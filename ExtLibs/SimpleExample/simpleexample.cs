@@ -89,6 +89,11 @@ namespace SimpleExample
                                 target_component = compid,
                                 target_system = sysid
                             });
+                        Console.WriteLine("Receive heartbeat sysid={0}, compid={1}!", sysid, compid);
+                    }
+                    else
+                    {
+                      Console.WriteLine("Receive other message!\n");
                     }
 
                     // from here we should check the the message is addressed to us
@@ -106,6 +111,7 @@ namespace SimpleExample
                 }
                 catch
                 {
+
                 }
 
                 System.Threading.Thread.Sleep(1);
@@ -143,8 +149,8 @@ namespace SimpleExample
         {
             MAVLink.mavlink_command_long_t req = new MAVLink.mavlink_command_long_t();
 
-            req.target_system = 1;
-            req.target_component = 1;
+            req.target_system = sysid;
+            req.target_component = compid;
 
             req.command = (ushort)MAVLink.MAV_CMD.COMPONENT_ARM_DISARM;
 
@@ -168,7 +174,7 @@ namespace SimpleExample
                 var ack = readsomedata<MAVLink.mavlink_command_ack_t>(sysid, compid);
                 if (ack.result == (byte)MAVLink.MAV_RESULT.ACCEPTED) 
                 {
-
+                  Console.WriteLine("Arm Success!");
                 }
             }
             catch 
