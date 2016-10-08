@@ -2570,12 +2570,23 @@ namespace MissionPlanner
 
             ThreadPool.QueueUserWorkItem(BGNoFly);
 
-
             ThreadPool.QueueUserWorkItem(BGGetKIndex);
-
 
             // update firmware version list - only once per day
             ThreadPool.QueueUserWorkItem(BGFirmwareCheck);
+
+            try
+            {
+                new Utilities.AltitudeAngel.AltitudeAngel();
+            }
+            catch (TypeInitializationException) // windows xp lacking patch level
+            {
+                CustomMessageBox.Show("Please update your .net version. kb2468871");
+            }
+            catch (Exception ex)
+            {
+                Tracking.AddException(ex);
+            }
 
             this.ResumeLayout();
 

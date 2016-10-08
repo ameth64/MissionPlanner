@@ -32,8 +32,7 @@ namespace AltitudeAngelWings.Service
         public AltitudeAngelService(
             IMessagesService messagesService,
             IMissionPlanner missionPlanner,
-            FlightDataService flightDataService,
-            AltitudeAngelClient.Create aaClientFactory
+            FlightDataService flightDataService
             )
         {
             _messagesService = messagesService;
@@ -43,22 +42,14 @@ namespace AltitudeAngelWings.Service
             WeatherReport = new ObservableProperty<WeatherInfo>();
             SentTelemetry = new ObservableProperty<Unit>();
 
-            CreateClient(aaClientFactory);
+            CreateClient((url, apiUrl, state) =>
+                new AltitudeAngelClient(url, apiUrl, state,
+                    (authUrl, existingState) => new AltitudeAngelHttpHandlerFactory(authUrl, existingState)));
 
-            IObservable<Models.FlightData> armedAndSignedIn = _flightDataService
-                .FlightArmed
-                .Join(IsSignedIn,
-                    i => _flightDataService.FlightDisarmed,
-                    i => IsSignedIn.Where(s => !IsSignedIn),
-                    (flight, signedIn) => flight);
-
-            IObservable<Models.FlightData> disarmedAndSignedIn = _flightDataService
-                .FlightDisarmed
-                .Join(IsSignedIn,
-                    i => _flightDataService.FlightArmed,
-                    i => IsSignedIn.Where(s => !IsSignedIn),
-                    (flight, signedIn) => flight);
-
+            _disposer.Add(_missionPlanner.FlightDataMap
+                .MapChanged
+                .Throttle(TimeSpan.FromSeconds(1))
+                .Subscribe(i => UpdateMapData(_missionPlanner.FlightDataMap)));
 
             TryConnect();
         }
@@ -144,7 +135,7 @@ namespace AltitudeAngelWings.Service
                                 List<PointLatLng> coordinates = line.Coordinates.OfType<GeographicPosition>()
                                                                     .Select(c => new PointLatLng(c.Latitude, c.Longitude))
                                                                     .ToList();
-                                overlay.AddLine(feature.Id, coordinates, new ColorInfo { StrokeColor = 0xFFFF0000 });
+                                overlay.AddLine(feature.Id, coordinates, new ColorInfo { StrokeColor = 0xFFFF0000 }, feature);
                             }
                         }
                         break;
@@ -163,7 +154,7 @@ namespace AltitudeAngelWings.Service
 
                                 ColorInfo colorInfo = feature.ToColorInfo();
                                 colorInfo.StrokeColor = 0xFFFF0000;
-                                overlay.AddPolygon(feature.Id, coordinates, colorInfo);
+                                overlay.AddPolygon(feature.Id, coordinates, colorInfo, feature);
                             }
                         }
                         break;
@@ -226,21 +217,33 @@ namespace AltitudeAngelWings.Service
             if (isSignedIn)
             {
                 _messagesService.AddMessageAsync("Loading map data...")
-                                .ContinueWith(async i =>
-                                {
-                                    await UpdateMapData(_missionPlanner.FlightDataMap);
-                                    await _messagesService.AddMessageAsync("Map data loaded");
-                                });
+                    .ContinueWith(async i =>
+                    {
+                        try
+                        {
+                            await UpdateMapData(_missionPlanner.FlightDataMap);
+                            await _messagesService.AddMessageAsync("Map data loaded");
+                        }
+                        catch
+                        {
+                        }
+                    });
 
                 // Should really move this to a manual trigger or on arm as the map might not be in the correct position
                 // And we only want to do it occasionally
                 _messagesService.AddMessageAsync("Loading weather info...")
-                                .ContinueWith(async i =>
-                                {
-                                    await UpdateWeatherData(_missionPlanner.FlightDataMap.GetCenter());
-                                    await _messagesService.AddMessageAsync("Weather loaded");
-                                    await _messagesService.AddMessageAsync(WeatherReport.Value.Summary);
-                                });
+                    .ContinueWith(async i =>
+                    {
+                        try
+                        {
+                            await UpdateWeatherData(_missionPlanner.FlightDataMap.GetCenter());
+                            await _messagesService.AddMessageAsync("Weather loaded");
+                            await _messagesService.AddMessageAsync(WeatherReport.Value.Summary);
+                        }
+                        catch
+                        {
+                        }
+                    });
             }
         }
 

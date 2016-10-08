@@ -81,7 +81,7 @@ namespace MissionPlanner.GCSViews
 
         private void poieditToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (CurrentPOIMarker == null)
+            if (CurrentGMapMarker == null || !(CurrentGMapMarker is GMapMarkerPOI))
                 return;
 
             POI.POIEdit(CurrentPOIMarker);
@@ -161,8 +161,17 @@ namespace MissionPlanner.GCSViews
                 return;
             }
 
-            // add history
-            history.Add(GetCommandList());
+            try
+            {
+                // get current command list
+                var currentlist = GetCommandList();
+                // add history
+                history.Add(currentlist);
+            }
+            catch (Exception ex)
+            {
+                CustomMessageBox.Show("A invalid entry has been detected\n" + ex.Message, Strings.ERROR);
+            }
 
             // remove more than 20 revisions
             if (history.Count > 20)
@@ -308,7 +317,7 @@ namespace MissionPlanner.GCSViews
             Commands.EndEdit();
         }
 
-        void convertFromGeographic(double lat, double lng)
+        private void convertFromGeographic(double lat, double lng)
         {
             if (lat == 0 && lng == 0)
             {
@@ -316,8 +325,9 @@ namespace MissionPlanner.GCSViews
             }
 
             // always update other systems, incase user switchs while planning
-            //if (coordZone.Visible)
+            try
             {
+                //UTM
                 var temp = new PointLatLngAlt(lat, lng);
                 int zone = temp.GetUTMZone();
                 var temp2 = temp.ToUTM();
@@ -325,10 +335,18 @@ namespace MissionPlanner.GCSViews
                 Commands[coordEasting.Index, selectedrow].Value = temp2[0].ToString("0.000");
                 Commands[coordNorthing.Index, selectedrow].Value = temp2[1].ToString("0.000");
             }
-
-            //if (MGRS.Visible)
+            catch (Exception ex)
             {
-                Commands[MGRS.Index, selectedrow].Value = ((MGRS)new Geographic(lng, lat)).ToString();
+                log.Error(ex);
+            }
+            try
+            {
+                //MGRS
+                Commands[MGRS.Index, selectedrow].Value = ((MGRS) new Geographic(lng, lat)).ToString();
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
             }
         }
 
@@ -1792,8 +1810,8 @@ namespace MissionPlanner.GCSViews
                         }
                         for (int a = 0; a < Commands.Rows.Count - 0; a++)
                         {
-                            byte mode =
-                                (byte)
+                            ushort mode =
+                                (ushort)
                                     (MAVLink.MAV_CMD)
                                         Enum.Parse(typeof (MAVLink.MAV_CMD), Commands.Rows[a].Cells[0].Value.ToString());
 
@@ -5079,61 +5097,70 @@ namespace MissionPlanner.GCSViews
         {
             PointLatLngAlt lastpnt = null;
 
-            DialogResult res = CustomMessageBox.Show("Ready ripp WP Path at Zoom = " + (int) MainMap.Zoom + " ?",
-                "GMap.NET", MessageBoxButtons.YesNo);
+            string maxzoomstring = "20";
+            if(InputBox.Show("max zoom", "Enter the max zoom to prefetch to.", ref maxzoomstring) != DialogResult.OK)
+                return;
+
+            int maxzoom = 20;
+            if (!int.TryParse(maxzoomstring, out maxzoom))
+            {
+                CustomMessageBox.Show(Strings.InvalidNumberEntered, Strings.ERROR);
+                return;
+            }
 
             fetchpathrip = true;
 
-            foreach (var pnt in pointlist)
-            {
-                if (pnt == null)
-                    continue;
+            maxzoom = Math.Min(maxzoom, MainMap.MaxZoom);
 
+            // zoom
+            for (int i = 1; i <= maxzoom; i++)
+            {
                 // exit if reqested
                 if (!fetchpathrip)
                     break;
 
-                // setup initial enviroment
-                if (lastpnt == null)
+                lastpnt = null;
+                // location
+                foreach (var pnt in pointlist)
                 {
-                    lastpnt = pnt;
-                    continue;
-                }
+                    if (pnt == null)
+                        continue;
 
-                RectLatLng area = new RectLatLng();
-                double top = Math.Max(lastpnt.Lat, pnt.Lat);
-                double left = Math.Min(lastpnt.Lng, pnt.Lng);
-                double bottom = Math.Min(lastpnt.Lat, pnt.Lat);
-                double right = Math.Max(lastpnt.Lng, pnt.Lng);
+                    // exit if reqested
+                    if (!fetchpathrip)
+                        break;
 
-                area.LocationTopLeft = new PointLatLng(top, left);
-                area.HeightLat = top - bottom;
-                area.WidthLng = right - left;
-
-                for (int i = 1; i <= MainMap.MaxZoom; i++)
-                {
-                    if (res == DialogResult.Yes)
+                    // setup initial enviroment
+                    if (lastpnt == null)
                     {
-                        TilePrefetcher obj = new TilePrefetcher();
-                        obj.KeyDown += obj_KeyDown;
-                        obj.ShowCompleteMessage = false;
-                        obj.Start(area, i, MainMap.MapProvider, 100, 0);
+                        lastpnt = pnt;
+                        continue;
                     }
-                    else if (res == DialogResult.No)
+
+                    RectLatLng area = new RectLatLng();
+                    double top = Math.Max(lastpnt.Lat, pnt.Lat);
+                    double left = Math.Min(lastpnt.Lng, pnt.Lng);
+                    double bottom = Math.Min(lastpnt.Lat, pnt.Lat);
+                    double right = Math.Max(lastpnt.Lng, pnt.Lng);
+
+                    area.LocationTopLeft = new PointLatLng(top, left);
+                    area.HeightLat = top - bottom;
+                    area.WidthLng = right - left;
+
+                    TilePrefetcher obj = new TilePrefetcher();
+                    ThemeManager.ApplyThemeTo(obj);
+                    obj.KeyDown += obj_KeyDown;
+                    obj.ShowCompleteMessage = false;
+                    obj.Start(area, i, MainMap.MapProvider, 0, 0);
+
+                    if (obj.UserAborted)
                     {
-                    }
-                    else
-                    {
+                        fetchpathrip = false;
                         break;
                     }
-                }
 
-                if (res == DialogResult.Cancel || res == DialogResult.None)
-                {
-                    break;
+                    lastpnt = pnt;
                 }
-
-                lastpnt = pnt;
             }
         }
 
@@ -5160,20 +5187,28 @@ namespace MissionPlanner.GCSViews
 
             if (!area.IsEmpty)
             {
-                DialogResult res = CustomMessageBox.Show("Ready ripp at Zoom = " + (int) MainMap.Zoom + " ?", "GMap.NET",
-                    MessageBoxButtons.YesNo);
+                string maxzoomstring = "20";
+                if (InputBox.Show("max zoom", "Enter the max zoom to prefetch to.", ref maxzoomstring) != DialogResult.OK)
+                    return;
 
-                if (res == DialogResult.Yes)
+                int maxzoom = 20;
+                if (!int.TryParse(maxzoomstring, out maxzoom))
                 {
-                    for (int i = 1; i <= MainMap.MaxZoom; i++)
-                    {
-                        TilePrefetcher obj = new TilePrefetcher();
-                        obj.ShowCompleteMessage = false;
-                        obj.Start(area, i, MainMap.MapProvider, 100, 0);
+                    CustomMessageBox.Show(Strings.InvalidNumberEntered, Strings.ERROR);
+                    return;
+                }
 
-                        if (obj.UserAborted)
-                            break;
-                    }
+                maxzoom = Math.Min(maxzoom, MainMap.MaxZoom);
+
+                for (int i = 1; i <= MainMap.MaxZoom; i++)
+                {
+                    TilePrefetcher obj = new TilePrefetcher();
+                    ThemeManager.ApplyThemeTo(obj);
+                    obj.ShowCompleteMessage = false;
+                    obj.Start(area, i, MainMap.MapProvider, 0, 0);
+
+                    if (obj.UserAborted)
+                        break;
                 }
             }
             else
@@ -5670,6 +5705,9 @@ namespace MissionPlanner.GCSViews
                         {
                             string[] items = line.Split(new[] {' ', '\t'}, StringSplitOptions.RemoveEmptyEntries);
 
+                            if (items.Length < 2)
+                                continue;
+                            
                             drawnpolygon.Points.Add(new PointLatLng(double.Parse(items[0]), double.Parse(items[1])));
                             addpolygonmarkergrid(drawnpolygon.Points.Count.ToString(), double.Parse(items[1]),
                                 double.Parse(items[0]), 0);
@@ -6646,17 +6684,25 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
 
                 utmpos basepos = new utmpos(MouseDownStart);
 
-                foreach (var pathPoint in gp.PathPoints)
+                try
                 {
-                    utmpos newpos = new utmpos(basepos);
 
-                    newpos.x += pathPoint.X;
-                    newpos.y += -pathPoint.Y;
+                    foreach (var pathPoint in gp.PathPoints)
+                    {
+                        utmpos newpos = new utmpos(basepos);
 
-                    var newlla = newpos.ToLLA();
-                    quickadd = true;
-                    AddWPToMap(newlla.Lat, newlla.Lng, int.Parse(TXT_DefaultAlt.Text));
-                    
+                        newpos.x += pathPoint.X;
+                        newpos.y += -pathPoint.Y;
+
+                        var newlla = newpos.ToLLA();
+                        quickadd = true;
+                        AddWPToMap(newlla.Lat, newlla.Lng, int.Parse(TXT_DefaultAlt.Text));
+
+                    }
+                }
+                catch (ArgumentException ex)
+                {
+                    CustomMessageBox.Show("Bad input options, please try again\n" + ex.ToString(), Strings.ERROR);
                 }
 
                 quickadd = false;

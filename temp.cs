@@ -693,18 +693,26 @@ namespace MissionPlanner
             end = DateTime.Now;
             Console.WriteLine("ByteArrayToStructureGC " + (end - start).TotalMilliseconds);
         }
-        
+
         private void but_armandtakeoff_Click(object sender, EventArgs e)
         {
-            MainV2.comPort.setMode("Stabilize");
-
-            if (MainV2.comPort.doARM(true))
+            try
             {
-                MainV2.comPort.setMode("GUIDED");
 
-                Thread.Sleep(300);
+                MainV2.comPort.setMode("Stabilize");
 
-                MainV2.comPort.doCommand(MAVLink.MAV_CMD.TAKEOFF, 0, 0, 0, 0, 0, 0, 10);
+                if (MainV2.comPort.doARM(true))
+                {
+                    MainV2.comPort.setMode("GUIDED");
+
+                    Thread.Sleep(300);
+
+                    MainV2.comPort.doCommand(MAVLink.MAV_CMD.TAKEOFF, 0, 0, 0, 0, 0, 0, 10);
+                }
+            }
+            catch (Exception ex)
+            {
+                CustomMessageBox.Show(ex.ToString());
             }
         }
 
@@ -932,6 +940,11 @@ namespace MissionPlanner
                     }
                 }
             }
+        }
+
+        private void but_AA_Click(object sender, EventArgs e)
+        {
+            Utilities.AltitudeAngel.AltitudeAngel.service.SignInAsync();
         }
     }
 }
