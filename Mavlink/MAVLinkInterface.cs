@@ -1716,6 +1716,7 @@ Please check the following
 
                     MainV2.instance.Invalidate();
                     MainV2.instance.FlightData.Invalidate();
+                    MainV2.instance.HsdevFlightData.Invalidate();
                     MainV2.instance.Update();
                 }
 
