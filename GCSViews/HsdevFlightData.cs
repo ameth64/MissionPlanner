@@ -160,7 +160,7 @@ namespace MissionPlanner.GCSViews
 
             start = DateTime.Now;
 
-            //_3DMesh1.yawrotate = true;
+            _3DMesh1.yawrotate = true;
 
         }
 
