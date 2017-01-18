@@ -328,10 +328,6 @@ namespace MissionPlanner.GCSViews
 
             MainV2.comPort.ParamListChanged += FlightData_ParentChanged;
 
-            MainV2.AdvancedChanged += MainV2_AdvancedChanged;
-
-            // first run
-            MainV2_AdvancedChanged(null, null);
         }
 
         protected override void OnInvalidated(InvalidateEventArgs e)
@@ -471,35 +467,6 @@ namespace MissionPlanner.GCSViews
             tabStatus.Width = x;
 
             ThemeManager.ApplyThemeTo(tabStatus);
-        }
-
-        private void MainV2_AdvancedChanged(object sender, EventArgs e)
-        {
-            if (!MainV2.Advanced)
-            {
-                if (!tabControlactions.TabPages.Contains(tabActionsSimple))
-                    tabControlactions.TabPages.Add(tabActionsSimple);
-                //tabControlactions.TabPages.Remove(tabGauges);
-                tabControlactions.TabPages.Remove(tabActions);
-                tabControlactions.TabPages.Remove(tabStatus);
-                tabControlactions.TabPages.Remove(tabServo);
-                tabControlactions.TabPages.Remove(tabScripts);
-
-                tabControlactions.Invalidate();
-            }
-            else
-            {
-                //tabControlactions.TabPages.Remove(tabGauges);
-                tabControlactions.TabPages.Remove(tabActionsSimple);
-                if (!tabControlactions.TabPages.Contains(tabActions))
-                    tabControlactions.TabPages.Add(tabActions);
-                if (!tabControlactions.TabPages.Contains(tabStatus))
-                    tabControlactions.TabPages.Add(tabStatus);
-                if (!tabControlactions.TabPages.Contains(tabServo))
-                    tabControlactions.TabPages.Add(tabServo);
-                if (!tabControlactions.TabPages.Contains(tabScripts))
-                    tabControlactions.TabPages.Add(tabScripts);
-            }
         }
 
         public void Activate()
@@ -1142,7 +1109,7 @@ namespace MissionPlanner.GCSViews
                             route.Points.Add(currentloc);
                         }
 
-                        gMapControl1.UpdateRouteLocalPosition(route);
+                        updateRoutePosition();
 
                         // update programed wp course
                         if (waypoints.AddSeconds(5) < DateTime.Now)
@@ -1262,7 +1229,9 @@ namespace MissionPlanner.GCSViews
                         // add gimbal point center
                         try
                         {
-                            if (MainV2.comPort.MAV.param.ContainsKey("MNT_STAB_TILT"))
+                            if (MainV2.comPort.MAV.param.ContainsKey("MNT_STAB_TILT") 
+                                && MainV2.comPort.MAV.param.ContainsKey("MNT_STAB_ROLL")
+                                && MainV2.comPort.MAV.param.ContainsKey("MNT_TYPE"))
                             {
                                 float temp1 = (float)MainV2.comPort.MAV.param["MNT_STAB_TILT"];
                                 float temp2 = (float)MainV2.comPort.MAV.param["MNT_STAB_ROLL"];
@@ -1528,7 +1497,6 @@ namespace MissionPlanner.GCSViews
             Invoke((MethodInvoker) delegate { gMapControl1.Bearing = (int) MainV2.comPort.MAV.cs.yaw; });
         }
 
-
         // to prevent cross thread calls while in a draw and exception
         private void updateClearRoutes()
         {
@@ -1549,6 +1517,15 @@ namespace MissionPlanner.GCSViews
                 polygons.Routes.Clear();
                 polygons.Markers.Clear();
                 routes.Markers.Clear();
+            });
+        }
+
+        private void updateRoutePosition()
+        {
+            // not async
+            Invoke((MethodInvoker) delegate
+            {
+                gMapControl1.UpdateRouteLocalPosition(route);
             });
         }
 
@@ -1692,7 +1669,10 @@ namespace MissionPlanner.GCSViews
                 {
                     if (lastmapposchange.Second != DateTime.Now.Second)
                     {
-                        gMapControl1.Position = currentloc;
+                        if (Math.Abs(currentloc.Lat - gMapControl1.Position.Lat) > 0.0001 || Math.Abs(currentloc.Lng - gMapControl1.Position.Lng) > 0.0001)
+                        {
+                            gMapControl1.Position = currentloc;
+                        }
                         lastmapposchange = DateTime.Now;
                     }
                     //hud1.Refresh();
@@ -2142,15 +2122,9 @@ namespace MissionPlanner.GCSViews
         {
             if (e.Button == MouseButtons.Left)
             {
-                PointLatLng point = gMapControl1.FromLocalToLatLng(e.X, e.Y);
-
-                double latdif = MouseDownStart.Lat - point.Lat;
-                double lngdif = MouseDownStart.Lng - point.Lng;
-
                 try
                 {
-                    gMapControl1.Position = new PointLatLng(gMapControl1.Position.Lat + latdif,
-                        gMapControl1.Position.Lng + lngdif);
+                    gMapControl1.Core.BeginDrag(new GPoint(e.Location.X, e.Location.Y));
                 }
                 catch
                 {
@@ -2727,9 +2701,19 @@ namespace MissionPlanner.GCSViews
 
         private void zg1_DoubleClick(object sender, EventArgs e)
         {
-            Form selectform = new Form
+            string formname = "select";
+            Form selectform = Application.OpenForms[formname];
+            if(selectform != null)
             {
-                Name = "select",
+                selectform.WindowState = FormWindowState.Minimized;
+                selectform.Show();
+                selectform.WindowState = FormWindowState.Normal;
+                return;
+            }
+
+            selectform = new Form
+            {
+                Name = formname,
                 Width = 50,
                 Height = 550,
                 Text = "Graph This"
@@ -3088,7 +3072,7 @@ namespace MissionPlanner.GCSViews
                     CustomMessageBox.Show("Max 10 at a time.");
                     ((CheckBox) sender).Checked = false;
                 }
-                ThemeManager.ApplyThemeTo(this);
+                ThemeManager.ApplyThemeTo((Control)sender);
 
                 string selected = "";
                 try
@@ -3402,6 +3386,7 @@ namespace MissionPlanner.GCSViews
                     splitContainer1.Panel2.Controls.Add(but);
                     splitContainer1.Panel2.Controls.Add(sc.Control);
                     ThemeManager.ApplyThemeTo(sc.Control);
+                    ThemeManager.ApplyThemeTo(this);
 
                     sc.Control.Dock = DockStyle.Fill;
                     sc.Control.Visible = true;
@@ -4376,6 +4361,11 @@ namespace MissionPlanner.GCSViews
         private void onOffCameraOverlapToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CameraOverlap = onOffCameraOverlapToolStripMenuItem.Checked;
+        }
+
+        private void altitudeAngelSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new Utilities.AltitudeAngel.AASettings().Show(this);
         }
     }
 }

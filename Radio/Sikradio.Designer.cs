@@ -1153,8 +1153,7 @@
             // 
             // Sikradio
             // 
-            resources.ApplyResources(this, "$this");
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.Controls.Add(this.BUT_loadcustom);
             this.Controls.Add(this.BUT_resettodefault);
             this.Controls.Add(this.linkLabel1);
@@ -1169,6 +1168,7 @@
             this.Controls.Add(this.BUT_upload);
             this.MinimumSize = new System.Drawing.Size(781, 433);
             this.Name = "Sikradio";
+            resources.ApplyResources(this, "$this");
             this.SPLIT_local.Panel1.ResumeLayout(false);
             this.SPLIT_local.Panel1.PerformLayout();
             this.SPLIT_local.Panel2.ResumeLayout(false);

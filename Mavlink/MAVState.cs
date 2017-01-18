@@ -11,12 +11,15 @@ using System.Collections.Concurrent;
 
 namespace MissionPlanner
 {
-    public class MAVState : MAVLink
+    public class MAVState : MAVLink, IDisposable
     {
         private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public MAVState()
+        public MAVLinkInterface parent;
+
+        public MAVState(MAVLinkInterface mavLinkInterface)
         {
+            this.parent = mavLinkInterface;
             this.packetspersecond = new double[0x100];
             this.packetspersecondbuild = new DateTime[0x100];
             this.lastvalidpacket = DateTime.MinValue;
@@ -33,6 +36,7 @@ namespace MissionPlanner
             this.SoftwareVersions = "";
             this.SerialString = "";
             this.FrameString = "";
+            this.Proximity = new Proximity(this);
 
             camerapoints.Clear();
 
@@ -109,25 +113,46 @@ namespace MissionPlanner
         /// <summary>
         /// storage of a previous packet recevied of a specific type
         /// </summary>
-        public Dictionary<uint, MAVLinkMessage> packets { get; set; }
+        Dictionary<uint, MAVLinkMessage> packets { get; set; }
+
+        object packetslock = new object();
 
         public MAVLinkMessage getPacket(uint mavlinkid)
         {
             //log.InfoFormat("getPacket {0}", (MAVLINK_MSG_ID)mavlinkid);
-            if (packets.ContainsKey(mavlinkid))
+            lock (packetslock)
             {
-                return packets[mavlinkid];
+                if (packets.ContainsKey(mavlinkid))
+                {
+                    return packets[mavlinkid];
+                }
             }
 
             return null;
         }
 
+        public void addPacket(MAVLinkMessage msg)
+        {
+            lock (packetslock)
+            {
+                packets[msg.msgid] = msg;
+            }
+        }
+
         public void clearPacket(uint mavlinkid)
         {
-            if (packets.ContainsKey(mavlinkid))
+            lock (packetslock)
             {
-                packets[mavlinkid] = null;
+                if (packets.ContainsKey(mavlinkid))
+                {
+                    packets[mavlinkid] = null;
+                }
             }
+        }
+
+        public void Dispose()
+        {
+             Proximity.Dispose();
         }
 
         /// <summary>
@@ -178,6 +203,8 @@ namespace MissionPlanner
         /// Store the guided mode wp location
         /// </summary>
         public mavlink_mission_item_t GuidedMode = new mavlink_mission_item_t();
+
+        public Proximity Proximity;
 
         internal int recvpacketcount = 0;
     }

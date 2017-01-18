@@ -134,6 +134,7 @@
     <Compile Include="ApiClient\Client\ApiOAuthClientHandler.cs" />
     <Compile Include="ApiClient\Client\ClientHandlerInfo.cs" />
     <Compile Include="ApiClient\Client\AltitudeAngelHttpHandlerFactory.cs" />
+    <Compile Include="ApiClient\Client\Extensions.cs" />
     <Compile Include="ApiClient\Client\IAuthorizeCodeProvider.cs" />
     <Compile Include="ApiClient\CodeProvider\WpfAuthorizeDisplay.cs" />
     <Compile Include="ApiClient\Models\AAFeatureCollection.cs" />
@@ -178,9 +179,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Content Include="Keys.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

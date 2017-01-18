@@ -11,9 +11,9 @@ using MissionPlanner.Controls;
 
 namespace MissionPlanner.Utilities.AltitudeAngel
 {
-    public class AltitudeAngel
+    public class AltitudeAngel : IDisposable
     {
-        private static MissionPlanner MP = new MissionPlanner();
+        public static MissionPlannerAdaptor MP = new MissionPlannerAdaptor();
         private static MessagesService Message = new MessagesService();
 
         public static AltitudeAngelService service = null;
@@ -21,7 +21,12 @@ namespace MissionPlanner.Utilities.AltitudeAngel
         static AltitudeAngel()
         {
             service = new AltitudeAngelService(Message, MP,
-                new FlightDataService(new ObservableProperty<long>(), new MissionPlannerFlightDataProvider(null)));
+                new FlightDataService(new ObservableProperty<long>(3), new MissionPlannerFlightDataProvider(null)));
+        }
+
+        public void Dispose()
+        {
+            service.Dispose();
         }
     }
 }

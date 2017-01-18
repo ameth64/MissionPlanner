@@ -10,6 +10,7 @@ using AltitudeAngel.IsolatedPlugin.Common;
 using AltitudeAngel.IsolatedPlugin.Common.Maps;
 using AltitudeAngelWings.ApiClient.Client;
 using AltitudeAngelWings.ApiClient.Models;
+using AltitudeAngelWings.Properties;
 using AltitudeAngelWings.Service.FlightData;
 using AltitudeAngelWings.Service.Messaging;
 using DotNetOpenAuth.OAuth2;
@@ -28,6 +29,41 @@ namespace AltitudeAngelWings.Service
         public ObservableProperty<WeatherInfo> WeatherReport { get; }
         public ObservableProperty<Unit> SentTelemetry { get; }
         public UserProfileInfo CurrentUser { get; private set; }
+        public readonly List<string> FilteredOut = new List<string>();
+
+        private bool _grounddata = true;
+        public bool GroundDataDisplay
+        {
+            get
+            {
+                if (String.IsNullOrEmpty(_missionPlanner.LoadSetting("AA.Ground")))
+                    return _grounddata;
+                _grounddata = bool.Parse(_missionPlanner.LoadSetting("AA.Ground"));
+                return _grounddata;
+            }
+            set
+            {
+                _grounddata = value;
+                _missionPlanner.SaveSetting("AA.Ground", _grounddata.ToString());
+            }
+        }
+
+        private bool _airdata = false;
+        public bool AirDataDisplay
+        {
+            get
+            {
+                if (String.IsNullOrEmpty(_missionPlanner.LoadSetting("AA.Air")))
+                    return _airdata;
+                _airdata = bool.Parse(_missionPlanner.LoadSetting("AA.Air"));
+                return _airdata;
+            }
+            set
+            {
+                _grounddata = value;
+                _missionPlanner.SaveSetting("AA.Air", _grounddata.ToString());
+            }
+        }
 
         public AltitudeAngelService(
             IMessagesService messagesService,
@@ -50,6 +86,21 @@ namespace AltitudeAngelWings.Service
                 .MapChanged
                 .Throttle(TimeSpan.FromSeconds(1))
                 .Subscribe(i => UpdateMapData(_missionPlanner.FlightDataMap)));
+
+            _disposer.Add(_missionPlanner.FlightPlanningMap
+              .MapChanged
+              .Throttle(TimeSpan.FromSeconds(1))
+              .Subscribe(i => UpdateMapData(_missionPlanner.FlightPlanningMap)));
+
+            try
+            {
+                var list = JsonConvert.DeserializeObject<List<string>>(_missionPlanner.LoadSetting("AAWings.Filters"));
+
+                FilteredOut.AddRange(list.Distinct());
+            } catch
+            {
+
+            }
 
             TryConnect();
         }
@@ -87,6 +138,15 @@ namespace AltitudeAngelWings.Service
             return null;
         }
 
+        public async Task RemoveOverlays()
+        {
+            _missionPlanner.FlightDataMap.DeleteOverlay("AAMapData.Air");
+            _missionPlanner.FlightDataMap.DeleteOverlay("AAMapData.Ground");
+
+            _missionPlanner.FlightPlanningMap.DeleteOverlay("AAMapData.Air");
+            _missionPlanner.FlightPlanningMap.DeleteOverlay("AAMapData.Ground");
+        }
+
         /// <summary>
         ///     Updates a map with the latest ground / air data
         /// </summary>
@@ -94,32 +154,71 @@ namespace AltitudeAngelWings.Service
         /// <returns></returns>
         public async Task UpdateMapData(IMap map)
         {
+            if (!IsSignedIn)
+                return;
+
             RectLatLng area = map.GetViewArea();
             await _messagesService.AddMessageAsync($"Map area {area.Top}, {area.Bottom}, {area.Left}, {area.Right}");
 
             AAFeatureCollection mapData = await _aaClient.GetMapData(area);
 
+            // build the filter list
+            mapData.GetFilters();
+
+            // this ensures the user sees the results before its saved
+            _missionPlanner.SaveSetting("AAWings.Filters", JsonConvert.SerializeObject(FilteredOut));
+
+            await _messagesService.AddMessageAsync($"Map area Loaded {area.Top}, {area.Bottom}, {area.Left}, {area.Right}");
+
+            // add all items to cache
+            mapData.Features.ForEach(feature => cache[feature.Id] = feature);
+
+            // Only get the features that are enabled by default, and have not been filtered out
+            IEnumerable<Feature> features = mapData.Features.Where(feature => feature.IsEnabledByDefault() && feature.IsFilterOutItem(FilteredOut)).ToList();
+
+            ProcessFeatures(map, features);
+        }
+
+        static Dictionary<string, Feature> cache = new Dictionary<string, Feature>();
+
+        public void ProcessAllFromCache(IMap map)
+        {
+            map.DeleteOverlay("AAMapData.Air");
+            map.DeleteOverlay("AAMapData.Ground");
+            ProcessFeatures(map, cache.Values.Where(feature => feature.IsEnabledByDefault() && feature.IsFilterOutItem(FilteredOut)).ToList());
+        }
+
+        public void ProcessFeatures(IMap map, IEnumerable<Feature> features)
+        {
             IOverlay airOverlay = map.GetOverlay("AAMapData.Air", true);
             IOverlay groundOverlay = map.GetOverlay("AAMapData.Ground", true);
 
-            bool groundDataExcluded = mapData.ExcludedData.Any(i => i.SelectToken("detail.name")?.Value<string>() == "Ground Hazards");
-            groundOverlay.IsVisible = !groundDataExcluded;
-
-            // Only get the features that have no lower alt or start below 152m. Ignoring datum for now...
-            IEnumerable<Feature> features = mapData.Features
-                                                   .Where(feature =>
-                                                   {
-                                                       var altitude = ((JObject)feature.Properties.Get("altitudeFloor"))?.ToObject<Altitude>();
-                                                       return altitude == null || altitude.Meters <= 152;
-                                                   })
-                                                   .ToList();
-
+            groundOverlay.IsVisible = GroundDataDisplay;
+            airOverlay.IsVisible = AirDataDisplay;
 
             foreach (Feature feature in features)
             {
                 IOverlay overlay = string.Equals((string)feature.Properties.Get("category"), "airspace")
                     ? airOverlay
                     : groundOverlay;
+
+                var altitude = ((JObject)feature.Properties.Get("altitudeFloor"))?.ToObject<Altitude>();
+
+                if (altitude == null || altitude.Meters <= 152)
+                {
+                    if (!GroundDataDisplay)
+                    {
+                        if (overlay.PolygonExists(feature.Id))
+                            continue;
+                    }
+                }
+                else
+                {
+                    if (!AirDataDisplay)
+                    {
+                        continue;
+                    }
+                }
 
                 switch (feature.Geometry.Type)
                 {
@@ -238,7 +337,6 @@ namespace AltitudeAngelWings.Service
                         {
                             await UpdateWeatherData(_missionPlanner.FlightDataMap.GetCenter());
                             await _messagesService.AddMessageAsync("Weather loaded");
-                            await _messagesService.AddMessageAsync(WeatherReport.Value.Summary);
                         }
                         catch
                         {
