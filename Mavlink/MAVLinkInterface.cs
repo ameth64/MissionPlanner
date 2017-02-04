@@ -69,6 +69,8 @@ namespace MissionPlanner
 
         public event EventHandler CommsClose;
 
+	 public PointLatLngAlt camera_feedback_new = null;
+
         const int gcssysid = 255;
 
         /// <summary>
@@ -412,7 +414,11 @@ namespace MissionPlanner
                 BaseStream.WriteLine("sh /etc/init.d/rc.usb");
 
                 int count = 0;
-
+               // if (DialogResult.No == CustomMessageBox.Show("连接", "是否下载数据?", MessageBoxButtons.YesNo))
+               // {
+               //     giveComport = false;
+               //     return;
+               // }
                 while (true)
                 {
                     if (progressWorkerEventArgs.CancelRequested)
@@ -3912,7 +3918,8 @@ Please check the following
             if (buffer.msgid == (byte)MAVLINK_MSG_ID.CAMERA_FEEDBACK)
             {
                 mavlink_camera_feedback_t camerapt = buffer.ToStructure<mavlink_camera_feedback_t>();
-
+                camera_feedback_new = new PointLatLngAlt(camerapt.lat,camerapt.lng,camerapt.alt_msl);
+			
                 if (MAVlist[sysid, compid].camerapoints.Count == 0 || MAVlist[sysid, compid].camerapoints.Last().time_usec != camerapt.time_usec)
                 {
                     MAVlist[sysid, compid].camerapoints.Add(camerapt);

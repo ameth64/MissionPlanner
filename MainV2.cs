@@ -721,7 +721,8 @@ namespace MissionPlanner
             //// load this before the other screens get loaded
             if (Settings.Instance["displayview"] != null)
             {
-                DisplayConfiguration = Settings.Instance.GetDisplayView("displayview");
+                DisplayConfiguration = new DisplayView().Advanced();
+                //DisplayConfiguration = Settings.Instance.GetDisplayView("displayview");
             }
 
             LayoutChanged += updateLayout;

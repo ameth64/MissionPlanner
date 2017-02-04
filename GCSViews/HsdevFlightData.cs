@@ -714,13 +714,11 @@ namespace MissionPlanner.GCSViews
                                 updateMapPosition(currentloc);
                                 mapupdate = DateTime.Now;
                             }
-
-                            //if (MainV2.comPort.MAV.cs.pslat != 0 && MainV2.comPort.MAV.cs.pslng != 0)
+                            if(MainV2.comPort.camera_feedback_new!=null)
                             {
-                               // addshotposition(MainV2.comPort.MAV.cs.pslng, MainV2.comPort.MAV.cs.pslat);
-                               // MainV2.comPort.MAV.cs.pslat = 0;
-                               // MainV2.comPort.MAV.cs.pslng = 0;
-                               // sp.Play();
+                                addshotposition(MainV2.comPort.camera_feedback_new.Lng/1E7, MainV2.comPort.camera_feedback_new.Lat / 1E7);
+                                MainV2.comPort.camera_feedback_new = null;
+                                sp.Play();
                             }
 
                             if (route.Points.Count == 1 && gMapControl1.Zoom == 3) // 3 is the default load zoom
@@ -1361,6 +1359,7 @@ namespace MissionPlanner.GCSViews
                 {
                     CMB_setwp.Items.Add(z.ToString());
                 }
+                return;
             }
 
             if (MainV2.comPort.MAV.param["WP_TOTAL"] != null)
@@ -1370,6 +1369,27 @@ namespace MissionPlanner.GCSViews
                 {
                     CMB_setwp.Items.Add(z.ToString());
                 }
+                return;
+            }
+
+            if (MainV2.comPort.MAV.param["MIS_TOTAL"] != null)
+            {
+                int wps = int.Parse(MainV2.comPort.MAV.param["MIS_TOTAL"].ToString());
+                for (int z = 1; z <= wps; z++)
+                {
+                    CMB_setwp.Items.Add(z.ToString());
+                }
+                return;
+            }
+
+            if (MainV2.comPort.MAV.wps.Count > 0)
+            {
+                int wps = MainV2.comPort.MAV.wps.Count;
+                for (int z = 1; z <= wps; z++)
+                {
+                    CMB_setwp.Items.Add(z.ToString());
+                }
+                return;
             }
         }
 
@@ -1389,15 +1409,23 @@ namespace MissionPlanner.GCSViews
         {
             if (start.AddMilliseconds(1000)<DateTime.Now)
             {
-                start = DateTime.Now;
+                // start = DateTime.Now;
+                // try
+                // {
+                //((Button)sender).Enabled = false;
+                //MainV2.comPort.setMode(26);
+                //System.Windows.Forms.MessageBox.Show("飞控进入弹射模式，弹射延时" + launch_delay.Text + "毫秒");
+                //}
+                // catch { CustomMessageBox.Show("The Command failed to execute", "Error"); }
+                //((Button)sender).Enabled = true;
                 try
                 {
-                    //((Button)sender).Enabled = false;
-                    //MainV2.comPort.setMode(26);
-                    //System.Windows.Forms.MessageBox.Show("飞控进入弹射模式，弹射延时" + launch_delay.Text + "毫秒");
+                    MainV2.comPort.setDigicamControl(true);
                 }
-                catch { CustomMessageBox.Show("The Command failed to execute", "Error"); }
-                //((Button)sender).Enabled = true;
+                catch
+                {
+                    CustomMessageBox.Show(Strings.CommandFailed, Strings.ERROR);
+                }
             }
         }
 

@@ -115,6 +115,7 @@ namespace MissionPlanner
             string strVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
             Splash.Text = name + " " + Application.ProductVersion + " build " + strVersion;
             Splash.Show();
+            Splash.Hide();
 
             Application.DoEvents();
             Application.DoEvents();
