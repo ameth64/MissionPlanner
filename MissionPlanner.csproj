@@ -357,6 +357,18 @@
     <Compile Include="GCSViews\HsdevFlightData.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="GCSViews\ConfigurationView\ConfigFrameClassType.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GCSViews\ConfigurationView\ConfigFrameClassType.Designer.cs">
+      <DependentUpon>ConfigFrameClassType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GCSViews\ConfigurationView\ConfigGPSInject.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GCSViews\ConfigurationView\ConfigGPSInject.Designer.cs">
+      <DependentUpon>ConfigGPSInject.cs</DependentUpon>
+    </Compile>
     <Compile Include="GCSViews\HsdevFlightData.designer.cs">
       <DependentUpon>HsdevFlightData.cs</DependentUpon>
 	</Compile>

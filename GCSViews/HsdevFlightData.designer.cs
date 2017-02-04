@@ -303,7 +303,7 @@
             this.hud2.targetheading = 0F;
             this.hud2.targetspeed = 0F;
             this.hud2.turnrate = 0F;
-            this.hud2.UseOpenGL = false;
+            //this.hud2.UseOpenGL = true;
             this.hud2.verticalspeed = 0F;
             this.hud2.vibex = 0F;
             this.hud2.vibey = 0F;
