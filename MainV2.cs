@@ -387,7 +387,7 @@ namespace MissionPlanner
         /// ie configuration gets reloaded on every click
         /// </summary>
         public GCSViews.FlightData FlightData;
-
+        public GCSViews.HsdevFlightData HsdevFlightData;
         public GCSViews.FlightPlanner FlightPlanner;
         Controls.SITL Simulation;
 
@@ -690,6 +690,7 @@ namespace MissionPlanner
             {
                 log.Info("Create FD");
                 FlightData = new GCSViews.FlightData();
+                HsdevFlightData = new GCSViews.HsdevFlightData();
                 log.Info("Create FP");
                 FlightPlanner = new GCSViews.FlightPlanner();
                 //Configuration = new GCSViews.ConfigurationView.Setup();
@@ -699,6 +700,7 @@ namespace MissionPlanner
                 //Terminal = new GCSViews.Terminal();
 
                 FlightData.Width = MyView.Width;
+                HsdevFlightData.Width = MyView.Width;
                 FlightPlanner.Width = MyView.Width;
                 Simulation.Width = MyView.Width;
             }
@@ -741,8 +743,9 @@ namespace MissionPlanner
             {
                 try
                 {
-                DisplayConfiguration = Settings.Instance.GetDisplayView("displayview");
-            }
+					DisplayConfiguration = new DisplayView().Advanced();
+					//DisplayConfiguration = Settings.Instance.GetDisplayView("displayview");
+				}
                 catch
                 {
                     DisplayConfiguration = DisplayConfiguration.Basic();
@@ -1135,6 +1138,11 @@ namespace MissionPlanner
         private void MenuFlightData_Click(object sender, EventArgs e)
         {
             MyView.ShowScreen("FlightData");
+        }
+
+        private void MenuHsFlightData_Click(object sender, EventArgs e)
+        {
+            MyView.ShowScreen("HsdevFlightData");
         }
 
         private void MenuFlightPlanner_Click(object sender, EventArgs e)
@@ -1774,6 +1782,7 @@ namespace MissionPlanner
             try
             {
                 FlightData.Dispose();
+                HsdevFlightData.Dispose();
             }
             catch
             {
@@ -2571,6 +2580,7 @@ namespace MissionPlanner
             }
 
             MyView.AddScreen(new MainSwitcher.Screen("FlightData", FlightData, true));
+            MyView.AddScreen(new MainSwitcher.Screen("HsdevFlightData", HsdevFlightData, true));
             MyView.AddScreen(new MainSwitcher.Screen("FlightPlanner", FlightPlanner, true));
             MyView.AddScreen(new MainSwitcher.Screen("HWConfig", typeof(GCSViews.InitialSetup), false));
             MyView.AddScreen(new MainSwitcher.Screen("SWConfig", typeof(GCSViews.SoftwareConfig), false));
