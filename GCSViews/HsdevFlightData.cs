@@ -162,6 +162,7 @@ namespace MissionPlanner.GCSViews
 
             _3DMesh1.yawrotate = true;
 
+
         }
 
         public void CreateChart(ZedGraphControl zgc)
@@ -455,7 +456,7 @@ namespace MissionPlanner.GCSViews
             //System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
 
             System.Threading.Thread.CurrentThread.IsBackground = true;
-
+            this.lbl_logpercent.Location = new System.Drawing.Point(354, 33);
             threadrun = 1;
             EndPoint Remote = (EndPoint)(new IPEndPoint(IPAddress.Any, 0));
 
@@ -517,7 +518,123 @@ namespace MissionPlanner.GCSViews
 
                 if (!MainV2.comPort.logreadmode)
                     System.Threading.Thread.Sleep(50); // max is only ever 10 hz but we go a little faster to empty the serial queue
+                                                       // log playback
+                if (MainV2.comPort.logreadmode && MainV2.comPort.logplaybackfile != null)
+                {
+                    if (threadrun == 0) { return; }
 
+                    if (MainV2.comPort.BaseStream.IsOpen)
+                    {
+                        MainV2.comPort.logreadmode = false;
+                        try
+                        {
+                            MainV2.comPort.logplaybackfile.Close();
+                        }
+                        catch
+                        { //log.Error("Failed to close logfile");
+                        }
+                        MainV2.comPort.logplaybackfile = null;
+                    }
+
+
+                    //Console.WriteLine(DateTime.Now.Millisecond);
+
+                    if (updatescreen.AddMilliseconds(300) < DateTime.Now)
+                    {
+                        try
+                        {
+                            updatePlayPauseButton(true);
+                            updateLogPlayPosition();
+                        }
+                        catch
+                        { //log.Error("Failed to update log playback pos"); 
+                        }
+                        updatescreen = DateTime.Now;
+                    }
+
+                    //Console.WriteLine(DateTime.Now.Millisecond + " done ");
+
+                    DateTime logplayback = MainV2.comPort.lastlogread;
+                    try
+                    {
+                        MainV2.comPort.readPacket();
+                    }
+                    catch
+                    { //log.Error("Failed to read log packet");
+                    }
+
+                    double act = (MainV2.comPort.lastlogread - logplayback).TotalMilliseconds;
+
+                    if (act > 9999 || act < 0)
+                        act = 0;
+
+                    double ts = 0;
+                    if (LogPlayBackSpeed == 0)
+                        LogPlayBackSpeed = 0.01;
+                    try
+                    {
+                        ts = Math.Min((act / LogPlayBackSpeed), 1000);
+                    }
+                    catch { }
+
+                    double timetook = (DateTime.Now - tsreal).TotalMilliseconds;
+                    if (timetook != 0)
+                    {
+                        //Console.WriteLine("took: " + timetook + "=" + taketime + " " + (taketime - timetook) + " " + ts);
+                        //Console.WriteLine(MainV2.comPort.lastlogread.Second + " " + DateTime.Now.Second + " " + (MainV2.comPort.lastlogread.Second - DateTime.Now.Second));
+                        //if ((taketime - timetook) < 0)
+                        {
+                            timeerror += (taketime - timetook);
+                            if (ts != 0)
+                            {
+                                ts += timeerror;
+                                timeerror = 0;
+                            }
+                        }
+                        if (ts > 1000)
+                            ts = 1000;
+                    }
+
+                    taketime = ts;
+                    tsreal = DateTime.Now;
+
+                    if (ts > 0 && ts < 1000)
+                        System.Threading.Thread.Sleep((int)ts);
+
+
+
+                    if (threadrun == 0) { return; }
+
+                    tracklast = tracklast.AddMilliseconds(ts - act);
+                    tunning = tunning.AddMilliseconds(ts - act);
+
+                    if (tracklast.Month != DateTime.Now.Month)
+                    {
+                        tracklast = DateTime.Now;
+                        tunning = DateTime.Now;
+                    }
+
+                    try
+                    {
+                        if (MainV2.comPort.logplaybackfile != null && MainV2.comPort.logplaybackfile.BaseStream.Position == MainV2.comPort.logplaybackfile.BaseStream.Length)
+                        {
+                            MainV2.comPort.logreadmode = false;
+                        }
+                    }
+                    catch { MainV2.comPort.logreadmode = false; }
+                }
+                else
+                {
+                    // ensure we know to stop
+                    if (MainV2.comPort.logreadmode)
+                        MainV2.comPort.logreadmode = false;
+                    //updatePlayPauseButton(false);
+
+                    if (!playingLog && MainV2.comPort.logplaybackfile != null)
+                    {
+                        continue;
+                    }
+                }
                 updateBindingSource();
 
                 // udpate tunning tab
@@ -819,7 +936,7 @@ namespace MissionPlanner.GCSViews
                     mode_value.Text = "增稳";
                 }
                 else
-                    mode_value.Text = "未知";
+                    mode_value.Text = MainV2.comPort.MAV.cs.mode.ToString();
 
                 if (MainV2.comPort.MAV.cs.gpsstatus == 3)
                     gpsstate_value.Text = "3D锁定";
@@ -839,10 +956,22 @@ namespace MissionPlanner.GCSViews
                 //aileron_l.Text = ((int)((((float)(MainV2.comPort.MAV.cs.aileron_l) - 255f) / 180f) * 90f)).ToString();
                 //aileron_r.Text = ((int)((((float)(MainV2.comPort.MAV.cs.aileron_r) - 255f) / 180f) * -90f)).ToString();
 
+                String hh = ""; string mm = ""; string ss = "";
+                hh = ((int)(MainV2.comPort.MAV.cs.timeInAir / 3600.0f)).ToString();
+                mm = ((int)(MainV2.comPort.MAV.cs.timeInAir - (int.Parse(hh) * 3600)) / 60).ToString();
+                ss = (MainV2.comPort.MAV.cs.timeInAir - (int.Parse(hh) * 3600) - (int.Parse(mm) * 60)).ToString();
+                timeinair.Text = hh + ":" + mm + ":" + ss;
+
+                //String hh2 = ""; string mm2 = ""; string ss2 = "";
+                hh = ((int)(MainV2.comPort.MAV.cs.time2InAir / 3600.0f)).ToString();
+                mm = ((int)(MainV2.comPort.MAV.cs.time2InAir - (int.Parse(hh) * 3600)) / 60).ToString();
+                ss = (MainV2.comPort.MAV.cs.time2InAir - (int.Parse(hh) * 3600) - (int.Parse(mm) * 60)).ToString();
+                quadbat_time.Text = hh + ":" + mm + ":" + ss;
+
                 try
                 {
-                    goal_aill.Text = ((int)((((float)(MainV2.comPort.MAV.cs.ch1out) - 1500f) / 1000f) * 90f)).ToString();
-                    goal_ailr.Text = ((int)((((float)(MainV2.comPort.MAV.cs.ch2out) - 1500f) / 1000f) * -90f)).ToString();
+                  //  goal_aill.Text = ((int)((((float)(MainV2.comPort.MAV.cs.ch1out) - 1500f) / 1000f) * 90f)).ToString();
+                  //  goal_ailr.Text = ((int)((((float)(MainV2.comPort.MAV.cs.ch2out) - 1500f) / 1000f) * -90f)).ToString();
                 }
                 catch { }
             }
@@ -1481,6 +1610,226 @@ namespace MissionPlanner.GCSViews
         private void _3DMesh1_AutoSizeChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void BUT_loadtelem_Click(object sender, EventArgs e)
+        {
+            //LBL_logfn.Text = "";
+
+            if (MainV2.comPort.logplaybackfile != null)
+            {
+                try
+                {
+                    MainV2.comPort.logplaybackfile.Close();
+                    MainV2.comPort.logplaybackfile = null;
+                }
+                catch { }
+            }
+
+            OpenFileDialog fd = new OpenFileDialog();
+            fd.AddExtension = true;
+            fd.Filter = "Ardupilot Telemtry log (*.tlog)|*.tlog|Mavlink Log (*.mavlog)|*.mavlog";
+            fd.InitialDirectory = Settings.Instance.LogDir;
+            fd.DefaultExt = ".tlog";
+            DialogResult result = fd.ShowDialog();
+            string file = fd.FileName;
+            LoadLogFile(file);
+        }
+
+        public void LoadLogFile(string file)
+        {
+            if (file != "")
+            {
+                try
+                {
+                    BUT_clear_track_Click(null, null);
+
+                    MainV2.comPort.logreadmode = false;
+                    MainV2.comPort.logplaybackfile = new BinaryReader(File.OpenRead(file));
+                    MainV2.comPort.lastlogread = DateTime.MinValue;
+
+                    //LBL_logfn.Text = Path.GetFileName(file);
+
+                    tracklog.Value = 0;
+                    tracklog.Minimum = 0;
+                    tracklog.Maximum = 100;
+                }
+                catch { CustomMessageBox.Show("Error: Failed to read log file", "Error"); }
+            }
+        }
+
+        private void BUT_playlog_Click(object sender, EventArgs e)
+        {
+            if (MainV2.comPort.logreadmode)
+            {
+                MainV2.comPort.logreadmode = false;
+                ZedGraphTimer.Stop();
+                playingLog = false;
+            }
+            else
+            {
+                // BUT_clear_track_Click(sender, e);
+                MainV2.comPort.logreadmode = true;
+                list1.Clear();
+                list2.Clear();
+                list3.Clear();
+                list4.Clear();
+                list5.Clear();
+                list6.Clear();
+                list7.Clear();
+                list8.Clear();
+                list9.Clear();
+                list10.Clear();
+                tickStart = Environment.TickCount;
+
+                zg1.GraphPane.XAxis.Scale.Min = 0;
+                zg1.GraphPane.XAxis.Scale.Max = 1;
+                ZedGraphTimer.Start();
+                playingLog = true;
+            }
+        }
+
+        private void tracklog_Scroll(object sender, EventArgs e)
+        {
+            try
+            {
+                BUT_clear_track_Click(sender, e);
+
+                MainV2.comPort.lastlogread = DateTime.MinValue;
+                MainV2.comPort.MAV.cs.ResetInternals();
+
+                if (MainV2.comPort.logplaybackfile != null)
+                    MainV2.comPort.logplaybackfile.BaseStream.Position = (long)(MainV2.comPort.logplaybackfile.BaseStream.Length * (tracklog.Value / 100.0));
+
+                updateLogPlayPosition();
+            }
+            catch { } // ignore any invalid 
+        }
+
+        private void updateLogPlayPosition()
+        {
+            this.BeginInvoke((MethodInvoker)delegate ()
+            {
+                try
+                {
+                    if (tracklog.Visible)
+                        tracklog.Value = (int)(MainV2.comPort.logplaybackfile.BaseStream.Position / (double)MainV2.comPort.logplaybackfile.BaseStream.Length * 100);
+                    if (lbl_logpercent.Visible)
+                        lbl_logpercent.Text = (MainV2.comPort.logplaybackfile.BaseStream.Position / (double)MainV2.comPort.logplaybackfile.BaseStream.Length).ToString("0.00%");
+                }
+                catch { }
+            });
+        }
+
+        private void CMB_playspeed_Click(object sender, EventArgs e)
+        {
+            CMB_playspeed.Items.Clear();
+            CMB_playspeed.Items.Add((0.1).ToString("0.0"));
+            CMB_playspeed.Items.Add((0.25).ToString("0.00"));
+            CMB_playspeed.Items.Add((0.5).ToString("0.0"));
+            CMB_playspeed.Items.Add((1).ToString());
+            CMB_playspeed.Items.Add((2).ToString());
+            CMB_playspeed.Items.Add((5).ToString());
+            CMB_playspeed.Items.Add((10).ToString());
+        }
+
+        private void CMB_playspeed_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            int i = CMB_playspeed.SelectedIndex; // set nav to
+            switch (i)
+            {
+                case 0:
+                    LogPlayBackSpeed = 0.1;
+                    break;
+                case 1:
+                    LogPlayBackSpeed = 0.25;
+                    break;
+                case 2:
+                    LogPlayBackSpeed = 0.5;
+                    break;
+                case 3:
+                    LogPlayBackSpeed = 1;
+                    break;
+                case 4:
+                    LogPlayBackSpeed = 2;
+                    break;
+                case 5:
+                    LogPlayBackSpeed = 5;
+                    break;
+                case 6:
+                    LogPlayBackSpeed = 10;
+                    break;
+
+            }
+
+        }
+
+        private void HsdevFlightData_Resize(object sender, EventArgs e)
+        {
+            this.lbl_logpercent.Location = new System.Drawing.Point(354, 33);
+        }
+
+        private void updatePlayPauseButton(bool playing)
+        {
+            if (playing)
+            {
+                if (BUT_playlog.Text == "暂停")
+                    return;
+
+                this.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate ()
+                {
+                    try
+                    {
+                        BUT_playlog.Text = "暂停";
+                    }
+                    catch { }
+                });
+            }
+            else
+            {
+                if (BUT_playlog.Text == "播放")
+                    return;
+
+                this.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate ()
+                {
+                    try
+                    {
+                        BUT_playlog.Text = "播放";
+                    }
+                    catch { }
+                });
+            }
+        }
+
+        private void BUT_ARM_Click(object sender, EventArgs e)
+        {
+            if (!MainV2.comPort.BaseStream.IsOpen)
+                return;
+
+            // arm the MAV
+            try
+            {
+                if (MainV2.comPort.MAV.cs.armed)
+                    if (CustomMessageBox.Show("确定要锁定电机吗?", "锁定?", MessageBoxButtons.YesNo) !=
+                        DialogResult.Yes)
+                        return;
+
+                bool ans = MainV2.comPort.doARM(!MainV2.comPort.MAV.cs.armed);
+                if (ans == false)
+                    CustomMessageBox.Show(Strings.ErrorRejectedByMAV, Strings.ERROR);
+                else
+                {
+                    if (!MainV2.comPort.MAV.cs.armed)
+                        BUT_ARM.Text = "解锁";
+                    else
+                        BUT_ARM.Text = "锁定";
+                }
+            }
+            catch
+            {
+                CustomMessageBox.Show(Strings.ErrorNoResponce, Strings.ERROR);
+            }
         }
     }
 }

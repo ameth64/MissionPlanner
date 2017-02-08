@@ -359,7 +359,7 @@
     </Compile>
     <Compile Include="GCSViews\HsdevFlightData.designer.cs">
       <DependentUpon>HsdevFlightData.cs</DependentUpon>
-	</Compile>
+    </Compile>
     <Compile Include="Swarm\FollowLeader\Control.cs">
       <SubType>Form</SubType>
     </Compile>

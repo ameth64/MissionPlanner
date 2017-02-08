@@ -2551,8 +2551,8 @@ namespace MissionPlanner
             {
             }
 
-            MyView.AddScreen(new MainSwitcher.Screen("FlightData", FlightData, true));
             MyView.AddScreen(new MainSwitcher.Screen("HsdevFlightData", HsdevFlightData, true));
+            MyView.AddScreen(new MainSwitcher.Screen("FlightData", FlightData, true));      
             MyView.AddScreen(new MainSwitcher.Screen("FlightPlanner", FlightPlanner, true));
             MyView.AddScreen(new MainSwitcher.Screen("HWConfig", typeof(GCSViews.InitialSetup), false));
             MyView.AddScreen(new MainSwitcher.Screen("SWConfig", typeof(GCSViews.SoftwareConfig), false));
@@ -2586,12 +2586,18 @@ namespace MissionPlanner
             else
             {
                 this.PerformLayout();
-                MenuFlightData_Click(this, e);
-                MainMenu_ItemClicked(this, new ToolStripItemClickedEventArgs(MenuFlightData));
+                MenuHsFlightData_Click(this, e);
+                MainMenu_ItemClicked(this, new ToolStripItemClickedEventArgs(MenuHsFilghtData));
             }
 
             // for long running tasks using own threads.
             // for short use threadpool
+            MenuSimulation.Visible = false;
+            MenuFlightData.Visible = false;
+            MenuInitConfig.Visible = false;
+            MenuConfigTune.Visible = false;
+            MenuTerminal.Visible = false;
+            MenuHelp.Visible = false;
 
             this.SuspendLayout();
 
@@ -2687,7 +2693,7 @@ namespace MissionPlanner
 
             MissionPlanner.Utilities.Tracking.AddTiming("AppLoad", "Load Time",
                 (DateTime.Now - Program.starttime).TotalMilliseconds, "");
-
+/*
             try
             {
                 // single update check per day - in a seperate thread
@@ -2706,7 +2712,7 @@ namespace MissionPlanner
             {
                 log.Error("Update check failed", ex);
             }
-
+*/
             // play a tlog that was passed to the program/ load a bin log passed
             if (Program.args.Length > 0)
             {
@@ -2889,7 +2895,8 @@ namespace MissionPlanner
             MyView.ShowScreen("Help");
         }
 
-
+        int pwstep = 0;
+        bool showcontrol = false;
         /// <summary>
         /// keyboard shortcuts override
         /// </summary>
@@ -2898,6 +2905,64 @@ namespace MissionPlanner
         /// <returns></returns>
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
+
+            switch (pwstep)
+            {
+                case 0:
+                    if (keyData == Keys.H)
+                        pwstep = 1;
+                    else
+                        pwstep = 0;
+                    break;
+                case 1:
+                    if (keyData == Keys.U)
+                        pwstep = 2;
+                    else
+                        pwstep = 0;
+                    break;
+                case 2:
+                    if (keyData == Keys.I)
+                        pwstep = 3;
+                    else
+                        pwstep = 0;
+                    break;
+
+            }
+            if (pwstep == 3)
+            {
+                pwstep = 0;
+                //MenuConnect_Click(null, null);
+                showcontrol = !showcontrol;
+                if (showcontrol)
+                {
+                    int win = NativeMethods.FindWindow("ConsoleWindowClass", null);
+                    NativeMethods.ShowWindow(win, NativeMethods.SW_SHOWNORMAL); // hide window
+                }
+                else
+                {
+                    int win = NativeMethods.FindWindow("ConsoleWindowClass", null);
+                    NativeMethods.ShowWindow(win, NativeMethods.SW_HIDE); // hide window
+                }
+                MenuSimulation.Visible = !MenuSimulation.Visible;
+                MenuFlightData.Visible = !MenuFlightData.Visible;
+                MenuInitConfig.Visible = !MenuInitConfig.Visible;
+                MenuConfigTune.Visible = !MenuConfigTune.Visible;
+                MenuTerminal.Visible = !MenuTerminal.Visible;
+                MenuHelp.Visible = !MenuHelp.Visible;
+                //MyFlightData.zg1show();
+                //  public System.Windows.Forms.ToolStripButton MenuFlightData;
+                // public System.Windows.Forms.ToolStripButton MenuFlightPlanner;
+                // public System.Windows.Forms.ToolStripButton MenuInitConfig;
+                // public System.Windows.Forms.ToolStripButton MenuSimulation;
+                // public System.Windows.Forms.ToolStripButton MenuConfigTune;
+                // public System.Windows.Forms.ToolStripButton MenuTerminal;
+                // public System.Windows.Forms.ToolStripButton MenuConnect;
+
+                //private System.Windows.Forms.ToolStripButton MenuHelp;
+                return true;
+            }
+
+            return true;
             if (keyData == Keys.F12)
             {
                 MenuConnect_Click(null, null);

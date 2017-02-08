@@ -522,6 +522,9 @@ namespace MissionPlanner
         [DisplayText("Time in Air (sec)")]
         public float timeInAir { get; set; }
 
+        [DisplayText("Time2 in Air (sec)")]
+        public float time2InAir { get; set; }
+
         // calced turn rate
         [DisplayText("Turn Rate (speed)")]
         public float turnrate
@@ -638,6 +641,7 @@ namespace MissionPlanner
         }
 
         private DateTime _lastcurrent = DateTime.MinValue;
+        private DateTime _lastcurrent2 = DateTime.MinValue;
 
         [DisplayText("Bat efficiency (mah/km)")]
         public float battery_mahperkm { get {return battery_usedmah / (distTraveled/1000.0f); } }
@@ -667,12 +671,20 @@ namespace MissionPlanner
             get { return _current2; }
             set
             {
-                if (value < 0) return;
+                if (_lastcurrent2 == DateTime.MinValue) _lastcurrent2 = datetime;
+                if (value < 1) return;
+
+                battery2_usedmah += (float)((value * 1000.0) * (datetime - _lastcurrent).TotalHours);
                 _current2 = value;
+                _lastcurrent2 = datetime;
             }
         }
 
         private float _current2;
+
+        [DisplayText("Bat2 used EST (mah)")]
+        public float battery2_usedmah { get; set; }
+
 
         public float HomeAlt
         {
@@ -1101,9 +1113,11 @@ namespace MissionPlanner
                 raterc = ratercbackup;
                 datetime = DateTime.MinValue;
                 battery_usedmah = 0;
+                battery2_usedmah = 0;
                 _lastcurrent = DateTime.MinValue;
                 distTraveled = 0;
                 timeInAir = 0;
+                time2InAir = 0;
                 version = new Version();
                 voltageflag = MAVLink.MAV_POWER_STATUS.USB_CONNECTED;
             }
@@ -1217,6 +1231,10 @@ namespace MissionPlanner
                         // throttle is up, or groundspeed is > 3 m/s
                         if (ch3percent > 12 || _groundspeed > 3.0)
                             timeInAir++;
+
+                        // throttle is up, or groundspeed is > 3 m/s
+                        if (current2>2)
+                            time2InAir++;
 
                         if (!gotwind)
                             dowindcalc();

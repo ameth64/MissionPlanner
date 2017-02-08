@@ -50,9 +50,9 @@ namespace MissionPlanner
             this.MenuConnect = new System.Windows.Forms.ToolStripButton();
             this.toolStripConnectionControl = new MissionPlanner.Controls.ToolStripConnectionControl();
             this.MenuDonate = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuHsFilghtData = new System.Windows.Forms.ToolStripButton();
             this.menu = new MissionPlanner.Controls.MyButton();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.MenuHsFilghtData = new System.Windows.Forms.ToolStripButton();
             this.MainMenu.SuspendLayout();
             this.CTX_mainmenu.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -65,6 +65,7 @@ namespace MissionPlanner
             this.MainMenu.GripMargin = new System.Windows.Forms.Padding(0);
             this.MainMenu.ImageScalingSize = new System.Drawing.Size(0, 0);
             this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuHsFilghtData,
             this.MenuFlightData,
             this.MenuFlightPlanner,
             this.MenuInitConfig,
@@ -74,8 +75,7 @@ namespace MissionPlanner
             this.MenuHelp,
             this.MenuConnect,
             this.toolStripConnectionControl,
-            this.MenuDonate,
-            this.MenuHsFilghtData});
+            this.MenuDonate});
             resources.ApplyResources(this.MainMenu, "MainMenu");
             this.MainMenu.Name = "MainMenu";
             this.MainMenu.Stretch = false;
@@ -208,6 +208,14 @@ namespace MissionPlanner
             this.MenuDonate.Padding = new System.Windows.Forms.Padding(0, 0, 10, 0);
             this.MenuDonate.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
+            // MenuHsFilghtData
+            // 
+            resources.ApplyResources(this.MenuHsFilghtData, "MenuHsFilghtData");
+            this.MenuHsFilghtData.ForeColor = System.Drawing.Color.White;
+            this.MenuHsFilghtData.Margin = new System.Windows.Forms.Padding(0);
+            this.MenuHsFilghtData.Name = "MenuHsFilghtData";
+            this.MenuHsFilghtData.Click += new System.EventHandler(this.MenuHsFlightData_Click);
+            // 
             // menu
             // 
             resources.ApplyResources(this.menu, "menu");
@@ -222,14 +230,6 @@ namespace MissionPlanner
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             this.panel1.MouseLeave += new System.EventHandler(this.MainMenu_MouseLeave);
-            // 
-            // MenuHsFilghtData
-            // 
-            resources.ApplyResources(this.MenuHsFilghtData, "MenuHsFilghtData");
-            this.MenuHsFilghtData.ForeColor = System.Drawing.Color.White;
-            this.MenuHsFilghtData.Margin = new System.Windows.Forms.Padding(0);
-            this.MenuHsFilghtData.Name = "MenuHsFilghtData";
-            this.MenuHsFilghtData.Click += new System.EventHandler(this.MenuHsFlightData_Click);
             // 
             // MainV2
             // 
