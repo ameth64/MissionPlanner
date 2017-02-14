@@ -1162,6 +1162,20 @@ namespace MissionPlanner
             MyView.ShowScreen("Terminal");
         }
 
+        private void toolStripMenuLogManger_Click(object sender, EventArgs e)
+        {
+            var form = new LogDownloadMavLink();
+
+            form.Show();
+        }
+
+        private void MenuDownLoadPos_Click(object sender, EventArgs e)
+        {
+            var form = new LogDownloadMavLink();
+
+            form.Show();
+        }
+
         public void doDisconnect(MAVLinkInterface comPort)
         {
             log.Info("We are disconnecting");
