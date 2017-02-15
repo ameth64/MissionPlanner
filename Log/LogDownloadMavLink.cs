@@ -61,8 +61,17 @@ namespace MissionPlanner.Log
             MissionPlanner.Utilities.Tracking.AddPage(this.GetType().ToString(), this.Text);            
         }
 
+        public void SetFullVersion()
+        {
+            BUT_firstperson.Visible = true;
+            BUT_bintolog.Visible = true;
+            BUT_DLall.Visible = true;
+            BUT_redokml.Visible = true;
+        }
+
         private void Log_Load(object sender, EventArgs e)
         {
+            MainV2.instance.posdownlaoding = true;
             LoadLogList();
         }
 
@@ -194,7 +203,7 @@ namespace MissionPlanner.Log
                     new System.Threading.Thread(
                         delegate ()
                         {
-                            DownloadThread(toDownload);
+                            DownloadThread(toDownload,false);
                         });
                 t11.Name = "Log Download All thread";
                 t11.Start();
@@ -229,7 +238,7 @@ namespace MissionPlanner.Log
 
                 logfile = Settings.Instance.LogDir + Path.DirectorySeparatorChar
                           + MainV2.comPort.MAV.aptype.ToString() + Path.DirectorySeparatorChar
-                          + hbpacket.sysid + Path.DirectorySeparatorChar + no + " " + MakeValidFileName(fileName) + ".pos.bin";
+                          + hbpacket.sysid + Path.DirectorySeparatorChar + no +"-"+ DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + "-" + MakeValidFileName(fileName) + ".pos.bin";
 
                 // make log dir
                 Directory.CreateDirectory(Path.GetDirectoryName(logfile));
@@ -259,14 +268,14 @@ namespace MissionPlanner.Log
             log.Info("about to GetFirstGpsTime: " + logfile);
             // get gps time of assci log
             DateTime logtime = new DFLog().GetFirstGpsTime(logfile);
-
+            string newlogfilename = "";
             // rename log is we have a valid gps time
             if (logtime != DateTime.MinValue)
             {
-                string newlogfilename = Settings.Instance.LogDir + Path.DirectorySeparatorChar
+                 newlogfilename = Settings.Instance.LogDir + Path.DirectorySeparatorChar
                                         + MainV2.comPort.MAV.aptype.ToString() + Path.DirectorySeparatorChar
                                         + hbpacket.sysid + Path.DirectorySeparatorChar +
-                                        logtime.ToString("yyyy-MM-dd HH-mm-ss") + ".txt";
+                                        logtime.ToString("-yyyy-MM-dd HH-mm-ss") + ".txt";
                 try
                 {
                     File.Move(logfile, newlogfilename);
@@ -282,7 +291,10 @@ namespace MissionPlanner.Log
             }
 
             MainV2.comPort.Progress -= comPort_Progress;
-
+            if (newlogfilename != "")
+                System.Diagnostics.Process.Start("notepad.exe", newlogfilename);
+            else
+                System.Diagnostics.Process.Start("notepad.exe", logfile);
             return logfile;
         }
 
@@ -344,11 +356,11 @@ namespace MissionPlanner.Log
             log.Info("about to GetFirstGpsTime: " + logfile);
             // get gps time of assci log
             DateTime logtime = new DFLog().GetFirstGpsTime(logfile);
-
+            string newlogfilename = "";
             // rename log is we have a valid gps time
             if (logtime != DateTime.MinValue)
             {
-                string newlogfilename = Settings.Instance.LogDir + Path.DirectorySeparatorChar
+                 newlogfilename = Settings.Instance.LogDir + Path.DirectorySeparatorChar
                                         + MainV2.comPort.MAV.aptype.ToString() + Path.DirectorySeparatorChar
                                         + hbpacket.sysid + Path.DirectorySeparatorChar +
                                         logtime.ToString("yyyy-MM-dd HH-mm-ss") + ".log";
@@ -375,7 +387,7 @@ namespace MissionPlanner.Log
         {
             this.closed = true;
             MainV2.comPort.Progress -= comPort_Progress;
-
+            MainV2.instance.posdownlaoding = false;
             base.OnClosed(e);
         }
 
@@ -389,6 +401,7 @@ namespace MissionPlanner.Log
                     e.Cancel = true;
                     return;
                 }
+                MainV2.instance.posdownlaoding = false;
             }
 
             base.OnClosing(e);
@@ -431,10 +444,10 @@ namespace MissionPlanner.Log
             status = SerialStatus.Done;
         }
 
-        private void DownloadThread(int[] selectedLogs)
+        private void DownloadThread(int[] selectedLogs,bool pos)
         {
             int data_type = 0;
-            if (DialogResult.Yes == CustomMessageBox.Show("下载POS选YES,下载记录选NO。", "选择数据类型", MessageBoxButtons.YesNo))
+            if (pos)
             {
                 data_type = 1;
             }
@@ -539,7 +552,7 @@ namespace MissionPlanner.Log
                 {
                     BUT_DLall.Enabled = false;
                     BUT_DLthese.Enabled = false;
-                    System.Threading.Thread t11 = new System.Threading.Thread(delegate () { DownloadThread(toDownload); });
+                    System.Threading.Thread t11 = new System.Threading.Thread(delegate () { DownloadThread(toDownload,false); });
                     t11.Name = "Log download single thread";
                     t11.Start();
                 }
@@ -699,5 +712,24 @@ namespace MissionPlanner.Log
             }
         }
 
+        private void BUT_DLthesePos_Click(object sender, EventArgs e)
+        {
+            if (status == SerialStatus.Done)
+            {
+                int[] toDownload = GetSelectedLogIndices().ToArray();
+                if (toDownload.Length == 0)
+                {
+                    AppendSerialLog(LogStrings.NothingSelected);
+                }
+                else
+                {
+                    BUT_DLall.Enabled = false;
+                    BUT_DLthese.Enabled = false;
+                    System.Threading.Thread t11 = new System.Threading.Thread(delegate () { DownloadThread(toDownload, true); });
+                    t11.Name = "Log download single thread";
+                    t11.Start();
+                }
+            }
+         }
     }
 }

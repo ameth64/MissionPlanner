@@ -387,6 +387,8 @@ namespace MissionPlanner
         private Form connectionStatsForm;
         private ConnectionStats _connectionStats;
 
+        public bool posdownlaoding = false;
+
         /// <summary>
         /// This 'Control' is the toolstrip control that holds the comport combo, baudrate combo etc
         /// Otiginally seperate controls, each hosted in a toolstip sqaure, combined into this custom
@@ -1164,16 +1166,54 @@ namespace MissionPlanner
 
         private void toolStripMenuLogManger_Click(object sender, EventArgs e)
         {
-            var form = new LogDownloadMavLink();
 
-            form.Show();
+            if (MainV2.comPort.MAV.cs.mode == "STABILIZE" || MainV2.comPort.MAV.cs.mode == "Manual")
+            {
+                if (posdownlaoding == false)
+                {
+                    posdownlaoding = true;
+
+                    var form = new LogDownloadMavLink();
+
+                    form.Show();
+
+                    
+                }
+                else
+                {
+                    CustomMessageBox.Show("POS下载中.....", "错误");
+                }
+            }
+            else
+            {
+                CustomMessageBox.Show("请在待机状态下载POS", "错误");
+            }
         }
 
         private void MenuDownLoadPos_Click(object sender, EventArgs e)
         {
-            var form = new LogDownloadMavLink();
+            if (MainV2.comPort.MAV.cs.mode == "STABILIZE" || MainV2.comPort.MAV.cs.mode == "Manual")
+            {
+                if (posdownlaoding == false)
+                {
+                    posdownlaoding = true;
+                    var form = new PosDownLoadCurrent();
 
-            form.Show();
+                    form.Show();
+
+                    form.Pos_DownLoad_Thread();
+
+                    
+                }
+                else
+                {
+                    CustomMessageBox.Show("POS下载中.....", "错误");
+                }
+            }
+            else
+            {
+                CustomMessageBox.Show("请在待机状态下载POS", "错误");
+            }
         }
 
         public void doDisconnect(MAVLinkInterface comPort)

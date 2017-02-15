@@ -34,13 +34,10 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
-            this._3DMesh1 = new MissionPlanner.Mesh._3DMesh();
-            this.bindingSourceHud = new System.Windows.Forms.BindingSource(this.components);
             this.hud2 = new MissionPlanner.Controls.HUD();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.Gvspeed = new AGaugeApp.AGauge();
-            this.bindingSourceGaugesTab = new System.Windows.Forms.BindingSource(this.components);
             this.Galt = new AGaugeApp.AGauge();
             this.Gspeed = new AGaugeApp.AGauge();
             this.Gheading = new MissionPlanner.Controls.HSI();
@@ -117,6 +114,11 @@
             this.flyToHereAltToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fixbattery = new System.Windows.Forms.ToolStripMenuItem();
             this.ZedGraphTimer = new System.Windows.Forms.Timer(this.components);
+            this.label16 = new System.Windows.Forms.Label();
+            this.cameranum = new System.Windows.Forms.Label();
+            this._3DMesh1 = new MissionPlanner.Mesh._3DMesh();
+            this.bindingSourceHud = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingSourceGaugesTab = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSourceStatusTab = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -130,7 +132,6 @@
             this.splitContainer5.Panel1.SuspendLayout();
             this.splitContainer5.Panel2.SuspendLayout();
             this.splitContainer5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceHud)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
@@ -139,13 +140,14 @@
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceGaugesTab)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tracklog)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer6)).BeginInit();
             this.splitContainer6.Panel1.SuspendLayout();
             this.splitContainer6.Panel2.SuspendLayout();
             this.splitContainer6.SuspendLayout();
             this.contextMenuStripMap.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceHud)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceGaugesTab)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceStatusTab)).BeginInit();
             this.SuspendLayout();
             // 
@@ -209,33 +211,6 @@
             this.splitContainer5.Size = new System.Drawing.Size(460, 215);
             this.splitContainer5.SplitterDistance = 224;
             this.splitContainer5.TabIndex = 6;
-            // 
-            // _3DMesh1
-            // 
-            this._3DMesh1.aileron_l = ((ushort)(0));
-            this._3DMesh1.aileron_r = ((ushort)(0));
-            this._3DMesh1.AutoSize = true;
-            this._3DMesh1.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
-            this._3DMesh1.BackColor = System.Drawing.Color.Black;
-            this._3DMesh1.DataBindings.Add(new System.Windows.Forms.Binding("heading", this.bindingSourceHud, "yaw", true));
-            this._3DMesh1.DataBindings.Add(new System.Windows.Forms.Binding("pitch", this.bindingSourceHud, "pitch", true));
-            this._3DMesh1.DataBindings.Add(new System.Windows.Forms.Binding("roll", this.bindingSourceHud, "roll", true));
-            this._3DMesh1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._3DMesh1.heading = 0F;
-            this._3DMesh1.Location = new System.Drawing.Point(0, 0);
-            this._3DMesh1.Name = "_3DMesh1";
-            this._3DMesh1.pitch = 0F;
-            this._3DMesh1.roll = 0F;
-            this._3DMesh1.Size = new System.Drawing.Size(224, 215);
-            this._3DMesh1.TabIndex = 0;
-            this._3DMesh1.VSync = false;
-            this._3DMesh1.AutoSizeChanged += new System.EventHandler(this._3DMesh1_AutoSizeChanged);
-            this._3DMesh1.Click += new System.EventHandler(this.mesh_Click);
-            this._3DMesh1.Resize += new System.EventHandler(this._3DMesh1_Resize);
-            // 
-            // bindingSourceHud
-            // 
-            this.bindingSourceHud.DataSource = typeof(MissionPlanner.CurrentState);
             // 
             // hud2
             // 
@@ -373,6 +348,8 @@
             // 
             // splitContainer4.Panel2
             // 
+            this.splitContainer4.Panel2.Controls.Add(this.label16);
+            this.splitContainer4.Panel2.Controls.Add(this.cameranum);
             this.splitContainer4.Panel2.Controls.Add(this.quadbat_time);
             this.splitContainer4.Panel2.Controls.Add(this.label24);
             this.splitContainer4.Panel2.Controls.Add(this.quadbat_used);
@@ -576,10 +553,6 @@
             this.Gvspeed.Value1 = 0F;
             this.Gvspeed.Value2 = 0F;
             this.Gvspeed.Value3 = 0F;
-            // 
-            // bindingSourceGaugesTab
-            // 
-            this.bindingSourceGaugesTab.DataSource = typeof(MissionPlanner.CurrentState);
             // 
             // Galt
             // 
@@ -1623,6 +1596,55 @@
             // 
             this.ZedGraphTimer.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // label16
+            // 
+            this.label16.Location = new System.Drawing.Point(360, 52);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(38, 14);
+            this.label16.TabIndex = 165;
+            this.label16.Text = "相机:";
+            // 
+            // cameranum
+            // 
+            this.cameranum.ContextMenuStrip = this.contextMenuStripHud;
+            this.cameranum.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "triggernum", true));
+            this.cameranum.Location = new System.Drawing.Point(396, 53);
+            this.cameranum.Name = "cameranum";
+            this.cameranum.Size = new System.Drawing.Size(55, 12);
+            this.cameranum.TabIndex = 166;
+            this.cameranum.Text = "0";
+            // 
+            // _3DMesh1
+            // 
+            this._3DMesh1.aileron_l = ((ushort)(0));
+            this._3DMesh1.aileron_r = ((ushort)(0));
+            this._3DMesh1.AutoSize = true;
+            this._3DMesh1.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
+            this._3DMesh1.BackColor = System.Drawing.Color.Black;
+            this._3DMesh1.DataBindings.Add(new System.Windows.Forms.Binding("heading", this.bindingSourceHud, "yaw", true));
+            this._3DMesh1.DataBindings.Add(new System.Windows.Forms.Binding("pitch", this.bindingSourceHud, "pitch", true));
+            this._3DMesh1.DataBindings.Add(new System.Windows.Forms.Binding("roll", this.bindingSourceHud, "roll", true));
+            this._3DMesh1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._3DMesh1.heading = 0F;
+            this._3DMesh1.Location = new System.Drawing.Point(0, 0);
+            this._3DMesh1.Name = "_3DMesh1";
+            this._3DMesh1.pitch = 0F;
+            this._3DMesh1.roll = 0F;
+            this._3DMesh1.Size = new System.Drawing.Size(224, 215);
+            this._3DMesh1.TabIndex = 0;
+            this._3DMesh1.VSync = false;
+            this._3DMesh1.AutoSizeChanged += new System.EventHandler(this._3DMesh1_AutoSizeChanged);
+            this._3DMesh1.Click += new System.EventHandler(this.mesh_Click);
+            this._3DMesh1.Resize += new System.EventHandler(this._3DMesh1_Resize);
+            // 
+            // bindingSourceHud
+            // 
+            this.bindingSourceHud.DataSource = typeof(MissionPlanner.CurrentState);
+            // 
+            // bindingSourceGaugesTab
+            // 
+            this.bindingSourceGaugesTab.DataSource = typeof(MissionPlanner.CurrentState);
+            // 
             // bindingSourceStatusTab
             // 
             this.bindingSourceStatusTab.DataSource = typeof(MissionPlanner.CurrentState);
@@ -1650,7 +1672,6 @@
             this.splitContainer5.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).EndInit();
             this.splitContainer5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceHud)).EndInit();
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
@@ -1659,13 +1680,14 @@
             this.splitContainer4.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
             this.splitContainer4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceGaugesTab)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tracklog)).EndInit();
             this.splitContainer6.Panel1.ResumeLayout(false);
             this.splitContainer6.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer6)).EndInit();
             this.splitContainer6.ResumeLayout(false);
             this.contextMenuStripMap.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceHud)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceGaugesTab)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceStatusTab)).EndInit();
             this.ResumeLayout(false);
 
@@ -1761,5 +1783,7 @@
         private Controls.MyButton BUT_ARM;
         private System.Windows.Forms.Label quadbat_time;
         private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label cameranum;
     }
 }

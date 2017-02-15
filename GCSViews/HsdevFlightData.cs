@@ -131,6 +131,8 @@ namespace MissionPlanner.GCSViews
 
             gMapControl1.Zoom = 3;
 
+            gMapControl1.DisableFocusOnMouseEnter = true;
+
             gMapControl1.RoutesEnabled = true;
             gMapControl1.PolygonsEnabled = true;
 

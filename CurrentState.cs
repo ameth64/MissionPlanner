@@ -134,6 +134,13 @@ namespace MissionPlanner
         float _altasl = 0;
         float oldalt = 0;
 
+        public UInt32 mytimeinair { get; set; }
+        public UInt32 mydistraveled { get; set; }
+        public bool mydtdata = false;
+
+        [DisplayText("camera trigger times")]
+        public UInt32 triggernum { get; set; }
+
         [DisplayText("Alt Home Offset (dist)")]
         public float altoffsethome { get; set; }
 
@@ -1221,6 +1228,9 @@ namespace MissionPlanner
 
                             distTraveled += (float) lastpos.GetDistance(new PointLatLngAlt(lat, lng, 0, ""))*
                                             multiplierdist;
+                            if (mydtdata)
+                                distTraveled = (float)((float)mydistraveled / 1000.0f);
+
                             lastpos = new PointLatLngAlt(lat, lng, 0, "");
                         }
                         else
@@ -1232,6 +1242,8 @@ namespace MissionPlanner
                         if (ch3percent > 12 || _groundspeed > 3.0)
                             timeInAir++;
 
+                        if (mydtdata)
+                            timeInAir = (float)mytimeinair;
                         // throttle is up, or groundspeed is > 3 m/s
                         if (current2>2)
                             time2InAir++;

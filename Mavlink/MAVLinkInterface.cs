@@ -3635,6 +3635,20 @@ Please check the following
                     {
                         var msg = message.ToStructure<MAVLink.mavlink_statustext_t>();
 
+                        string mydata = Encoding.ASCII.GetString(msg.text);
+                        int myind = mydata.IndexOf('\0');
+                        if (myind != -1)
+                            mydata = mydata.Substring(0, myind);
+
+                        if (mydata.StartsWith("d+t+n", true, null))
+                        {
+                            string[] s = mydata.Split(new Char[] { ':', '-' });
+                            MainV2.comPort.MAV.cs.mytimeinair = UInt32.Parse(s[1]);
+                            MainV2.comPort.MAV.cs.mydistraveled = UInt32.Parse(s[2]);
+                            MainV2.comPort.MAV.cs.triggernum = UInt32.Parse(s[3])-1;
+                            MainV2.comPort.MAV.cs.mydtdata = true;
+                        }
+
                         byte sev = msg.severity;
 
                         string logdata = Encoding.ASCII.GetString(msg.text);
@@ -4076,7 +4090,7 @@ Please check the following
 
             if (Progress != null)
             {
-                Progress((int)0, "");
+                Progress((int)0, "0");
             }
 
             uint totallength = 0;
@@ -4091,7 +4105,7 @@ Please check the following
             req.id = no;
             req.ofs = ofs;
             // entire pos
-            req.count = 0xFFFFFF00;
+            req.count = 0x80000000;
 
             // request point
             generatePacket((byte)MAVLINK_MSG_ID.LOG_REQUEST_DATA, req);
@@ -4122,9 +4136,6 @@ Please check the following
                     {
                         var data = buffer.ToStructure<mavlink_log_data_t>();
 
-                        if (data.id != no)
-                            continue;
-
                         // reset retrys
                         retrys = 3;
                         start = DateTime.Now;
@@ -4144,7 +4155,7 @@ Please check the following
                         {
                             if (Progress != null)
                             {
-                                Progress((int)req.ofs, "");
+                                Progress((int)req.ofs, data.id.ToString());
                             }
 
                             //Console.WriteLine("log dl bps: " + bps.ToString());
@@ -4194,7 +4205,8 @@ Please check the following
 
                             req.ofs = (uint)(a * 90);
                             req.count = bytereq;
-                            log.Info("req missing " + req.ofs + " " + req.count);
+                            req.count |= 0x80000000;
+                            log.Info("req missing " + req.ofs + " " + (req.count&0x7fffffff));
                             generatePacket((byte)MAVLINK_MSG_ID.LOG_REQUEST_DATA, req);
                             start = DateTime.Now;
                             break;
@@ -4208,9 +4220,6 @@ Please check the following
                     if (buffer.msgid == (byte)MAVLINK_MSG_ID.LOG_DATA)
                     {
                         var data = buffer.ToStructure<mavlink_log_data_t>();
-
-                        if (data.id != no)
-                            continue;
 
                         // reset retrys
                         retrys = 3;
@@ -4231,7 +4240,7 @@ Please check the following
                         {
                             if (Progress != null)
                             {
-                                Progress((int)req.ofs, "");
+                                Progress((int)req.ofs, data.id.ToString());
                             }
 
                             //Console.WriteLine("log dl bps: " + bps.ToString());

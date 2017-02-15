@@ -50,11 +50,11 @@ namespace MissionPlanner
             this.MenuHelp = new System.Windows.Forms.ToolStripButton();
             this.MenuLogManger = new System.Windows.Forms.ToolStripButton();
             this.MenuConnect = new System.Windows.Forms.ToolStripButton();
+            this.MenuDownLoadPos = new System.Windows.Forms.ToolStripButton();
             this.toolStripConnectionControl = new MissionPlanner.Controls.ToolStripConnectionControl();
             this.MenuDonate = new System.Windows.Forms.ToolStripMenuItem();
             this.menu = new MissionPlanner.Controls.MyButton();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.MenuDownLoadPos = new System.Windows.Forms.ToolStripButton();
             this.MainMenu.SuspendLayout();
             this.CTX_mainmenu.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -210,6 +210,15 @@ namespace MissionPlanner
             this.MenuConnect.Name = "MenuConnect";
             this.MenuConnect.Click += new System.EventHandler(this.MenuConnect_Click);
             // 
+            // MenuDownLoadPos
+            // 
+            resources.ApplyResources(this.MenuDownLoadPos, "MenuDownLoadPos");
+            this.MenuDownLoadPos.ForeColor = System.Drawing.Color.White;
+            this.MenuDownLoadPos.Margin = new System.Windows.Forms.Padding(0);
+            this.MenuDownLoadPos.Name = "MenuDownLoadPos";
+            this.MenuDownLoadPos.Padding = new System.Windows.Forms.Padding(0, 0, 10, 0);
+            this.MenuDownLoadPos.Click += new System.EventHandler(this.MenuDownLoadPos_Click);
+            // 
             // toolStripConnectionControl
             // 
             this.toolStripConnectionControl.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -243,15 +252,6 @@ namespace MissionPlanner
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             this.panel1.MouseLeave += new System.EventHandler(this.MainMenu_MouseLeave);
-            // 
-            // MenuDownLoadPos
-            // 
-            resources.ApplyResources(this.MenuDownLoadPos, "MenuDownLoadPos");
-            this.MenuDownLoadPos.ForeColor = System.Drawing.Color.White;
-            this.MenuDownLoadPos.Margin = new System.Windows.Forms.Padding(0);
-            this.MenuDownLoadPos.Name = "MenuDownLoadPos";
-            this.MenuDownLoadPos.Padding = new System.Windows.Forms.Padding(0, 0, 10, 0);
-            this.MenuDownLoadPos.Click += new System.EventHandler(this.MenuDownLoadPos_Click);
             // 
             // MainV2
             // 
