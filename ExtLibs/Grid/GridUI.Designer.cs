@@ -56,6 +56,8 @@
             this.label22 = new System.Windows.Forms.Label();
             this.tabCamera = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label42 = new System.Windows.Forms.Label();
+            this.num_setservono = new System.Windows.Forms.NumericUpDown();
             this.label41 = new System.Windows.Forms.Label();
             this.label39 = new System.Windows.Forms.Label();
             this.num_setservolow = new System.Windows.Forms.NumericUpDown();
@@ -151,11 +153,12 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.TRK_zoom = new MissionPlanner.Controls.MyTrackBar();
             this.map = new MissionPlanner.Controls.myGMAP();
-            this.label42 = new System.Windows.Forms.Label();
-            this.num_setservono = new System.Windows.Forms.NumericUpDown();
+            this.label43 = new System.Windows.Forms.Label();
+            this.NUM_windDir = new System.Windows.Forms.NumericUpDown();
             this.groupBox5.SuspendLayout();
             this.tabCamera.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_setservono)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_setservolow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_setservohigh)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUM_repttime)).BeginInit();
@@ -185,7 +188,7 @@
             this.groupBox4.SuspendLayout();
             this.tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TRK_zoom)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.num_setservono)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUM_windDir)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox5
@@ -368,6 +371,31 @@
             resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
+            // 
+            // label42
+            // 
+            resources.ApplyResources(this.label42, "label42");
+            this.label42.Name = "label42";
+            // 
+            // num_setservono
+            // 
+            resources.ApplyResources(this.num_setservono, "num_setservono");
+            this.num_setservono.Maximum = new decimal(new int[] {
+            12,
+            0,
+            0,
+            0});
+            this.num_setservono.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.num_setservono.Name = "num_setservono";
+            this.num_setservono.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
             // 
             // label41
             // 
@@ -964,6 +992,8 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.NUM_windDir);
+            this.groupBox6.Controls.Add(this.label43);
             this.groupBox6.Controls.Add(this.label37);
             this.groupBox6.Controls.Add(this.NUM_split);
             this.groupBox6.Controls.Add(this.CHK_usespeed);
@@ -1227,36 +1257,27 @@
             this.map.RetryLoadTile = 0;
             this.map.RoutesEnabled = true;
             this.map.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Fractional;
+            this.map.SelectedArea = ((GMap.NET.RectLatLng)(resources.GetObject("map.SelectedArea")));
             this.map.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.map.ShowTileGridLines = false;
             this.map.Zoom = 3D;
             this.map.MouseDown += new System.Windows.Forms.MouseEventHandler(this.map_MouseDown);
             this.map.MouseMove += new System.Windows.Forms.MouseEventHandler(this.map_MouseMove);
             // 
-            // label42
+            // label43
             // 
-            resources.ApplyResources(this.label42, "label42");
-            this.label42.Name = "label42";
+            resources.ApplyResources(this.label43, "label43");
+            this.label43.Name = "label43";
             // 
-            // num_setservono
+            // NUM_windDir
             // 
-            resources.ApplyResources(this.num_setservono, "num_setservono");
-            this.num_setservono.Maximum = new decimal(new int[] {
-            12,
+            resources.ApplyResources(this.NUM_windDir, "NUM_windDir");
+            this.NUM_windDir.Maximum = new decimal(new int[] {
+            360,
             0,
             0,
             0});
-            this.num_setservono.Minimum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.num_setservono.Name = "num_setservono";
-            this.num_setservono.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
+            this.NUM_windDir.Name = "NUM_windDir";
             // 
             // GridUI
             // 
@@ -1274,6 +1295,7 @@
             this.tabCamera.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_setservono)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_setservolow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_setservohigh)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUM_repttime)).EndInit();
@@ -1311,7 +1333,7 @@
             this.groupBox4.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.TRK_zoom)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.num_setservono)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUM_windDir)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1443,5 +1465,7 @@
         private System.Windows.Forms.NumericUpDown num_setservohigh;
         private System.Windows.Forms.Label label42;
         private System.Windows.Forms.NumericUpDown num_setservono;
+        private System.Windows.Forms.NumericUpDown NUM_windDir;
+        private System.Windows.Forms.Label label43;
     }
 }
