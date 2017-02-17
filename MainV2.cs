@@ -1167,7 +1167,7 @@ namespace MissionPlanner
         private void toolStripMenuLogManger_Click(object sender, EventArgs e)
         {
 
-            if (MainV2.comPort.MAV.cs.mode == "STABILIZE" || MainV2.comPort.MAV.cs.mode == "Manual")
+            if (MainV2.comPort.MAV.cs.mode.ToString().ToUpper() == "STABILIZE" || MainV2.comPort.MAV.cs.mode == "Manual")
             {
                 if (posdownlaoding == false)
                 {
@@ -1192,7 +1192,7 @@ namespace MissionPlanner
 
         private void MenuDownLoadPos_Click(object sender, EventArgs e)
         {
-            if (MainV2.comPort.MAV.cs.mode == "STABILIZE" || MainV2.comPort.MAV.cs.mode == "Manual")
+            if (MainV2.comPort.MAV.cs.mode.ToString().ToUpper() == "STABILIZE" || MainV2.comPort.MAV.cs.mode == "Manual")
             {
                 if (posdownlaoding == false)
                 {

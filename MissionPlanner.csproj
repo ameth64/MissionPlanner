@@ -333,7 +333,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="3DMesh.cs" />
+    <Compile Include="3DMesh.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Antenna\ArduTracker.cs" />
     <Compile Include="Antenna\DegreeTracker.cs" />
     <Compile Include="Antenna\ITrackerOutput.cs" />
@@ -364,7 +366,9 @@
     <Compile Include="Log\PosDownLoadCurrent.Designer.cs">
       <DependentUpon>PosDownLoadCurrent.cs</DependentUpon>
     </Compile>
-    <Compile Include="Swarm\FollowLeader\Control.cs" />
+    <Compile Include="Swarm\FollowLeader\Control.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Swarm\FollowLeader\Control.Designer.cs">
       <DependentUpon>Control.cs</DependentUpon>
     </Compile>
@@ -390,8 +394,12 @@
     <Compile Include="Utilities\AltitudeAngel\MissionPlannerAdaptor.cs" />
     <Compile Include="Utilities\AltitudeAngel\OverlayAdapter.cs" />
     <Compile Include="Utilities\BoardDetect.cs" />
-    <Compile Include="Arduino\ArduinoSTK.cs" />
-    <Compile Include="Arduino\ArduinoSTKv2.cs" />
+    <Compile Include="Arduino\ArduinoSTK.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Arduino\ArduinoSTKv2.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CodeGen.cs" />
     <Compile Include="Comms\CommsSerialScan.cs" />
     <Compile Include="Comms\MAVLinkSerialPort.cs" />
@@ -413,11 +421,15 @@
     <Compile Include="Controls\ConnectionStats.Designer.cs">
       <DependentUpon>ConnectionStats.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ControlTest.cs" />
+    <Compile Include="Controls\ControlTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Controls\ControlTest.Designer.cs">
       <DependentUpon>ControlTest.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DistanceBar.cs" />
+    <Compile Include="Controls\DistanceBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\DistanceBar.Designer.cs">
       <DependentUpon>DistanceBar.cs</DependentUpon>
     </Compile>
@@ -438,7 +450,9 @@
     <Compile Include="Controls\MavlinkCheckBoxBitMask.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\MavlinkCheckBox.cs" />
+    <Compile Include="Controls\MavlinkCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\MavlinkComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -462,7 +476,9 @@
     <Compile Include="Controls\PreFlight\CheckListEditor.Designer.cs">
       <DependentUpon>CheckListEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ServoOptions.cs" />
+    <Compile Include="Controls\ServoOptions.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\ServoOptions.Designer.cs">
       <DependentUpon>ServoOptions.cs</DependentUpon>
     </Compile>
@@ -472,12 +488,18 @@
     <Compile Include="Controls\SITL.Designer.cs">
       <DependentUpon>SITL.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ThemeColors.cs" />
+    <Compile Include="Controls\ThemeColors.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Controls\ThemeColors.Designer.cs">
       <DependentUpon>ThemeColors.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToolStripConnectionControl.cs" />
-    <Compile Include="Controls\ModifyandSet.cs" />
+    <Compile Include="Controls\ToolStripConnectionControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ModifyandSet.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\ModifyandSet.Designer.cs">
       <DependentUpon>ModifyandSet.cs</DependentUpon>
     </Compile>
@@ -524,7 +546,9 @@
     <Compile Include="GCSViews\ConfigurationView\ConfigAP_Limits.Designer.cs">
       <DependentUpon>ConfigAP_Limits.cs</DependentUpon>
     </Compile>
-    <Compile Include="GCSViews\ConfigurationView\ConfigArducopter.cs" />
+    <Compile Include="GCSViews\ConfigurationView\ConfigArducopter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="GCSViews\ConfigurationView\ConfigArducopter.Designer.cs">
       <DependentUpon>ConfigArducopter.cs</DependentUpon>
     </Compile>
@@ -570,7 +594,9 @@
     <Compile Include="GCSViews\ConfigurationView\ConfigCompassMot.Designer.cs">
       <DependentUpon>ConfigCompassMot.cs</DependentUpon>
     </Compile>
-    <Compile Include="GCSViews\ConfigurationView\ConfigESCCalibration.cs" />
+    <Compile Include="GCSViews\ConfigurationView\ConfigESCCalibration.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="GCSViews\ConfigurationView\ConfigESCCalibration.Designer.cs">
       <DependentUpon>ConfigESCCalibration.cs</DependentUpon>
     </Compile>
@@ -580,11 +606,15 @@
     <Compile Include="GCSViews\ConfigurationView\ConfigFailSafe.Designer.cs">
       <DependentUpon>ConfigFailSafe.cs</DependentUpon>
     </Compile>
-    <Compile Include="GCSViews\ConfigurationView\ConfigFirmware.cs" />
+    <Compile Include="GCSViews\ConfigurationView\ConfigFirmware.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="GCSViews\ConfigurationView\ConfigFirmware.Designer.cs">
       <DependentUpon>ConfigFirmware.cs</DependentUpon>
     </Compile>
-    <Compile Include="GCSViews\ConfigurationView\ConfigFirmwareDisabled.cs" />
+    <Compile Include="GCSViews\ConfigurationView\ConfigFirmwareDisabled.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="GCSViews\ConfigurationView\ConfigFirmwareDisabled.Designer.cs">
       <DependentUpon>ConfigFirmwareDisabled.cs</DependentUpon>
     </Compile>
@@ -627,7 +657,9 @@
     <Compile Include="GCSViews\ConfigurationView\ConfigHWBT.Designer.cs">
       <DependentUpon>ConfigHWBT.cs</DependentUpon>
     </Compile>
-    <Compile Include="GCSViews\ConfigurationView\ConfigHWCompass.cs" />
+    <Compile Include="GCSViews\ConfigurationView\ConfigHWCompass.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="GCSViews\ConfigurationView\ConfigHWCompass.Designer.cs">
       <DependentUpon>ConfigHWCompass.cs</DependentUpon>
     </Compile>
@@ -637,7 +669,9 @@
     <Compile Include="GCSViews\ConfigurationView\ConfigHWUAVCAN.Designer.cs">
       <DependentUpon>ConfigHWUAVCAN.cs</DependentUpon>
     </Compile>
-    <Compile Include="GCSViews\ConfigurationView\ConfigHWPX4Flow.cs" />
+    <Compile Include="GCSViews\ConfigurationView\ConfigHWPX4Flow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="GCSViews\ConfigurationView\ConfigHWPX4Flow.Designer.cs">
       <DependentUpon>ConfigHWPX4Flow.cs</DependentUpon>
     </Compile>
@@ -647,7 +681,9 @@
     <Compile Include="GCSViews\ConfigurationView\ConfigHWOptFlow.Designer.cs">
       <DependentUpon>ConfigHWOptFlow.cs</DependentUpon>
     </Compile>
-    <Compile Include="GCSViews\ConfigurationView\ConfigHWOSD.cs" />
+    <Compile Include="GCSViews\ConfigurationView\ConfigHWOSD.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="GCSViews\ConfigurationView\ConfigHWOSD.Designer.cs">
       <DependentUpon>ConfigHWOSD.cs</DependentUpon>
     </Compile>
@@ -705,11 +741,15 @@
     <Compile Include="GCSViews\ConfigurationView\ConfigRadioInput.Designer.cs">
       <DependentUpon>ConfigRadioInput.cs</DependentUpon>
     </Compile>
-    <Compile Include="GCSViews\ConfigurationView\ConfigRawParams.cs" />
+    <Compile Include="GCSViews\ConfigurationView\ConfigRawParams.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="GCSViews\ConfigurationView\ConfigRawParams.Designer.cs">
       <DependentUpon>ConfigRawParams.cs</DependentUpon>
     </Compile>
-    <Compile Include="GCSViews\ConfigurationView\ConfigRawParamsTree.cs" />
+    <Compile Include="GCSViews\ConfigurationView\ConfigRawParamsTree.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="GCSViews\ConfigurationView\ConfigRawParamsTree.Designer.cs">
       <DependentUpon>ConfigRawParamsTree.cs</DependentUpon>
     </Compile>
@@ -731,11 +771,15 @@
     <Compile Include="GCSViews\ConfigurationView\ConfigWizard.Designer.cs">
       <DependentUpon>ConfigWizard.cs</DependentUpon>
     </Compile>
-    <Compile Include="GCSViews\FlightData.cs" />
+    <Compile Include="GCSViews\FlightData.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="GCSViews\FlightData.Designer.cs">
       <DependentUpon>FlightData.cs</DependentUpon>
     </Compile>
-    <Compile Include="GCSViews\FlightPlanner.cs" />
+    <Compile Include="GCSViews\FlightPlanner.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="GCSViews\FlightPlanner.Designer.cs">
       <DependentUpon>FlightPlanner.cs</DependentUpon>
     </Compile>
@@ -757,7 +801,9 @@
     <Compile Include="GCSViews\SoftwareConfig.Designer.cs">
       <DependentUpon>SoftwareConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="GCSViews\Terminal.cs" />
+    <Compile Include="GCSViews\Terminal.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="GCSViews\Terminal.Designer.cs">
       <DependentUpon>Terminal.cs</DependentUpon>
     </Compile>
@@ -769,7 +815,9 @@
     <Compile Include="GeoRef\SingleLocation.cs" />
     <Compile Include="GeoRef\VehicleLocation.cs" />
     <Compile Include="HIL\QuadCopter.cs" />
-    <Compile Include="Joystick\Joy_Do_Repeat_Servo.cs" />
+    <Compile Include="Joystick\Joy_Do_Repeat_Servo.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Joystick\Joy_Do_Repeat_Servo.Designer.cs">
       <DependentUpon>Joy_Do_Repeat_Servo.cs</DependentUpon>
     </Compile>
@@ -838,7 +886,9 @@
     <Compile Include="Mavlink\MAVAuthKeys.cs" />
     <Compile Include="Mavlink\MAVList.cs" />
     <Compile Include="Mavlink\MAVState.cs" />
-    <Compile Include="MovingBase.cs" />
+    <Compile Include="MovingBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MovingBase.Designer.cs">
       <DependentUpon>MovingBase.cs</DependentUpon>
     </Compile>
@@ -847,7 +897,9 @@
     <Compile Include="Maps\Custom.cs" />
     <Compile Include="Maps\MyImageCache.cs" />
     <Compile Include="Maps\WMSProvider.cs" />
-    <Compile Include="GenOTP.cs" />
+    <Compile Include="GenOTP.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="GenOTP.Designer.cs">
       <DependentUpon>GenOTP.cs</DependentUpon>
     </Compile>
@@ -855,7 +907,9 @@
     <Compile Include="Log\MatLab.cs" />
     <Compile Include="Magfitrotation.cs" />
     <Compile Include="Models\BattMonitor.cs" />
-    <Compile Include="OpenGLtest2.cs" />
+    <Compile Include="OpenGLtest2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Plugin\Plugin.cs" />
     <Compile Include="Plugin\PluginLoader.cs" />
     <Compile Include="Plugin\PluginUI.cs">
@@ -871,15 +925,21 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Radio\XModem.cs" />
-    <Compile Include="ScriptConsole.cs" />
+    <Compile Include="ScriptConsole.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ScriptConsole.Designer.cs">
       <DependentUpon>ScriptConsole.cs</DependentUpon>
     </Compile>
-    <Compile Include="SerialInjectGPS.cs" />
+    <Compile Include="SerialInjectGPS.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SerialInjectGPS.Designer.cs">
       <DependentUpon>SerialInjectGPS.cs</DependentUpon>
     </Compile>
-    <Compile Include="ConnectionOptions.cs" />
+    <Compile Include="ConnectionOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ConnectionOptions.Designer.cs">
       <DependentUpon>ConnectionOptions.cs</DependentUpon>
     </Compile>
@@ -954,7 +1014,9 @@
     <Compile Include="Utilities\Proximity.cs" />
     <Compile Include="Utilities\ubx_m8p.cs" />
     <Compile Include="Utilities\UDPVideoShim.cs" />
-    <Compile Include="Wizard\10FlightModes.cs" />
+    <Compile Include="Wizard\10FlightModes.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Wizard\10FlightModes.Designer.cs">
       <DependentUpon>10FlightModes.cs</DependentUpon>
     </Compile>
@@ -970,7 +1032,9 @@
     <Compile Include="Wizard\12FailSafe.Designer.cs">
       <DependentUpon>12FailSafe.cs</DependentUpon>
     </Compile>
-    <Compile Include="Wizard\13GeoFence.cs" />
+    <Compile Include="Wizard\13GeoFence.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Wizard\13GeoFence.Designer.cs">
       <DependentUpon>13GeoFence.cs</DependentUpon>
     </Compile>
@@ -980,7 +1044,9 @@
     <Compile Include="Wizard\1Intro.Designer.cs">
       <DependentUpon>1Intro.cs</DependentUpon>
     </Compile>
-    <Compile Include="Wizard\2FrameFW.cs" />
+    <Compile Include="Wizard\2FrameFW.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Wizard\2FrameFW.Designer.cs">
       <DependentUpon>2FrameFW.cs</DependentUpon>
     </Compile>
@@ -996,11 +1062,15 @@
     <Compile Include="Wizard\4FrameType.Designer.cs">
       <DependentUpon>4FrameType.cs</DependentUpon>
     </Compile>
-    <Compile Include="Wizard\5AccelCalib.cs" />
+    <Compile Include="Wizard\5AccelCalib.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Wizard\5AccelCalib.Designer.cs">
       <DependentUpon>5AccelCalib.cs</DependentUpon>
     </Compile>
-    <Compile Include="Wizard\6CompassCalib.cs" />
+    <Compile Include="Wizard\6CompassCalib.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Wizard\6CompassCalib.Designer.cs">
       <DependentUpon>6CompassCalib.cs</DependentUpon>
     </Compile>
@@ -1016,7 +1086,9 @@
     <Compile Include="Wizard\8OptionalItemsAC.Designer.cs">
       <DependentUpon>8OptionalItemsAC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Wizard\8OptionalItemsAP.cs" />
+    <Compile Include="Wizard\8OptionalItemsAP.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Wizard\8OptionalItemsAP.Designer.cs">
       <DependentUpon>8OptionalItemsAP.cs</DependentUpon>
     </Compile>
@@ -2567,6 +2639,7 @@
     <EmbeddedResource Include="Wizard\Wizard.zh-TW.resx">
       <DependentUpon>Wizard.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Drivers\arduinomega2560.cat" />
     <None Include="Drivers\ArduinoMEGA2560.inf" />
     <None Include="Drivers\mindpx.cat">
@@ -3113,19 +3186,27 @@
     <EmbeddedResource Include="Swarm\Status.resx">
       <DependentUpon>Status.cs</DependentUpon>
     </EmbeddedResource>
-    <Compile Include="SerialOutputPass.cs" />
+    <Compile Include="SerialOutputPass.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SerialOutputPass.Designer.cs">
       <DependentUpon>SerialOutputPass.cs</DependentUpon>
     </Compile>
     <Compile Include="HIL\Hil.cs" />
     <Compile Include="HIL\Wind.cs" />
     <Compile Include="HIL\XPlane.cs" />
-    <Compile Include="OpenGLtest.cs" />
-    <Compile Include="OSDVideo.cs" />
+    <Compile Include="OpenGLtest.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OSDVideo.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="OSDVideo.Designer.cs">
       <DependentUpon>OSDVideo.cs</DependentUpon>
     </Compile>
-    <Compile Include="SerialOutputMD.cs" />
+    <Compile Include="SerialOutputMD.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SerialOutputMD.Designer.cs">
       <DependentUpon>SerialOutputMD.cs</DependentUpon>
     </Compile>
@@ -3158,16 +3239,22 @@
       <DependentUpon>Sikradio.cs</DependentUpon>
     </Compile>
     <Compile Include="Radio\IHex.cs" />
-    <Compile Include="FollowMe.cs" />
+    <Compile Include="FollowMe.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FollowMe.Designer.cs">
       <DependentUpon>FollowMe.cs</DependentUpon>
     </Compile>
     <Compile Include="HIL\Utils.cs" />
-    <Compile Include="ResEdit.cs" />
+    <Compile Include="ResEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ResEdit.Designer.cs">
       <DependentUpon>ResEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="GeoRef\georefimage.cs" />
+    <Compile Include="GeoRef\georefimage.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="HIL\Aircraft.cs" />
     <Compile Include="Log\MavlinkLog.cs">
       <SubType>Form</SubType>
@@ -3183,47 +3270,65 @@
       <DependentUpon>JoystickSetup.cs</DependentUpon>
     </Compile>
     <Compile Include="Common.cs" />
-    <Compile Include="paramcompare.cs" />
+    <Compile Include="paramcompare.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="paramcompare.Designer.cs">
       <DependentUpon>paramcompare.cs</DependentUpon>
     </Compile>
-    <Compile Include="RAW_Sensor.cs" />
+    <Compile Include="RAW_Sensor.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="RAW_Sensor.Designer.cs">
       <DependentUpon>RAW_Sensor.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainV2.cs" />
+    <Compile Include="MainV2.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MainV2.Designer.cs">
       <DependentUpon>MainV2.cs</DependentUpon>
     </Compile>
     <Compile Include="CurrentState.cs" />
-    <Compile Include="ElevationProfile.cs" />
+    <Compile Include="ElevationProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ElevationProfile.Designer.cs">
       <DependentUpon>ElevationProfile.cs</DependentUpon>
     </Compile>
     <Compile Include="Mavlink\MAVLinkInterface.cs" />
-    <Compile Include="Log\LogDownload.cs" />
+    <Compile Include="Log\LogDownload.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Log\LogDownload.Designer.cs">
       <DependentUpon>LogDownload.cs</DependentUpon>
     </Compile>
-    <Compile Include="Log\LogBrowse.cs" />
+    <Compile Include="Log\LogBrowse.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Log\LogBrowse.designer.cs">
       <DependentUpon>LogBrowse.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Script.cs" />
-    <Compile Include="SerialOutputNMEA.cs" />
+    <Compile Include="SerialOutputNMEA.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SerialOutputNMEA.Designer.cs">
       <DependentUpon>SerialOutputNMEA.cs</DependentUpon>
     </Compile>
     <None Include="Properties\DataSources\MissionPlanner.GCSViews.InitialSetup.datasource" />
     <None Include="Properties\DataSources\MissionPlanner.GCSViews.SoftwareConfig.datasource" />
     <None Include="README.md" />
-    <Compile Include="Splash.cs" />
+    <Compile Include="Splash.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Splash.Designer.cs">
       <DependentUpon>Splash.cs</DependentUpon>
     </Compile>
-    <Compile Include="temp.cs" />
+    <Compile Include="temp.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="temp.Designer.cs">
       <DependentUpon>temp.cs</DependentUpon>
     </Compile>

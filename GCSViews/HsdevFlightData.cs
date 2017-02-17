@@ -1540,7 +1540,7 @@ namespace MissionPlanner.GCSViews
         {
             if (start.AddMilliseconds(1000)<DateTime.Now)
             {
-                // start = DateTime.Now;
+                 start = DateTime.Now;
                 // try
                 // {
                 //((Button)sender).Enabled = false;
