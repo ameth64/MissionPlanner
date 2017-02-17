@@ -16,7 +16,6 @@ namespace MissionPlanner.Utilities
     {
         public fftui()
         {
-            this.DoubleBuffered = true;
             InitializeComponent();
         }
 
@@ -623,23 +622,6 @@ namespace MissionPlanner.Utilities
                     controlindex++;
                 }
             }
-        }
-
-        double prevMouseX = 0; 
-        double prevMouseY = 0;  
-
-        private bool zedGraphControl1_MouseMoveEvent(ZedGraphControl sender, MouseEventArgs e)
-        {
-            // debounce for mousemove and tooltip label
-
-            if (e.X == prevMouseX && e.Y == prevMouseY)
-                return true;
-
-            prevMouseX = e.X;
-            prevMouseY = e.Y;
-
-            // not handled
-            return false;
         }
     }
 }

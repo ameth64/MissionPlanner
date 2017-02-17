@@ -1554,6 +1554,8 @@ namespace MissionPlanner
                 List<int> wpsplitstart = new List<int>();
                 //HOME点坐标可访问plugin.Host.cs.HomeLocation.Lng 及 Lat
                 PointLatLngAlt home_plla = new PointLatLngAlt(plugin.Host.cs.HomeLocation.Lat, plugin.Host.cs.HomeLocation.Lng);
+                //获得用户输入风向
+                double wind_dir = (double)NUM_windDir.Value;
                 for (int splitno = 0; splitno < NUM_split.Value; splitno++)
                 {
                     int wpstart = wpsplit*splitno;
@@ -1588,10 +1590,10 @@ namespace MissionPlanner
                             var wpno = plugin.Host.AddWPtoList(MAVLink.MAV_CMD.VTOL_TAKEOFF, 0, 0, 0, 0, 0, 0,
                                 (int)(30 * CurrentState.multiplierdist), gridobject);
                             wpsplitstart.Add(wpno);
-                            //添加起飞引导点, 默认以home点为中心规划
-                            double to_bearing = home_plla.GetBearing(grid[0]);
+                            //添加起飞引导点, 默认以home点为中心, 逆风规划
+                            double to_bearing = wind_dir;//home_plla.GetBearing(grid[0]);
                             double to_dist = home_plla.GetDistance(grid[0]);
-                            PointLatLngAlt to_plla = home_plla.newpos(to_bearing, 300);
+                            PointLatLngAlt to_plla = home_plla.newpos(to_bearing, 400);
                             to_plla.Alt = grid[0].Alt;
                             wpno = plugin.Host.AddWPtoList(MAVLink.MAV_CMD.LOITER_TO_ALT, 1, 120, 0, 0, to_plla.Lng, to_plla.Lat,
                                 (int)(to_plla.Alt * CurrentState.multiplierdist), gridobject);
@@ -1787,32 +1789,43 @@ namespace MissionPlanner
                             plugin.Host.AddWPtoList(MAVLink.MAV_CMD.LAND, 0, 0, 0, 0, plugin.Host.cs.HomeLocation.Lng,
                                 plugin.Host.cs.HomeLocation.Lat, 0, gridobject);
                             */
+                            //计算盘旋下降点, 取home点逆风向200米                                                        
+                            PointLatLngAlt rtl_final = home_plla.newpos(wind_dir, 200);
+                            rtl_final.Alt = grid.Last().Alt;
                             //计算返航引导点
-                            double rtl_dist = grid.Last().GetDistance(home_plla);
-                            double rtl_bearing = grid.Last().GetBearing(home_plla);
-                            PointLatLngAlt pre_rtl = grid.Last().newpos(rtl_bearing, rtl_dist - 20);
+                            double rtl_dist = grid.Last().GetDistance(rtl_final);
+                            double rtl_bearing = grid.Last().GetBearing(rtl_final);
+                            PointLatLngAlt pre_rtl = grid.Last().newpos(rtl_bearing, rtl_dist - 10), 
+                                pre_loiter = grid.Last().newpos(rtl_bearing, 300);
+
+                            plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, 0, 0, 0, 0, pre_loiter.Lng, pre_loiter.Lat,
+                                (int)(pre_loiter.Alt * CurrentState.multiplierdist), gridobject);
                             plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, 0, 0, 0, 0, pre_rtl.Lng, pre_rtl.Lat, 
-                                (int)(pre_rtl.Alt * CurrentState.multiplierdist), gridobject);
-                            //添加盘旋下降航点, 目标高度100米
-                            PointLatLngAlt rtl_final = pre_rtl.newpos(rtl_bearing, 10);
+                                (int)(pre_rtl.Alt * CurrentState.multiplierdist), gridobject);                            
+                            
                             plugin.Host.AddWPtoList(MAVLink.MAV_CMD.LOITER_TO_ALT, 1, 120, 0, 0, rtl_final.Lng, rtl_final.Lat,
                                 (int)(100 * CurrentState.multiplierdist), gridobject);
                             //生成标准四转弯航线
-                            PointLatLngAlt land_c1 = rtl_final.newpos(rtl_bearing, 150);
+                            rtl_bearing = wind_dir + 90;
+                            PointLatLngAlt land_c1 = rtl_final.newpos(rtl_bearing, 200), land_slowdown = rtl_final.newpos(rtl_bearing, 100);
+                            //添加减速航点
+                            plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_CHANGE_SPEED, 0, 17, 75, 0, 0, 0, 0, gridobject);
+                            //生成四转弯起点
                             plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, 0, 0, 0, 0, land_c1.Lng, land_c1.Lat,
-                                (int)(85 * CurrentState.multiplierdist), gridobject);
-                            PointLatLngAlt land_c2 = land_c1.newpos(rtl_bearing+90, 150);
+                                (int)(95 * CurrentState.multiplierdist), gridobject);
+                            //第二点
+                            PointLatLngAlt land_c2 = land_c1.newpos(rtl_bearing + 90, 500);
                             plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, 0, 0, 0, 0, land_c2.Lng, land_c2.Lat,
-                                (int)(70 * CurrentState.multiplierdist), gridobject);
-                            PointLatLngAlt land_c3 = land_c2.newpos(rtl_bearing + 180, 300);
+                                (int)(80 * CurrentState.multiplierdist), gridobject);
+                            //第三点
+                            PointLatLngAlt land_c3 = land_c2.newpos(rtl_bearing + 180, 200);
                             plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, 0, 0, 0, 0, land_c3.Lng, land_c3.Lat,
-                                (int)(60 * CurrentState.multiplierdist), gridobject);
+                                (int)(65 * CurrentState.multiplierdist), gridobject);
+                            //第四点
                             PointLatLngAlt land_c4 = land_c3.newpos(rtl_bearing + 270, 150);
                             plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, 0, 0, 0, 0, land_c4.Lng, land_c4.Lat,
                                 (int)(50 * CurrentState.multiplierdist), gridobject);
-                            PointLatLngAlt land_c5 = land_c4.newpos(rtl_bearing, 100);
-                            plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, 0, 0, 0, 0, land_c5.Lng, land_c5.Lat,
-                                (int)(50 * CurrentState.multiplierdist), gridobject);
+                            
                             //改为添加垂直着陆航点
                             plugin.Host.AddWPtoList(MAVLink.MAV_CMD.VTOL_LAND, 0, 0, 0, 0, plugin.Host.cs.HomeLocation.Lng,
                                 plugin.Host.cs.HomeLocation.Lat, (0.1 * CurrentState.multiplierdist), gridobject);

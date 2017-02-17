@@ -54,9 +54,7 @@ namespace MissionPlanner.Controls
 
         public int huddrawtime = 0;
 
-        [DefaultValue(true)]
-        public bool opengl {get; set; }
-        [Browsable(false)]
+        public bool opengl { get { return UseOpenGL; } set { UseOpenGL = value; } }
         public bool npotSupported { get; private set; }
 
         public bool SixteenXNine = false;
@@ -92,25 +90,33 @@ namespace MissionPlanner.Controls
 
         public HUD()
         {
-            opengl =
-                displayvibe =
-                    displayekf =
-                        displayheading =
-                            displayspeed =
-                                displayalt =
-                                    displayconninfo =
-                                        displayxtrack = displayrollpitch = displaygps = bgon = hudon = batteryon = true;
+            if (this.DesignMode)
+            {
+                VSync = true;
+                opengl = false;
+                //return;
+            }
+
+            displayvibe =
+                displayekf =
+                    displayheading =
+                        displayspeed =
+                            displayalt =
+                                displayconninfo =
+                                    displayxtrack = displayrollpitch = displaygps = bgon = hudon = batteryon = true;
 
             this.Name = "Hud";
 
-            eps.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, 50L);
-            // or whatever other quality value you want
+            eps.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, 50L); // or whatever other quality value you want
 
             objBitmap.MakeTransparent();
+
+            //InitializeComponent();
 
             graphicsObject = this;
             graphicsObjectGDIP = Graphics.FromImage(objBitmap);
         }
+
 
         float _roll = 0;
         float _navroll = 0;
@@ -465,7 +471,6 @@ namespace MissionPlanner.Controls
                 e.Graphics.Flush();
                 opengl = false;
                 doPaint(e);
-                opengl = true;
                 return;
             }
 
@@ -1688,14 +1693,6 @@ namespace MissionPlanner.Controls
                     {
                         gps = (HUDT.GPS5);
                     }
-                    else if (_fix == 6)
-                    {
-                        gps = (HUDT.GPS6);
-                    }
-                    else
-                    {
-                        gps = _fix.ToString();
-                    }
                     drawstring(graphicsObject, gps, font, fontsize + 2, col, this.Width - 13 * fontsize, this.Height - 30 - fontoffset);
                 }
 
@@ -2208,6 +2205,8 @@ namespace MissionPlanner.Controls
 
             Refresh();
         }
+
+        public bool UseOpenGL { get; set; }
 
         [Browsable(false)]
         public new bool VSync

@@ -936,7 +936,6 @@ namespace MissionPlanner.GCSViews
             Folder folder = Element as Folder;
             Polygon polygon = Element as Polygon;
             LineString ls = Element as LineString;
-            MultipleGeometry geom = Element as MultipleGeometry;
 
             if (doc != null)
             {
@@ -983,13 +982,6 @@ namespace MissionPlanner.GCSViews
                 }
 
                 kmlpolygonsoverlay.Routes.Add(kmlroute);
-            }
-            else if (geom != null)
-            {
-                foreach (var geometry in geom.Geometry)
-                {
-                    processKML(geometry);
-                }
             }
         }
 
@@ -6946,12 +6938,6 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
                 CustomMessageBox.Show("Failed to set FENCE_TOTAL");
                 return;
             }
-
-            // clear all
-            drawnpolygonsoverlay.Polygons.Clear();
-            drawnpolygonsoverlay.Markers.Clear();
-            geofenceoverlay.Polygons.Clear();
-            geofencepolygon.Points.Clear();
         }
     }
 }

@@ -4,24 +4,16 @@ using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading;
-using System.Windows.Forms;
 
 namespace MissionPlanner.Utilities
 {
     public class UDPVideoShim
     {
-        private static UdpClient client;
-        private static TcpClient tcpclient;
+        static UdpClient client = new UdpClient(5600, AddressFamily.InterNetwork);
 
         static UDPVideoShim()
         {
-            try
-            {
-                client = new UdpClient(5600, AddressFamily.InterNetwork);
-                client.BeginReceive(clientdata, client);
-            }
-            catch { }
+            client.BeginReceive(clientdata, client);
         }
 
         private static void clientdata(IAsyncResult ar)
@@ -53,19 +45,7 @@ namespace MissionPlanner.Utilities
 
         public static void Start()
         {
-            ThreadPool.QueueUserWorkItem(tcpsolo);
-        }
 
-        private static void tcpsolo(object state)
-        {
-            try
-            {
-                // solo video
-                tcpclient = new TcpClient("10.1.1.1", 5502);
-            }
-            catch (Exception)
-            {
-            }
         }
     }
 }

@@ -155,7 +155,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
             var list = _params_changed.Keys.ToList();
 
             // set enable last
-            list.SortENABLE();
+            list.Sort((a, b) => { if (a.EndsWith("ENABLE")) return 1; return -1; });
 
             list.ForEach(x =>
             {

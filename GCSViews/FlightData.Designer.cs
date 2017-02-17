@@ -30,8 +30,6 @@
             this.tabQuick = new System.Windows.Forms.TabPage();
             this.tableLayoutPanelQuick = new System.Windows.Forms.TableLayoutPanel();
             this.quickView6 = new MissionPlanner.Controls.QuickView();
-            this.contextMenuStripQuickView = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.setViewCountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bindingSourceQuickTab = new System.Windows.Forms.BindingSource(this.components);
             this.quickView5 = new MissionPlanner.Controls.QuickView();
             this.quickView4 = new MissionPlanner.Controls.QuickView();
@@ -179,7 +177,6 @@
             this.contextMenuStripactionstab.SuspendLayout();
             this.tabQuick.SuspendLayout();
             this.tableLayoutPanelQuick.SuspendLayout();
-            this.contextMenuStripQuickView.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceQuickTab)).BeginInit();
             this.tabActions.SuspendLayout();
             this.tabActionsSimple.SuspendLayout();
@@ -309,6 +306,7 @@
             this.hud1.Name = "hud1";
             this.hud1.navpitch = 0F;
             this.hud1.navroll = 0F;
+            this.hud1.opengl = false;
             this.hud1.pitch = 0F;
             this.hud1.roll = 0F;
             this.hud1.Russian = false;
@@ -318,6 +316,7 @@
             this.hud1.targetheading = 0F;
             this.hud1.targetspeed = 0F;
             this.hud1.turnrate = 0F;
+            this.hud1.UseOpenGL = false;
             this.hud1.verticalspeed = 0F;
             this.hud1.vibex = 0F;
             this.hud1.vibey = 0F;
@@ -457,7 +456,6 @@
             // 
             // quickView6
             // 
-            this.quickView6.ContextMenuStrip = this.contextMenuStripQuickView;
             this.quickView6.DataBindings.Add(new System.Windows.Forms.Binding("number", this.bindingSourceQuickTab, "DistToHome", true));
             this.quickView6.desc = "DistToMAV";
             resources.ApplyResources(this.quickView6, "quickView6");
@@ -467,26 +465,12 @@
             this.quickView6.numberformat = "0.00";
             this.quickView6.DoubleClick += new System.EventHandler(this.quickView_DoubleClick);
             // 
-            // contextMenuStripQuickView
-            // 
-            this.contextMenuStripQuickView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.setViewCountToolStripMenuItem});
-            this.contextMenuStripQuickView.Name = "contextMenuStripQuickView";
-            resources.ApplyResources(this.contextMenuStripQuickView, "contextMenuStripQuickView");
-            // 
-            // setViewCountToolStripMenuItem
-            // 
-            this.setViewCountToolStripMenuItem.Name = "setViewCountToolStripMenuItem";
-            resources.ApplyResources(this.setViewCountToolStripMenuItem, "setViewCountToolStripMenuItem");
-            this.setViewCountToolStripMenuItem.Click += new System.EventHandler(this.setViewCountToolStripMenuItem_Click);
-            // 
             // bindingSourceQuickTab
             // 
             this.bindingSourceQuickTab.DataSource = typeof(MissionPlanner.CurrentState);
             // 
             // quickView5
             // 
-            this.quickView5.ContextMenuStrip = this.contextMenuStripQuickView;
             this.quickView5.DataBindings.Add(new System.Windows.Forms.Binding("number", this.bindingSourceQuickTab, "verticalspeed", true));
             this.quickView5.desc = "verticalspeed";
             resources.ApplyResources(this.quickView5, "quickView5");
@@ -498,7 +482,6 @@
             // 
             // quickView4
             // 
-            this.quickView4.ContextMenuStrip = this.contextMenuStripQuickView;
             this.quickView4.DataBindings.Add(new System.Windows.Forms.Binding("number", this.bindingSourceQuickTab, "yaw", true));
             this.quickView4.desc = "yaw";
             resources.ApplyResources(this.quickView4, "quickView4");
@@ -510,7 +493,6 @@
             // 
             // quickView3
             // 
-            this.quickView3.ContextMenuStrip = this.contextMenuStripQuickView;
             this.quickView3.DataBindings.Add(new System.Windows.Forms.Binding("number", this.bindingSourceQuickTab, "wp_dist", true));
             this.quickView3.desc = "wp_dist";
             resources.ApplyResources(this.quickView3, "quickView3");
@@ -522,7 +504,6 @@
             // 
             // quickView2
             // 
-            this.quickView2.ContextMenuStrip = this.contextMenuStripQuickView;
             this.quickView2.DataBindings.Add(new System.Windows.Forms.Binding("number", this.bindingSourceQuickTab, "groundspeed", true));
             this.quickView2.desc = "groundspeed";
             resources.ApplyResources(this.quickView2, "quickView2");
@@ -534,7 +515,6 @@
             // 
             // quickView1
             // 
-            this.quickView1.ContextMenuStrip = this.contextMenuStripQuickView;
             this.quickView1.DataBindings.Add(new System.Windows.Forms.Binding("number", this.bindingSourceQuickTab, "alt", true));
             this.quickView1.desc = "alt";
             resources.ApplyResources(this.quickView1, "quickView1");
@@ -1939,7 +1919,7 @@
             this.windDir1.BackColor = System.Drawing.Color.Transparent;
             this.windDir1.DataBindings.Add(new System.Windows.Forms.Binding("Direction", this.bindingSource1, "wind_dir", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.windDir1.DataBindings.Add(new System.Windows.Forms.Binding("Speed", this.bindingSource1, "wind_vel", true, System.Windows.Forms.DataSourceUpdateMode.Never));
-            this.windDir1.Direction = 360D;
+            this.windDir1.Direction = 180D;
             resources.ApplyResources(this.windDir1, "windDir1");
             this.windDir1.Name = "windDir1";
             this.windDir1.Speed = 0D;
@@ -2181,7 +2161,6 @@
             this.contextMenuStripactionstab.ResumeLayout(false);
             this.tabQuick.ResumeLayout(false);
             this.tableLayoutPanelQuick.ResumeLayout(false);
-            this.contextMenuStripQuickView.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceQuickTab)).EndInit();
             this.tabActions.ResumeLayout(false);
             this.tabActionsSimple.ResumeLayout(false);
@@ -2374,7 +2353,5 @@
         private Controls.ModifyandSet modifyandSetLoiterRad;
         private System.Windows.Forms.ToolStripMenuItem onOffCameraOverlapToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem altitudeAngelSettingsToolStripMenuItem;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStripQuickView;
-        private System.Windows.Forms.ToolStripMenuItem setViewCountToolStripMenuItem;
     }
 }

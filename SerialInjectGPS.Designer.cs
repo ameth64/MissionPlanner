@@ -163,6 +163,7 @@
             // SerialInjectGPS
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            resources.ApplyResources(this, "$this");
             this.Controls.Add(this.but_save_basepos);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lbl_svin);
@@ -172,7 +173,8 @@
             this.Controls.Add(this.BUT_connect);
             this.Controls.Add(this.CMB_serialport);
             this.Name = "SerialInjectGPS";
-            resources.ApplyResources(this, "$this");
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SerialInjectGPS_FormClosing);
+            this.Load += new System.EventHandler(this.SerialInjectGPS_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

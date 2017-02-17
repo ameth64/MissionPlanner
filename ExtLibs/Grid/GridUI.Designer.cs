@@ -153,6 +153,8 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.TRK_zoom = new MissionPlanner.Controls.MyTrackBar();
             this.map = new MissionPlanner.Controls.myGMAP();
+            this.label43 = new System.Windows.Forms.Label();
+            this.NUM_windDir = new System.Windows.Forms.NumericUpDown();
             this.groupBox5.SuspendLayout();
             this.tabCamera.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -186,6 +188,7 @@
             this.groupBox4.SuspendLayout();
             this.tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TRK_zoom)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUM_windDir)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox5
@@ -989,6 +992,8 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.NUM_windDir);
+            this.groupBox6.Controls.Add(this.label43);
             this.groupBox6.Controls.Add(this.label37);
             this.groupBox6.Controls.Add(this.NUM_split);
             this.groupBox6.Controls.Add(this.CHK_usespeed);
@@ -1259,6 +1264,21 @@
             this.map.MouseDown += new System.Windows.Forms.MouseEventHandler(this.map_MouseDown);
             this.map.MouseMove += new System.Windows.Forms.MouseEventHandler(this.map_MouseMove);
             // 
+            // label43
+            // 
+            resources.ApplyResources(this.label43, "label43");
+            this.label43.Name = "label43";
+            // 
+            // NUM_windDir
+            // 
+            resources.ApplyResources(this.NUM_windDir, "NUM_windDir");
+            this.NUM_windDir.Maximum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            0});
+            this.NUM_windDir.Name = "NUM_windDir";
+            // 
             // GridUI
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1313,6 +1333,7 @@
             this.groupBox4.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.TRK_zoom)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUM_windDir)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1444,5 +1465,7 @@
         private System.Windows.Forms.NumericUpDown num_setservohigh;
         private System.Windows.Forms.Label label42;
         private System.Windows.Forms.NumericUpDown num_setservono;
+        private System.Windows.Forms.NumericUpDown NUM_windDir;
+        private System.Windows.Forms.Label label43;
     }
 }

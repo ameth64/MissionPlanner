@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Net;
@@ -14,17 +13,6 @@ namespace MissionPlanner.Utilities
 {
     public class GStreamer
     {
-        private static Process process;
-
-        ~GStreamer()
-        {
-            try
-            {
-                if (process != null)
-                    process.Close();
-            }
-            catch { }
-        }
 
         //gst-launch-1.0 videotestsrc pattern=ball ! x264enc ! rtph264pay ! udpsink host=127.0.0.1 port=5600
         //gst-launch-1.0 udpsrc port=5600 caps='application/x-rtp, media=(string)video, clock-rate=(int)90000, encoding-name=(string)H264' ! rtph264depay ! avdec_h264 ! autovideosink fps-update-interval=1000 sync=false
@@ -72,7 +60,7 @@ namespace MissionPlanner.Utilities
         {
             if (File.Exists(gstlaunch))
             {
-                process = System.Diagnostics.Process.Start(gstlaunch,
+                System.Diagnostics.Process.Start(gstlaunch,
                     "-v udpsrc port=5600 buffer-size=60000 ! application/x-rtp ! rtph264depay ! avdec_h264 ! queue ! avenc_mjpeg ! tcpserversink host=127.0.0.1 port=1235 sync=false");
 
                 System.Threading.ThreadPool.QueueUserWorkItem(_Start);
@@ -81,100 +69,75 @@ namespace MissionPlanner.Utilities
 
         static void _Start(object nothing)
         {
-            try
+            using (TcpClient client = new TcpClient("127.0.0.1", 1235))
             {
-                var deadline = DateTime.Now.AddSeconds(20);
+                client.ReceiveBufferSize = 1024*1024*1;
 
-                while (DateTime.Now < deadline)
+                using (MemoryStream ms = new MemoryStream())
                 {
-                    try
-                    {
-                        TcpClient client = new TcpClient("127.0.0.1", 1235);
-                        Console.WriteLine("Port open");
-                        client.Close();
-                        break;
-                    }
-                    catch (Exception)
-                    {
-                        Console.WriteLine("Port closed");
-                    }
-                }
+                    int tempno = 0;
+                    int miss = 0;
+                    int persecond = 0;
+                    DateTime lastsecond = DateTime.Now;
 
-                using (TcpClient client = new TcpClient("127.0.0.1", 1235))
-                {
-                    client.ReceiveBufferSize = 1024*1024*1;
-
-                    using (MemoryStream ms = new MemoryStream())
+                    using (var stream = client.GetStream())
                     {
-                        int tempno = 0;
-                        int miss = 0;
-                        int persecond = 0;
-                        DateTime lastsecond = DateTime.Now;
-
-                        using (var stream = client.GetStream())
+                        while (client.Client.Connected)
                         {
-                            while (client.Client.Connected)
+                            while (client.Available > 0)
                             {
-                                while (client.Available > 0)
+                                // start header
+                                byte ch3 = (byte) stream.ReadByte();
+                                if (ch3 == 0xff)
                                 {
-                                    // start header
-                                    byte ch3 = (byte) stream.ReadByte();
-                                    if (ch3 == 0xff)
+                                    byte ch4 = (byte) stream.ReadByte();
+                                    if (ch4 == 0xd8)
                                     {
-                                        byte ch4 = (byte) stream.ReadByte();
-                                        if (ch4 == 0xd8)
+                                        ms.Seek(0, SeekOrigin.Begin);
+                                        ms.WriteByte(ch3);
+                                        ms.WriteByte(ch4);
+                                        int last = 0;
+                                        do
                                         {
-                                            ms.Seek(0, SeekOrigin.Begin);
-                                            ms.WriteByte(ch3);
-                                            ms.WriteByte(ch4);
-                                            int last = 0;
-                                            do
+                                            int datach = stream.ReadByte();
+                                            if (datach < 0)
+                                                break;
+
+                                            ms.WriteByte((byte) datach);
+
+                                            if (last == 0xff)
                                             {
-                                                int datach = stream.ReadByte();
-                                                if (datach < 0)
+                                                if (datach == 0xd9)
                                                     break;
-
-                                                ms.WriteByte((byte) datach);
-
-                                                if (last == 0xff)
-                                                {
-                                                    if (datach == 0xd9)
-                                                        break;
-                                                }
-                                                last = datach;
-                                            } while (true);
-
-                                            ms.Seek(0, SeekOrigin.Begin);
-                                            try
-                                            {
-                                                var temp = Image.FromStream(ms);
-
-                                                //File.WriteAllBytes(tempno + ".bmp", ms.ToArray());
-
-                                                FlightData.myhud.bgimage = temp;
-
-                                                tempno++;
-                                                persecond++;
-
-                                                if (lastsecond.Second != DateTime.Now.Second)
-                                                {
-                                                    Console.WriteLine("image {0}x{1} size {2} miss {3} ps {4}",
-                                                        temp.Width,
-                                                        temp.Height, 0, miss, persecond);
-                                                    persecond = 0;
-                                                    lastsecond = DateTime.Now;
-                                                    miss = 0;
-                                                }
-
-
                                             }
-                                            catch
-                                            {
-                                            }
-                                        }
-                                        else
+                                            last = datach;
+                                        } while (true);
+
+                                        ms.Seek(0, SeekOrigin.Begin);
+                                        try
                                         {
-                                            miss++;
+                                            var temp = Image.FromStream(ms);
+
+                                            //File.WriteAllBytes(tempno + ".bmp", ms.ToArray());
+
+                                            FlightData.myhud.bgimage = temp;
+
+                                            tempno++;
+                                            persecond++;
+
+                                            if (lastsecond.Second != DateTime.Now.Second)
+                                            {
+                                                Console.WriteLine("image {0}x{1} size {2} miss {3} ps {4}", temp.Width,
+                                                    temp.Height, 0, miss, persecond);
+                                                persecond = 0;
+                                                lastsecond = DateTime.Now;
+                                                miss = 0;
+                                            }
+
+
+                                        }
+                                        catch
+                                        {
                                         }
                                     }
                                     else
@@ -182,15 +145,15 @@ namespace MissionPlanner.Utilities
                                         miss++;
                                     }
                                 }
-                                System.Threading.Thread.Sleep(2);
+                                else
+                                {
+                                    miss++;
+                                }
                             }
+                            System.Threading.Thread.Sleep(2);
                         }
                     }
                 }
-            }
-            catch
-            {
-                
             }
         }
     }

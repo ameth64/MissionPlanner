@@ -34,34 +34,40 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
-            this._3DMesh1 = new MissionPlanner.Mesh._3DMesh();
-            this.bindingSourceHud = new System.Windows.Forms.BindingSource(this.components);
             this.hud2 = new MissionPlanner.Controls.HUD();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.Gvspeed = new AGaugeApp.AGauge();
-            this.bindingSourceGaugesTab = new System.Windows.Forms.BindingSource(this.components);
             this.Galt = new AGaugeApp.AGauge();
             this.Gspeed = new AGaugeApp.AGauge();
             this.Gheading = new MissionPlanner.Controls.HSI();
-            this.goal_ailr = new System.Windows.Forms.Label();
+            this.quadbat_time = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.quadbat_used = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.quad_vlt = new System.Windows.Forms.Label();
+            this.quad_current = new System.Windows.Forms.Label();
+            this.timeinair = new System.Windows.Forms.Label();
+            this.BUT_parachute = new MissionPlanner.Controls.MyButton();
+            this.label20 = new System.Windows.Forms.Label();
+            this.traveled_inkm = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.bat_used = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
             this.groundspeed_value = new System.Windows.Forms.Label();
-            this.goal_aill = new System.Windows.Forms.Label();
             this.airspeederror_value = new System.Windows.Forms.Label();
             this.voltage = new System.Windows.Forms.Label();
-            this.aileron_r = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.compass_value = new System.Windows.Forms.Label();
-            this.aileron_l = new System.Windows.Forms.Label();
             this.latitude_value = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
             this.longitude_value = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.height_value = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.targetaltitude_value = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
@@ -86,9 +92,14 @@
             this.label9 = new System.Windows.Forms.Label();
             this.xtrack_value = new System.Windows.Forms.Label();
             this.targetairspeed_value = new System.Windows.Forms.Label();
+            this.BUT_ARM = new MissionPlanner.Controls.MyButton();
+            this.lbl_logpercent = new MissionPlanner.Controls.MyLabel();
+            this.CMB_playspeed = new System.Windows.Forms.ComboBox();
+            this.tracklog = new System.Windows.Forms.TrackBar();
+            this.BUT_playlog = new MissionPlanner.Controls.MyButton();
+            this.BUT_loadtelem = new MissionPlanner.Controls.MyButton();
             this.BUT_camera = new MissionPlanner.Controls.MyButton();
             this.CMB_setwp = new System.Windows.Forms.ComboBox();
-            this.BUT_parachute = new MissionPlanner.Controls.MyButton();
             this.BUT_standby = new MissionPlanner.Controls.MyButton();
             this.BUT_clear_track = new MissionPlanner.Controls.MyButton();
             this.BUT_quickrtl = new MissionPlanner.Controls.MyButton();
@@ -103,6 +114,11 @@
             this.flyToHereAltToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fixbattery = new System.Windows.Forms.ToolStripMenuItem();
             this.ZedGraphTimer = new System.Windows.Forms.Timer(this.components);
+            this.label16 = new System.Windows.Forms.Label();
+            this.cameranum = new System.Windows.Forms.Label();
+            this._3DMesh1 = new MissionPlanner.Mesh._3DMesh();
+            this.bindingSourceHud = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingSourceGaugesTab = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSourceStatusTab = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -116,7 +132,6 @@
             this.splitContainer5.Panel1.SuspendLayout();
             this.splitContainer5.Panel2.SuspendLayout();
             this.splitContainer5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceHud)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
@@ -125,12 +140,14 @@
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceGaugesTab)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tracklog)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer6)).BeginInit();
             this.splitContainer6.Panel1.SuspendLayout();
             this.splitContainer6.Panel2.SuspendLayout();
             this.splitContainer6.SuspendLayout();
             this.contextMenuStripMap.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceHud)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceGaugesTab)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceStatusTab)).BeginInit();
             this.SuspendLayout();
             // 
@@ -195,33 +212,6 @@
             this.splitContainer5.SplitterDistance = 224;
             this.splitContainer5.TabIndex = 6;
             // 
-            // _3DMesh1
-            // 
-            this._3DMesh1.aileron_l = ((ushort)(0));
-            this._3DMesh1.aileron_r = ((ushort)(0));
-            this._3DMesh1.AutoSize = true;
-            this._3DMesh1.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
-            this._3DMesh1.BackColor = System.Drawing.Color.Black;
-            this._3DMesh1.DataBindings.Add(new System.Windows.Forms.Binding("heading", this.bindingSourceHud, "yaw", true));
-            this._3DMesh1.DataBindings.Add(new System.Windows.Forms.Binding("pitch", this.bindingSourceHud, "pitch", true));
-            this._3DMesh1.DataBindings.Add(new System.Windows.Forms.Binding("roll", this.bindingSourceHud, "roll", true));
-            this._3DMesh1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._3DMesh1.heading = 0F;
-            this._3DMesh1.Location = new System.Drawing.Point(0, 0);
-            this._3DMesh1.Name = "_3DMesh1";
-            this._3DMesh1.pitch = 0F;
-            this._3DMesh1.roll = 0F;
-            this._3DMesh1.Size = new System.Drawing.Size(224, 215);
-            this._3DMesh1.TabIndex = 0;
-            this._3DMesh1.VSync = false;
-            this._3DMesh1.AutoSizeChanged += new System.EventHandler(this._3DMesh1_AutoSizeChanged);
-            this._3DMesh1.Click += new System.EventHandler(this.mesh_Click);
-            this._3DMesh1.Resize += new System.EventHandler(this._3DMesh1_Resize);
-            // 
-            // bindingSourceHud
-            // 
-            this.bindingSourceHud.DataSource = typeof(MissionPlanner.CurrentState);
-            // 
             // hud2
             // 
             this.hud2.airspeed = 0F;
@@ -284,7 +274,7 @@
             this.hud2.lowairspeed = false;
             this.hud2.lowgroundspeed = false;
             this.hud2.lowvoltagealert = false;
-            this.hud2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.hud2.Margin = new System.Windows.Forms.Padding(4);
             this.hud2.message = "";
             this.hud2.messagetime = new System.DateTime(((long)(0)));
             this.hud2.mode = "Unknown";
@@ -303,11 +293,12 @@
             this.hud2.targetheading = 0F;
             this.hud2.targetspeed = 0F;
             this.hud2.turnrate = 0F;
-            //this.hud2.UseOpenGL = true;
+            this.hud2.UseOpenGL = false;
             this.hud2.verticalspeed = 0F;
             this.hud2.vibex = 0F;
             this.hud2.vibey = 0F;
             this.hud2.vibez = 0F;
+            this.hud2.VSync = false;
             this.hud2.wpno = 0;
             this.hud2.xtrack_error = 0F;
             // 
@@ -324,16 +315,21 @@
             // 
             // splitContainer3.Panel2
             // 
+            this.splitContainer3.Panel2.Controls.Add(this.BUT_ARM);
+            this.splitContainer3.Panel2.Controls.Add(this.lbl_logpercent);
+            this.splitContainer3.Panel2.Controls.Add(this.CMB_playspeed);
+            this.splitContainer3.Panel2.Controls.Add(this.tracklog);
+            this.splitContainer3.Panel2.Controls.Add(this.BUT_playlog);
+            this.splitContainer3.Panel2.Controls.Add(this.BUT_loadtelem);
             this.splitContainer3.Panel2.Controls.Add(this.BUT_camera);
             this.splitContainer3.Panel2.Controls.Add(this.CMB_setwp);
-            this.splitContainer3.Panel2.Controls.Add(this.BUT_parachute);
             this.splitContainer3.Panel2.Controls.Add(this.BUT_standby);
             this.splitContainer3.Panel2.Controls.Add(this.BUT_clear_track);
             this.splitContainer3.Panel2.Controls.Add(this.BUT_quickrtl);
             this.splitContainer3.Panel2.Controls.Add(this.BUT_quickauto);
             this.splitContainer3.Panel2.Controls.Add(this.BUTrestartmission);
             this.splitContainer3.Size = new System.Drawing.Size(460, 310);
-            this.splitContainer3.SplitterDistance = 271;
+            this.splitContainer3.SplitterDistance = 259;
             this.splitContainer3.TabIndex = 84;
             // 
             // splitContainer4
@@ -352,24 +348,35 @@
             // 
             // splitContainer4.Panel2
             // 
-            this.splitContainer4.Panel2.Controls.Add(this.goal_ailr);
+            this.splitContainer4.Panel2.Controls.Add(this.label16);
+            this.splitContainer4.Panel2.Controls.Add(this.cameranum);
+            this.splitContainer4.Panel2.Controls.Add(this.quadbat_time);
+            this.splitContainer4.Panel2.Controls.Add(this.label24);
+            this.splitContainer4.Panel2.Controls.Add(this.quadbat_used);
+            this.splitContainer4.Panel2.Controls.Add(this.label23);
+            this.splitContainer4.Panel2.Controls.Add(this.label15);
+            this.splitContainer4.Panel2.Controls.Add(this.label19);
+            this.splitContainer4.Panel2.Controls.Add(this.quad_vlt);
+            this.splitContainer4.Panel2.Controls.Add(this.quad_current);
+            this.splitContainer4.Panel2.Controls.Add(this.timeinair);
+            this.splitContainer4.Panel2.Controls.Add(this.BUT_parachute);
+            this.splitContainer4.Panel2.Controls.Add(this.label20);
+            this.splitContainer4.Panel2.Controls.Add(this.traveled_inkm);
+            this.splitContainer4.Panel2.Controls.Add(this.label18);
+            this.splitContainer4.Panel2.Controls.Add(this.bat_used);
+            this.splitContainer4.Panel2.Controls.Add(this.label1);
             this.splitContainer4.Panel2.Controls.Add(this.label30);
             this.splitContainer4.Panel2.Controls.Add(this.groundspeed_value);
-            this.splitContainer4.Panel2.Controls.Add(this.goal_aill);
             this.splitContainer4.Panel2.Controls.Add(this.airspeederror_value);
             this.splitContainer4.Panel2.Controls.Add(this.voltage);
-            this.splitContainer4.Panel2.Controls.Add(this.aileron_r);
             this.splitContainer4.Panel2.Controls.Add(this.label12);
             this.splitContainer4.Panel2.Controls.Add(this.compass_value);
-            this.splitContainer4.Panel2.Controls.Add(this.aileron_l);
             this.splitContainer4.Panel2.Controls.Add(this.latitude_value);
             this.splitContainer4.Panel2.Controls.Add(this.label13);
             this.splitContainer4.Panel2.Controls.Add(this.label7);
-            this.splitContainer4.Panel2.Controls.Add(this.label16);
             this.splitContainer4.Panel2.Controls.Add(this.longitude_value);
             this.splitContainer4.Panel2.Controls.Add(this.label14);
             this.splitContainer4.Panel2.Controls.Add(this.height_value);
-            this.splitContainer4.Panel2.Controls.Add(this.label17);
             this.splitContainer4.Panel2.Controls.Add(this.label11);
             this.splitContainer4.Panel2.Controls.Add(this.targetaltitude_value);
             this.splitContainer4.Panel2.Controls.Add(this.label28);
@@ -395,8 +402,8 @@
             this.splitContainer4.Panel2.Controls.Add(this.xtrack_value);
             this.splitContainer4.Panel2.Controls.Add(this.targetairspeed_value);
             this.splitContainer4.Panel2.Resize += new System.EventHandler(this.splitContainer4_Panel2_Resize);
-            this.splitContainer4.Size = new System.Drawing.Size(460, 271);
-            this.splitContainer4.SplitterDistance = 112;
+            this.splitContainer4.Size = new System.Drawing.Size(460, 259);
+            this.splitContainer4.SplitterDistance = 132;
             this.splitContainer4.TabIndex = 0;
             // 
             // Gvspeed
@@ -546,10 +553,6 @@
             this.Gvspeed.Value1 = 0F;
             this.Gvspeed.Value2 = 0F;
             this.Gvspeed.Value3 = 0F;
-            // 
-            // bindingSourceGaugesTab
-            // 
-            this.bindingSourceGaugesTab.DataSource = typeof(MissionPlanner.CurrentState);
             // 
             // Galt
             // 
@@ -864,17 +867,145 @@
             this.Gheading.Size = new System.Drawing.Size(92, 92);
             this.Gheading.TabIndex = 139;
             // 
-            // goal_ailr
+            // quadbat_time
             // 
-            this.goal_ailr.Location = new System.Drawing.Point(424, 128);
-            this.goal_ailr.Name = "goal_ailr";
-            this.goal_ailr.Size = new System.Drawing.Size(35, 12);
-            this.goal_ailr.TabIndex = 144;
-            this.goal_ailr.Text = "0";
+            this.quadbat_time.ContextMenuStrip = this.contextMenuStripHud;
+            this.quadbat_time.Location = new System.Drawing.Point(375, 89);
+            this.quadbat_time.Name = "quadbat_time";
+            this.quadbat_time.Size = new System.Drawing.Size(83, 11);
+            this.quadbat_time.TabIndex = 164;
+            this.quadbat_time.Text = "0";
+            // 
+            // label24
+            // 
+            this.label24.Location = new System.Drawing.Point(311, 88);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(73, 12);
+            this.label24.TabIndex = 163;
+            this.label24.Text = "旋翼时间：";
+            // 
+            // quadbat_used
+            // 
+            this.quadbat_used.ContextMenuStrip = this.contextMenuStripHud;
+            this.quadbat_used.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "battery2_usedmah", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N0"));
+            this.quadbat_used.Location = new System.Drawing.Point(254, 88);
+            this.quadbat_used.Name = "quadbat_used";
+            this.quadbat_used.Size = new System.Drawing.Size(63, 12);
+            this.quadbat_used.TabIndex = 162;
+            this.quadbat_used.Text = "0";
+            // 
+            // label23
+            // 
+            this.label23.Location = new System.Drawing.Point(195, 88);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(72, 12);
+            this.label23.TabIndex = 161;
+            this.label23.Text = "旋翼耗电:";
+            // 
+            // label15
+            // 
+            this.label15.Location = new System.Drawing.Point(7, 88);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(60, 12);
+            this.label15.TabIndex = 157;
+            this.label15.Text = "旋翼电压:";
+            // 
+            // label19
+            // 
+            this.label19.Location = new System.Drawing.Point(98, 88);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(61, 12);
+            this.label19.TabIndex = 159;
+            this.label19.Text = "旋翼电流:";
+            // 
+            // quad_vlt
+            // 
+            this.quad_vlt.ContextMenuStrip = this.contextMenuStripHud;
+            this.quad_vlt.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "battery_voltage2", true));
+            this.quad_vlt.Location = new System.Drawing.Point(65, 88);
+            this.quad_vlt.Name = "quad_vlt";
+            this.quad_vlt.Size = new System.Drawing.Size(42, 12);
+            this.quad_vlt.TabIndex = 158;
+            this.quad_vlt.Text = "0";
+            // 
+            // quad_current
+            // 
+            this.quad_current.ContextMenuStrip = this.contextMenuStripHud;
+            this.quad_current.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "current2", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N0"));
+            this.quad_current.Location = new System.Drawing.Point(158, 88);
+            this.quad_current.Name = "quad_current";
+            this.quad_current.Size = new System.Drawing.Size(39, 12);
+            this.quad_current.TabIndex = 160;
+            this.quad_current.Text = "0";
+            // 
+            // timeinair
+            // 
+            this.timeinair.ContextMenuStrip = this.contextMenuStripHud;
+            this.timeinair.Location = new System.Drawing.Point(282, 108);
+            this.timeinair.Name = "timeinair";
+            this.timeinair.Size = new System.Drawing.Size(83, 11);
+            this.timeinair.TabIndex = 156;
+            this.timeinair.Text = "0";
+            // 
+            // BUT_parachute
+            // 
+            this.BUT_parachute.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.BUT_parachute.Location = new System.Drawing.Point(440, 5);
+            this.BUT_parachute.Name = "BUT_parachute";
+            this.BUT_parachute.Size = new System.Drawing.Size(17, 16);
+            this.BUT_parachute.TabIndex = 85;
+            this.BUT_parachute.Text = "强制开伞";
+            this.BUT_parachute.UseVisualStyleBackColor = true;
+            this.BUT_parachute.Visible = false;
+            this.BUT_parachute.Click += new System.EventHandler(this.BUT_parachute_Click);
+            // 
+            // label20
+            // 
+            this.label20.Location = new System.Drawing.Point(218, 107);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(73, 12);
+            this.label20.TabIndex = 155;
+            this.label20.Text = "飞行时间：";
+            // 
+            // traveled_inkm
+            // 
+            this.traveled_inkm.ContextMenuStrip = this.contextMenuStripHud;
+            this.traveled_inkm.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "distTraveled", true));
+            this.traveled_inkm.Location = new System.Drawing.Point(152, 108);
+            this.traveled_inkm.Name = "traveled_inkm";
+            this.traveled_inkm.Size = new System.Drawing.Size(58, 12);
+            this.traveled_inkm.TabIndex = 154;
+            this.traveled_inkm.Text = "0";
+            // 
+            // label18
+            // 
+            this.label18.Location = new System.Drawing.Point(111, 108);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(53, 12);
+            this.label18.TabIndex = 153;
+            this.label18.Text = "里程：";
+            // 
+            // bat_used
+            // 
+            this.bat_used.ContextMenuStrip = this.contextMenuStripHud;
+            this.bat_used.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "battery_usedmah", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N0"));
+            this.bat_used.Location = new System.Drawing.Point(44, 108);
+            this.bat_used.Name = "bat_used";
+            this.bat_used.Size = new System.Drawing.Size(63, 12);
+            this.bat_used.TabIndex = 152;
+            this.bat_used.Text = "0";
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(7, 108);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.TabIndex = 151;
+            this.label1.Text = "耗电：";
             // 
             // label30
             // 
-            this.label30.Location = new System.Drawing.Point(137, 46);
+            this.label30.Location = new System.Drawing.Point(137, 32);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(59, 12);
             this.label30.TabIndex = 137;
@@ -884,25 +1015,17 @@
             // 
             this.groundspeed_value.ContextMenuStrip = this.contextMenuStripHud;
             this.groundspeed_value.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "groundspeed", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N0"));
-            this.groundspeed_value.Location = new System.Drawing.Point(280, 46);
+            this.groundspeed_value.Location = new System.Drawing.Point(280, 32);
             this.groundspeed_value.Name = "groundspeed_value";
             this.groundspeed_value.Size = new System.Drawing.Size(30, 12);
             this.groundspeed_value.TabIndex = 76;
             this.groundspeed_value.Text = "0";
             // 
-            // goal_aill
-            // 
-            this.goal_aill.Location = new System.Drawing.Point(423, 87);
-            this.goal_aill.Name = "goal_aill";
-            this.goal_aill.Size = new System.Drawing.Size(35, 12);
-            this.goal_aill.TabIndex = 143;
-            this.goal_aill.Text = "0";
-            // 
             // airspeederror_value
             // 
             this.airspeederror_value.ContextMenuStrip = this.contextMenuStripHud;
             this.airspeederror_value.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "aspd_error", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N0"));
-            this.airspeederror_value.Location = new System.Drawing.Point(373, 46);
+            this.airspeederror_value.Location = new System.Drawing.Point(373, 32);
             this.airspeederror_value.Name = "airspeederror_value";
             this.airspeederror_value.Size = new System.Drawing.Size(32, 12);
             this.airspeederror_value.TabIndex = 132;
@@ -910,20 +1033,11 @@
             // 
             // voltage
             // 
-            this.voltage.Location = new System.Drawing.Point(7, 10);
+            this.voltage.Location = new System.Drawing.Point(8, 71);
             this.voltage.Name = "voltage";
             this.voltage.Size = new System.Drawing.Size(41, 12);
             this.voltage.TabIndex = 71;
-            this.voltage.Text = "电压：";
-            // 
-            // aileron_r
-            // 
-            this.aileron_r.ContextMenuStrip = this.contextMenuStripHud;
-            this.aileron_r.Location = new System.Drawing.Point(387, 128);
-            this.aileron_r.Name = "aileron_r";
-            this.aileron_r.Size = new System.Drawing.Size(39, 12);
-            this.aileron_r.TabIndex = 140;
-            this.aileron_r.Text = "0";
+            this.voltage.Text = "电压:";
             // 
             // label12
             // 
@@ -937,26 +1051,17 @@
             // 
             this.compass_value.ContextMenuStrip = this.contextMenuStripHud;
             this.compass_value.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "yaw", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N0"));
-            this.compass_value.Location = new System.Drawing.Point(299, 128);
+            this.compass_value.Location = new System.Drawing.Point(299, 72);
             this.compass_value.Name = "compass_value";
             this.compass_value.Size = new System.Drawing.Size(34, 12);
             this.compass_value.TabIndex = 88;
             this.compass_value.Text = "0";
             // 
-            // aileron_l
-            // 
-            this.aileron_l.ContextMenuStrip = this.contextMenuStripHud;
-            this.aileron_l.Location = new System.Drawing.Point(387, 87);
-            this.aileron_l.Name = "aileron_l";
-            this.aileron_l.Size = new System.Drawing.Size(30, 12);
-            this.aileron_l.TabIndex = 142;
-            this.aileron_l.Text = "0";
-            // 
             // latitude_value
             // 
             this.latitude_value.ContextMenuStrip = this.contextMenuStripHud;
             this.latitude_value.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "lat", true));
-            this.latitude_value.Location = new System.Drawing.Point(299, 86);
+            this.latitude_value.Location = new System.Drawing.Point(299, 51);
             this.latitude_value.Name = "latitude_value";
             this.latitude_value.Size = new System.Drawing.Size(38, 12);
             this.latitude_value.TabIndex = 98;
@@ -964,7 +1069,7 @@
             // 
             // label13
             // 
-            this.label13.Location = new System.Drawing.Point(165, 87);
+            this.label13.Location = new System.Drawing.Point(165, 52);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(41, 12);
             this.label13.TabIndex = 95;
@@ -978,19 +1083,11 @@
             this.label7.TabIndex = 83;
             this.label7.Text = "油门：";
             // 
-            // label16
-            // 
-            this.label16.Location = new System.Drawing.Point(339, 127);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(53, 12);
-            this.label16.TabIndex = 139;
-            this.label16.Text = "副翼右：";
-            // 
             // longitude_value
             // 
             this.longitude_value.ContextMenuStrip = this.contextMenuStripHud;
             this.longitude_value.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "lng", true));
-            this.longitude_value.Location = new System.Drawing.Point(206, 87);
+            this.longitude_value.Location = new System.Drawing.Point(206, 52);
             this.longitude_value.Name = "longitude_value";
             this.longitude_value.Size = new System.Drawing.Size(45, 12);
             this.longitude_value.TabIndex = 96;
@@ -998,7 +1095,7 @@
             // 
             // label14
             // 
-            this.label14.Location = new System.Drawing.Point(257, 86);
+            this.label14.Location = new System.Drawing.Point(257, 51);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(41, 12);
             this.label14.TabIndex = 97;
@@ -1008,23 +1105,15 @@
             // 
             this.height_value.ContextMenuStrip = this.contextMenuStripHud;
             this.height_value.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "alt", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N0"));
-            this.height_value.Location = new System.Drawing.Point(138, 86);
+            this.height_value.Location = new System.Drawing.Point(138, 51);
             this.height_value.Name = "height_value";
             this.height_value.Size = new System.Drawing.Size(30, 12);
             this.height_value.TabIndex = 80;
             this.height_value.Text = "0";
             // 
-            // label17
-            // 
-            this.label17.Location = new System.Drawing.Point(339, 86);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(53, 12);
-            this.label17.TabIndex = 141;
-            this.label17.Text = "副翼左：";
-            // 
             // label11
             // 
-            this.label11.Location = new System.Drawing.Point(4, 86);
+            this.label11.Location = new System.Drawing.Point(4, 51);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(65, 12);
             this.label11.TabIndex = 91;
@@ -1034,7 +1123,7 @@
             // 
             this.targetaltitude_value.ContextMenuStrip = this.contextMenuStripHud;
             this.targetaltitude_value.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "targetalt", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N0"));
-            this.targetaltitude_value.Location = new System.Drawing.Point(70, 86);
+            this.targetaltitude_value.Location = new System.Drawing.Point(70, 51);
             this.targetaltitude_value.Name = "targetaltitude_value";
             this.targetaltitude_value.Size = new System.Drawing.Size(37, 12);
             this.targetaltitude_value.TabIndex = 92;
@@ -1042,7 +1131,7 @@
             // 
             // label28
             // 
-            this.label28.Location = new System.Drawing.Point(173, 126);
+            this.label28.Location = new System.Drawing.Point(173, 70);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(54, 14);
             this.label28.TabIndex = 135;
@@ -1050,7 +1139,7 @@
             // 
             // label8
             // 
-            this.label8.Location = new System.Drawing.Point(81, 45);
+            this.label8.Location = new System.Drawing.Point(81, 31);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(41, 12);
             this.label8.TabIndex = 85;
@@ -1058,17 +1147,17 @@
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(81, 10);
+            this.label2.Location = new System.Drawing.Point(82, 71);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(41, 12);
             this.label2.TabIndex = 73;
-            this.label2.Text = "电流：";
+            this.label2.Text = "电流:";
             // 
             // voltage_value
             // 
             this.voltage_value.ContextMenuStrip = this.contextMenuStripHud;
             this.voltage_value.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "battery_voltage", true));
-            this.voltage_value.Location = new System.Drawing.Point(48, 10);
+            this.voltage_value.Location = new System.Drawing.Point(49, 71);
             this.voltage_value.Name = "voltage_value";
             this.voltage_value.Size = new System.Drawing.Size(34, 12);
             this.voltage_value.TabIndex = 72;
@@ -1078,7 +1167,7 @@
             // 
             this.mode_value.ContextMenuStrip = this.contextMenuStripHud;
             this.mode_value.ForeColor = System.Drawing.Color.Red;
-            this.mode_value.Location = new System.Drawing.Point(48, 44);
+            this.mode_value.Location = new System.Drawing.Point(48, 30);
             this.mode_value.Name = "mode_value";
             this.mode_value.Size = new System.Drawing.Size(34, 12);
             this.mode_value.TabIndex = 90;
@@ -1116,7 +1205,7 @@
             // 
             this.current_value.ContextMenuStrip = this.contextMenuStripHud;
             this.current_value.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "current", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N0"));
-            this.current_value.Location = new System.Drawing.Point(120, 10);
+            this.current_value.Location = new System.Drawing.Point(121, 71);
             this.current_value.Name = "current_value";
             this.current_value.Size = new System.Drawing.Size(39, 12);
             this.current_value.TabIndex = 74;
@@ -1126,7 +1215,7 @@
             // 
             this.targetwaypoint_value.ContextMenuStrip = this.contextMenuStripHud;
             this.targetwaypoint_value.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "wpno", true));
-            this.targetwaypoint_value.Location = new System.Drawing.Point(228, 128);
+            this.targetwaypoint_value.Location = new System.Drawing.Point(228, 72);
             this.targetwaypoint_value.Name = "targetwaypoint_value";
             this.targetwaypoint_value.Size = new System.Drawing.Size(25, 12);
             this.targetwaypoint_value.TabIndex = 136;
@@ -1136,7 +1225,7 @@
             // 
             this.alterror_value.ContextMenuStrip = this.contextMenuStripHud;
             this.alterror_value.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "alt_error", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N0"));
-            this.alterror_value.Location = new System.Drawing.Point(60, 126);
+            this.alterror_value.Location = new System.Drawing.Point(52, 9);
             this.alterror_value.Name = "alterror_value";
             this.alterror_value.Size = new System.Drawing.Size(32, 12);
             this.alterror_value.TabIndex = 134;
@@ -1144,7 +1233,7 @@
             // 
             // label26
             // 
-            this.label26.Location = new System.Drawing.Point(7, 126);
+            this.label26.Location = new System.Drawing.Point(-1, 9);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(53, 12);
             this.label26.TabIndex = 133;
@@ -1152,7 +1241,7 @@
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(106, 87);
+            this.label5.Location = new System.Drawing.Point(106, 52);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(41, 12);
             this.label5.TabIndex = 79;
@@ -1160,7 +1249,7 @@
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(238, 46);
+            this.label3.Location = new System.Drawing.Point(238, 32);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 12);
             this.label3.TabIndex = 75;
@@ -1170,7 +1259,7 @@
             // 
             this.starcount_value.ContextMenuStrip = this.contextMenuStripHud;
             this.starcount_value.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "satcount", true));
-            this.starcount_value.Location = new System.Drawing.Point(122, 45);
+            this.starcount_value.Location = new System.Drawing.Point(122, 31);
             this.starcount_value.Name = "starcount_value";
             this.starcount_value.Size = new System.Drawing.Size(17, 12);
             this.starcount_value.TabIndex = 86;
@@ -1179,7 +1268,7 @@
             // gpsstate_value
             // 
             this.gpsstate_value.ContextMenuStrip = this.contextMenuStripHud;
-            this.gpsstate_value.Location = new System.Drawing.Point(195, 46);
+            this.gpsstate_value.Location = new System.Drawing.Point(195, 32);
             this.gpsstate_value.Name = "gpsstate_value";
             this.gpsstate_value.Size = new System.Drawing.Size(41, 12);
             this.gpsstate_value.TabIndex = 138;
@@ -1187,7 +1276,7 @@
             // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(95, 127);
+            this.label6.Location = new System.Drawing.Point(87, 10);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(41, 12);
             this.label6.TabIndex = 81;
@@ -1196,7 +1285,7 @@
             // label10
             // 
             this.label10.ForeColor = System.Drawing.Color.Red;
-            this.label10.Location = new System.Drawing.Point(5, 44);
+            this.label10.Location = new System.Drawing.Point(5, 30);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(41, 12);
             this.label10.TabIndex = 89;
@@ -1204,7 +1293,7 @@
             // 
             // label22
             // 
-            this.label22.Location = new System.Drawing.Point(312, 46);
+            this.label22.Location = new System.Drawing.Point(312, 32);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(53, 12);
             this.label22.TabIndex = 131;
@@ -1212,7 +1301,7 @@
             // 
             // label9
             // 
-            this.label9.Location = new System.Drawing.Point(256, 127);
+            this.label9.Location = new System.Drawing.Point(256, 71);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(41, 12);
             this.label9.TabIndex = 87;
@@ -1222,7 +1311,7 @@
             // 
             this.xtrack_value.ContextMenuStrip = this.contextMenuStripHud;
             this.xtrack_value.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "xtrack_error", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N0"));
-            this.xtrack_value.Location = new System.Drawing.Point(136, 128);
+            this.xtrack_value.Location = new System.Drawing.Point(128, 11);
             this.xtrack_value.Name = "xtrack_value";
             this.xtrack_value.Size = new System.Drawing.Size(35, 12);
             this.xtrack_value.TabIndex = 82;
@@ -1237,6 +1326,76 @@
             this.targetairspeed_value.Size = new System.Drawing.Size(32, 12);
             this.targetairspeed_value.TabIndex = 94;
             this.targetairspeed_value.Text = "0";
+            // 
+            // BUT_ARM
+            // 
+            this.BUT_ARM.ColorMouseDown = System.Drawing.Color.Empty;
+            this.BUT_ARM.ColorMouseOver = System.Drawing.Color.Empty;
+            this.BUT_ARM.ColorNotEnabled = System.Drawing.Color.Empty;
+            this.BUT_ARM.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.BUT_ARM.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.BUT_ARM.Location = new System.Drawing.Point(407, 0);
+            this.BUT_ARM.Name = "BUT_ARM";
+            this.BUT_ARM.Size = new System.Drawing.Size(43, 23);
+            this.BUT_ARM.TabIndex = 98;
+            this.BUT_ARM.Text = "解锁";
+            this.BUT_ARM.UseVisualStyleBackColor = true;
+            this.BUT_ARM.Click += new System.EventHandler(this.BUT_ARM_Click);
+            // 
+            // lbl_logpercent
+            // 
+            this.lbl_logpercent.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lbl_logpercent.Location = new System.Drawing.Point(341, 33);
+            this.lbl_logpercent.Name = "lbl_logpercent";
+            this.lbl_logpercent.resize = false;
+            this.lbl_logpercent.Size = new System.Drawing.Size(38, 14);
+            this.lbl_logpercent.TabIndex = 97;
+            this.lbl_logpercent.Text = "0.00 %";
+            // 
+            // CMB_playspeed
+            // 
+            this.CMB_playspeed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CMB_playspeed.FormattingEnabled = true;
+            this.CMB_playspeed.Location = new System.Drawing.Point(392, 28);
+            this.CMB_playspeed.Name = "CMB_playspeed";
+            this.CMB_playspeed.Size = new System.Drawing.Size(53, 20);
+            this.CMB_playspeed.TabIndex = 96;
+            this.CMB_playspeed.SelectedIndexChanged += new System.EventHandler(this.CMB_playspeed_SelectedIndexChanged);
+            this.CMB_playspeed.Click += new System.EventHandler(this.CMB_playspeed_Click);
+            // 
+            // tracklog
+            // 
+            this.tracklog.AutoSize = false;
+            this.tracklog.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.tracklog.Location = new System.Drawing.Point(118, 29);
+            this.tracklog.Maximum = 100;
+            this.tracklog.Name = "tracklog";
+            this.tracklog.Size = new System.Drawing.Size(219, 23);
+            this.tracklog.TabIndex = 95;
+            this.tracklog.TickFrequency = 5;
+            this.tracklog.Scroll += new System.EventHandler(this.tracklog_Scroll);
+            // 
+            // BUT_playlog
+            // 
+            this.BUT_playlog.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.BUT_playlog.Location = new System.Drawing.Point(64, 29);
+            this.BUT_playlog.Name = "BUT_playlog";
+            this.BUT_playlog.Size = new System.Drawing.Size(46, 18);
+            this.BUT_playlog.TabIndex = 94;
+            this.BUT_playlog.Text = "播放";
+            this.BUT_playlog.UseVisualStyleBackColor = true;
+            this.BUT_playlog.Click += new System.EventHandler(this.BUT_playlog_Click);
+            // 
+            // BUT_loadtelem
+            // 
+            this.BUT_loadtelem.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.BUT_loadtelem.Location = new System.Drawing.Point(9, 29);
+            this.BUT_loadtelem.Name = "BUT_loadtelem";
+            this.BUT_loadtelem.Size = new System.Drawing.Size(45, 18);
+            this.BUT_loadtelem.TabIndex = 93;
+            this.BUT_loadtelem.Text = "录像";
+            this.BUT_loadtelem.UseVisualStyleBackColor = true;
+            this.BUT_loadtelem.Click += new System.EventHandler(this.BUT_loadtelem_Click);
             // 
             // BUT_camera
             // 
@@ -1261,17 +1420,6 @@
             this.CMB_setwp.TabIndex = 86;
             this.CMB_setwp.SelectedIndexChanged += new System.EventHandler(this.CMB_setwp_SelectedIndexChanged);
             this.CMB_setwp.Click += new System.EventHandler(this.CMB_setwp_Click);
-            // 
-            // BUT_parachute
-            // 
-            this.BUT_parachute.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BUT_parachute.Location = new System.Drawing.Point(395, 2);
-            this.BUT_parachute.Name = "BUT_parachute";
-            this.BUT_parachute.Size = new System.Drawing.Size(60, 21);
-            this.BUT_parachute.TabIndex = 85;
-            this.BUT_parachute.Text = "强制开伞";
-            this.BUT_parachute.UseVisualStyleBackColor = true;
-            this.BUT_parachute.Click += new System.EventHandler(this.BUT_parachute_Click);
             // 
             // BUT_standby
             // 
@@ -1361,7 +1509,7 @@
             // 
             this.zg1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.zg1.Location = new System.Drawing.Point(0, 0);
-            this.zg1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.zg1.Margin = new System.Windows.Forms.Padding(4);
             this.zg1.Name = "zg1";
             this.zg1.ScrollGrace = 0D;
             this.zg1.ScrollMaxX = 0D;
@@ -1370,7 +1518,7 @@
             this.zg1.ScrollMinX = 0D;
             this.zg1.ScrollMinY = 0D;
             this.zg1.ScrollMinY2 = 0D;
-            this.zg1.Size = new System.Drawing.Size(100, 119);
+            this.zg1.Size = new System.Drawing.Size(150, 178);
             this.zg1.TabIndex = 81;
             this.zg1.Visible = false;
             // 
@@ -1379,7 +1527,7 @@
             this.windDir1.BackColor = System.Drawing.Color.Transparent;
             this.windDir1.DataBindings.Add(new System.Windows.Forms.Binding("Direction", this.bindingSourceHud, "wind_dir", true));
             this.windDir1.DataBindings.Add(new System.Windows.Forms.Binding("Speed", this.bindingSourceHud, "wind_vel", true));
-            this.windDir1.Direction = 180D;
+            this.windDir1.Direction = 360D;
             this.windDir1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.windDir1.Location = new System.Drawing.Point(3, 3);
             this.windDir1.Name = "windDir1";
@@ -1448,6 +1596,55 @@
             // 
             this.ZedGraphTimer.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // label16
+            // 
+            this.label16.Location = new System.Drawing.Point(360, 52);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(38, 14);
+            this.label16.TabIndex = 165;
+            this.label16.Text = "相机:";
+            // 
+            // cameranum
+            // 
+            this.cameranum.ContextMenuStrip = this.contextMenuStripHud;
+            this.cameranum.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "triggernum", true));
+            this.cameranum.Location = new System.Drawing.Point(396, 53);
+            this.cameranum.Name = "cameranum";
+            this.cameranum.Size = new System.Drawing.Size(55, 12);
+            this.cameranum.TabIndex = 166;
+            this.cameranum.Text = "0";
+            // 
+            // _3DMesh1
+            // 
+            this._3DMesh1.aileron_l = ((ushort)(0));
+            this._3DMesh1.aileron_r = ((ushort)(0));
+            this._3DMesh1.AutoSize = true;
+            this._3DMesh1.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
+            this._3DMesh1.BackColor = System.Drawing.Color.Black;
+            this._3DMesh1.DataBindings.Add(new System.Windows.Forms.Binding("heading", this.bindingSourceHud, "yaw", true));
+            this._3DMesh1.DataBindings.Add(new System.Windows.Forms.Binding("pitch", this.bindingSourceHud, "pitch", true));
+            this._3DMesh1.DataBindings.Add(new System.Windows.Forms.Binding("roll", this.bindingSourceHud, "roll", true));
+            this._3DMesh1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._3DMesh1.heading = 0F;
+            this._3DMesh1.Location = new System.Drawing.Point(0, 0);
+            this._3DMesh1.Name = "_3DMesh1";
+            this._3DMesh1.pitch = 0F;
+            this._3DMesh1.roll = 0F;
+            this._3DMesh1.Size = new System.Drawing.Size(224, 215);
+            this._3DMesh1.TabIndex = 0;
+            this._3DMesh1.VSync = false;
+            this._3DMesh1.AutoSizeChanged += new System.EventHandler(this._3DMesh1_AutoSizeChanged);
+            this._3DMesh1.Click += new System.EventHandler(this.mesh_Click);
+            this._3DMesh1.Resize += new System.EventHandler(this._3DMesh1_Resize);
+            // 
+            // bindingSourceHud
+            // 
+            this.bindingSourceHud.DataSource = typeof(MissionPlanner.CurrentState);
+            // 
+            // bindingSourceGaugesTab
+            // 
+            this.bindingSourceGaugesTab.DataSource = typeof(MissionPlanner.CurrentState);
+            // 
             // bindingSourceStatusTab
             // 
             this.bindingSourceStatusTab.DataSource = typeof(MissionPlanner.CurrentState);
@@ -1475,7 +1672,6 @@
             this.splitContainer5.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).EndInit();
             this.splitContainer5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceHud)).EndInit();
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
@@ -1484,12 +1680,14 @@
             this.splitContainer4.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
             this.splitContainer4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceGaugesTab)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tracklog)).EndInit();
             this.splitContainer6.Panel1.ResumeLayout(false);
             this.splitContainer6.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer6)).EndInit();
             this.splitContainer6.ResumeLayout(false);
             this.contextMenuStripMap.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceHud)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceGaugesTab)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceStatusTab)).EndInit();
             this.ResumeLayout(false);
 
@@ -1562,14 +1760,30 @@
         private Controls.MyButton BUT_camera;
         public System.Windows.Forms.ContextMenuStrip contextMenuStripMap;
         private System.Windows.Forms.ToolStripMenuItem flyToHereAltToolStripMenuItem;
-        private System.Windows.Forms.Label goal_ailr;
-        private System.Windows.Forms.Label goal_aill;
-        private System.Windows.Forms.Label aileron_r;
-        private System.Windows.Forms.Label aileron_l;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label17;
         private System.Windows.Forms.ToolStripMenuItem fixbattery;
         private Mesh._3DMesh _3DMesh1;
         private Controls.HUD hud2;
+        private Controls.MyLabel lbl_logpercent;
+        private System.Windows.Forms.ComboBox CMB_playspeed;
+        private System.Windows.Forms.TrackBar tracklog;
+        private Controls.MyButton BUT_playlog;
+        private Controls.MyButton BUT_loadtelem;
+        private System.Windows.Forms.Label quadbat_used;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label quad_vlt;
+        private System.Windows.Forms.Label quad_current;
+        private System.Windows.Forms.Label timeinair;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label traveled_inkm;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label bat_used;
+        private System.Windows.Forms.Label label1;
+        private Controls.MyButton BUT_ARM;
+        private System.Windows.Forms.Label quadbat_time;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label cameranum;
     }
 }
