@@ -173,6 +173,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>ExtLibs\Flurl.Http.dll</HintPath>
     </Reference>
+    <Reference Include="gdalconst_csharp, Version=1.0.6014.33939, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\GDAL.1.11.1\lib\net40\gdalconst_csharp.dll</HintPath>
+    </Reference>
+    <Reference Include="gdal_csharp, Version=1.0.6014.33938, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\GDAL.1.11.1\lib\net40\gdal_csharp.dll</HintPath>
+    </Reference>
     <Reference Include="GeoJSON.Net, Version=0.1.37.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\GeoJSON.Net.0.1.37\lib\GeoJSON.Net.dll</HintPath>
       <Private>True</Private>
@@ -212,6 +220,14 @@
     </Reference>
     <Reference Include="ObjectListView">
       <HintPath>packages\Unofficial.ObjectListView.2.6.0\lib\net20\ObjectListView.dll</HintPath>
+    </Reference>
+    <Reference Include="ogr_csharp, Version=1.0.6014.33938, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\GDAL.1.11.1\lib\net40\ogr_csharp.dll</HintPath>
+    </Reference>
+    <Reference Include="osr_csharp, Version=1.0.6014.33938, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\GDAL.1.11.1\lib\net40\osr_csharp.dll</HintPath>
     </Reference>
     <Reference Include="protobuf-net">
       <HintPath>packages\protobuf-net.2.0.0.668\lib\net40\protobuf-net.dll</HintPath>
@@ -2639,7 +2655,6 @@
     <EmbeddedResource Include="Wizard\Wizard.zh-TW.resx">
       <DependentUpon>Wizard.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="ClassDiagram1.cd" />
     <None Include="Drivers\arduinomega2560.cat" />
     <None Include="Drivers\ArduinoMEGA2560.inf" />
     <None Include="Drivers\mindpx.cat">

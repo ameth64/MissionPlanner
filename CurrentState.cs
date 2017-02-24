@@ -1229,7 +1229,7 @@ namespace MissionPlanner
                             distTraveled += (float) lastpos.GetDistance(new PointLatLngAlt(lat, lng, 0, ""))*
                                             multiplierdist;
                             if (mydtdata)
-                                distTraveled = (float)((float)mydistraveled / 1000.0f);
+                                distTraveled = (float)((float)mydistraveled);
 
                             lastpos = new PointLatLngAlt(lat, lng, 0, "");
                         }

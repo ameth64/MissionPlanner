@@ -1160,12 +1160,15 @@ namespace MissionPlanner.GCSViews
         // to prevent cross thread calls while in a draw and exception
         private void updateMissionRouteMarkers()
         {
-            // not async
-            this.Invoke((System.Windows.Forms.MethodInvoker)delegate()
+            if (this.Visible)
             {
-                polygons.Markers.Clear();
-                routes.Markers.Clear();
-            });
+                    // not async
+                    this.Invoke((System.Windows.Forms.MethodInvoker)delegate ()
+                {
+                    polygons.Markers.Clear();
+                    routes.Markers.Clear();
+                });
+            }
         }
 
         private void addpolygonmarker(string tag, double lng, double lat, int alt, Color? color, GMapOverlay overlay)

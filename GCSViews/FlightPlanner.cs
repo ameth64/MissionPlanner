@@ -3372,6 +3372,8 @@ namespace MissionPlanner.GCSViews
                     clearPolygonToolStripMenuItem_Click(this, null);
 
                     contextMenuStrip1.Visible = false;
+                    //用户菜单
+                    contextMenuStrip2.Visible = false;
 
                     return;
                 }
@@ -6939,5 +6941,294 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
                 return;
             }
         }
+
+        private void deleteWPToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            int no = 0;
+            if (CurentRectMarker != null)
+            {
+                if (int.TryParse(CurentRectMarker.InnerMarker.Tag.ToString(), out no))
+                {
+                    try
+                    {
+                        Commands.Rows.RemoveAt(no - 1); // home is 0
+                    }
+                    catch
+                    {
+                        CustomMessageBox.Show("error selecting wp, please try again.");
+                    }
+                }
+                else if (int.TryParse(CurentRectMarker.InnerMarker.Tag.ToString().Replace("grid", ""), out no))
+                {
+                    try
+                    {
+                        drawnpolygon.Points.RemoveAt(no - 1);
+                        drawnpolygonsoverlay.Markers.Clear();
+
+                        int a = 1;
+                        foreach (PointLatLng pnt in drawnpolygon.Points)
+                        {
+                            addpolygonmarkergrid(a.ToString(), pnt.Lng, pnt.Lat, 0);
+                            a++;
+                        }
+
+                        MainMap.UpdatePolygonLocalPosition(drawnpolygon);
+
+                        MainMap.Invalidate();
+                    }
+                    catch
+                    {
+                        CustomMessageBox.Show("Remove point Failed. Please try again.");
+                    }
+                }
+            }
+            else if (CurrentRallyPt != null)
+            {
+                rallypointoverlay.Markers.Remove(CurrentRallyPt);
+                MainMap.Invalidate(true);
+
+                CurrentRallyPt = null;
+            }
+            else if (groupmarkers.Count > 0)
+            {
+                for (int a = Commands.Rows.Count; a > 0; a--)
+                {
+                    try
+                    {
+                        if (groupmarkers.Contains(a))
+                            Commands.Rows.RemoveAt(a - 1); // home is 0
+                    }
+                    catch
+                    {
+                        CustomMessageBox.Show("error selecting wp, please try again.");
+                    }
+                }
+
+                groupmarkers.Clear();
+            }
+
+
+            if (currentMarker != null)
+                CurentRectMarker = null;
+
+            writeKML();
+        }
+
+        private void addWPToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            string wpno = (selectedrow + 1).ToString("0");
+            if (InputBox.Show("Insert WP", "Insert WP after wp#", ref wpno) == DialogResult.OK)
+            {
+                try
+                {
+                    Commands.Rows.Insert(int.Parse(wpno), 1);
+                }
+                catch
+                {
+                    CustomMessageBox.Show("Invalid insert position", Strings.ERROR);
+                    return;
+                }
+
+                selectedrow = int.Parse(wpno);
+
+                ChangeColumnHeader(MAVLink.MAV_CMD.WAYPOINT.ToString());
+
+                setfromMap(MouseDownStart.Lat, MouseDownStart.Lng, (int)float.Parse(TXT_DefaultAlt.Text));
+            }
+        }
+
+        private void clearWPToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            quickadd = true;
+
+            // mono fix
+            Commands.CurrentCell = null;
+
+            Commands.Rows.Clear();
+
+            selectedrow = 0;
+            quickadd = false;
+            writeKML();
+        }
+
+        private void addGridToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            if (polygongridmode == false)
+            {
+                CustomMessageBox.Show(
+                    "You will remain in polygon mode until you clear the polygon or create a grid/upload a fence");
+            }
+
+            polygongridmode = true;
+
+            List<PointLatLng> polygonPoints = new List<PointLatLng>();
+            if (drawnpolygonsoverlay.Polygons.Count == 0)
+            {
+                drawnpolygon.Points.Clear();
+                drawnpolygonsoverlay.Polygons.Add(drawnpolygon);
+            }
+
+            drawnpolygon.Fill = Brushes.Transparent;
+
+            // remove full loop is exists
+            if (drawnpolygon.Points.Count > 1 &&
+                drawnpolygon.Points[0] == drawnpolygon.Points[drawnpolygon.Points.Count - 1])
+                drawnpolygon.Points.RemoveAt(drawnpolygon.Points.Count - 1); // unmake a full loop
+
+            drawnpolygon.Points.Add(new PointLatLng(MouseDownStart.Lat, MouseDownStart.Lng));
+
+            addpolygonmarkergrid(drawnpolygon.Points.Count.ToString(), MouseDownStart.Lng, MouseDownStart.Lat, 0);
+
+            MainMap.UpdatePolygonLocalPosition(drawnpolygon);
+
+            MainMap.Invalidate();
+        }
+
+        private void clearGridToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            polygongridmode = false;
+            if (drawnpolygon == null)
+                return;
+            drawnpolygon.Points.Clear();
+            drawnpolygonsoverlay.Markers.Clear();
+            MainMap.Invalidate();
+
+            writeKML();
+        }
+
+        private void aeraToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            double aream2 = Math.Abs(calcpolygonarea(drawnpolygon.Points));
+
+            double areaa = aream2 * 0.000247105;
+
+            double areaha = aream2 * 1e-4;
+
+            double areasqf = aream2 * 10.7639;
+
+            CustomMessageBox.Show(
+                "Area: " + aream2.ToString("0") + " m2\n\t" + areaa.ToString("0.00") + " Acre\n\t" +
+                areaha.ToString("0.00") + " Hectare\n\t" + areasqf.ToString("0") + " sqf", "Area");
+        }
+
+        public void setAdvancedFuction(bool f)
+        {
+            if (f)
+                MainMap.ContextMenuStrip = contextMenuStrip1;
+            else
+                MainMap.ContextMenuStrip = contextMenuStrip2;
+        }
+
+        private void BUT_CheckElevation_Click(object sender, EventArgs e)
+        {
+            writeKML();
+            double homealt = MainV2.comPort.MAV.cs.HomeAlt;
+            Form temp = new ElevationProfile(pointlist, homealt, (altmode)CMB_altmode.SelectedValue);
+            ThemeManager.ApplyThemeTo(temp);
+            temp.ShowDialog();
+        }
+
+        private void but_kml_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog fd = new OpenFileDialog())
+            {
+                fd.Filter = "Google Earth KML |*.kml;*.kmz|AutoCad DXF|*.dxf";
+                DialogResult result = fd.ShowDialog();
+                string file = fd.FileName;
+                if (file != "")
+                {
+                    kmlpolygonsoverlay.Polygons.Clear();
+                    kmlpolygonsoverlay.Routes.Clear();
+
+                    FlightData.kmlpolygons.Routes.Clear();
+                    FlightData.kmlpolygons.Polygons.Clear();
+                    if (file.ToLower().EndsWith("dxf"))
+                    {
+                        string zone = "-99";
+                        InputBox.Show("Zone", "Please enter the UTM zone, or cancel to not change", ref zone);
+
+                        dxf dxf = new dxf();
+                        if (zone != "-99")
+                            dxf.Tag = zone;
+
+                        dxf.newLine += Dxf_newLine;
+                        dxf.newPolyLine += Dxf_newPolyLine;
+                        dxf.newLwPolyline += Dxf_newLwPolyline;
+                        dxf.newMLine += Dxf_newMLine;
+                        dxf.Read(file);
+                    }
+                    else
+                    {
+                        try
+                        {
+                            string kml = "";
+                            string tempdir = "";
+                            if (file.ToLower().EndsWith("kmz"))
+                            {
+                                ZipFile input = new ZipFile(file);
+
+                                tempdir = Path.GetTempPath() + Path.DirectorySeparatorChar + Path.GetRandomFileName();
+                                input.ExtractAll(tempdir, ExtractExistingFileAction.OverwriteSilently);
+
+                                string[] kmls = Directory.GetFiles(tempdir, "*.kml");
+
+                                if (kmls.Length > 0)
+                                {
+                                    file = kmls[0];
+
+                                    input.Dispose();
+                                }
+                                else
+                                {
+                                    input.Dispose();
+                                    return;
+                                }
+                            }
+
+                            var sr = new StreamReader(File.OpenRead(file));
+                            kml = sr.ReadToEnd();
+                            sr.Close();
+
+                            // cleanup after out
+                            if (tempdir != "")
+                                Directory.Delete(tempdir, true);
+
+                            kml = kml.Replace("<Snippet/>", "");
+
+                            var parser = new Parser();
+
+                            parser.ElementAdded += parser_ElementAdded;
+                            parser.ParseString(kml, false);
+
+                            if (DialogResult.Yes ==
+                                CustomMessageBox.Show(Strings.Do_you_want_to_load_this_into_the_flight_data_screen, Strings.Load_data,
+                                    MessageBoxButtons.YesNo))
+                            {
+                                foreach (var temp in kmlpolygonsoverlay.Polygons)
+                                {
+                                    FlightData.kmlpolygons.Polygons.Add(temp);
+                                }
+                                foreach (var temp in kmlpolygonsoverlay.Routes)
+                                {
+                                    FlightData.kmlpolygons.Routes.Add(temp);
+                                }
+                            }
+
+                            if (
+                                CustomMessageBox.Show(Strings.Zoom_To, Strings.Zoom_to_the_center_or_the_loaded_file, MessageBoxButtons.YesNo) ==
+                                DialogResult.Yes)
+                            {
+                                MainMap.SetZoomToFitRect(GetBoundingLayer(kmlpolygonsoverlay));
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            CustomMessageBox.Show(Strings.Bad_KML_File + ex);
+                        }
+                    }
+                }
+            }
+
     }
+}
 }

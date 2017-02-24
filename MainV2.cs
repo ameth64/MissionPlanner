@@ -2648,6 +2648,7 @@ namespace MissionPlanner
             // for short use threadpool
             MenuSimulation.Visible = false;
             MenuFlightData.Visible = false;
+            FlightPlanner.setAdvancedFuction(false);
             MenuInitConfig.Visible = false;
             MenuConfigTune.Visible = false;
             MenuTerminal.Visible = false;
@@ -2747,6 +2748,8 @@ namespace MissionPlanner
 
             MissionPlanner.Utilities.Tracking.AddTiming("AppLoad", "Load Time",
                 (DateTime.Now - Program.starttime).TotalMilliseconds, "");
+
+            //禁止自动更新
 /*
             try
             {
@@ -2951,6 +2954,7 @@ namespace MissionPlanner
 
         int pwstep = 0;
         bool showcontrol = false;
+        bool fladv = false;
         /// <summary>
         /// keyboard shortcuts override
         /// </summary>
@@ -3003,6 +3007,8 @@ namespace MissionPlanner
                 MenuConfigTune.Visible = !MenuConfigTune.Visible;
                 MenuTerminal.Visible = !MenuTerminal.Visible;
                 MenuHelp.Visible = !MenuHelp.Visible;
+                fladv = !fladv;
+                FlightPlanner.setAdvancedFuction(fladv);
                 //MyFlightData.zg1show();
                 //  public System.Windows.Forms.ToolStripButton MenuFlightData;
                 // public System.Windows.Forms.ToolStripButton MenuFlightPlanner;

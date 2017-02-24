@@ -40,7 +40,7 @@ namespace MissionPlanner
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GridUI));
             var temp = (string)(resources.GetObject("$this.Text"));
 
-            but = new ToolStripMenuItem(temp);
+            but = new ToolStripMenuItem("自动生成航线");
             but.Click += but_Click;
 
             bool hit = false;
@@ -49,6 +49,20 @@ namespace MissionPlanner
             foreach (ToolStripItem item in col)
             {
                 if (item.Text.Equals(Strings.AutoWP))
+                {
+                    index = col.IndexOf(item);
+                    ((ToolStripMenuItem)item).DropDownItems.Add(but);
+                    hit = true;
+                    break;
+                }
+            }
+
+            //用户菜单
+            col = Host.FPMenuMap2.Items;
+            index = col.Count;
+            foreach (ToolStripItem item in col)
+            {
+                if (item.Text.Equals("生成航线"))
                 {
                     index = col.IndexOf(item);
                     ((ToolStripMenuItem)item).DropDownItems.Add(but);
