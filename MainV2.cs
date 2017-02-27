@@ -2953,6 +2953,7 @@ namespace MissionPlanner
         }
 
         int pwstep = 0;
+        int keyhack = 0;
         bool showcontrol = false;
         bool fladv = false;
         /// <summary>
@@ -2968,21 +2969,51 @@ namespace MissionPlanner
             {
                 case 0:
                     if (keyData == Keys.H)
-                        pwstep = 1;
+                    {
+                        keyhack++;
+                    }
                     else
+                    {
                         pwstep = 0;
+                        keyhack = 0;
+                    }
+                    if (keyhack == 2)
+                    {
+                        pwstep = 1;
+                        keyhack = 0;
+                    }
                     break;
                 case 1:
                     if (keyData == Keys.U)
-                        pwstep = 2;
+                    {
+                        keyhack++;
+                    }
                     else
+                    {
                         pwstep = 0;
+                        keyhack = 0;
+                    }
+                    if (keyhack == 2)
+                    {
+                        pwstep = 2;
+                        keyhack = 0;
+                    }
                     break;
                 case 2:
                     if (keyData == Keys.I)
-                        pwstep = 3;
+                    {
+                        keyhack++;
+                    }
                     else
+                    {
                         pwstep = 0;
+                        keyhack = 0;
+                    }
+                    if (keyhack == 2)
+                    {
+                        pwstep = 3;
+                        keyhack = 0;
+                    }
                     break;
 
             }
@@ -3022,7 +3053,7 @@ namespace MissionPlanner
                 return true;
             }
 
-            return true;
+            return base.ProcessCmdKey(ref msg, keyData);
             if (keyData == Keys.F12)
             {
                 MenuConnect_Click(null, null);

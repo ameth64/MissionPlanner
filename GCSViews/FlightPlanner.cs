@@ -1756,6 +1756,41 @@ namespace MissionPlanner.GCSViews
             }
         }
 
+        public static Color HexStringToColor(string hexColor)
+        {
+            string hc = (hexColor);
+            if (hc.Length != 8)
+            {
+                // you can choose whether to throw an exception
+                //throw new ArgumentException("hexColor is not exactly 6 digits.");
+                return Color.Empty;
+            }
+            string a = hc.Substring(0, 2);
+            string r = hc.Substring(6, 2);
+            string g = hc.Substring(4, 2);
+            string b = hc.Substring(2, 2);
+            Color color = Color.Empty;
+            try
+            {
+                int ai
+                   = Int32.Parse(a, System.Globalization.NumberStyles.HexNumber);
+                int ri
+                   = Int32.Parse(r, System.Globalization.NumberStyles.HexNumber);
+                int gi
+                   = Int32.Parse(g, System.Globalization.NumberStyles.HexNumber);
+                int bi
+                   = Int32.Parse(b, System.Globalization.NumberStyles.HexNumber);
+                color = Color.FromArgb(ai, ri, gi, bi);
+            }
+            catch
+            {
+                // you can choose whether to throw an exception
+                //throw new ArgumentException("Conversion failed.");
+                return Color.Empty;
+            }
+            return color;
+        }
+
         /// <summary>
         /// Saves a waypoint writer file
         /// </summary>
@@ -1763,12 +1798,12 @@ namespace MissionPlanner.GCSViews
         {
             using (SaveFileDialog fd = new SaveFileDialog())
             {
-                fd.Filter = "Mission|*.waypoints;*.txt|Mission JSON|*.mission";
+                fd.Filter = "Mission|*.waypoints;*.txt|Mission JSON|*.mission|KML|*.kml";
                 fd.DefaultExt = ".waypoints";
                 fd.FileName = wpfilename;
                 DialogResult result = fd.ShowDialog();
                 string file = fd.FileName;
-                if (file != "")
+                if (file != "" && fd.FilterIndex != 3)
                 {
                     try
                     {
@@ -1848,7 +1883,7 @@ namespace MissionPlanner.GCSViews
                                      double.Parse(Commands.Rows[a].Cells[Lon.Index].Value.ToString())
                                          .ToString("0.000000", new CultureInfo("en-US")));
                             sw.Write("\t" +
-                                     (double.Parse(Commands.Rows[a].Cells[Alt.Index].Value.ToString())/
+                                     (double.Parse(Commands.Rows[a].Cells[Alt.Index].Value.ToString()) /
                                       CurrentState.multiplierdist).ToString("0.000000", new CultureInfo("en-US")));
                             sw.Write("\t" + 1);
                             sw.WriteLine("");
@@ -1861,6 +1896,155 @@ namespace MissionPlanner.GCSViews
                     {
                         CustomMessageBox.Show(Strings.ERROR);
                     }
+                }
+
+                if (file != "" && fd.FilterIndex == 3)
+                {
+                    double homealt;
+                    double.TryParse(TXT_homealt.Text, out homealt);
+
+                    Document kml = new Document();
+
+                    Style style = new Style();
+                    style.Id = "msn_ylw-pushpin";
+                    style.Line = new LineStyle(new Color32(HexStringToColor("ff0000ff")), 4);
+
+
+
+                    PolygonStyle pstyle = new PolygonStyle();
+                    pstyle.Color = new Color32(HexStringToColor("ff0000ff"));
+                    style.Polygon = pstyle;
+
+                    kml.AddStyle(style);
+
+                    Style stylet = new Style();
+                    stylet.Id = "sn_ylw-pushpin";
+                    SharpKml.Dom.IconStyle ico = new SharpKml.Dom.IconStyle();
+                    ico.Scale = 1.2;
+                    stylet.Icon = ico;
+                    SharpKml.Dom.LineStyle lin = new SharpKml.Dom.LineStyle();
+                    lin.Color = new Color32(HexStringToColor("ff0000ff"));
+                    lin.Width = 4;
+                    stylet.Line = lin;
+                    SharpKml.Dom.PolygonStyle pol = new SharpKml.Dom.PolygonStyle();
+                    pol.Fill = false;
+                    stylet.Polygon = pol;
+
+                    kml.AddStyle(stylet);
+
+                    Style style2 = new Style();
+                    style2.Id = "yellowLineGreenPoly";
+                    style2.Line = new LineStyle(new Color32(HexStringToColor("7f00ffff")), 4);
+
+
+
+                    PolygonStyle pstyle2 = new PolygonStyle();
+                    pstyle2.Color = new Color32(HexStringToColor("7f00ff00"));
+                    style2.Polygon = pstyle;
+
+                    kml.AddStyle(style2);
+
+                    Style stylet3 = new Style();
+                    stylet3.Id = "track";
+                    SharpKml.Dom.IconStyle ico2 = new SharpKml.Dom.IconStyle();
+                    LabelStyle lst = new LabelStyle();
+                    lst.Scale = 0.6;
+                    stylet3.Icon = ico2;
+                    ico2.Icon = new IconStyle.IconLink(new Uri("http://maps.google.com/mapfiles/kml/paddle/ltblu-blank.png"));
+                    stylet3.Icon.Scale = 0.5;
+                    stylet3.Label = lst;
+
+                    kml.AddStyle(stylet3);
+
+
+                    // This will be used for the placemark
+                    CoordinateCollection coords = new CoordinateCollection();
+                    SharpKml.Dom.Polygon polygon = new SharpKml.Dom.Polygon();
+                    //point.Coordinate = new Vector(37.42052549, -122.0816695);
+
+                    // process and add home to the list
+                    int a = 0;
+                    if (TXT_homealt.Text != "" && TXT_homelat.Text != "" && TXT_homelng.Text != "")
+                    {
+                        coords.Add(new Vector(double.Parse(TXT_homelat.Text), double.Parse(TXT_homelng.Text), (int)double.Parse(TXT_homealt.Text)));
+                        a++;
+                    }
+
+                    for (a = a; a < Commands.Rows.Count - 0; a++)
+                    {
+                        if (Commands.Rows[a].Cells[Command.Index].Value.ToString().Contains("DO_"))
+                            continue;
+                        coords.Add(new Vector(float.Parse(Commands.Rows[a].Cells[Lat.Index].Value.ToString()), float.Parse(Commands.Rows[a].Cells[Lon.Index].Value.ToString()), float.Parse(Commands.Rows[a].Cells[Alt.Index].Value.ToString()) + homealt));
+                    }
+
+                    polygon.AltitudeMode = new SharpKml.Dom.AltitudeMode();
+                    polygon.Extrude = false;
+                    SharpKml.Dom.AltitudeMode altmode = SharpKml.Dom.AltitudeMode.Absolute;
+                    polygon.AltitudeMode = altmode;
+                    polygon.OuterBoundary = new SharpKml.Dom.OuterBoundary();
+                    polygon.OuterBoundary.LinearRing = new SharpKml.Dom.LinearRing();
+                    polygon.OuterBoundary.LinearRing.Coordinates = coords;
+
+                    SharpKml.Dom.Placemark placemark = new SharpKml.Dom.Placemark();
+                    placemark.Name = "path";
+                    placemark.StyleUrl = new Uri("#sn_ylw-pushpin", UriKind.Relative);
+                    placemark.Geometry = polygon;
+
+                    // This is the root element of the file
+
+                    kml.AddFeature(placemark);
+
+                    Folder points = new Folder();
+                    points.Name = "Points";
+                    kml.AddFeature(points);
+
+                    a = 0;
+                    if (TXT_homealt.Text != "" && TXT_homelat.Text != "" && TXT_homelng.Text != "")
+                    {
+                        //coords.Add(new Vector(double.Parse(TXT_homelat.Text), double.Parse(TXT_homelng.Text), (int)double.Parse(TXT_homealt.Text)));
+                        SharpKml.Dom.Placemark pmt = new SharpKml.Dom.Placemark();
+
+                        SharpKml.Dom.Point pnt = new SharpKml.Dom.Point();
+                        pnt.AltitudeMode = altmode;
+                        pnt.Extrude = true;
+                        pnt.Coordinate = new Vector(double.Parse(TXT_homelat.Text), double.Parse(TXT_homelng.Text), (int)double.Parse(TXT_homealt.Text));
+
+                        pmt.Name = "" + 1;
+                        pmt.Geometry = pnt;
+                        pmt.StyleUrl = new Uri("#track", UriKind.Relative);
+                        points.AddFeature(pmt);
+                        a++;
+                    }
+
+                    //int num = 1;
+                    for (a = a; a < Commands.Rows.Count - 0; a++)
+                    {
+                        if (Commands.Rows[a].Cells[Command.Index].Value.ToString().Contains("DO_"))
+                            continue;
+                        //coords.Add(new Vector(float.Parse(Commands.Rows[a].Cells[Lat.Index].Value.ToString()), float.Parse(Commands.Rows[a].Cells[Lon.Index].Value.ToString()), float.Parse(Commands.Rows[a].Cells[Alt.Index].Value.ToString()) + homealt));
+                        SharpKml.Dom.Placemark pmt = new SharpKml.Dom.Placemark();
+
+                        SharpKml.Dom.Point pnt = new SharpKml.Dom.Point();
+                        pnt.AltitudeMode = altmode;
+                        pnt.Extrude = true;
+                        pnt.Coordinate = new Vector(float.Parse(Commands.Rows[a].Cells[Lat.Index].Value.ToString()), float.Parse(Commands.Rows[a].Cells[Lon.Index].Value.ToString()), float.Parse(Commands.Rows[a].Cells[Alt.Index].Value.ToString()) + homealt);
+                        int num = a + 1;
+                        pmt.Name = "" + num;
+                        pmt.Geometry = pnt;
+                        pmt.StyleUrl = new Uri("#track", UriKind.Relative);
+                        //ico2.Icon = new IconStyle.IconLink(new Uri("http://maps.google.com/mapfiles/kml/paddle/ltblu-blank.png"));
+                        points.AddFeature(pmt);
+                        //num++;
+                        //pmt.StyleUrl = new Uri("#track", UriKind.Relative);
+                    }
+
+                    Serializer serializer = new Serializer();
+                    serializer.Serialize(kml);
+                    Console.WriteLine(serializer.Xml);
+
+                    StreamWriter sw = new StreamWriter(file);
+                    sw.Write(serializer.Xml);
+                    sw.Close();
                 }
             }
         }
