@@ -1961,19 +1961,26 @@ namespace MissionPlanner.GCSViews
                     CoordinateCollection coords = new CoordinateCollection();
                     SharpKml.Dom.Polygon polygon = new SharpKml.Dom.Polygon();
                     //point.Coordinate = new Vector(37.42052549, -122.0816695);
-
-                    // process and add home to the list
                     int a = 0;
+                    /*
+                    // process and add home to the list
+                    
                     if (TXT_homealt.Text != "" && TXT_homelat.Text != "" && TXT_homelng.Text != "")
                     {
                         coords.Add(new Vector(double.Parse(TXT_homelat.Text), double.Parse(TXT_homelng.Text), (int)double.Parse(TXT_homealt.Text)));
                         a++;
                     }
-
-                    for (a = a; a < Commands.Rows.Count - 0; a++)
+                    */
+                    for (a = 0; a < Commands.Rows.Count - 0; a++)
                     {
                         if (Commands.Rows[a].Cells[Command.Index].Value.ToString().Contains("DO_"))
                             continue;
+                        if (Commands.Rows[a].Cells[Command.Index].Value.ToString().Contains("VTOL_TAKEOFF"))
+                        {
+                            coords.Add(new Vector(double.Parse(TXT_homelat.Text), double.Parse(TXT_homelng.Text), float.Parse(Commands.Rows[a].Cells[Alt.Index].Value.ToString()) + homealt));
+                            continue;
+                        }
+
                         coords.Add(new Vector(float.Parse(Commands.Rows[a].Cells[Lat.Index].Value.ToString()), float.Parse(Commands.Rows[a].Cells[Lon.Index].Value.ToString()), float.Parse(Commands.Rows[a].Cells[Alt.Index].Value.ToString()) + homealt));
                     }
 
@@ -2009,7 +2016,7 @@ namespace MissionPlanner.GCSViews
                         pnt.Extrude = true;
                         pnt.Coordinate = new Vector(double.Parse(TXT_homelat.Text), double.Parse(TXT_homelng.Text), (int)double.Parse(TXT_homealt.Text));
 
-                        pmt.Name = "" + 1;
+                        pmt.Name = "" + 0;
                         pmt.Geometry = pnt;
                         pmt.StyleUrl = new Uri("#track", UriKind.Relative);
                         points.AddFeature(pmt);
@@ -2017,7 +2024,7 @@ namespace MissionPlanner.GCSViews
                     }
 
                     //int num = 1;
-                    for (a = a; a < Commands.Rows.Count - 0; a++)
+                    for (a = 0; a < Commands.Rows.Count - 0; a++)
                     {
                         if (Commands.Rows[a].Cells[Command.Index].Value.ToString().Contains("DO_"))
                             continue;
@@ -2027,6 +2034,11 @@ namespace MissionPlanner.GCSViews
                         SharpKml.Dom.Point pnt = new SharpKml.Dom.Point();
                         pnt.AltitudeMode = altmode;
                         pnt.Extrude = true;
+                        if (Commands.Rows[a].Cells[Command.Index].Value.ToString().Contains("VTOL_TAKEOFF"))
+                        {
+                            pnt.Coordinate = (new Vector(double.Parse(TXT_homelat.Text), double.Parse(TXT_homelng.Text), float.Parse(Commands.Rows[a].Cells[Alt.Index].Value.ToString()) + homealt));
+                        }
+                        else
                         pnt.Coordinate = new Vector(float.Parse(Commands.Rows[a].Cells[Lat.Index].Value.ToString()), float.Parse(Commands.Rows[a].Cells[Lon.Index].Value.ToString()), float.Parse(Commands.Rows[a].Cells[Alt.Index].Value.ToString()) + homealt);
                         int num = a + 1;
                         pmt.Name = "" + num;
@@ -4009,6 +4021,7 @@ namespace MissionPlanner.GCSViews
             {
                 MainMap.MapProvider = (GMapProvider) comboBoxMapType.SelectedItem;
                 FlightData.mymap.MapProvider = (GMapProvider) comboBoxMapType.SelectedItem;
+                HsdevFlightData.mymap.MapProvider = (GMapProvider)comboBoxMapType.SelectedItem;
                 Settings.Instance["MapType"] = comboBoxMapType.Text;
             }
             catch

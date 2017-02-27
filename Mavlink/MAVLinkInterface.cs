@@ -3113,6 +3113,7 @@ Please check the following
             int length = 0;
             int readcount = 0;
             MAVLinkMessage message = null;
+            bool messagemod = false;
 
             BaseStream.ReadTimeout = 1200; // 1200 ms between chars - the gps detection requires this.
 
@@ -3634,7 +3635,7 @@ Please check the following
                     if (msgid == (byte)MAVLink.MAVLINK_MSG_ID.STATUSTEXT) // status text
                     {
                         var msg = message.ToStructure<MAVLink.mavlink_statustext_t>();
-
+                       
                         string mydata = Encoding.ASCII.GetString(msg.text);
                         int myind = mydata.IndexOf('\0');
                         if (myind != -1)
@@ -3647,6 +3648,7 @@ Please check the following
                             MainV2.comPort.MAV.cs.mydistraveled = UInt32.Parse(s[2]);
                             MainV2.comPort.MAV.cs.triggernum = UInt32.Parse(s[3])-1;
                             MainV2.comPort.MAV.cs.mydtdata = true;
+                            messagemod = true;
                         }
 
                         byte sev = msg.severity;
@@ -3657,7 +3659,8 @@ Please check the following
                             logdata = logdata.Substring(0, ind);
                         log.Info(DateTime.Now + " " + sev + " " + logdata);
 
-                        MAVlist[sysid, compid].cs.messages.Add(logdata);
+                        if (!messagemod)
+                            MAVlist[sysid, compid].cs.messages.Add(logdata);
 
                         // gymbals etc are a child/slave to the main sysid, this displays the children messages under the current displayed vehicle
                         if (sysid == sysidcurrent && compid != compidcurrent)
@@ -3682,6 +3685,9 @@ Please check the following
                                 printit = true;
                             }
                         }
+
+                        if (messagemod)
+                            printit = false;
 
                         if (logdata.StartsWith("Tuning:") || logdata.StartsWith("PreArm:") || logdata.StartsWith("Arm:"))
                             printit = true;
