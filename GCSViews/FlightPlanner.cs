@@ -1263,7 +1263,7 @@ namespace MissionPlanner.GCSViews
                         pointlist.Add(new PointLatLngAlt(double.Parse(TXT_homelat.Text), double.Parse(TXT_homelng.Text),
                             double.Parse(TXT_homealt.Text), "H"));
                         fullpointlist.Add(pointlist[pointlist.Count - 1]);
-                        addpolygonmarker("H", double.Parse(TXT_homelng.Text), double.Parse(TXT_homelat.Text), 0, null);
+                        addpolygonmarker("H", double.Parse(TXT_homelng.Text), double.Parse(TXT_homelat.Text), 0, null, GMarkerGoogleType.green);
                     }
                 }
                 else
@@ -1386,7 +1386,10 @@ namespace MissionPlanner.GCSViews
                                     double.Parse(cell2) + homealt, (a + 1).ToString()));
                                 fullpointlist.Add(pointlist[pointlist.Count - 1]);
                                 //取出航点tag
-                                var wpc = Commands.Rows[a].Cells[TagData.Index].Value == null? GMarkerGoogleType.green: ((HsTag)Commands.Rows[a].Cells[TagData.Index].Value).wp_color;
+                                Type t = Commands.Rows[a].Cells[TagData.Index].Value.GetType();
+                                GMarkerGoogleType wpc = (t.Name == "HsTag") ?
+                                    ((HsTag)Commands.Rows[a].Cells[TagData.Index].Value).wp_color: 
+                                    GMarkerGoogleType.green;                                    
                                 addpolygonmarker((a + 1).ToString(), double.Parse(cell4), double.Parse(cell3),
                                     double.Parse(cell2), null, wpc);
                             }
@@ -5868,11 +5871,8 @@ namespace MissionPlanner.GCSViews
             double y, double z, object tag = null)
         {
             Commands.Rows[rowIndex].Cells[Command.Index].Value = cmd.ToString();
-            if(tag != null)
-            {
-                Commands.Rows[rowIndex].Cells[TagData.Index].Tag = (HsTag)tag;
-                Commands.Rows[rowIndex].Cells[TagData.Index].Value = (HsTag)tag;
-            }            
+            Commands.Rows[rowIndex].Cells[TagData.Index].Tag = tag;
+            Commands.Rows[rowIndex].Cells[TagData.Index].Value = tag;
 
             ChangeColumnHeader(cmd.ToString());
 
