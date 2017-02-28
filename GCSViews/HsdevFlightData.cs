@@ -923,7 +923,6 @@ namespace MissionPlanner.GCSViews
                 if (MainV2.comPort.MAV.cs.mode == "Manual")
                 {
                     mode_value.Text = "手动";
-                   // mode_value.ForeColor = Color(0, 255, 0, 0);
                 }
                 else if (MainV2.comPort.MAV.cs.mode == "RTL")
                 {
@@ -969,6 +968,8 @@ namespace MissionPlanner.GCSViews
                 mm = ((int)(MainV2.comPort.MAV.cs.time2InAir - (int.Parse(hh) * 3600)) / 60).ToString();
                 ss = (MainV2.comPort.MAV.cs.time2InAir - (int.Parse(hh) * 3600) - (int.Parse(mm) * 60)).ToString();
                 quadbat_time.Text = hh + ":" + mm + ":" + ss;
+
+                traveled_inkm.Text = (MainV2.comPort.MAV.cs.distTraveled / 1000.00f).ToString();
 
                 try
                 {
@@ -1160,12 +1161,21 @@ namespace MissionPlanner.GCSViews
         // to prevent cross thread calls while in a draw and exception
         private void updateMissionRouteMarkers()
         {
-            // not async
-            this.Invoke((System.Windows.Forms.MethodInvoker)delegate()
+            if (this.Visible)
             {
-                polygons.Markers.Clear();
-                routes.Markers.Clear();
-            });
+                // not async
+                try
+                {
+                    this.Invoke((System.Windows.Forms.MethodInvoker)delegate ()
+                    {
+                        polygons.Markers.Clear();
+                        routes.Markers.Clear();
+                    });
+                }
+                catch
+                {
+                }
+            }
         }
 
         private void addpolygonmarker(string tag, double lng, double lat, int alt, Color? color, GMapOverlay overlay)

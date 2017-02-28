@@ -1773,6 +1773,41 @@ namespace MissionPlanner.GCSViews
             }
         }
 
+        public static Color HexStringToColor(string hexColor)
+        {
+            string hc = (hexColor);
+            if (hc.Length != 8)
+            {
+                // you can choose whether to throw an exception
+                //throw new ArgumentException("hexColor is not exactly 6 digits.");
+                return Color.Empty;
+            }
+            string a = hc.Substring(0, 2);
+            string r = hc.Substring(6, 2);
+            string g = hc.Substring(4, 2);
+            string b = hc.Substring(2, 2);
+            Color color = Color.Empty;
+            try
+            {
+                int ai
+                   = Int32.Parse(a, System.Globalization.NumberStyles.HexNumber);
+                int ri
+                   = Int32.Parse(r, System.Globalization.NumberStyles.HexNumber);
+                int gi
+                   = Int32.Parse(g, System.Globalization.NumberStyles.HexNumber);
+                int bi
+                   = Int32.Parse(b, System.Globalization.NumberStyles.HexNumber);
+                color = Color.FromArgb(ai, ri, gi, bi);
+            }
+            catch
+            {
+                // you can choose whether to throw an exception
+                //throw new ArgumentException("Conversion failed.");
+                return Color.Empty;
+            }
+            return color;
+        }
+
         /// <summary>
         /// Saves a waypoint writer file
         /// </summary>
@@ -1780,12 +1815,12 @@ namespace MissionPlanner.GCSViews
         {
             using (SaveFileDialog fd = new SaveFileDialog())
             {
-                fd.Filter = "Mission|*.waypoints;*.txt|Mission JSON|*.mission";
+                fd.Filter = "Mission|*.waypoints;*.txt|Mission JSON|*.mission|KML|*.kml";
                 fd.DefaultExt = ".waypoints";
                 fd.FileName = wpfilename;
                 DialogResult result = fd.ShowDialog();
                 string file = fd.FileName;
-                if (file != "")
+                if (file != "" && fd.FilterIndex != 3)
                 {
                     try
                     {
@@ -1865,7 +1900,7 @@ namespace MissionPlanner.GCSViews
                                      double.Parse(Commands.Rows[a].Cells[Lon.Index].Value.ToString())
                                          .ToString("0.000000", new CultureInfo("en-US")));
                             sw.Write("\t" +
-                                     (double.Parse(Commands.Rows[a].Cells[Alt.Index].Value.ToString())/
+                                     (double.Parse(Commands.Rows[a].Cells[Alt.Index].Value.ToString()) /
                                       CurrentState.multiplierdist).ToString("0.000000", new CultureInfo("en-US")));
                             sw.Write("\t" + 1);
                             sw.WriteLine("");
@@ -1878,6 +1913,167 @@ namespace MissionPlanner.GCSViews
                     {
                         CustomMessageBox.Show(Strings.ERROR);
                     }
+                }
+
+                if (file != "" && fd.FilterIndex == 3)
+                {
+                    double homealt;
+                    double.TryParse(TXT_homealt.Text, out homealt);
+
+                    Document kml = new Document();
+
+                    Style style = new Style();
+                    style.Id = "msn_ylw-pushpin";
+                    style.Line = new LineStyle(new Color32(HexStringToColor("ff0000ff")), 4);
+
+
+
+                    PolygonStyle pstyle = new PolygonStyle();
+                    pstyle.Color = new Color32(HexStringToColor("ff0000ff"));
+                    style.Polygon = pstyle;
+
+                    kml.AddStyle(style);
+
+                    Style stylet = new Style();
+                    stylet.Id = "sn_ylw-pushpin";
+                    SharpKml.Dom.IconStyle ico = new SharpKml.Dom.IconStyle();
+                    ico.Scale = 1.2;
+                    stylet.Icon = ico;
+                    SharpKml.Dom.LineStyle lin = new SharpKml.Dom.LineStyle();
+                    lin.Color = new Color32(HexStringToColor("ff0000ff"));
+                    lin.Width = 4;
+                    stylet.Line = lin;
+                    SharpKml.Dom.PolygonStyle pol = new SharpKml.Dom.PolygonStyle();
+                    pol.Fill = false;
+                    stylet.Polygon = pol;
+
+                    kml.AddStyle(stylet);
+
+                    Style style2 = new Style();
+                    style2.Id = "yellowLineGreenPoly";
+                    style2.Line = new LineStyle(new Color32(HexStringToColor("7f00ffff")), 4);
+
+
+
+                    PolygonStyle pstyle2 = new PolygonStyle();
+                    pstyle2.Color = new Color32(HexStringToColor("7f00ff00"));
+                    style2.Polygon = pstyle;
+
+                    kml.AddStyle(style2);
+
+                    Style stylet3 = new Style();
+                    stylet3.Id = "track";
+                    SharpKml.Dom.IconStyle ico2 = new SharpKml.Dom.IconStyle();
+                    LabelStyle lst = new LabelStyle();
+                    lst.Scale = 0.6;
+                    stylet3.Icon = ico2;
+                    ico2.Icon = new IconStyle.IconLink(new Uri("http://maps.google.com/mapfiles/kml/paddle/ltblu-blank.png"));
+                    stylet3.Icon.Scale = 0.5;
+                    stylet3.Label = lst;
+
+                    kml.AddStyle(stylet3);
+
+
+                    // This will be used for the placemark
+                    CoordinateCollection coords = new CoordinateCollection();
+                    SharpKml.Dom.Polygon polygon = new SharpKml.Dom.Polygon();
+                    //point.Coordinate = new Vector(37.42052549, -122.0816695);
+                    int a = 0;
+                    /*
+                    // process and add home to the list
+                    
+                    if (TXT_homealt.Text != "" && TXT_homelat.Text != "" && TXT_homelng.Text != "")
+                    {
+                        coords.Add(new Vector(double.Parse(TXT_homelat.Text), double.Parse(TXT_homelng.Text), (int)double.Parse(TXT_homealt.Text)));
+                        a++;
+                    }
+                    */
+                    for (a = 0; a < Commands.Rows.Count - 0; a++)
+                    {
+                        if (Commands.Rows[a].Cells[Command.Index].Value.ToString().Contains("DO_"))
+                            continue;
+                        if (Commands.Rows[a].Cells[Command.Index].Value.ToString().Contains("VTOL_TAKEOFF"))
+                        {
+                            coords.Add(new Vector(double.Parse(TXT_homelat.Text), double.Parse(TXT_homelng.Text), float.Parse(Commands.Rows[a].Cells[Alt.Index].Value.ToString()) + homealt));
+                            continue;
+                        }
+
+                        coords.Add(new Vector(float.Parse(Commands.Rows[a].Cells[Lat.Index].Value.ToString()), float.Parse(Commands.Rows[a].Cells[Lon.Index].Value.ToString()), float.Parse(Commands.Rows[a].Cells[Alt.Index].Value.ToString()) + homealt));
+                    }
+
+                    polygon.AltitudeMode = new SharpKml.Dom.AltitudeMode();
+                    polygon.Extrude = false;
+                    SharpKml.Dom.AltitudeMode altmode = SharpKml.Dom.AltitudeMode.Absolute;
+                    polygon.AltitudeMode = altmode;
+                    polygon.OuterBoundary = new SharpKml.Dom.OuterBoundary();
+                    polygon.OuterBoundary.LinearRing = new SharpKml.Dom.LinearRing();
+                    polygon.OuterBoundary.LinearRing.Coordinates = coords;
+
+                    SharpKml.Dom.Placemark placemark = new SharpKml.Dom.Placemark();
+                    placemark.Name = "path";
+                    placemark.StyleUrl = new Uri("#sn_ylw-pushpin", UriKind.Relative);
+                    placemark.Geometry = polygon;
+
+                    // This is the root element of the file
+
+                    kml.AddFeature(placemark);
+
+                    Folder points = new Folder();
+                    points.Name = "Points";
+                    kml.AddFeature(points);
+
+                    a = 0;
+                    if (TXT_homealt.Text != "" && TXT_homelat.Text != "" && TXT_homelng.Text != "")
+                    {
+                        //coords.Add(new Vector(double.Parse(TXT_homelat.Text), double.Parse(TXT_homelng.Text), (int)double.Parse(TXT_homealt.Text)));
+                        SharpKml.Dom.Placemark pmt = new SharpKml.Dom.Placemark();
+
+                        SharpKml.Dom.Point pnt = new SharpKml.Dom.Point();
+                        pnt.AltitudeMode = altmode;
+                        pnt.Extrude = true;
+                        pnt.Coordinate = new Vector(double.Parse(TXT_homelat.Text), double.Parse(TXT_homelng.Text), (int)double.Parse(TXT_homealt.Text));
+
+                        pmt.Name = "" + 0;
+                        pmt.Geometry = pnt;
+                        pmt.StyleUrl = new Uri("#track", UriKind.Relative);
+                        points.AddFeature(pmt);
+                        a++;
+                    }
+
+                    //int num = 1;
+                    for (a = 0; a < Commands.Rows.Count - 0; a++)
+                    {
+                        if (Commands.Rows[a].Cells[Command.Index].Value.ToString().Contains("DO_"))
+                            continue;
+                        //coords.Add(new Vector(float.Parse(Commands.Rows[a].Cells[Lat.Index].Value.ToString()), float.Parse(Commands.Rows[a].Cells[Lon.Index].Value.ToString()), float.Parse(Commands.Rows[a].Cells[Alt.Index].Value.ToString()) + homealt));
+                        SharpKml.Dom.Placemark pmt = new SharpKml.Dom.Placemark();
+
+                        SharpKml.Dom.Point pnt = new SharpKml.Dom.Point();
+                        pnt.AltitudeMode = altmode;
+                        pnt.Extrude = true;
+                        if (Commands.Rows[a].Cells[Command.Index].Value.ToString().Contains("VTOL_TAKEOFF"))
+                        {
+                            pnt.Coordinate = (new Vector(double.Parse(TXT_homelat.Text), double.Parse(TXT_homelng.Text), float.Parse(Commands.Rows[a].Cells[Alt.Index].Value.ToString()) + homealt));
+                        }
+                        else
+                        pnt.Coordinate = new Vector(float.Parse(Commands.Rows[a].Cells[Lat.Index].Value.ToString()), float.Parse(Commands.Rows[a].Cells[Lon.Index].Value.ToString()), float.Parse(Commands.Rows[a].Cells[Alt.Index].Value.ToString()) + homealt);
+                        int num = a + 1;
+                        pmt.Name = "" + num;
+                        pmt.Geometry = pnt;
+                        pmt.StyleUrl = new Uri("#track", UriKind.Relative);
+                        //ico2.Icon = new IconStyle.IconLink(new Uri("http://maps.google.com/mapfiles/kml/paddle/ltblu-blank.png"));
+                        points.AddFeature(pmt);
+                        //num++;
+                        //pmt.StyleUrl = new Uri("#track", UriKind.Relative);
+                    }
+
+                    Serializer serializer = new Serializer();
+                    serializer.Serialize(kml);
+                    Console.WriteLine(serializer.Xml);
+
+                    StreamWriter sw = new StreamWriter(file);
+                    sw.Write(serializer.Xml);
+                    sw.Close();
                 }
             }
         }
@@ -3389,6 +3585,8 @@ namespace MissionPlanner.GCSViews
                     clearPolygonToolStripMenuItem_Click(this, null);
 
                     contextMenuStrip1.Visible = false;
+                    //用户菜单
+                    contextMenuStrip2.Visible = false;
 
                     return;
                 }
@@ -3840,6 +4038,7 @@ namespace MissionPlanner.GCSViews
             {
                 MainMap.MapProvider = (GMapProvider) comboBoxMapType.SelectedItem;
                 FlightData.mymap.MapProvider = (GMapProvider) comboBoxMapType.SelectedItem;
+                HsdevFlightData.mymap.MapProvider = (GMapProvider)comboBoxMapType.SelectedItem;
                 Settings.Instance["MapType"] = comboBoxMapType.Text;
             }
             catch
@@ -6959,5 +7158,294 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
                 return;
             }
         }
+
+        private void deleteWPToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            int no = 0;
+            if (CurentRectMarker != null)
+            {
+                if (int.TryParse(CurentRectMarker.InnerMarker.Tag.ToString(), out no))
+                {
+                    try
+                    {
+                        Commands.Rows.RemoveAt(no - 1); // home is 0
+                    }
+                    catch
+                    {
+                        CustomMessageBox.Show("error selecting wp, please try again.");
+                    }
+                }
+                else if (int.TryParse(CurentRectMarker.InnerMarker.Tag.ToString().Replace("grid", ""), out no))
+                {
+                    try
+                    {
+                        drawnpolygon.Points.RemoveAt(no - 1);
+                        drawnpolygonsoverlay.Markers.Clear();
+
+                        int a = 1;
+                        foreach (PointLatLng pnt in drawnpolygon.Points)
+                        {
+                            addpolygonmarkergrid(a.ToString(), pnt.Lng, pnt.Lat, 0);
+                            a++;
+                        }
+
+                        MainMap.UpdatePolygonLocalPosition(drawnpolygon);
+
+                        MainMap.Invalidate();
+                    }
+                    catch
+                    {
+                        CustomMessageBox.Show("Remove point Failed. Please try again.");
+                    }
+                }
+            }
+            else if (CurrentRallyPt != null)
+            {
+                rallypointoverlay.Markers.Remove(CurrentRallyPt);
+                MainMap.Invalidate(true);
+
+                CurrentRallyPt = null;
+            }
+            else if (groupmarkers.Count > 0)
+            {
+                for (int a = Commands.Rows.Count; a > 0; a--)
+                {
+                    try
+                    {
+                        if (groupmarkers.Contains(a))
+                            Commands.Rows.RemoveAt(a - 1); // home is 0
+                    }
+                    catch
+                    {
+                        CustomMessageBox.Show("error selecting wp, please try again.");
+                    }
+                }
+
+                groupmarkers.Clear();
+            }
+
+
+            if (currentMarker != null)
+                CurentRectMarker = null;
+
+            writeKML();
+        }
+
+        private void addWPToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            string wpno = (selectedrow + 1).ToString("0");
+            if (InputBox.Show("Insert WP", "Insert WP after wp#", ref wpno) == DialogResult.OK)
+            {
+                try
+                {
+                    Commands.Rows.Insert(int.Parse(wpno), 1);
+                }
+                catch
+                {
+                    CustomMessageBox.Show("Invalid insert position", Strings.ERROR);
+                    return;
+                }
+
+                selectedrow = int.Parse(wpno);
+
+                ChangeColumnHeader(MAVLink.MAV_CMD.WAYPOINT.ToString());
+
+                setfromMap(MouseDownStart.Lat, MouseDownStart.Lng, (int)float.Parse(TXT_DefaultAlt.Text));
+            }
+        }
+
+        private void clearWPToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            quickadd = true;
+
+            // mono fix
+            Commands.CurrentCell = null;
+
+            Commands.Rows.Clear();
+
+            selectedrow = 0;
+            quickadd = false;
+            writeKML();
+        }
+
+        private void addGridToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            if (polygongridmode == false)
+            {
+                CustomMessageBox.Show(
+                    "You will remain in polygon mode until you clear the polygon or create a grid/upload a fence");
+            }
+
+            polygongridmode = true;
+
+            List<PointLatLng> polygonPoints = new List<PointLatLng>();
+            if (drawnpolygonsoverlay.Polygons.Count == 0)
+            {
+                drawnpolygon.Points.Clear();
+                drawnpolygonsoverlay.Polygons.Add(drawnpolygon);
+            }
+
+            drawnpolygon.Fill = Brushes.Transparent;
+
+            // remove full loop is exists
+            if (drawnpolygon.Points.Count > 1 &&
+                drawnpolygon.Points[0] == drawnpolygon.Points[drawnpolygon.Points.Count - 1])
+                drawnpolygon.Points.RemoveAt(drawnpolygon.Points.Count - 1); // unmake a full loop
+
+            drawnpolygon.Points.Add(new PointLatLng(MouseDownStart.Lat, MouseDownStart.Lng));
+
+            addpolygonmarkergrid(drawnpolygon.Points.Count.ToString(), MouseDownStart.Lng, MouseDownStart.Lat, 0);
+
+            MainMap.UpdatePolygonLocalPosition(drawnpolygon);
+
+            MainMap.Invalidate();
+        }
+
+        private void clearGridToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            polygongridmode = false;
+            if (drawnpolygon == null)
+                return;
+            drawnpolygon.Points.Clear();
+            drawnpolygonsoverlay.Markers.Clear();
+            MainMap.Invalidate();
+
+            writeKML();
+        }
+
+        private void aeraToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            double aream2 = Math.Abs(calcpolygonarea(drawnpolygon.Points));
+
+            double areaa = aream2 * 0.000247105;
+
+            double areaha = aream2 * 1e-4;
+
+            double areasqf = aream2 * 10.7639;
+
+            CustomMessageBox.Show(
+                "Area: " + aream2.ToString("0") + " m2\n\t" + areaa.ToString("0.00") + " Acre\n\t" +
+                areaha.ToString("0.00") + " Hectare\n\t" + areasqf.ToString("0") + " sqf", "Area");
+        }
+
+        public void setAdvancedFuction(bool f)
+        {
+            if (f)
+                MainMap.ContextMenuStrip = contextMenuStrip1;
+            else
+                MainMap.ContextMenuStrip = contextMenuStrip2;
+        }
+
+        private void BUT_CheckElevation_Click(object sender, EventArgs e)
+        {
+            writeKML();
+            double homealt = MainV2.comPort.MAV.cs.HomeAlt;
+            Form temp = new ElevationProfile(pointlist, homealt, (altmode)CMB_altmode.SelectedValue);
+            ThemeManager.ApplyThemeTo(temp);
+            temp.ShowDialog();
+        }
+
+        private void but_kml_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog fd = new OpenFileDialog())
+            {
+                fd.Filter = "Google Earth KML |*.kml;*.kmz|AutoCad DXF|*.dxf";
+                DialogResult result = fd.ShowDialog();
+                string file = fd.FileName;
+                if (file != "")
+                {
+                    kmlpolygonsoverlay.Polygons.Clear();
+                    kmlpolygonsoverlay.Routes.Clear();
+
+                    FlightData.kmlpolygons.Routes.Clear();
+                    FlightData.kmlpolygons.Polygons.Clear();
+                    if (file.ToLower().EndsWith("dxf"))
+                    {
+                        string zone = "-99";
+                        InputBox.Show("Zone", "Please enter the UTM zone, or cancel to not change", ref zone);
+
+                        dxf dxf = new dxf();
+                        if (zone != "-99")
+                            dxf.Tag = zone;
+
+                        dxf.newLine += Dxf_newLine;
+                        dxf.newPolyLine += Dxf_newPolyLine;
+                        dxf.newLwPolyline += Dxf_newLwPolyline;
+                        dxf.newMLine += Dxf_newMLine;
+                        dxf.Read(file);
+                    }
+                    else
+                    {
+                        try
+                        {
+                            string kml = "";
+                            string tempdir = "";
+                            if (file.ToLower().EndsWith("kmz"))
+                            {
+                                ZipFile input = new ZipFile(file);
+
+                                tempdir = Path.GetTempPath() + Path.DirectorySeparatorChar + Path.GetRandomFileName();
+                                input.ExtractAll(tempdir, ExtractExistingFileAction.OverwriteSilently);
+
+                                string[] kmls = Directory.GetFiles(tempdir, "*.kml");
+
+                                if (kmls.Length > 0)
+                                {
+                                    file = kmls[0];
+
+                                    input.Dispose();
+                                }
+                                else
+                                {
+                                    input.Dispose();
+                                    return;
+                                }
+                            }
+
+                            var sr = new StreamReader(File.OpenRead(file));
+                            kml = sr.ReadToEnd();
+                            sr.Close();
+
+                            // cleanup after out
+                            if (tempdir != "")
+                                Directory.Delete(tempdir, true);
+
+                            kml = kml.Replace("<Snippet/>", "");
+
+                            var parser = new Parser();
+
+                            parser.ElementAdded += parser_ElementAdded;
+                            parser.ParseString(kml, false);
+
+                            if (DialogResult.Yes ==
+                                CustomMessageBox.Show(Strings.Do_you_want_to_load_this_into_the_flight_data_screen, Strings.Load_data,
+                                    MessageBoxButtons.YesNo))
+                            {
+                                foreach (var temp in kmlpolygonsoverlay.Polygons)
+                                {
+                                    FlightData.kmlpolygons.Polygons.Add(temp);
+                                }
+                                foreach (var temp in kmlpolygonsoverlay.Routes)
+                                {
+                                    FlightData.kmlpolygons.Routes.Add(temp);
+                                }
+                            }
+
+                            if (
+                                CustomMessageBox.Show(Strings.Zoom_To, Strings.Zoom_to_the_center_or_the_loaded_file, MessageBoxButtons.YesNo) ==
+                                DialogResult.Yes)
+                            {
+                                MainMap.SetZoomToFitRect(GetBoundingLayer(kmlpolygonsoverlay));
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            CustomMessageBox.Show(Strings.Bad_KML_File + ex);
+                        }
+                    }
+                }
+            }
+
     }
+}
 }

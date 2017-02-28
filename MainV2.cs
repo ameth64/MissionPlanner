@@ -1167,7 +1167,7 @@ namespace MissionPlanner
         private void toolStripMenuLogManger_Click(object sender, EventArgs e)
         {
 
-            if (MainV2.comPort.MAV.cs.mode == "STABILIZE" || MainV2.comPort.MAV.cs.mode == "Manual")
+            if (MainV2.comPort.MAV.cs.mode.ToString().ToUpper() == "STABILIZE" || MainV2.comPort.MAV.cs.mode == "Manual")
             {
                 if (posdownlaoding == false)
                 {
@@ -1192,7 +1192,7 @@ namespace MissionPlanner
 
         private void MenuDownLoadPos_Click(object sender, EventArgs e)
         {
-            if (MainV2.comPort.MAV.cs.mode == "STABILIZE" || MainV2.comPort.MAV.cs.mode == "Manual")
+            if (MainV2.comPort.MAV.cs.mode.ToString().ToUpper() == "STABILIZE" || MainV2.comPort.MAV.cs.mode == "Manual")
             {
                 if (posdownlaoding == false)
                 {
@@ -2648,6 +2648,7 @@ namespace MissionPlanner
             // for short use threadpool
             MenuSimulation.Visible = false;
             MenuFlightData.Visible = false;
+            FlightPlanner.setAdvancedFuction(false);
             MenuInitConfig.Visible = false;
             MenuConfigTune.Visible = false;
             MenuTerminal.Visible = false;
@@ -2747,6 +2748,8 @@ namespace MissionPlanner
 
             MissionPlanner.Utilities.Tracking.AddTiming("AppLoad", "Load Time",
                 (DateTime.Now - Program.starttime).TotalMilliseconds, "");
+
+            //禁止自动更新
 /*
             try
             {
@@ -2950,7 +2953,9 @@ namespace MissionPlanner
         }
 
         int pwstep = 0;
+        int keyhack = 0;
         bool showcontrol = false;
+        bool fladv = false;
         /// <summary>
         /// keyboard shortcuts override
         /// </summary>
@@ -2964,21 +2969,51 @@ namespace MissionPlanner
             {
                 case 0:
                     if (keyData == Keys.H)
-                        pwstep = 1;
+                    {
+                        keyhack++;
+                    }
                     else
+                    {
                         pwstep = 0;
+                        keyhack = 0;
+                    }
+                    if (keyhack == 2)
+                    {
+                        pwstep = 1;
+                        keyhack = 0;
+                    }
                     break;
                 case 1:
                     if (keyData == Keys.U)
-                        pwstep = 2;
+                    {
+                        keyhack++;
+                    }
                     else
+                    {
                         pwstep = 0;
+                        keyhack = 0;
+                    }
+                    if (keyhack == 2)
+                    {
+                        pwstep = 2;
+                        keyhack = 0;
+                    }
                     break;
                 case 2:
                     if (keyData == Keys.I)
-                        pwstep = 3;
+                    {
+                        keyhack++;
+                    }
                     else
+                    {
                         pwstep = 0;
+                        keyhack = 0;
+                    }
+                    if (keyhack == 2)
+                    {
+                        pwstep = 3;
+                        keyhack = 0;
+                    }
                     break;
 
             }
@@ -3003,6 +3038,8 @@ namespace MissionPlanner
                 MenuConfigTune.Visible = !MenuConfigTune.Visible;
                 MenuTerminal.Visible = !MenuTerminal.Visible;
                 MenuHelp.Visible = !MenuHelp.Visible;
+                fladv = !fladv;
+                FlightPlanner.setAdvancedFuction(fladv);
                 //MyFlightData.zg1show();
                 //  public System.Windows.Forms.ToolStripButton MenuFlightData;
                 // public System.Windows.Forms.ToolStripButton MenuFlightPlanner;
@@ -3016,7 +3053,7 @@ namespace MissionPlanner
                 return true;
             }
 
-            return true;
+            return base.ProcessCmdKey(ref msg, keyData);
             if (keyData == Keys.F12)
             {
                 MenuConnect_Click(null, null);
