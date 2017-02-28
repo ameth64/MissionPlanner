@@ -1547,7 +1547,8 @@ namespace MissionPlanner
                     return;
                 }
 
-                var gridobject = savegriddata();
+                //var gridobject = savegriddata(); 
+                object gridobject = null;
 
                 int wpsplit = (int)Math.Round(grid.Count / NUM_split.Value,MidpointRounding.AwayFromZero);
 
@@ -1556,6 +1557,10 @@ namespace MissionPlanner
                 PointLatLngAlt home_plla = new PointLatLngAlt(plugin.Host.cs.HomeLocation.Lat, plugin.Host.cs.HomeLocation.Lng);
                 //获得用户输入风向
                 double wind_dir = (double)NUM_windDir.Value;
+                MissionPlanner.GCSViews.FlightPlanner.HsTag hstag = new MissionPlanner.GCSViews.FlightPlanner.HsTag();
+                hstag.wp_color = GMarkerGoogleType.blue;
+                hstag.wp_type = FlightPlanner.HsWPType.NormalWP
+
                 for (int splitno = 0; splitno < NUM_split.Value; splitno++)
                 {
                     int wpstart = wpsplit*splitno;
@@ -1585,24 +1590,26 @@ namespace MissionPlanner
                             /*
                             var wpno = plugin.Host.AddWPtoList(MAVLink.MAV_CMD.TAKEOFF, 20, 0, 0, 0, 0, 0, 
                                 (int) (30*CurrentState.multiplierdist), gridobject);
-                            */
-                            //改为添加垂直起飞航点, 默认起飞高度30米
+                            */                            
+                            //改为添加垂直起飞航点, 默认起飞高度30米                            
                             var wpno = plugin.Host.AddWPtoList(MAVLink.MAV_CMD.VTOL_TAKEOFF, 0, 0, 0, 0, 0, 0,
-                                (int)(30 * CurrentState.multiplierdist), gridobject);
+                                (int)(30 * CurrentState.multiplierdist), hstag);
                             wpsplitstart.Add(wpno);
                             //添加起飞引导点, 默认以home点为中心, 逆风规划
                             double to_bearing = wind_dir;//home_plla.GetBearing(grid[0]);
                             double to_dist = home_plla.GetDistance(grid[0]);
                             PointLatLngAlt to_plla = home_plla.newpos(to_bearing, 400);
                             to_plla.Alt = grid[0].Alt;
+                            hstag.wp_type = FlightPlanner.HsWPType.Takeoff_LoiterToAlt;
                             wpno = plugin.Host.AddWPtoList(MAVLink.MAV_CMD.LOITER_TO_ALT, 1, 120, 0, 0, to_plla.Lng, to_plla.Lat,
-                                (int)(to_plla.Alt * CurrentState.multiplierdist), gridobject);
+                                (int)(to_plla.Alt * CurrentState.multiplierdist), hstag);
                             wpsplitstart.Add(wpno);
                             //添加起飞结束到作业航线的切入点
                             to_bearing = grid[1].GetBearing(grid[0]);
                             PointLatLngAlt switch_plla = grid[0].newpos(to_bearing, 150);
+                            hstag.wp_type = FlightPlanner.HsWPType.Takeoff_LoiterToAlt;
                             wpno = plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, 0, 0, 0, 0, switch_plla.Lng, switch_plla.Lat,
-                                (int)(switch_plla.Alt * CurrentState.multiplierdist), gridobject);
+                                (int)(switch_plla.Alt * CurrentState.multiplierdist), hstag);
                             wpsplitstart.Add(wpno);
                         }
                     }
@@ -1617,6 +1624,8 @@ namespace MissionPlanner
                     int i = 0;
                     bool startedtrigdist = false;
                     PointLatLngAlt lastplla = PointLatLngAlt.Zero;
+                    hstag.wp_color = GMarkerGoogleType.green;
+                    hstag.wp_type = FlightPlanner.HsWPType.NormalWP;
                     foreach (var plla in grid)
                     {
                         // skip before start point
@@ -1637,7 +1646,7 @@ namespace MissionPlanner
                                 {
                                     if (!chk_stopstart.Checked)
                                     {
-                                        AddWP(plla.Lng, plla.Lat, plla.Alt);
+                                        AddWP(plla.Lng, plla.Lat, plla.Alt, hstag);
                                         plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_REPEAT_SERVO,
                                             (float) NUM_reptservo.Value,
                                             (float) num_reptpwm.Value, 1, (float) NUM_repttime.Value, 0, 0, 0,
@@ -1646,7 +1655,7 @@ namespace MissionPlanner
                                 }
                                 if (rad_digicam.Checked)
                                 {
-                                    AddWP(plla.Lng, plla.Lat, plla.Alt);
+                                    AddWP(plla.Lng, plla.Lat, plla.Alt, hstag);
                                     plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_DIGICAM_CONTROL, 1, 0, 0, 0, 0, 1, 0,
                                         gridobject);
                                 }
@@ -1658,7 +1667,7 @@ namespace MissionPlanner
                                 {
                                     if (plla.Lat != lastplla.Lat || plla.Lng != lastplla.Lng ||
                                         plla.Alt != lastplla.Alt)
-                                        AddWP(plla.Lng, plla.Lat, plla.Alt);
+                                        AddWP(plla.Lng, plla.Lat, plla.Alt, hstag);
                                 }
 
                                 // check trigger method
@@ -1672,7 +1681,7 @@ namespace MissionPlanner
                                             //  s > sm, need to dup check
                                             if (plla.Lat != lastplla.Lat || plla.Lng != lastplla.Lng ||
                                                 plla.Alt != lastplla.Alt)
-                                                AddWP(plla.Lng, plla.Lat, plla.Alt);
+                                                AddWP(plla.Lng, plla.Lat, plla.Alt, hstag);
 
                                             plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_SET_CAM_TRIGG_DIST,
                                                 (float) NUM_spacing.Value,
@@ -1680,7 +1689,7 @@ namespace MissionPlanner
                                         }
                                         else if (plla.Tag == "ME")
                                         {
-                                            AddWP(plla.Lng, plla.Lat, plla.Alt);
+                                            AddWP(plla.Lng, plla.Lat, plla.Alt, hstag);
 
                                             plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_SET_CAM_TRIGG_DIST, 0,
                                                 0, 0, 0, 0, 0, 0, gridobject);
@@ -1698,7 +1707,7 @@ namespace MissionPlanner
                                         }
                                         else if (plla.Tag == "ME")
                                         {
-                                            AddWP(plla.Lng, plla.Lat, plla.Alt);
+                                            AddWP(plla.Lng, plla.Lat, plla.Alt, hstag);
                                         }
                                     }
                                 }
@@ -1710,7 +1719,7 @@ namespace MissionPlanner
                                         {
                                             if (plla.Lat != lastplla.Lat || plla.Lng != lastplla.Lng ||
                                                 plla.Alt != lastplla.Alt)
-                                                AddWP(plla.Lng, plla.Lat, plla.Alt);
+                                                AddWP(plla.Lng, plla.Lat, plla.Alt, hstag);
 
                                             plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_REPEAT_SERVO,
                                                 (float) NUM_reptservo.Value,
@@ -1719,7 +1728,7 @@ namespace MissionPlanner
                                         }
                                         else if (plla.Tag == "ME")
                                         {
-                                            AddWP(plla.Lng, plla.Lat, plla.Alt);
+                                            AddWP(plla.Lng, plla.Lat, plla.Alt, hstag);
 
                                             plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_REPEAT_SERVO,
                                                 (float) NUM_reptservo.Value,
@@ -1734,7 +1743,7 @@ namespace MissionPlanner
                                     {
                                         if (plla.Lat != lastplla.Lat || plla.Lng != lastplla.Lng ||
                                             plla.Alt != lastplla.Alt)
-                                            AddWP(plla.Lng, plla.Lat, plla.Alt);
+                                            AddWP(plla.Lng, plla.Lat, plla.Alt, hstag);
 
                                         plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_SET_SERVO,
                                             (float) num_setservono.Value,
@@ -1743,7 +1752,7 @@ namespace MissionPlanner
                                     }
                                     else if (plla.Tag == "ME")
                                     {
-                                        AddWP(plla.Lng, plla.Lat, plla.Alt);
+                                        AddWP(plla.Lng, plla.Lat, plla.Alt, hstag);
 
                                         plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_SET_SERVO,
                                             (float) num_setservono.Value,
@@ -1755,7 +1764,7 @@ namespace MissionPlanner
                         }
                         else
                         {
-                            AddWP(plla.Lng, plla.Lat, plla.Alt, gridobject);
+                            AddWP(plla.Lng, plla.Lat, plla.Alt, hstag);
                         }
                         lastplla = plla;
                         ++i;
@@ -1779,6 +1788,7 @@ namespace MissionPlanner
 
                     if (CHK_toandland.Checked)  //添加着陆航点
                     {
+                        hstag.wp_color = GMarkerGoogleType.orange;
                         if (CHK_toandland_RTL.Checked)
                         {
                             plugin.Host.AddWPtoList(MAVLink.MAV_CMD.RETURN_TO_LAUNCH, 0, 0, 0, 0, 0, 0, 0, gridobject);
@@ -1797,38 +1807,42 @@ namespace MissionPlanner
                             double rtl_bearing = grid.Last().GetBearing(rtl_final);
                             PointLatLngAlt pre_rtl = grid.Last().newpos(rtl_bearing, rtl_dist - 10), 
                                 pre_loiter = grid.Last().newpos(rtl_bearing, 300);
-
+                            // 设置航点类型
+                            hstag.wp_type = FlightPlanner.HsWPType.Landing_Adjust;                            
                             plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, 0, 0, 0, 0, pre_loiter.Lng, pre_loiter.Lat,
-                                (int)(pre_loiter.Alt * CurrentState.multiplierdist), gridobject);
+                                (int)(pre_loiter.Alt * CurrentState.multiplierdist), hstag);
                             plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, 0, 0, 0, 0, pre_rtl.Lng, pre_rtl.Lat, 
-                                (int)(pre_rtl.Alt * CurrentState.multiplierdist), gridobject);                            
-                            
+                                (int)(pre_rtl.Alt * CurrentState.multiplierdist), hstag);
+
+                            hstag.wp_type = FlightPlanner.HsWPType.Landing_LoiterToAlt;
                             plugin.Host.AddWPtoList(MAVLink.MAV_CMD.LOITER_TO_ALT, 1, 120, 0, 0, rtl_final.Lng, rtl_final.Lat,
-                                (int)(100 * CurrentState.multiplierdist), gridobject);
+                                (int)(100 * CurrentState.multiplierdist), hstag);
+
                             //生成标准四转弯航线
+                            hstag.wp_type = FlightPlanner.HsWPType.Landing_Leadin;
                             rtl_bearing = wind_dir + 90;
                             PointLatLngAlt land_c1 = rtl_final.newpos(rtl_bearing, 200), land_slowdown = rtl_final.newpos(rtl_bearing, 100);
                             //添加减速航点
-                            plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_CHANGE_SPEED, 0, 17, 75, 0, 0, 0, 0, gridobject);
+                            plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_CHANGE_SPEED, 0, 17, 75, 0, 0, 0, 0, hstag);
                             //生成四转弯起点
                             plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, 0, 0, 0, 0, land_c1.Lng, land_c1.Lat,
-                                (int)(95 * CurrentState.multiplierdist), gridobject);
+                                (int)(95 * CurrentState.multiplierdist), hstag);
                             //第二点
                             PointLatLngAlt land_c2 = land_c1.newpos(rtl_bearing + 90, 500);
                             plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, 0, 0, 0, 0, land_c2.Lng, land_c2.Lat,
-                                (int)(80 * CurrentState.multiplierdist), gridobject);
+                                (int)(80 * CurrentState.multiplierdist), hstag);
                             //第三点
                             PointLatLngAlt land_c3 = land_c2.newpos(rtl_bearing + 180, 200);
                             plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, 0, 0, 0, 0, land_c3.Lng, land_c3.Lat,
-                                (int)(65 * CurrentState.multiplierdist), gridobject);
+                                (int)(65 * CurrentState.multiplierdist), hstag);
                             //第四点
                             PointLatLngAlt land_c4 = land_c3.newpos(rtl_bearing + 270, 150);
                             plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, 0, 0, 0, 0, land_c4.Lng, land_c4.Lat,
-                                (int)(50 * CurrentState.multiplierdist), gridobject);
+                                (int)(50 * CurrentState.multiplierdist), hstag);
                             
                             //改为添加垂直着陆航点
                             plugin.Host.AddWPtoList(MAVLink.MAV_CMD.VTOL_LAND, 0, 0, 0, 0, plugin.Host.cs.HomeLocation.Lng,
-                                plugin.Host.cs.HomeLocation.Lat, (0.1 * CurrentState.multiplierdist), gridobject);
+                                plugin.Host.cs.HomeLocation.Lat, (0.1 * CurrentState.multiplierdist), hstag);
                         }
                     }
                 }

@@ -79,6 +79,21 @@ namespace MissionPlanner.GCSViews
             Terrain = MAVLink.MAV_FRAME.GLOBAL_TERRAIN_ALT
         }
 
+        public enum HsWPType
+        {
+            NormalWP = 0,
+            Takeoff_Adjust,         //起飞爬升结束后航线调整点
+            Takeoff_LoiterToAlt,    //起飞段盘旋爬升点
+            Landing_LoiterToAlt,    //着陆段盘旋下降点
+            Landing_Adjust,         //着陆段盘旋下降前航线调整点
+            Landing_Leadin          //着陆段引导线起点
+        }
+        public struct HsTag
+        {
+            public GMarkerGoogleType wp_color;
+            public HsWPType wp_type;
+        }
+
         private void poieditToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (CurrentGMapMarker == null || !(CurrentGMapMarker is GMapMarkerPOI))
@@ -1123,12 +1138,12 @@ namespace MissionPlanner.GCSViews
         /// <param name="lng"></param>
         /// <param name="lat"></param>
         /// <param name="alt"></param>
-        private void addpolygonmarker(string tag, double lng, double lat, double alt, Color? color)
+        private void addpolygonmarker(string tag, double lng, double lat, double alt, Color? color, GMarkerGoogleType wpcolor = GMarkerGoogleType.green)
         {
             try
             {
                 PointLatLng point = new PointLatLng(lat, lng);
-                GMapMarkerWP m = new GMapMarkerWP(point, tag);
+                GMapMarkerWP m = new GMapMarkerWP(point, tag, wpcolor);
                 m.ToolTipMode = MarkerTooltipMode.OnMouseOver;
                 m.ToolTipText = "Alt: " + alt.ToString("0");
                 m.Tag = tag;
@@ -1370,8 +1385,10 @@ namespace MissionPlanner.GCSViews
                                 pointlist.Add(new PointLatLngAlt(double.Parse(cell3), double.Parse(cell4),
                                     double.Parse(cell2) + homealt, (a + 1).ToString()));
                                 fullpointlist.Add(pointlist[pointlist.Count - 1]);
+                                //取出航点tag
+                                var wpc = Commands.Rows[a].Cells[TagData.Index].Value == null? GMarkerGoogleType.green: ((HsTag)Commands.Rows[a].Cells[TagData.Index].Value).wp_color;
                                 addpolygonmarker((a + 1).ToString(), double.Parse(cell4), double.Parse(cell3),
-                                    double.Parse(cell2), null);
+                                    double.Parse(cell2), null, wpc);
                             }
 
                             avglong += double.Parse(Commands.Rows[a].Cells[Lon.Index].Value.ToString());
@@ -5652,8 +5669,11 @@ namespace MissionPlanner.GCSViews
             double y, double z, object tag = null)
         {
             Commands.Rows[rowIndex].Cells[Command.Index].Value = cmd.ToString();
-            Commands.Rows[rowIndex].Cells[TagData.Index].Tag = tag;
-            Commands.Rows[rowIndex].Cells[TagData.Index].Value = tag;
+            if(tag != null)
+            {
+                Commands.Rows[rowIndex].Cells[TagData.Index].Tag = (HsTag)tag;
+                Commands.Rows[rowIndex].Cells[TagData.Index].Value = (HsTag)tag;
+            }            
 
             ChangeColumnHeader(cmd.ToString());
 
