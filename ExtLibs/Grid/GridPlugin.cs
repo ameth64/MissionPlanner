@@ -12,6 +12,7 @@ namespace MissionPlanner
         
 
         ToolStripMenuItem but;
+        ToolStripMenuItem but2;
 
         public override string Name
         {
@@ -40,7 +41,7 @@ namespace MissionPlanner
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GridUI));
             var temp = (string)(resources.GetObject("$this.Text"));
 
-            but = new ToolStripMenuItem("自动生成航线");
+            but = new ToolStripMenuItem(temp);
             but.Click += but_Click;
 
             bool hit = false;
@@ -58,15 +59,16 @@ namespace MissionPlanner
             }
 
             //用户菜单
-            col = Host.FPMenuMap2.Items;
-            index = col.Count;
-            foreach (ToolStripItem item in col)
+            but2 = new ToolStripMenuItem("自动生成航线");
+            but2.Click += but_Click;
+            ToolStripItemCollection col2 = Host.FPMenuMap2.Items;
+            index = col2.Count;
+            foreach (ToolStripItem item in col2)
             {
                 if (item.Text.Equals("生成航线"))
                 {
-                    index = col.IndexOf(item);
-                    ((ToolStripMenuItem)item).DropDownItems.Add(but);
-                    hit = true;
+                    index = col2.IndexOf(item);
+                    ((ToolStripMenuItem)item).DropDownItems.Add(but2);
                     break;
                 }
             }

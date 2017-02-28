@@ -1559,7 +1559,7 @@ namespace MissionPlanner
                 double wind_dir = (double)NUM_windDir.Value;
                 MissionPlanner.GCSViews.FlightPlanner.HsTag hstag = new MissionPlanner.GCSViews.FlightPlanner.HsTag();
                 hstag.wp_color = GMarkerGoogleType.blue;
-                hstag.wp_type = FlightPlanner.HsWPType.NormalWP
+                hstag.wp_type = FlightPlanner.HsWPType.NormalWP;
 
                 for (int splitno = 0; splitno < NUM_split.Value; splitno++)
                 {
