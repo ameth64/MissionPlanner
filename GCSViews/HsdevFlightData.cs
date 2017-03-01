@@ -1935,5 +1935,25 @@ namespace MissionPlanner.GCSViews
             MainV2.comPort.setWPCurrent((ushort)wp); // set nav to
             MainV2.comPort.setMode("Auto");
         }
+
+        public void showLogPlayBut(bool f)
+        {
+            if(f)
+            {
+                BUT_loadtelem.Visible = true;
+                BUT_playlog.Visible = true;
+                tracklog.Visible = true;
+                lbl_logpercent.Visible = true;
+                CMB_playspeed.Visible = true;
+            }
+            else
+            {
+                BUT_loadtelem.Visible = false;
+                BUT_playlog.Visible = false;
+                tracklog.Visible = false;
+                lbl_logpercent.Visible = false;
+                CMB_playspeed.Visible = false;
+            }
+        }
     }
 }

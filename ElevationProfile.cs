@@ -47,7 +47,7 @@ namespace MissionPlanner
 
             if (planlocs.Count <= 1)
             {
-                CustomMessageBox.Show("Please plan something first", Strings.ERROR);
+                CustomMessageBox.Show("没有航线", Strings.ERROR);
                 return;
             }
 
@@ -68,7 +68,7 @@ namespace MissionPlanner
 
             this.homealt = homealt/CurrentState.multiplierdist;
 
-            Form frm = Common.LoadingBox("Loading", "using alt data");
+            Form frm = Common.LoadingBox("读取中", "读取高度数据");
            // Gdal.AllRegister();
             //gelocs = getGEAltPath(planlocs);
             gelocs = getSTRM90Path(planlocs);
@@ -156,7 +156,7 @@ namespace MissionPlanner
 
             if (list.Count <= 2)
             {
-                CustomMessageBox.Show("Too many/few WP's or to Big a Distance " + (distance / 1000) + "km", "Error");
+                CustomMessageBox.Show("航点太少", "错误");
                 return answer;
             }
             //Ogr.RegisterAll();
@@ -391,15 +391,15 @@ namespace MissionPlanner
             GraphPane myPane = zgc.GraphPane;
 
             // Set the titles and axis labels
-            myPane.Title.Text = "Elevation above ground";
-            myPane.XAxis.Title.Text = "Distance (m)";
-            myPane.YAxis.Title.Text = "Elevation (m)";
+            myPane.Title.Text = "地面以上高程";
+            myPane.XAxis.Title.Text = "距离 (米)";
+            myPane.YAxis.Title.Text = "高程 (米)";
 
             LineItem myCurve;
 
-            myCurve = myPane.AddCurve("Planner", list1, Color.Red, SymbolType.None);
-            myCurve = myPane.AddCurve("NASA", list2, Color.Green, SymbolType.None);
-            myCurve = myPane.AddCurve("ALT", list3, Color.Blue, SymbolType.None);
+            myCurve = myPane.AddCurve("任务航线高度", list1, Color.Red, SymbolType.None);
+            myCurve = myPane.AddCurve("NASA卫星扫描高度", list2, Color.Green, SymbolType.None);
+            myCurve = myPane.AddCurve("高度", list3, Color.Blue, SymbolType.None);
 
             foreach (PointPair pp in list1)
             {

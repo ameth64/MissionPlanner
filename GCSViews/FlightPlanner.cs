@@ -2905,9 +2905,11 @@ namespace MissionPlanner.GCSViews
                 //  continue;
                 DataGridViewTextBoxCell cell;
                 DataGridViewComboBoxCell cellcmd;
+                //Commands.Rows[i].Cells[Command.Index].ReadOnly = true;
                 cellcmd = Commands.Rows[i].Cells[Command.Index] as DataGridViewComboBoxCell;
                 cellcmd.Value = "UNKNOWN";
                 cellcmd.Tag = temp.id;
+                //cellcmd.ReadOnly = true;
 
                 foreach (object value in Enum.GetValues(typeof (MAVLink.MAV_CMD)))
                 {
@@ -2969,7 +2971,7 @@ namespace MissionPlanner.GCSViews
                 {
                     if (cellhome.Value.ToString() != TXT_homelat.Text && cellhome.Value.ToString() != "0")
                     {
-                        DialogResult dr = CustomMessageBox.Show("Reset Home to loaded coords", "Reset Home Coords",
+                        DialogResult dr = CustomMessageBox.Show("重新加载home", "重新加载home坐标",
                             MessageBoxButtons.YesNo);
 
                         if (dr == DialogResult.Yes)
@@ -3457,7 +3459,7 @@ namespace MissionPlanner.GCSViews
 
             if (polygon.Count == 0)
             {
-                CustomMessageBox.Show("Please define a polygon!");
+                CustomMessageBox.Show("先添加范围!");
                 return 0;
             }
 
@@ -4458,7 +4460,7 @@ namespace MissionPlanner.GCSViews
         private void TXT_homelat_Enter(object sender, EventArgs e)
         {
             if (!sethome)
-                CustomMessageBox.Show("Click on the Map to set Home ");
+                CustomMessageBox.Show("点击地图设置home点");
             sethome = true;
             
         }
@@ -7648,9 +7650,25 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
         public void setAdvancedFuction(bool f)
         {
             if (f)
+            {
                 MainMap.ContextMenuStrip = contextMenuStrip1;
+                CMB_altmode.Enabled = true;
+                CHK_verifyheight.Visible = true;
+                BUT_Add.Visible = true;
+                label17.Visible = true;
+                TXT_altwarn.Visible = true;
+                CHK_splinedefault.Visible = true;
+            }
             else
+            {
                 MainMap.ContextMenuStrip = contextMenuStrip2;
+                CMB_altmode.Enabled = false;
+                CHK_verifyheight.Visible = false;
+                BUT_Add.Visible = false;
+                label17.Visible = false;
+                TXT_altwarn.Visible = false;
+                CHK_splinedefault.Visible = false;
+            }
         }
 
         private void BUT_CheckElevation_Click(object sender, EventArgs e)

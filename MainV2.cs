@@ -1423,6 +1423,7 @@ namespace MissionPlanner
                         _connectionControl.IsConnected(false);
                         UpdateConnectIcon();
                         comPort.Close();
+                        HsdevFlightData.showLogPlayBut(true);
                     }
                     catch
                     {
@@ -1569,6 +1570,7 @@ namespace MissionPlanner
 
                 // set connected icon
                 this.MenuConnect.Image = displayicons.disconnect;
+                HsdevFlightData.showLogPlayBut(false);
             }
             catch (Exception ex)
             {
@@ -1626,6 +1628,7 @@ namespace MissionPlanner
             if (comPort.BaseStream.IsOpen)
             {
                 doDisconnect(comPort);
+                HsdevFlightData.showLogPlayBut(true);
             }
             else
             {
