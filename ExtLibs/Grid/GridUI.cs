@@ -915,7 +915,7 @@ namespace MissionPlanner
 
             if (polygon.Count == 0)
             {
-                CustomMessageBox.Show("Please define a polygon!");
+                CustomMessageBox.Show("没有范围，请先添加范围!");
                 return 0;
             }
 
@@ -1607,7 +1607,7 @@ namespace MissionPlanner
                             //添加起飞结束到作业航线的切入点
                             to_bearing = grid[1].GetBearing(grid[0]);
                             PointLatLngAlt switch_plla = grid[0].newpos(to_bearing, 150);
-                            hstag.wp_type = FlightPlanner.HsWPType.Takeoff_LoiterToAlt;
+                            hstag.wp_type = FlightPlanner.HsWPType.Takeoff_Adjust;
                             wpno = plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, 0, 0, 0, 0, switch_plla.Lng, switch_plla.Lat,
                                 (int)(switch_plla.Alt * CurrentState.multiplierdist), hstag);
                             wpsplitstart.Add(wpno);

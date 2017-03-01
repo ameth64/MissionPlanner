@@ -811,34 +811,34 @@ namespace MissionPlanner.GCSViews
                                     double alt = double.Parse(Command.Rows[a].Cells[MainV2.instance.FlightPlanner.Alt.Index].Value.ToString());
                                     if (MissionPlanner.GCSViews.FlightPlanner.HsWPType.Takeoff_Adjust == ((MissionPlanner.GCSViews.FlightPlanner.HsTag)Command.Rows[a].Cells[MainV2.instance.FlightPlanner.TagData.Index].Tag).wp_type)
                                     {
-                                        tag = a.ToString() + "起飞调整" + Command.Rows[a].Cells[MainV2.instance.FlightPlanner.Alt.Index].Value.ToString() + "米高";
+                                        tag = (a + 1).ToString() + "起飞调整" + Command.Rows[a].Cells[MainV2.instance.FlightPlanner.Alt.Index].Value.ToString() + "米高";
                                     }
                                     else if (MissionPlanner.GCSViews.FlightPlanner.HsWPType.Takeoff_LoiterToAlt == ((MissionPlanner.GCSViews.FlightPlanner.HsTag)Command.Rows[a].Cells[MainV2.instance.FlightPlanner.TagData.Index].Tag).wp_type)
                                     {
-                                        tag = a.ToString() + "盘旋爬升" + Command.Rows[a].Cells[MainV2.instance.FlightPlanner.Alt.Index].Value.ToString() + "米高";
+                                        tag = (a + 1).ToString() + "盘旋爬升" + Command.Rows[a].Cells[MainV2.instance.FlightPlanner.Alt.Index].Value.ToString() + "米高";
                                     }
                                     else if (MissionPlanner.GCSViews.FlightPlanner.HsWPType.NormalWP == ((MissionPlanner.GCSViews.FlightPlanner.HsTag)Command.Rows[a].Cells[MainV2.instance.FlightPlanner.TagData.Index].Tag).wp_type)
                                     {
-                                        tag = a.ToString() + "点" + Command.Rows[a].Cells[MainV2.instance.FlightPlanner.Alt.Index].Value.ToString() + "米高";
+                                        tag = (a + 1).ToString() + "点" + Command.Rows[a].Cells[MainV2.instance.FlightPlanner.Alt.Index].Value.ToString() + "米高";
                                     }
                                     else if (MissionPlanner.GCSViews.FlightPlanner.HsWPType.Landing_Adjust == ((MissionPlanner.GCSViews.FlightPlanner.HsTag)Command.Rows[a].Cells[MainV2.instance.FlightPlanner.TagData.Index].Tag).wp_type)
                                     {
-                                        tag = a.ToString() + "降落准备" + Command.Rows[a].Cells[MainV2.instance.FlightPlanner.Alt.Index].Value.ToString() + "米高";
+                                        tag = (a + 1).ToString() + "降落准备" + Command.Rows[a].Cells[MainV2.instance.FlightPlanner.Alt.Index].Value.ToString() + "米高";
                                     }
                                     else if (MissionPlanner.GCSViews.FlightPlanner.HsWPType.Landing_LoiterToAlt == ((MissionPlanner.GCSViews.FlightPlanner.HsTag)Command.Rows[a].Cells[MainV2.instance.FlightPlanner.TagData.Index].Tag).wp_type)
                                     {
-                                        tag = a.ToString() + "盘旋降落" + Command.Rows[a].Cells[MainV2.instance.FlightPlanner.Alt.Index].Value.ToString() + "米高";
+                                        tag = (a + 1).ToString() + "盘旋降落" + Command.Rows[a].Cells[MainV2.instance.FlightPlanner.Alt.Index].Value.ToString() + "米高";
                                     }
                                     else if (MissionPlanner.GCSViews.FlightPlanner.HsWPType.Landing_Leadin == ((MissionPlanner.GCSViews.FlightPlanner.HsTag)Command.Rows[a].Cells[MainV2.instance.FlightPlanner.TagData.Index].Tag).wp_type)
                                     {
-                                        tag = a.ToString() + "降落引导" + Command.Rows[a].Cells[MainV2.instance.FlightPlanner.Alt.Index].Value.ToString() + "米高";
+                                        tag = (a + 1).ToString() + "降落引导" + Command.Rows[a].Cells[MainV2.instance.FlightPlanner.Alt.Index].Value.ToString() + "米高";
                                     }
 
                                     addpolygonmarker(tag, lng, lat, (int)alt, Color.White, polygons, ((MissionPlanner.GCSViews.FlightPlanner.HsTag)Command.Rows[a].Cells[MainV2.instance.FlightPlanner.TagData.Index].Tag).wp_color);
                                 }
                                 else
                                 {
-                                    tag = a.ToString() + "点" + Command.Rows[a].Cells[MainV2.instance.FlightPlanner.Alt.Index].Value.ToString() + "米高";
+                                    tag = (a + 1).ToString() + "点" + Command.Rows[a].Cells[MainV2.instance.FlightPlanner.Alt.Index].Value.ToString() + "米高";
                                     double lng = double.Parse(Command.Rows[a].Cells[MainV2.instance.FlightPlanner.Lon.Index].Value.ToString());
                                     double lat = double.Parse(Command.Rows[a].Cells[MainV2.instance.FlightPlanner.Lat.Index].Value.ToString());
                                     int alt = int.Parse(Command.Rows[a].Cells[MainV2.instance.FlightPlanner.Alt.Index].Value.ToString());
