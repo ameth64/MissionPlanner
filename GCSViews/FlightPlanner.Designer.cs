@@ -105,6 +105,7 @@
             this.lbl_status = new System.Windows.Forms.Label();
             this.panelWaypoints = new BSE.Windows.Forms.Panel();
             this.splitter1 = new BSE.Windows.Forms.Splitter();
+            this.CMB_displaywp = new System.Windows.Forms.ComboBox();
             this.but_kml = new MissionPlanner.Controls.MyButton();
             this.BUT_CheckElevation = new MissionPlanner.Controls.MyButton();
             this.CMB_altmode = new System.Windows.Forms.ComboBox();
@@ -208,6 +209,9 @@
             this.addWPToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.clearWPToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.addGridToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.addGrid2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearGridToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.autoWPMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.aeraToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -588,6 +592,7 @@
             this.panelWaypoints.CaptionFont = new System.Drawing.Font("Segoe UI", 11.75F, System.Drawing.FontStyle.Bold);
             this.panelWaypoints.CaptionHeight = 21;
             this.panelWaypoints.ColorScheme = BSE.Windows.Forms.ColorScheme.Custom;
+            this.panelWaypoints.Controls.Add(this.CMB_displaywp);
             this.panelWaypoints.Controls.Add(this.but_kml);
             this.panelWaypoints.Controls.Add(this.BUT_CheckElevation);
             this.panelWaypoints.Controls.Add(this.CMB_altmode);
@@ -632,6 +637,13 @@
             resources.ApplyResources(this.splitter1, "splitter1");
             this.splitter1.Name = "splitter1";
             this.splitter1.TabStop = false;
+            // 
+            // CMB_displaywp
+            // 
+            this.CMB_displaywp.FormattingEnabled = true;
+            resources.ApplyResources(this.CMB_displaywp, "CMB_displaywp");
+            this.CMB_displaywp.Name = "CMB_displaywp";
+            this.CMB_displaywp.SelectedIndexChanged += new System.EventHandler(this.CMB_displaywp_SelectedIndexChanged);
             // 
             // but_kml
             // 
@@ -1395,9 +1407,30 @@
             // 
             // addGridToolStripMenuItem2
             // 
+            this.addGridToolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addGrid2ToolStripMenuItem,
+            this.saveGridToolStripMenuItem,
+            this.loadGridToolStripMenuItem});
             this.addGridToolStripMenuItem2.Name = "addGridToolStripMenuItem2";
             resources.ApplyResources(this.addGridToolStripMenuItem2, "addGridToolStripMenuItem2");
-            this.addGridToolStripMenuItem2.Click += new System.EventHandler(this.addGridToolStripMenuItem2_Click);
+            // 
+            // addGrid2ToolStripMenuItem
+            // 
+            this.addGrid2ToolStripMenuItem.Name = "addGrid2ToolStripMenuItem";
+            resources.ApplyResources(this.addGrid2ToolStripMenuItem, "addGrid2ToolStripMenuItem");
+            this.addGrid2ToolStripMenuItem.Click += new System.EventHandler(this.addGridToolStripMenuItem2_Click);
+            // 
+            // saveGridToolStripMenuItem
+            // 
+            this.saveGridToolStripMenuItem.Name = "saveGridToolStripMenuItem";
+            resources.ApplyResources(this.saveGridToolStripMenuItem, "saveGridToolStripMenuItem");
+            this.saveGridToolStripMenuItem.Click += new System.EventHandler(this.saveGridToolStripMenuItem_Click);
+            // 
+            // loadGridToolStripMenuItem
+            // 
+            this.loadGridToolStripMenuItem.Name = "loadGridToolStripMenuItem";
+            resources.ApplyResources(this.loadGridToolStripMenuItem, "loadGridToolStripMenuItem");
+            this.loadGridToolStripMenuItem.Click += new System.EventHandler(this.loadGridToolStripMenuItem_Click);
             // 
             // clearGridToolStripMenuItem3
             // 
@@ -1469,7 +1502,7 @@
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lbl_status;
-        private System.Windows.Forms.DataGridView Commands;
+        public System.Windows.Forms.DataGridView Commands;
         private Controls.MyButton BUT_Add;
         private System.Windows.Forms.Label LBL_WPRad;
         private System.Windows.Forms.Label LBL_defalutalt;
@@ -1575,14 +1608,14 @@
         private System.Windows.Forms.ToolStripMenuItem areaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem setHomeHereToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem areaToolStripMenuItem1;
-        private System.Windows.Forms.DataGridViewComboBoxColumn Command;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Param1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Param2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Param3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Param4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Lat;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Lon;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Alt;
+        public System.Windows.Forms.DataGridViewComboBoxColumn Command;
+        public System.Windows.Forms.DataGridViewTextBoxColumn Param1;
+        public System.Windows.Forms.DataGridViewTextBoxColumn Param2;
+        public System.Windows.Forms.DataGridViewTextBoxColumn Param3;
+        public System.Windows.Forms.DataGridViewTextBoxColumn Param4;
+        public System.Windows.Forms.DataGridViewTextBoxColumn Lat;
+        public System.Windows.Forms.DataGridViewTextBoxColumn Lon;
+        public System.Windows.Forms.DataGridViewTextBoxColumn Alt;
         private System.Windows.Forms.DataGridViewTextBoxColumn coordZone;
         private System.Windows.Forms.DataGridViewTextBoxColumn coordEasting;
         private System.Windows.Forms.DataGridViewTextBoxColumn coordNorthing;
@@ -1594,8 +1627,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Angle;
         private System.Windows.Forms.DataGridViewTextBoxColumn Dist;
         private System.Windows.Forms.DataGridViewTextBoxColumn AZ;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TagData;
-        private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
+        public System.Windows.Forms.DataGridViewTextBoxColumn TagData;
+        public System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
         private Controls.MyButton BUT_CheckElevation;
         public System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem deleteWPToolStripMenuItem2;
@@ -1606,5 +1639,9 @@
         private System.Windows.Forms.ToolStripMenuItem clearWPToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem clearGridToolStripMenuItem3;
         private Controls.MyButton but_kml;
+        public System.Windows.Forms.ComboBox CMB_displaywp;
+        private System.Windows.Forms.ToolStripMenuItem addGrid2ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveGridToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadGridToolStripMenuItem;
     }
 }

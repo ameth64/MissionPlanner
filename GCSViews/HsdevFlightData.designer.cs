@@ -120,6 +120,7 @@
             this.fixbattery = new System.Windows.Forms.ToolStripMenuItem();
             this.ZedGraphTimer = new System.Windows.Forms.Timer(this.components);
             this.bindingSourceStatusTab = new System.Windows.Forms.BindingSource(this.components);
+            this.landStartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -1575,7 +1576,7 @@
             this.windDir1.BackColor = System.Drawing.Color.Transparent;
             this.windDir1.DataBindings.Add(new System.Windows.Forms.Binding("Direction", this.bindingSourceHud, "wind_dir", true));
             this.windDir1.DataBindings.Add(new System.Windows.Forms.Binding("Speed", this.bindingSourceHud, "wind_vel", true));
-            this.windDir1.Direction = 180D;
+            this.windDir1.Direction = 360D;
             this.windDir1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.windDir1.Location = new System.Drawing.Point(3, 3);
             this.windDir1.Name = "windDir1";
@@ -1622,9 +1623,10 @@
             this.contextMenuStripMap.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.contextMenuStripMap.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.flyToHereAltToolStripMenuItem,
-            this.fixbattery});
+            this.fixbattery,
+            this.landStartToolStripMenuItem});
             this.contextMenuStripMap.Name = "contextMenuStrip1";
-            this.contextMenuStripMap.Size = new System.Drawing.Size(161, 48);
+            this.contextMenuStripMap.Size = new System.Drawing.Size(161, 70);
             // 
             // flyToHereAltToolStripMenuItem
             // 
@@ -1647,6 +1649,13 @@
             // bindingSourceStatusTab
             // 
             this.bindingSourceStatusTab.DataSource = typeof(MissionPlanner.CurrentState);
+            // 
+            // landStartToolStripMenuItem
+            // 
+            this.landStartToolStripMenuItem.Name = "landStartToolStripMenuItem";
+            this.landStartToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.landStartToolStripMenuItem.Text = "执行降落";
+            this.landStartToolStripMenuItem.Click += new System.EventHandler(this.landStartToolStripMenuItem_Click);
             // 
             // HsdevFlightData
             // 
@@ -1784,5 +1793,6 @@
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label cameranum;
+        private System.Windows.Forms.ToolStripMenuItem landStartToolStripMenuItem;
     }
 }

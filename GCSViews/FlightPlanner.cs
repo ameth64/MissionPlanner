@@ -1389,9 +1389,44 @@ namespace MissionPlanner.GCSViews
                                 Type t = Commands.Rows[a].Cells[TagData.Index].Value.GetType();
                                 GMarkerGoogleType wpc = (t.Name == "HsTag") ?
                                     ((HsTag)Commands.Rows[a].Cells[TagData.Index].Value).wp_color: 
-                                    GMarkerGoogleType.green;                                    
-                                addpolygonmarker((a + 1).ToString(), double.Parse(cell4), double.Parse(cell3),
-                                    double.Parse(cell2), null, wpc);
+                                    GMarkerGoogleType.green;
+                                if (CMB_displaywp.SelectedItem.ToString() == "全部航点")
+                                {
+                                    addpolygonmarker((a + 1).ToString(), double.Parse(cell4), double.Parse(cell3),
+                                        double.Parse(cell2), null, wpc);
+                                }
+                                else if(CMB_displaywp.SelectedItem.ToString() == "起飞航点")
+                                {
+                                    if (((HsTag)Commands.Rows[a].Cells[TagData.Index].Tag).wp_type.ToString() == HsWPType.Takeoff_Adjust.ToString()
+                                        || ((HsTag)Commands.Rows[a].Cells[TagData.Index].Tag).wp_type.ToString() == HsWPType.Takeoff_LoiterToAlt.ToString())
+                                    {
+                                        addpolygonmarker((a + 1).ToString(), double.Parse(cell4), double.Parse(cell3),
+                                          double.Parse(cell2), null, wpc);
+                                    }
+                                }
+                                else if (CMB_displaywp.SelectedItem.ToString() == "降落航点")
+                                {
+                                    if (((HsTag)Commands.Rows[a].Cells[TagData.Index].Tag).wp_type.ToString() == HsWPType.Landing_LoiterToAlt.ToString()
+                                        || ((HsTag)Commands.Rows[a].Cells[TagData.Index].Tag).wp_type.ToString() == HsWPType.Landing_Adjust.ToString()
+                                        || ((HsTag)Commands.Rows[a].Cells[TagData.Index].Tag).wp_type.ToString() == HsWPType.Landing_Leadin.ToString())
+                                    {
+                                        addpolygonmarker((a + 1).ToString(), double.Parse(cell4), double.Parse(cell3),
+                                          double.Parse(cell2), null, wpc);
+                                    }
+                                }
+                                else if (CMB_displaywp.SelectedItem.ToString() == "飞行航点")
+                                {
+                                    if (((HsTag)Commands.Rows[a].Cells[TagData.Index].Tag).wp_type.ToString() == HsWPType.NormalWP.ToString())
+                                    {
+                                        addpolygonmarker((a + 1).ToString(), double.Parse(cell4), double.Parse(cell3),
+                                          double.Parse(cell2), null, wpc);
+                                    }
+                                }
+                                else
+                                {
+                                    addpolygonmarker((a + 1).ToString(), double.Parse(cell4), double.Parse(cell3),
+                                        double.Parse(cell2), null, wpc);
+                                }
                             }
 
                             avglong += double.Parse(Commands.Rows[a].Cells[Lon.Index].Value.ToString());
@@ -1905,6 +1940,21 @@ namespace MissionPlanner.GCSViews
                             sw.Write("\t" +
                                      (double.Parse(Commands.Rows[a].Cells[Alt.Index].Value.ToString()) /
                                       CurrentState.multiplierdist).ToString("0.000000", new CultureInfo("en-US")));
+                            if (Commands.Rows[a].Cells[TagData.Index].Value != null)
+                            {
+                                sw.Write("\t" +
+                                         ((HsTag)Commands.Rows[a].Cells[TagData.Index].Value).wp_type);
+
+                                sw.Write("\t" +
+                                         ((HsTag)Commands.Rows[a].Cells[TagData.Index].Value).wp_color);
+                            }
+                            else
+                            {
+                                sw.Write("\t" +
+                                         "NormalWP");
+                                sw.Write("\t" +
+                                         "green");
+                            }
                             sw.Write("\t" + 1);
                             sw.WriteLine("");
                         }
@@ -2101,12 +2151,12 @@ namespace MissionPlanner.GCSViews
                 }
                 else
                 {
-                    if (
-                        CustomMessageBox.Show("This will clear your existing planned mission, Continue?", "Confirm",
-                            MessageBoxButtons.OKCancel) != DialogResult.OK)
-                    {
-                        return;
-                    }
+                    //if (
+                     //   CustomMessageBox.Show("This will clear your existing planned mission, Continue?", "Confirm",
+                     //       MessageBoxButtons.OKCancel) != DialogResult.OK)
+                   // {
+                    //    return;
+                   // }
                 }
             }
 
@@ -2189,6 +2239,7 @@ namespace MissionPlanner.GCSViews
             }
 
             WPtoScreen(cmds);
+            getcurrentwaypoints();
         }
 
         public void WPtoScreen(List<Locationwp> cmds, bool withrally = true)
@@ -2230,6 +2281,199 @@ namespace MissionPlanner.GCSViews
             }
         }
 
+        private void getcurrentwaypoints()
+        {
+            string file = "currentwp.txt";
+            if (File.Exists(file))
+            {
+                StreamReader sr = new StreamReader(file); //"defines.h"
+                string header = sr.ReadLine();
+                sr = new StreamReader(file); //"defines.h"
+                header = sr.ReadLine();
+                int a = 0;
+                bool error = false;
+                while (!error && !sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
+                    // waypoints
+
+                    if (line.StartsWith("#"))
+                        continue;
+
+                    string[] items = line.Split(new[] { '\t', ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+                    if (items.Length <= 9)
+                        continue;
+
+                    if (int.Parse(items[0]) == 0)
+                        continue;
+                    HsTag t = new HsTag();
+                    t.wp_type = HsWPType.NormalWP;
+                    t.wp_color = GMarkerGoogleType.green;
+                    if (items[8] == double.Parse(Commands.Rows[a].Cells[Lat.Index].Value.ToString()).ToString("0.000000", new CultureInfo("en-US"))
+                        && items[9] == double.Parse(Commands.Rows[a].Cells[Lon.Index].Value.ToString()).ToString("0.000000", new CultureInfo("en-US")))
+                    {
+                        try
+                        {
+                            if (items[11] == HsWPType.NormalWP.ToString())
+                                t.wp_type = HsWPType.NormalWP;
+                            else if (items[11] == HsWPType.Takeoff_Adjust.ToString())
+                                t.wp_type = HsWPType.Takeoff_Adjust;
+                            else if (items[11] == HsWPType.Takeoff_LoiterToAlt.ToString())
+                                t.wp_type = HsWPType.Takeoff_LoiterToAlt;
+                            else if (items[11] == HsWPType.Landing_LoiterToAlt.ToString())
+                                t.wp_type = HsWPType.Landing_LoiterToAlt;
+                            else if (items[11] == HsWPType.Landing_Adjust.ToString())
+                                t.wp_type = HsWPType.Landing_Adjust;
+                            else if (items[11] == HsWPType.Landing_Leadin.ToString())
+                                t.wp_type = HsWPType.Landing_Leadin;
+
+                            if (items[12] == GMarkerGoogleType.green.ToString())
+                                t.wp_color = GMarkerGoogleType.green;
+                            else if (items[12] == GMarkerGoogleType.blue.ToString())
+                                t.wp_color = GMarkerGoogleType.blue;
+                            else if (items[12] == GMarkerGoogleType.orange.ToString())
+                                t.wp_color = GMarkerGoogleType.orange;
+
+                            Commands.Rows[a].Cells[TagData.Index].Tag = t;
+                            Commands.Rows[a].Cells[TagData.Index].Value = t;
+                            a++;
+                        }
+                        catch
+                        {
+                            CustomMessageBox.Show("Line invalid\n" + line);
+                        }
+                    }
+                    else
+                    {
+                        CustomMessageBox.Show("读出航点与本地缓存不一致");
+                        break;
+                    }
+                }
+
+                sr.Close();
+
+                writeKML();
+
+                MainMap.ZoomAndCenterMarkers("objects");
+            }
+        }
+
+        private void savecurrentwaypoints()
+        {
+
+                string file = "currentwp.txt";
+                if (file != "" )
+                {
+                    try
+                    {
+                        if (file.EndsWith(".mission"))
+                        {
+                            var list = GetCommandList();
+                            Locationwp home = new Locationwp();
+                            try
+                            {
+                                home.id = (ushort)MAVLink.MAV_CMD.WAYPOINT;
+                                home.lat = (double.Parse(TXT_homelat.Text));
+                                home.lng = (double.Parse(TXT_homelng.Text));
+                                home.alt = (float.Parse(TXT_homealt.Text) / CurrentState.multiplierdist); // use saved home
+                            }
+                            catch { }
+
+                            list.Insert(0, home);
+
+                            var format = MissionFile.ConvertFromLocationwps(list, (byte)(altmode)CMB_altmode.SelectedValue);
+
+                            MissionFile.WriteFile(file, format);
+                            return;
+                        }
+
+                        StreamWriter sw = new StreamWriter(file);
+                        sw.WriteLine("QGC WPL 110");
+                        try
+                        {
+                            sw.WriteLine("0\t1\t0\t16\t0\t0\t0\t0\t" +
+                                         double.Parse(TXT_homelat.Text).ToString("0.000000", new CultureInfo("en-US")) +
+                                         "\t" +
+                                         double.Parse(TXT_homelng.Text).ToString("0.000000", new CultureInfo("en-US")) +
+                                         "\t" +
+                                         double.Parse(TXT_homealt.Text).ToString("0.000000", new CultureInfo("en-US")) +
+                                         "\t1");
+                        }
+                        catch
+                        {
+                            sw.WriteLine("0\t1\t0\t0\t0\t0\t0\t0\t0\t0\t0\t1");
+                        }
+                        for (int a = 0; a < Commands.Rows.Count - 0; a++)
+                        {
+                            ushort mode = 0;
+
+                            if (Commands.Rows[a].Cells[0].Value.ToString() == "UNKNOWN")
+                            {
+                                mode = (ushort)Commands.Rows[a].Cells[Command.Index].Tag;
+                            }
+                            else
+                            {
+                                mode =
+                                (ushort)
+                                    (MAVLink.MAV_CMD)
+                                        Enum.Parse(typeof(MAVLink.MAV_CMD), Commands.Rows[a].Cells[Command.Index].Value.ToString());
+                            }
+
+                            sw.Write((a + 1)); // seq
+                            sw.Write("\t" + 0); // current
+                            sw.Write("\t" + CMB_altmode.SelectedValue); //frame 
+                            sw.Write("\t" + mode);
+                            sw.Write("\t" +
+                                     double.Parse(Commands.Rows[a].Cells[Param1.Index].Value.ToString())
+                                         .ToString("0.000000", new CultureInfo("en-US")));
+                            sw.Write("\t" +
+                                     double.Parse(Commands.Rows[a].Cells[Param2.Index].Value.ToString())
+                                         .ToString("0.000000", new CultureInfo("en-US")));
+                            sw.Write("\t" +
+                                     double.Parse(Commands.Rows[a].Cells[Param3.Index].Value.ToString())
+                                         .ToString("0.000000", new CultureInfo("en-US")));
+                            sw.Write("\t" +
+                                     double.Parse(Commands.Rows[a].Cells[Param4.Index].Value.ToString())
+                                         .ToString("0.000000", new CultureInfo("en-US")));
+                            sw.Write("\t" +
+                                     double.Parse(Commands.Rows[a].Cells[Lat.Index].Value.ToString())
+                                         .ToString("0.000000", new CultureInfo("en-US")));
+                            sw.Write("\t" +
+                                     double.Parse(Commands.Rows[a].Cells[Lon.Index].Value.ToString())
+                                         .ToString("0.000000", new CultureInfo("en-US")));
+                            sw.Write("\t" +
+                                     (double.Parse(Commands.Rows[a].Cells[Alt.Index].Value.ToString()) /
+                                      CurrentState.multiplierdist).ToString("0.000000", new CultureInfo("en-US")));
+                            if (Commands.Rows[a].Cells[TagData.Index].Value != null)
+                            {
+                                sw.Write("\t" +
+                                         ((HsTag)Commands.Rows[a].Cells[TagData.Index].Value).wp_type);
+
+                                sw.Write("\t" +
+                                         ((HsTag)Commands.Rows[a].Cells[TagData.Index].Value).wp_color);
+                            }
+                            else
+                            {
+                                sw.Write("\t" +
+                                         "NormalWP");
+                                sw.Write("\t" +
+                                         "green");
+                            }
+                            sw.Write("\t" + 1);
+                            sw.WriteLine("");
+                        }
+                        sw.Close();
+
+                        lbl_wpfile.Text = "Saved " + Path.GetFileName(file);
+                    }
+                    catch (Exception)
+                    {
+                        CustomMessageBox.Show(Strings.ERROR);
+                    }
+                }
+        }
+
         /// <summary>
         /// Writes the mission from the datagrid and values to the EEPROM
         /// </summary>
@@ -2237,6 +2481,9 @@ namespace MissionPlanner.GCSViews
         /// <param name="e"></param>
         public void BUT_write_Click(object sender, EventArgs e)
         {
+            CMB_displaywp.SelectedIndex = 0;
+            writeKML();
+            savecurrentwaypoints();
             if ((altmode) CMB_altmode.SelectedValue == altmode.Absolute)
             {
                 if (DialogResult.No ==
@@ -3122,6 +3369,61 @@ namespace MissionPlanner.GCSViews
                 sr.Close();
 
                 processToScreen(cmds, append);
+
+                sr = new StreamReader(file); //"defines.h"
+                header = sr.ReadLine();
+                int a = 0;
+                while (!error && !sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
+                    // waypoints
+
+                    if (line.StartsWith("#"))
+                        continue;
+
+                    string[] items = line.Split(new[] { '\t', ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+                    if (items.Length <= 9)
+                        continue;
+
+                    if (int.Parse(items[0]) == 0)
+                        continue;
+                    HsTag t = new HsTag();
+                    t.wp_type = HsWPType.NormalWP;
+                    t.wp_color = GMarkerGoogleType.green;
+                    try
+                    {
+                        if (items[11] == HsWPType.NormalWP.ToString())
+                            t.wp_type = HsWPType.NormalWP;
+                        else if (items[11] == HsWPType.Takeoff_Adjust.ToString())
+                            t.wp_type = HsWPType.Takeoff_Adjust;
+                        else if (items[11] == HsWPType.Takeoff_LoiterToAlt.ToString())
+                            t.wp_type = HsWPType.Takeoff_LoiterToAlt;
+                        else if (items[11] == HsWPType.Landing_LoiterToAlt.ToString())
+                            t.wp_type = HsWPType.Landing_LoiterToAlt;
+                        else if (items[11] == HsWPType.Landing_Adjust.ToString())
+                            t.wp_type = HsWPType.Landing_Adjust;
+                        else if (items[11] == HsWPType.Landing_Leadin.ToString())
+                            t.wp_type = HsWPType.Landing_Leadin;
+
+                        if (items[12] == GMarkerGoogleType.green.ToString())
+                            t.wp_color = GMarkerGoogleType.green;
+                        else if (items[12] == GMarkerGoogleType.blue.ToString())
+                            t.wp_color = GMarkerGoogleType.blue;
+                        else if (items[12] == GMarkerGoogleType.orange.ToString())
+                            t.wp_color = GMarkerGoogleType.orange;
+
+                        Commands.Rows[a].Cells[TagData.Index].Tag = t;
+                        Commands.Rows[a].Cells[TagData.Index].Value = t;
+                        a++;
+                    }
+                    catch
+                    {
+                        CustomMessageBox.Show("Line invalid\n" + line);
+                    }
+                }
+
+                sr.Close();
 
                 writeKML();
 
@@ -5270,6 +5572,12 @@ namespace MissionPlanner.GCSViews
                 CMB_altmode.Visible = true;
             }
 
+            CMB_displaywp.Items.Clear();
+            CMB_displaywp.Items.Add("全部航点");
+            CMB_displaywp.Items.Add("起飞航点");
+            CMB_displaywp.Items.Add("飞行航点");
+            CMB_displaywp.Items.Add("降落航点");
+            CMB_displaywp.SelectedIndex = 0;
             //switchDockingToolStripMenuItem_Click(null, null);
 
             updateHome();
@@ -6958,6 +7266,15 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             }
         }
 
+        private void CMB_displaywp_SelectedIndexChanged(object sender, EventArgs e)
+        {
+          //  if (CMB_displaywp.SelectedValue == null)
+            {
+               // CMB_displaywp.SelectedIndex = 0;
+            }
+            writeKML();
+        }
+
         private void fromSHPToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog fd = new OpenFileDialog())
@@ -7270,10 +7587,10 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
 
         private void addGridToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            if (polygongridmode == false)
+            //if (polygongridmode == false)
             {
-                CustomMessageBox.Show(
-                    "You will remain in polygon mode until you clear the polygon or create a grid/upload a fence");
+                //CustomMessageBox.Show(
+                //    "You will remain in polygon mode until you clear the polygon or create a grid/upload a fence");
             }
 
             polygongridmode = true;
@@ -7447,5 +7764,118 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             }
 
     }
-}
+
+        private void saveGridToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (drawnpolygon.Points.Count == 0)
+            {
+                return;
+            }
+
+
+            using (SaveFileDialog sf = new SaveFileDialog())
+            {
+                sf.Filter = "Polygon (*.poly)|*.poly";
+                sf.ShowDialog();
+                if (sf.FileName != "")
+                {
+                    try
+                    {
+                        StreamWriter sw = new StreamWriter(sf.OpenFile());
+
+                        sw.WriteLine("#saved by Mission Planner " + Application.ProductVersion);
+
+                        if (drawnpolygon.Points.Count > 0)
+                        {
+                            foreach (var pll in drawnpolygon.Points)
+                            {
+                                sw.WriteLine(pll.Lat + " " + pll.Lng);
+                            }
+
+                            PointLatLng pll2 = drawnpolygon.Points[0];
+
+                            sw.WriteLine(pll2.Lat + " " + pll2.Lng);
+                        }
+
+                        sw.Close();
+                    }
+                    catch
+                    {
+                        CustomMessageBox.Show("Failed to write fence file");
+                    }
+                }
+            }
+        }
+
+        private void loadGridToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog fd = new OpenFileDialog())
+            {
+                fd.Filter = "Polygon (*.poly)|*.poly";
+                fd.ShowDialog();
+                if (File.Exists(fd.FileName))
+                {
+                    StreamReader sr = new StreamReader(fd.OpenFile());
+
+                    drawnpolygonsoverlay.Markers.Clear();
+                    drawnpolygonsoverlay.Polygons.Clear();
+                    drawnpolygon.Points.Clear();
+
+                    int a = 0;
+
+                    while (!sr.EndOfStream)
+                    {
+                        string line = sr.ReadLine();
+                        if (line.StartsWith("#"))
+                        {
+                        }
+                        else
+                        {
+                            string[] items = line.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+
+                            if (items.Length < 2)
+                                continue;
+
+                            drawnpolygon.Points.Add(new PointLatLng(double.Parse(items[0]), double.Parse(items[1])));
+                            addpolygonmarkergrid(drawnpolygon.Points.Count.ToString(), double.Parse(items[1]),
+                                double.Parse(items[0]), 0);
+
+                            a++;
+                        }
+                    }
+
+                    // remove loop close
+                    if (drawnpolygon.Points.Count > 1 &&
+                        drawnpolygon.Points[0] == drawnpolygon.Points[drawnpolygon.Points.Count - 1])
+                    {
+                        drawnpolygon.Points.RemoveAt(drawnpolygon.Points.Count - 1);
+                    }
+
+                    drawnpolygonsoverlay.Polygons.Add(drawnpolygon);
+
+                    MainMap.UpdatePolygonLocalPosition(drawnpolygon);
+
+                    MainMap.Invalidate();
+
+                    MainMap.ZoomAndCenterMarkers(drawnpolygonsoverlay.Id);
+                }
+            }
+        }
+
+        public UInt32 GetLandWaypoint()
+        {
+            UInt32 ret = 0xffffffff;
+
+            for (int i = 0; i < Commands.Rows.Count; i++)
+            {
+                if (Commands.Rows[i].Cells[TagData.Index].Value != null)
+                {
+                    if (((HsTag)Commands.Rows[i].Cells[TagData.Index].Tag).wp_type == HsWPType.Landing_Adjust)
+                        return (UInt32)i + 1;
+                }
+            }
+
+            return ret;
+        }
+    }
 }
