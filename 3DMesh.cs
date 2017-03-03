@@ -51,7 +51,7 @@ namespace MissionPlanner.Mesh
         int vertOffset, normOffset, texcoordOffset;
         OpenTK.Vector3d up = new OpenTK.Vector3d(0.0, 1.0, 0.0);
         OpenTK.Vector3d viewDirection = new OpenTK.Vector3d(1.0, 1.0, 1.0);
-        double viewDist = 370f;
+        double viewDist = 1.2f;
         bool loaded = false;
         string vShaderSource = @"
 void main() {
@@ -73,7 +73,7 @@ void main() {
         {
 
             this.Name = "_3DMesh";
-
+            this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.panel_MouseWheel);
             //eps.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, 50L); // or whatever other quality value you want
 
             //objBitmap.MakeTransparent();
@@ -214,7 +214,7 @@ void main() {
                 GL.UseProgram(CompileShaders());
                 LoadBuffers(m);
 
-               // GL.Viewport(0, 0, Width, Height);
+                // GL.Viewport(0, 0, Width, Height);
 
                 double aspect_ratio = Width / (double)Height;
 
@@ -226,24 +226,24 @@ void main() {
 
             loaded = true;
 
-        // Alternate method: create a Timer with an interval argument to the constructor. 
-        //aTimer = new System.Timers.Timer(2000); 
+            // Alternate method: create a Timer with an interval argument to the constructor. 
+            //aTimer = new System.Timers.Timer(2000); 
 
-        // Create a timer with a two second interval.
-        aTimer = new System.Timers.Timer(34);
+            // Create a timer with a two second interval.
+            aTimer = new System.Timers.Timer(34);
 
-        // Hook up the Elapsed event for the timer. 
-        aTimer.Elapsed += OnTimedEvent;
+            // Hook up the Elapsed event for the timer. 
+            aTimer.Elapsed += OnTimedEvent;
 
-        // Have the timer fire repeated events (true is the default)
-        aTimer.AutoReset = true;
+            // Have the timer fire repeated events (true is the default)
+            aTimer.AutoReset = true;
 
-        // Start the timer
-        aTimer.Enabled = true;
+            // Start the timer
+            aTimer.Enabled = true;
 
         }
 
-        protected  void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
+        protected void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
         {
             using (Graphics gg = this.CreateGraphics())
             {
@@ -251,7 +251,7 @@ void main() {
             }
         }
 
-      
+
         protected override void OnResize(EventArgs e)
         {
 
@@ -269,7 +269,7 @@ void main() {
 
             try
             {
-               // GL.Viewport(0, 0, Width, Height);
+                // GL.Viewport(0, 0, Width, Height);
 
                 double aspect_ratio = Width / (double)Height;
 
@@ -281,7 +281,7 @@ void main() {
 
             //base.OnResize(e);
         }
-      
+
         public static double ConvertDegreesToRadians(double degrees)
         {
             double radians = (Math.PI / 180) * degrees;
@@ -377,13 +377,14 @@ void main() {
                 GL.LoadMatrix(ref camera);
 
                 GL.BindBuffer(BufferTarget.ArrayBuffer, dataBuffer);
+                /*
                 //GL.BufferSubData<float>(BufferTarget.ArrayBuffer, (IntPtr)0,(IntPtr)1, ref a);
                 IntPtr data = GL.MapBuffer(BufferTarget.ArrayBuffer, BufferAccess.ReadWrite);
                 unsafe
                 {
                     float* vdata = (float*)data.ToPointer();
                     double lineAlpha = Math.Atan2(Math.Abs(m.Vertices[92].Y - m.Vertices[158].Y), Math.Abs(m.Vertices[92].X - m.Vertices[158].X));
-                    double ldeg = (((float)_aileron_l - 255f) / 180f) * 90f ;
+                    double ldeg = (((float)_aileron_l - 255f) / 180f) * 90f;
                     for (int tri = 44; tri <= 84; tri++)
                     {
                         double Alpha = Math.Atan2(Math.Abs(m.Vertices[92].Y - m.Vertices[m.Tris[tri].P1.Vertex].Y), Math.Abs(m.Vertices[92].X - m.Vertices[m.Tris[tri].P1.Vertex].X));
@@ -480,15 +481,22 @@ void main() {
 
                 }
                 GL.UnmapBuffer(BufferTarget.ArrayBuffer);
-                
-                GL.Rotate(45, 0.0f, 1.0f, 0.0f);
-                GL.Rotate(-125, 1.0f, 0.0f, 0.0f);
+                */
+
+                GL.Rotate(-135, 0.0f, 1.0f, 0.0f);
+                GL.Rotate(35, 1.0f, 0.0f, 0.0f);
+
+
+              //  GL.Rotate(90, 0.0f, 1.0f, 0.0f);//ywa 90
+               // GL.Rotate(45, 0.0f, 0.0f, 1.0f);//roll 45
+               // GL.Rotate(45, 1.0f, 0.0f, 0.0f);//pitch 45
+                //GL.Rotate(-180, 0.0f, 0.0f, 1.0f);
                 if (yawrotate)
-                GL.Rotate(-_heading, 0.0f, 0.0f, 1.0f);
-                GL.Rotate(_roll, 0.0f, 1.0f, 0.0f);
-                GL.Rotate(_pitch, 1.0f, 0.0f, 0.0f);
-                
-                
+                   GL.Rotate(-_heading, 0.0f, 1.0f, 0.0f);
+                GL.Rotate(_roll, 0.0f, 0.0f, 1.0f);
+                GL.Rotate(-_pitch, 1.0f, 0.0f, 0.0f);
+
+
                 DrawBuffer();
 
                 SwapBuffers();
@@ -498,12 +506,12 @@ void main() {
             Thread.Sleep(1);
         }
 
-        protected  void OnUpdateFrame(FrameEventArgs e)
+        protected void OnUpdateFrame(FrameEventArgs e)
         {
             //base.OnUpdateFrame(e);
         }
 
-        protected  void OnRenderFrame(FrameEventArgs e)
+        protected void OnRenderFrame(FrameEventArgs e)
         {
             //base.OnRenderFrame(e);
 
@@ -527,26 +535,28 @@ void main() {
         }
 
         // Example of how you would draw things in (deprecated) immediate mode.
-        
-        private void DrawMesh() {
+
+        private void DrawMesh()
+        {
             GL.BindTexture(TextureTarget.Texture2D, tex);
             GL.Begin(BeginMode.Triangles);
-			
-            foreach(Tri t in m.Tris) {
+
+            foreach (Tri t in m.Tris)
+            {
                 foreach (Meshomatic.mPoint p in t.Points())
                 {
                     Meshomatic.Vector3 v = m.Vertices[p.Vertex];
                     Meshomatic.Vector3 n = m.Normals[p.Normal];
                     Meshomatic.Vector2 tc = m.TexCoords[p.TexCoord];
                     GL.Normal3(n.X, n.Y, n.Z);
-                    GL.TexCoord2(tc.X, 1- tc.Y);
+                    GL.TexCoord2(tc.X, 1 - tc.Y);
                     GL.Vertex3(v.X, v.Y, v.Z);
                 }
             }
-			
+
             GL.End();
         }
-        
+
 
         // XXX: TODO: Make this work
         static bool IsPowerOf2(Bitmap b)
@@ -571,28 +581,29 @@ void main() {
                 throw new FormatException("Texture sizes must be powers of 2!");
             }
 
-            
-    try
-       {
-           
-            GL.Hint(HintTarget.PerspectiveCorrectionHint, HintMode.Nicest);
 
-            GL.GenTextures(1, out texture);
-            GL.BindTexture(TextureTarget.Texture2D, texture);
+            try
+            {
 
-            BitmapData data = bitmap.LockBits(new System.Drawing.Rectangle(0, 0, bitmap.Width, bitmap.Height),
-                ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                GL.Hint(HintTarget.PerspectiveCorrectionHint, HintMode.Nicest);
 
-            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, data.Width, data.Height, 0,
-                OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, data.Scan0);
-            bitmap.UnlockBits(data);
+                GL.GenTextures(1, out texture);
+                GL.BindTexture(TextureTarget.Texture2D, texture);
 
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
-            return texture;
-        }catch (Exception ex) { Console.WriteLine("HUD opengl onload 2 ", ex); }
-    return 0;
-            
+                BitmapData data = bitmap.LockBits(new System.Drawing.Rectangle(0, 0, bitmap.Width, bitmap.Height),
+                    ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+
+                GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, data.Width, data.Height, 0,
+                    OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, data.Scan0);
+                bitmap.UnlockBits(data);
+
+                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
+                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
+                return texture;
+            }
+            catch (Exception ex) { Console.WriteLine("HUD opengl onload 2 ", ex); }
+            return 0;
+
         }
 
         private void InitializeComponent()
@@ -632,5 +643,11 @@ void main() {
 
         }
 
+        private void panel_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            viewDist += -((float)e.Delta/1200.0f);
+            if (viewDist <= 0)
+                viewDist = 0;
+        }
     }
 }
