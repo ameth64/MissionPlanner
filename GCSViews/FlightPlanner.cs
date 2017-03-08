@@ -2283,13 +2283,12 @@ namespace MissionPlanner.GCSViews
 
         private void getcurrentwaypoints()
         {
+            StreamReader sr = null;
             string file = "currentwp.txt";
             if (File.Exists(file))
             {
-                StreamReader sr = new StreamReader(file); //"defines.h"
-                string header = sr.ReadLine();
                 sr = new StreamReader(file); //"defines.h"
-                header = sr.ReadLine();
+                string header = sr.ReadLine();
                 int a = 0;
                 bool error = false;
                 while (!error && !sr.EndOfStream)
@@ -2310,8 +2309,9 @@ namespace MissionPlanner.GCSViews
                     HsTag t = new HsTag();
                     t.wp_type = HsWPType.NormalWP;
                     t.wp_color = GMarkerGoogleType.green;
-                    if (items[8] == double.Parse(Commands.Rows[a].Cells[Lat.Index].Value.ToString()).ToString("0.000000", new CultureInfo("en-US"))
-                        && items[9] == double.Parse(Commands.Rows[a].Cells[Lon.Index].Value.ToString()).ToString("0.000000", new CultureInfo("en-US")))
+                    double latdiff = Math.Abs(double.Parse(items[8]) - double.Parse(Commands.Rows[a].Cells[Lat.Index].Value.ToString()));
+                    double londiff = Math.Abs(double.Parse(items[9]) - double.Parse(Commands.Rows[a].Cells[Lon.Index].Value.ToString()));
+                    if (latdiff < 0.00001f && londiff <0.00001f) 
                     {
                         try
                         {
@@ -2352,7 +2352,7 @@ namespace MissionPlanner.GCSViews
                 }
 
                 sr.Close();
-
+                sr.Dispose();
                 writeKML();
 
                 MainMap.ZoomAndCenterMarkers("objects");
@@ -2361,7 +2361,7 @@ namespace MissionPlanner.GCSViews
 
         private void savecurrentwaypoints()
         {
-
+            StreamWriter sw = null;
                 string file = "currentwp.txt";
                 if (file != "" )
                 {
@@ -2388,7 +2388,7 @@ namespace MissionPlanner.GCSViews
                             return;
                         }
 
-                        StreamWriter sw = new StreamWriter(file);
+                        sw = new StreamWriter(file);
                         sw.WriteLine("QGC WPL 110");
                         try
                         {
@@ -2445,7 +2445,8 @@ namespace MissionPlanner.GCSViews
                             sw.Write("\t" +
                                      (double.Parse(Commands.Rows[a].Cells[Alt.Index].Value.ToString()) /
                                       CurrentState.multiplierdist).ToString("0.000000", new CultureInfo("en-US")));
-                            if (Commands.Rows[a].Cells[TagData.Index].Value != null)
+                            if (Commands.Rows[a].Cells[TagData.Index].Value != null &&
+                                Commands.Rows[a].Cells[TagData.Index].Value.ToString() != "0")
                             {
                                 sw.Write("\t" +
                                          ((HsTag)Commands.Rows[a].Cells[TagData.Index].Value).wp_type);
@@ -2464,13 +2465,15 @@ namespace MissionPlanner.GCSViews
                             sw.WriteLine("");
                         }
                         sw.Close();
+                        sw.Dispose();
+                    
 
                         lbl_wpfile.Text = "Saved " + Path.GetFileName(file);
                     }
                     catch (Exception)
                     {
                         CustomMessageBox.Show(Strings.ERROR);
-                    }
+                     }
                 }
         }
 
