@@ -1386,14 +1386,28 @@ namespace MissionPlanner.GCSViews
                                     double.Parse(cell2) + homealt, (a + 1).ToString()));
                                 fullpointlist.Add(pointlist[pointlist.Count - 1]);
                                 //取出航点tag
+                                GMarkerGoogleType wpc = GMarkerGoogleType.green;
+                                Color color = Color.Green;
                                 Type t = Commands.Rows[a].Cells[TagData.Index].Value.GetType();
-                                GMarkerGoogleType wpc = (t.Name == "HsTag") ?
-                                    ((HsTag)Commands.Rows[a].Cells[TagData.Index].Value).wp_color: 
-                                    GMarkerGoogleType.green;
+                                if( t.Name == "HsTag")
+                                {
+                                     wpc = ((HsTag)Commands.Rows[a].Cells[TagData.Index].Value).wp_color;
+                                     if (wpc.ToString() == "green")
+                                        color = Color.Green;
+                                     else if(wpc.ToString() == "blue")
+                                            color = Color.Blue;
+                                     else if (wpc.ToString() == "orange")
+                                        color = Color.Orange;
+                                }
+                                else{
+                                     wpc = GMarkerGoogleType.green;
+                                     color = Color.Green;
+
+                                }
                                 if (CMB_displaywp.SelectedItem.ToString() == "全部航点")
                                 {
                                     addpolygonmarker((a + 1).ToString(), double.Parse(cell4), double.Parse(cell3),
-                                        double.Parse(cell2), null, wpc);
+                                        double.Parse(cell2), color, wpc);
                                 }
                                 else if(CMB_displaywp.SelectedItem.ToString() == "起飞航点")
                                 {
@@ -1401,7 +1415,7 @@ namespace MissionPlanner.GCSViews
                                         || ((HsTag)Commands.Rows[a].Cells[TagData.Index].Tag).wp_type.ToString() == HsWPType.Takeoff_LoiterToAlt.ToString())
                                     {
                                         addpolygonmarker((a + 1).ToString(), double.Parse(cell4), double.Parse(cell3),
-                                          double.Parse(cell2), null, wpc);
+                                          double.Parse(cell2), color, wpc);
                                     }
                                 }
                                 else if (CMB_displaywp.SelectedItem.ToString() == "降落航点")
@@ -1411,7 +1425,7 @@ namespace MissionPlanner.GCSViews
                                         || ((HsTag)Commands.Rows[a].Cells[TagData.Index].Tag).wp_type.ToString() == HsWPType.Landing_Leadin.ToString())
                                     {
                                         addpolygonmarker((a + 1).ToString(), double.Parse(cell4), double.Parse(cell3),
-                                          double.Parse(cell2), null, wpc);
+                                          double.Parse(cell2), color, wpc);
                                     }
                                 }
                                 else if (CMB_displaywp.SelectedItem.ToString() == "飞行航点")
@@ -1419,13 +1433,13 @@ namespace MissionPlanner.GCSViews
                                     if (((HsTag)Commands.Rows[a].Cells[TagData.Index].Tag).wp_type.ToString() == HsWPType.NormalWP.ToString())
                                     {
                                         addpolygonmarker((a + 1).ToString(), double.Parse(cell4), double.Parse(cell3),
-                                          double.Parse(cell2), null, wpc);
+                                          double.Parse(cell2), color, wpc);
                                     }
                                 }
                                 else
                                 {
                                     addpolygonmarker((a + 1).ToString(), double.Parse(cell4), double.Parse(cell3),
-                                        double.Parse(cell2), null, wpc);
+                                        double.Parse(cell2), color, wpc);
                                 }
                             }
 
