@@ -1544,7 +1544,7 @@ namespace MissionPlanner.GCSViews
 
         private void BUT_standby_Click(object sender, EventArgs e)
         {
-                MainV2.comPort.setMode("Stabilize");
+                MainV2.comPort.setMode("Manual");
         }
 
         private void BUT_parachute_Click(object sender, EventArgs e)
@@ -1914,9 +1914,9 @@ namespace MissionPlanner.GCSViews
                 else
                 {
                     if (!MainV2.comPort.MAV.cs.armed)
-                        BUT_ARM.Text = "解锁";
-                    else
                         BUT_ARM.Text = "锁定";
+                    else
+                        BUT_ARM.Text = "解锁";
                 }
             }
             catch
