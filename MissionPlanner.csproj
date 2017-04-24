@@ -364,11 +364,15 @@
       <DependentUpon>Tracker.cs</DependentUpon>
     </Compile>
     <Compile Include="Arduino\IArduinoComms.cs" />
+    <Compile Include="Comms\CommsSerialPipe.cs" />
     <Compile Include="Controls\ControlSensorsStatus.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\ControlSensorsStatus.Designer.cs">
       <DependentUpon>ControlSensorsStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MyDataGridView.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="DistanceCaremaMOD.cs" />
     <Compile Include="GCSViews\ConfigurationView\ConfigGPSInject.cs">
@@ -1004,6 +1008,7 @@
     <Compile Include="Utilities\AP_GPS_SBF.cs" />
     <Compile Include="Utilities\AP_Terrain.cs" />
     <Compile Include="Utilities\dxf.cs" />
+    <Compile Include="Utilities\ExpireType.cs" />
     <Compile Include="Utilities\Extensions.cs" />
     <Compile Include="Utilities\GMapMarkerOverlapCount.cs" />
     <Compile Include="Utilities\GMapMarkerPOI.cs" />
@@ -1029,7 +1034,9 @@
     <Compile Include="Utilities\ListExtension.cs" />
     <Compile Include="Utilities\LogAnalyzer.cs" />
     <Compile Include="NoFly\NoFly.cs" />
+    <Compile Include="Utilities\Math.cs" />
     <Compile Include="Utilities\NGEN.cs" />
+    <Compile Include="Utilities\nmea.cs" />
     <Compile Include="Utilities\OpticalFlow.cs" />
     <Compile Include="Utilities\ParameterMetaDataRepositoryAPM.cs" />
     <Compile Include="Utilities\ParameterMetaDataRepositoryPX4.cs" />
