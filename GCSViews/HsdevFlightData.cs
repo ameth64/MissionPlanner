@@ -164,7 +164,39 @@ namespace MissionPlanner.GCSViews
 
             _3DMesh1.yawrotate = true;
 
+            string planetype_file = String.Format("{0}{1}{2}", Application.StartupPath, Path.DirectorySeparatorChar, "\\planetype.txt");
 
+
+
+            StreamReader sr = new StreamReader(planetype_file); //"defines.h"
+            if (sr != null)
+            {
+                while (!sr.EndOfStream)
+                {
+                    string planetype = sr.ReadLine();
+                    if (planetype.Contains("#"))
+                        continue;
+
+                    string[] items = planetype.Split(' ');
+                    if (items.Length == 10)
+                    {
+                        rocker1.checkBox1.Checked = (int.Parse(items[1]) == 1) ? true : false;
+                        rocker1.checkBox2.Checked = (int.Parse(items[2]) == 1) ? true : false;
+                        rocker1.checkBox3.Checked = (int.Parse(items[3]) == 1) ? true : false;
+                        rocker1.checkBox4.Checked = (int.Parse(items[4]) == 1) ? true : false;
+                        rocker1.mode = 0;
+
+                        rocker2.checkBox1.Checked = (int.Parse(items[5]) == 1) ? true : false;
+                        rocker2.checkBox2.Checked = (int.Parse(items[6]) == 1) ? true : false;
+                        rocker2.checkBox3.Checked = (int.Parse(items[7]) == 1) ? true : false;
+                        rocker2.checkBox4.Checked = (int.Parse(items[8]) == 1) ? true : false;
+                        rocker2.mode = int.Parse(items[9]);
+                        break;
+                    }
+                }
+            }
+
+            sr.Close();
         }
 
         public void CreateChart(ZedGraphControl zgc)
@@ -1462,16 +1494,16 @@ namespace MissionPlanner.GCSViews
                     myheight = tabGauges.Width / 2;
 
                 Gvspeed.Height = myheight;
-                Gspeed.Height = myheight;
-                Galt.Height = myheight;
+                rocker1.Height = myheight;
+                rocker2.Height = myheight;
                 Gheading.Height = myheight;
 
                 Gvspeed.Location = new Point(0, 0);
-                Gspeed.Location = new Point(Gvspeed.Right, 0);
+                rocker1.Location = new Point(Gvspeed.Right, 0);
 
 
-                Galt.Location = new Point(0, Gspeed.Bottom);
-                Gheading.Location = new Point(Galt.Right, Gspeed.Bottom);
+                rocker2.Location = new Point(0, rocker1.Bottom);
+                Gheading.Location = new Point(rocker2.Right, rocker1.Bottom);
 
                 return;
             }
@@ -1495,16 +1527,16 @@ namespace MissionPlanner.GCSViews
                 mywidth = tabGauges.Width / 4;
 
                 Gvspeed.Height = mywidth;
-                Gspeed.Height = mywidth;
-                Galt.Height = mywidth;
+                rocker1.Height = mywidth;
+                rocker2.Height = mywidth;
                 Gheading.Height = mywidth;
 
                 Gvspeed.Location = new Point(0, 0);
-                Gspeed.Location = new Point(Gvspeed.Right, 0);
+                rocker1.Location = new Point(Gvspeed.Right, 0);
             }
 
-            Galt.Location = new Point(Gspeed.Right, 0);
-            Gheading.Location = new Point(Galt.Right, 0);
+            rocker2.Location = new Point(rocker1.Right, 0);
+            Gheading.Location = new Point(rocker2.Right, 0);
         }
 
         private void splitContainer5_Panel1_Resize(object sender, EventArgs e)

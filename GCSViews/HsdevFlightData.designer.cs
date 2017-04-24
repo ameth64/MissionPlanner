@@ -39,10 +39,10 @@
             this.hud2 = new MissionPlanner.Controls.HUD();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.rocker2 = new MissionPlanner.Controls.Rocker();
+            this.rocker1 = new MissionPlanner.Controls.Rocker();
             this.Gvspeed = new AGaugeApp.AGauge();
             this.bindingSourceGaugesTab = new System.Windows.Forms.BindingSource(this.components);
-            this.Galt = new AGaugeApp.AGauge();
-            this.Gspeed = new AGaugeApp.AGauge();
             this.Gheading = new MissionPlanner.Controls.HSI();
             this.label16 = new System.Windows.Forms.Label();
             this.cameranum = new System.Windows.Forms.Label();
@@ -118,9 +118,9 @@
             this.contextMenuStripMap = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.flyToHereAltToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fixbattery = new System.Windows.Forms.ToolStripMenuItem();
+            this.landStartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ZedGraphTimer = new System.Windows.Forms.Timer(this.components);
             this.bindingSourceStatusTab = new System.Windows.Forms.BindingSource(this.components);
-            this.landStartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -192,7 +192,7 @@
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
             this.splitContainer2.Panel2.Controls.Add(this.panel1);
             this.splitContainer2.Size = new System.Drawing.Size(460, 529);
-            this.splitContainer2.SplitterDistance = 215;
+            this.splitContainer2.SplitterDistance = 214;
             this.splitContainer2.TabIndex = 81;
             // 
             // splitContainer5
@@ -209,7 +209,7 @@
             // splitContainer5.Panel2
             // 
             this.splitContainer5.Panel2.Controls.Add(this.hud2);
-            this.splitContainer5.Size = new System.Drawing.Size(460, 215);
+            this.splitContainer5.Size = new System.Drawing.Size(460, 214);
             this.splitContainer5.SplitterDistance = 224;
             this.splitContainer5.TabIndex = 6;
             // 
@@ -226,10 +226,11 @@
             this._3DMesh1.Dock = System.Windows.Forms.DockStyle.Fill;
             this._3DMesh1.heading = 0F;
             this._3DMesh1.Location = new System.Drawing.Point(0, 0);
+            this._3DMesh1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this._3DMesh1.Name = "_3DMesh1";
             this._3DMesh1.pitch = 0F;
             this._3DMesh1.roll = 0F;
-            this._3DMesh1.Size = new System.Drawing.Size(224, 215);
+            this._3DMesh1.Size = new System.Drawing.Size(224, 214);
             this._3DMesh1.TabIndex = 0;
             this._3DMesh1.VSync = false;
             this._3DMesh1.AutoSizeChanged += new System.EventHandler(this._3DMesh1_AutoSizeChanged);
@@ -302,7 +303,7 @@
             this.hud2.lowairspeed = false;
             this.hud2.lowgroundspeed = false;
             this.hud2.lowvoltagealert = false;
-            this.hud2.Margin = new System.Windows.Forms.Padding(4);
+            this.hud2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.hud2.message = "";
             this.hud2.messagetime = new System.DateTime(((long)(0)));
             this.hud2.mode = "Unknown";
@@ -313,7 +314,7 @@
             this.hud2.pitch = 0F;
             this.hud2.roll = 0F;
             this.hud2.Russian = false;
-            this.hud2.Size = new System.Drawing.Size(232, 215);
+            this.hud2.Size = new System.Drawing.Size(232, 214);
             this.hud2.status = false;
             this.hud2.streamjpg = null;
             this.hud2.TabIndex = 4;
@@ -356,7 +357,7 @@
             this.splitContainer3.Panel2.Controls.Add(this.BUT_quickrtl);
             this.splitContainer3.Panel2.Controls.Add(this.BUT_quickauto);
             this.splitContainer3.Panel2.Controls.Add(this.BUTrestartmission);
-            this.splitContainer3.Size = new System.Drawing.Size(460, 310);
+            this.splitContainer3.Size = new System.Drawing.Size(460, 311);
             this.splitContainer3.SplitterDistance = 259;
             this.splitContainer3.TabIndex = 84;
             // 
@@ -369,9 +370,9 @@
             // 
             // splitContainer4.Panel1
             // 
+            this.splitContainer4.Panel1.Controls.Add(this.rocker2);
+            this.splitContainer4.Panel1.Controls.Add(this.rocker1);
             this.splitContainer4.Panel1.Controls.Add(this.Gvspeed);
-            this.splitContainer4.Panel1.Controls.Add(this.Galt);
-            this.splitContainer4.Panel1.Controls.Add(this.Gspeed);
             this.splitContainer4.Panel1.Controls.Add(this.Gheading);
             // 
             // splitContainer4.Panel2
@@ -431,8 +432,46 @@
             this.splitContainer4.Panel2.Controls.Add(this.targetairspeed_value);
             this.splitContainer4.Panel2.Resize += new System.EventHandler(this.splitContainer4_Panel2_Resize);
             this.splitContainer4.Size = new System.Drawing.Size(460, 259);
-            this.splitContainer4.SplitterDistance = 132;
+            this.splitContainer4.SplitterDistance = 131;
             this.splitContainer4.TabIndex = 0;
+            // 
+            // rocker2
+            // 
+            this.rocker2.BackColor = System.Drawing.Color.Transparent;
+            this.rocker2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("rocker2.BackgroundImage")));
+            this.rocker2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.rocker2.DataBindings.Add(new System.Windows.Forms.Binding("rockerin1", this.bindingSourceHud, "ch3in", true));
+            this.rocker2.DataBindings.Add(new System.Windows.Forms.Binding("rockerin2", this.bindingSourceHud, "ch4in", true));
+            this.rocker2.DataBindings.Add(new System.Windows.Forms.Binding("rockerout1", this.bindingSourceHud, "ch3out", true));
+            this.rocker2.DataBindings.Add(new System.Windows.Forms.Binding("rockerout2", this.bindingSourceHud, "ch4out", true));
+            this.rocker2.Location = new System.Drawing.Point(246, 11);
+            this.rocker2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rocker2.Name = "rocker2";
+            this.rocker2.rockerin1 = 1500;
+            this.rocker2.rockerin2 = 1500;
+            this.rocker2.rockerout1 = 1500;
+            this.rocker2.rockerout2 = 1500;
+            this.rocker2.Size = new System.Drawing.Size(92, 92);
+            this.rocker2.TabIndex = 145;
+            // 
+            // rocker1
+            // 
+            this.rocker1.BackColor = System.Drawing.Color.Transparent;
+            this.rocker1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("rocker1.BackgroundImage")));
+            this.rocker1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.rocker1.DataBindings.Add(new System.Windows.Forms.Binding("rockerin1", this.bindingSourceHud, "ch2in", true));
+            this.rocker1.DataBindings.Add(new System.Windows.Forms.Binding("rockerin2", this.bindingSourceHud, "ch1in", true));
+            this.rocker1.DataBindings.Add(new System.Windows.Forms.Binding("rockerout1", this.bindingSourceHud, "ch2out", true));
+            this.rocker1.DataBindings.Add(new System.Windows.Forms.Binding("rockerout2", this.bindingSourceHud, "ch1out", true));
+            this.rocker1.Location = new System.Drawing.Point(130, 11);
+            this.rocker1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rocker1.Name = "rocker1";
+            this.rocker1.rockerin1 = 1500;
+            this.rocker1.rockerin2 = 1500;
+            this.rocker1.rockerout1 = 1500;
+            this.rocker1.rockerout2 = 1500;
+            this.rocker1.Size = new System.Drawing.Size(92, 92);
+            this.rocker1.TabIndex = 144;
             // 
             // Gvspeed
             // 
@@ -585,303 +624,6 @@
             // bindingSourceGaugesTab
             // 
             this.bindingSourceGaugesTab.DataSource = typeof(MissionPlanner.CurrentState);
-            // 
-            // Galt
-            // 
-            this.Galt.BackColor = System.Drawing.Color.Transparent;
-            this.Galt.BackgroundImage = global::MissionPlanner.Properties.Resources.Gaugebg;
-            this.Galt.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.Galt.BaseArcColor = System.Drawing.Color.Transparent;
-            this.Galt.BaseArcRadius = 60;
-            this.Galt.BaseArcStart = 135;
-            this.Galt.BaseArcSweep = 270;
-            this.Galt.BaseArcWidth = 2;
-            this.Galt.Cap_Idx = ((byte)(0));
-            this.Galt.CapColor = System.Drawing.Color.White;
-            this.Galt.CapColors = new System.Drawing.Color[] {
-        System.Drawing.Color.White,
-        System.Drawing.Color.Black,
-        System.Drawing.Color.Black,
-        System.Drawing.Color.Black,
-        System.Drawing.Color.Black};
-            this.Galt.CapPosition = new System.Drawing.Point(68, 85);
-            this.Galt.CapsPosition = new System.Drawing.Point[] {
-        new System.Drawing.Point(68, 85),
-        new System.Drawing.Point(30, 55),
-        new System.Drawing.Point(10, 10),
-        new System.Drawing.Point(10, 10),
-        new System.Drawing.Point(10, 10)};
-            this.Galt.CapsText = new string[] {
-        "电量",
-        "",
-        "",
-        "",
-        ""};
-            this.Galt.CapText = "电量";
-            this.Galt.Center = new System.Drawing.Point(75, 75);
-            this.Galt.DataBindings.Add(new System.Windows.Forms.Binding("Value0", this.bindingSourceGaugesTab, "battery_voltage", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, "14"));
-            this.Galt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.Galt.Location = new System.Drawing.Point(245, 11);
-            this.Galt.Margin = new System.Windows.Forms.Padding(0);
-            this.Galt.MaxValue = 17F;
-            this.Galt.MinValue = 14F;
-            this.Galt.Name = "Galt";
-            this.Galt.Need_Idx = ((byte)(3));
-            this.Galt.NeedleColor1 = AGaugeApp.AGauge.NeedleColorEnum.Red;
-            this.Galt.NeedleColor2 = System.Drawing.Color.Red;
-            this.Galt.NeedleEnabled = false;
-            this.Galt.NeedleRadius = 80;
-            this.Galt.NeedlesColor1 = new AGaugeApp.AGauge.NeedleColorEnum[] {
-        AGaugeApp.AGauge.NeedleColorEnum.Gray,
-        AGaugeApp.AGauge.NeedleColorEnum.Gray,
-        AGaugeApp.AGauge.NeedleColorEnum.Red,
-        AGaugeApp.AGauge.NeedleColorEnum.Red};
-            this.Galt.NeedlesColor2 = new System.Drawing.Color[] {
-        System.Drawing.Color.White,
-        System.Drawing.Color.White,
-        System.Drawing.Color.White,
-        System.Drawing.Color.Red};
-            this.Galt.NeedlesEnabled = new bool[] {
-        true,
-        false,
-        false,
-        false};
-            this.Galt.NeedlesRadius = new int[] {
-        50,
-        30,
-        50,
-        80};
-            this.Galt.NeedlesType = new int[] {
-        0,
-        0,
-        0,
-        0};
-            this.Galt.NeedlesWidth = new int[] {
-        2,
-        2,
-        2,
-        2};
-            this.Galt.NeedleType = 0;
-            this.Galt.NeedleWidth = 2;
-            this.Galt.Range_Idx = ((byte)(0));
-            this.Galt.RangeColor = System.Drawing.Color.LightGreen;
-            this.Galt.RangeEnabled = false;
-            this.Galt.RangeEndValue = 90F;
-            this.Galt.RangeInnerRadius = 1;
-            this.Galt.RangeOuterRadius = 20;
-            this.Galt.RangesColor = new System.Drawing.Color[] {
-        System.Drawing.Color.LightGreen,
-        System.Drawing.Color.Red,
-        System.Drawing.Color.Orange,
-        System.Drawing.SystemColors.Control,
-        System.Drawing.SystemColors.Control};
-            this.Galt.RangesEnabled = new bool[] {
-        false,
-        false,
-        false,
-        false,
-        false};
-            this.Galt.RangesEndValue = new float[] {
-        90F,
-        200F,
-        150F,
-        0F,
-        0F};
-            this.Galt.RangesInnerRadius = new int[] {
-        1,
-        1,
-        1,
-        70,
-        70};
-            this.Galt.RangesOuterRadius = new int[] {
-        20,
-        60,
-        60,
-        80,
-        80};
-            this.Galt.RangesStartValue = new float[] {
-        0F,
-        150F,
-        75F,
-        0F,
-        0F};
-            this.Galt.RangeStartValue = 0F;
-            this.Galt.ScaleLinesInterColor = System.Drawing.Color.White;
-            this.Galt.ScaleLinesInterInnerRadius = 52;
-            this.Galt.ScaleLinesInterOuterRadius = 60;
-            this.Galt.ScaleLinesInterWidth = 1;
-            this.Galt.ScaleLinesMajorColor = System.Drawing.Color.White;
-            this.Galt.ScaleLinesMajorInnerRadius = 50;
-            this.Galt.ScaleLinesMajorOuterRadius = 60;
-            this.Galt.ScaleLinesMajorStepValue = 14F;
-            this.Galt.ScaleLinesMajorWidth = 1;
-            this.Galt.ScaleLinesMinorColor = System.Drawing.Color.White;
-            this.Galt.ScaleLinesMinorInnerRadius = 55;
-            this.Galt.ScaleLinesMinorNumOf = 9;
-            this.Galt.ScaleLinesMinorOuterRadius = 60;
-            this.Galt.ScaleLinesMinorWidth = 1;
-            this.Galt.ScaleNumbersColor = System.Drawing.Color.White;
-            this.Galt.ScaleNumbersFormat = "0";
-            this.Galt.ScaleNumbersRadius = 42;
-            this.Galt.ScaleNumbersRotation = 0;
-            this.Galt.ScaleNumbersStartScaleLine = 1;
-            this.Galt.ScaleNumbersStepScaleLines = 1;
-            this.Galt.Size = new System.Drawing.Size(92, 92);
-            this.Galt.TabIndex = 141;
-            this.Galt.Value = 0F;
-            this.Galt.Value0 = 14F;
-            this.Galt.Value1 = 0F;
-            this.Galt.Value2 = 0F;
-            this.Galt.Value3 = 0F;
-            // 
-            // Gspeed
-            // 
-            this.Gspeed.BackColor = System.Drawing.Color.Transparent;
-            this.Gspeed.BackgroundImage = global::MissionPlanner.Properties.Resources.Gaugebg;
-            this.Gspeed.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.Gspeed.BaseArcColor = System.Drawing.Color.Transparent;
-            this.Gspeed.BaseArcRadius = 70;
-            this.Gspeed.BaseArcStart = 135;
-            this.Gspeed.BaseArcSweep = 300;
-            this.Gspeed.BaseArcWidth = 2;
-            this.Gspeed.Cap_Idx = ((byte)(0));
-            this.Gspeed.CapColor = System.Drawing.Color.White;
-            this.Gspeed.CapColors = new System.Drawing.Color[] {
-        System.Drawing.Color.White,
-        System.Drawing.Color.White,
-        System.Drawing.Color.Black,
-        System.Drawing.Color.Black,
-        System.Drawing.Color.Black};
-            this.Gspeed.CapPosition = new System.Drawing.Point(58, 85);
-            this.Gspeed.CapsPosition = new System.Drawing.Point[] {
-        new System.Drawing.Point(58, 85),
-        new System.Drawing.Point(50, 110),
-        new System.Drawing.Point(10, 10),
-        new System.Drawing.Point(10, 10),
-        new System.Drawing.Point(10, 10)};
-            this.Gspeed.CapsText = new string[] {
-        "速度",
-        "",
-        "",
-        "",
-        ""};
-            this.Gspeed.CapText = "速度";
-            this.Gspeed.Center = new System.Drawing.Point(75, 75);
-            this.Gspeed.DataBindings.Add(new System.Windows.Forms.Binding("Value0", this.bindingSourceGaugesTab, "airspeed", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
-            this.Gspeed.DataBindings.Add(new System.Windows.Forms.Binding("Value1", this.bindingSourceGaugesTab, "groundspeed", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
-            this.Gspeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Gspeed.Location = new System.Drawing.Point(130, 11);
-            this.Gspeed.Margin = new System.Windows.Forms.Padding(0);
-            this.Gspeed.MaxValue = 150F;
-            this.Gspeed.MinValue = 0F;
-            this.Gspeed.Name = "Gspeed";
-            this.Gspeed.Need_Idx = ((byte)(3));
-            this.Gspeed.NeedleColor1 = AGaugeApp.AGauge.NeedleColorEnum.Gray;
-            this.Gspeed.NeedleColor2 = System.Drawing.Color.Brown;
-            this.Gspeed.NeedleEnabled = false;
-            this.Gspeed.NeedleRadius = 70;
-            this.Gspeed.NeedlesColor1 = new AGaugeApp.AGauge.NeedleColorEnum[] {
-        AGaugeApp.AGauge.NeedleColorEnum.Red,
-        AGaugeApp.AGauge.NeedleColorEnum.Blue,
-        AGaugeApp.AGauge.NeedleColorEnum.Blue,
-        AGaugeApp.AGauge.NeedleColorEnum.Gray};
-            this.Gspeed.NeedlesColor2 = new System.Drawing.Color[] {
-        System.Drawing.Color.White,
-        System.Drawing.Color.White,
-        System.Drawing.Color.White,
-        System.Drawing.Color.Brown};
-            this.Gspeed.NeedlesEnabled = new bool[] {
-        true,
-        true,
-        false,
-        false};
-            this.Gspeed.NeedlesRadius = new int[] {
-        50,
-        50,
-        70,
-        70};
-            this.Gspeed.NeedlesType = new int[] {
-        0,
-        0,
-        0,
-        0};
-            this.Gspeed.NeedlesWidth = new int[] {
-        2,
-        1,
-        2,
-        2};
-            this.Gspeed.NeedleType = 0;
-            this.Gspeed.NeedleWidth = 2;
-            this.Gspeed.Range_Idx = ((byte)(2));
-            this.Gspeed.RangeColor = System.Drawing.Color.Orange;
-            this.Gspeed.RangeEnabled = false;
-            this.Gspeed.RangeEndValue = 50F;
-            this.Gspeed.RangeInnerRadius = 1;
-            this.Gspeed.RangeOuterRadius = 70;
-            this.Gspeed.RangesColor = new System.Drawing.Color[] {
-        System.Drawing.Color.LightGreen,
-        System.Drawing.Color.Red,
-        System.Drawing.Color.Orange,
-        System.Drawing.SystemColors.Control,
-        System.Drawing.SystemColors.Control};
-            this.Gspeed.RangesEnabled = new bool[] {
-        false,
-        false,
-        false,
-        false,
-        false};
-            this.Gspeed.RangesEndValue = new float[] {
-        35F,
-        60F,
-        50F,
-        0F,
-        0F};
-            this.Gspeed.RangesInnerRadius = new int[] {
-        1,
-        1,
-        1,
-        70,
-        70};
-            this.Gspeed.RangesOuterRadius = new int[] {
-        70,
-        70,
-        70,
-        80,
-        80};
-            this.Gspeed.RangesStartValue = new float[] {
-        0F,
-        50F,
-        12F,
-        0F,
-        0F};
-            this.Gspeed.RangeStartValue = 12F;
-            this.Gspeed.ScaleLinesInterColor = System.Drawing.Color.OrangeRed;
-            this.Gspeed.ScaleLinesInterInnerRadius = 52;
-            this.Gspeed.ScaleLinesInterOuterRadius = 60;
-            this.Gspeed.ScaleLinesInterWidth = 1;
-            this.Gspeed.ScaleLinesMajorColor = System.Drawing.Color.LightGray;
-            this.Gspeed.ScaleLinesMajorInnerRadius = 50;
-            this.Gspeed.ScaleLinesMajorOuterRadius = 60;
-            this.Gspeed.ScaleLinesMajorStepValue = 10F;
-            this.Gspeed.ScaleLinesMajorWidth = 2;
-            this.Gspeed.ScaleLinesMinorColor = System.Drawing.Color.Maroon;
-            this.Gspeed.ScaleLinesMinorInnerRadius = 55;
-            this.Gspeed.ScaleLinesMinorNumOf = 9;
-            this.Gspeed.ScaleLinesMinorOuterRadius = 60;
-            this.Gspeed.ScaleLinesMinorWidth = 1;
-            this.Gspeed.ScaleNumbersColor = System.Drawing.Color.DarkGray;
-            this.Gspeed.ScaleNumbersFormat = null;
-            this.Gspeed.ScaleNumbersRadius = 42;
-            this.Gspeed.ScaleNumbersRotation = 0;
-            this.Gspeed.ScaleNumbersStartScaleLine = 1;
-            this.Gspeed.ScaleNumbersStepScaleLines = 1;
-            this.Gspeed.Size = new System.Drawing.Size(92, 92);
-            this.Gspeed.TabIndex = 140;
-            this.Gspeed.Value = 0F;
-            this.Gspeed.Value0 = 0F;
-            this.Gspeed.Value1 = 0F;
-            this.Gspeed.Value2 = 0F;
-            this.Gspeed.Value3 = 0F;
             // 
             // Gheading
             // 
@@ -1558,7 +1300,7 @@
             // 
             this.zg1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.zg1.Location = new System.Drawing.Point(0, 0);
-            this.zg1.Margin = new System.Windows.Forms.Padding(4);
+            this.zg1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.zg1.Name = "zg1";
             this.zg1.ScrollGrace = 0D;
             this.zg1.ScrollMaxX = 0D;
@@ -1567,7 +1309,7 @@
             this.zg1.ScrollMinX = 0D;
             this.zg1.ScrollMinY = 0D;
             this.zg1.ScrollMinY2 = 0D;
-            this.zg1.Size = new System.Drawing.Size(150, 178);
+            this.zg1.Size = new System.Drawing.Size(100, 119);
             this.zg1.TabIndex = 81;
             this.zg1.Visible = false;
             // 
@@ -1576,7 +1318,7 @@
             this.windDir1.BackColor = System.Drawing.Color.Transparent;
             this.windDir1.DataBindings.Add(new System.Windows.Forms.Binding("Direction", this.bindingSourceHud, "wind_dir", true));
             this.windDir1.DataBindings.Add(new System.Windows.Forms.Binding("Speed", this.bindingSourceHud, "wind_vel", true));
-            this.windDir1.Direction = 360D;
+            this.windDir1.Direction = 180D;
             this.windDir1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.windDir1.Location = new System.Drawing.Point(3, 3);
             this.windDir1.Name = "windDir1";
@@ -1642,6 +1384,13 @@
             this.fixbattery.Text = "修正电池电压";
             this.fixbattery.Click += new System.EventHandler(this.changebatteryvalue);
             // 
+            // landStartToolStripMenuItem
+            // 
+            this.landStartToolStripMenuItem.Name = "landStartToolStripMenuItem";
+            this.landStartToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.landStartToolStripMenuItem.Text = "执行降落";
+            this.landStartToolStripMenuItem.Click += new System.EventHandler(this.landStartToolStripMenuItem_Click);
+            // 
             // ZedGraphTimer
             // 
             this.ZedGraphTimer.Tick += new System.EventHandler(this.timer1_Tick);
@@ -1649,13 +1398,6 @@
             // bindingSourceStatusTab
             // 
             this.bindingSourceStatusTab.DataSource = typeof(MissionPlanner.CurrentState);
-            // 
-            // landStartToolStripMenuItem
-            // 
-            this.landStartToolStripMenuItem.Name = "landStartToolStripMenuItem";
-            this.landStartToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.landStartToolStripMenuItem.Text = "执行降落";
-            this.landStartToolStripMenuItem.Click += new System.EventHandler(this.landStartToolStripMenuItem_Click);
             // 
             // HsdevFlightData
             // 
@@ -1715,8 +1457,6 @@
         private Controls.MyButton BUT_quickauto;
         private Controls.MyButton BUT_quickrtl;
         private Controls.HSI Gheading;
-        private AGaugeApp.AGauge Gspeed;
-        private AGaugeApp.AGauge Galt;
         private AGaugeApp.AGauge Gvspeed;
         private System.Windows.Forms.BindingSource bindingSourceGaugesTab;
         private System.Windows.Forms.SplitContainer splitContainer3;
@@ -1794,5 +1534,7 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label cameranum;
         private System.Windows.Forms.ToolStripMenuItem landStartToolStripMenuItem;
+        private Controls.Rocker rocker2;
+        private Controls.Rocker rocker1;
     }
 }
