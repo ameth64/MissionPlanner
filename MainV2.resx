@@ -898,7 +898,7 @@
     <value>menu</value>
   </data>
   <data name="&gt;&gt;menu.Type" xml:space="preserve">
-    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6269.30126, Culture=neutral, PublicKeyToken=null</value>
+    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6324.21745, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;menu.Parent" xml:space="preserve">
     <value>$this</value>
@@ -2602,7 +2602,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Mission Planner - By Michael Oborne</value>
+    <value>HSGCS</value>
   </data>
   <data name="&gt;&gt;autoHideToolStripMenuItem.Name" xml:space="preserve">
     <value>autoHideToolStripMenuItem</value>
@@ -2698,7 +2698,7 @@
     <value>toolStripConnectionControl</value>
   </data>
   <data name="&gt;&gt;toolStripConnectionControl.Type" xml:space="preserve">
-    <value>MissionPlanner.Controls.ToolStripConnectionControl, MissionPlanner, Version=1.1.6269.30221, Culture=neutral, PublicKeyToken=null</value>
+    <value>MissionPlanner.Controls.ToolStripConnectionControl, MissionPlanner, Version=1.1.6324.21750, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;MenuDonate.Name" xml:space="preserve">
     <value>MenuDonate</value>

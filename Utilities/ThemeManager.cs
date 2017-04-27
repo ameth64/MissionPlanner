@@ -737,21 +737,22 @@ mc:Ignorable=""d""
 
         private static void SetBurntKermitColors()
         {
-            BGColor = Color.FromArgb(0x26, 0x27, 0x28);                     // This changes the colour of the main menu background
-            ControlBGColor = Color.FromArgb(0x43, 0x44, 0x45);              // This changes the colour of the sub menu backgrounds
+            BGColor = Color.FromArgb(45, 45, 48);                     // This changes the colour of the main menu background
+            ControlBGColor = Color.FromArgb(45, 45, 48);              // This changes the colour of the sub menu backgrounds
             TextColor = Color.White;                                        // This changes the colour of text
             BGColorTextBox = Color.FromArgb(0x43, 0x44, 0x45);              // This changes the colour of the background of textboxes
-            ButtonTextColor = Color.FromArgb(64, 87, 4);                    // This changes the colour of button text
-            ButBG = Color.FromArgb(148, 193, 31);                           // This changes the colour of button backgrounds (Top)
-            ButBGBot = Color.FromArgb(205, 226, 150);                       // This changes the colour of button backgrounds (Bot)
-            ProgressBarColorTop = Color.FromArgb(102, 139, 26);             // These three variables change the colours of progress bars
-            ProgressBarColorBot = Color.FromArgb(124, 164, 40);
-            ProgressBarOutlineColor = Color.FromArgb(150, 174, 112);
+            ButtonTextColor = Color.FromArgb(255, 255, 255);                    // This changes the colour of button text
+            ButBG = Color.FromArgb(51, 51, 55);                           // This changes the colour of button backgrounds (Top)
+            ButBGBot = Color.FromArgb(51, 51, 55);                       // This changes the colour of button backgrounds (Bot)
+            ButBorder = Color.FromArgb(67, 67, 70);
+            ProgressBarColorTop = Color.FromArgb(28, 151, 234);             // These three variables change the colours of progress bars
+            ProgressBarColorBot = Color.FromArgb(28, 151, 234);
+            ProgressBarOutlineColor = Color.FromArgb(255, 255, 255);
             BannerColor1 = Color.FromArgb(0x40, 0x57, 0x04);                // These two variables change the colours of banners such as "planner" umder configuration
             BannerColor2 = Color.FromArgb(0x94, 0xC1, 0x1F);
-            ColorNotEnabled = Color.FromArgb(73, 43, 58, 3);                // This changes the background color of buttons when not enabled
-            ColorMouseOver = Color.FromArgb(73, 43, 58, 3);                 // This changes the background color of buttons when the mouse is hovering over a button
-            ColorMouseDown = Color.FromArgb(73, 43, 58, 3);                 // This changes the background color of buttons when the mouse is clicked down on a button
+            ColorNotEnabled = Color.FromArgb(73, 51, 51, 55);                // This changes the background color of buttons when not enabled
+            ColorMouseOver = Color.FromArgb(28, 151, 234);                 // This changes the background color of buttons when the mouse is hovering over a button
+            ColorMouseDown = Color.FromArgb(97, 190, 253);                 // This changes the background color of buttons when the mouse is clicked down on a button
             CurrentPPMBackground = Color.Green;                             // This changes the background colour of the current PPM setting in the flight modes tab
             ZedGraphChartFill = Color.FromArgb(0x1F, 0x1F, 0x20);           // These three variables change the fill colours of Zed Graphs
             ZedGraphPaneFill = Color.FromArgb(0x37, 0x37, 0x38);

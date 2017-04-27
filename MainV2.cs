@@ -496,7 +496,7 @@ namespace MissionPlanner
             }
 
             InitializeComponent();
-            Utilities.ThemeManager.ApplyThemeTo(this);
+            //Utilities.ThemeManager.ApplyThemeTo(this);
             MyView = new MainSwitcher(this);
 
             View = MyView;
@@ -597,8 +597,10 @@ namespace MissionPlanner
                 changelanguage(CultureInfoEx.GetCultureInfo(Settings.Instance["language"]));
             }
 
-            this.Text = splash.Text;
-            titlebar = splash.Text;
+            //this.Text = splash.Text + " - HSGCS";
+            //titlebar = splash.Text + " - HSGCS";
+            this.Text = "HSGCS - V0.9";
+            titlebar = "HSGCS - V0.9";
 
             if (!MONO) // windows only
             {

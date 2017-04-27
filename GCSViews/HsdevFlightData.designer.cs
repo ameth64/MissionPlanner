@@ -36,7 +36,7 @@
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
             this._3DMesh1 = new MissionPlanner.Mesh._3DMesh();
             this.bindingSourceHud = new System.Windows.Forms.BindingSource(this.components);
-            this.hud2 = new MissionPlanner.Controls.HUD();
+            this.hud2 = new MissionPlanner.Controls.HSHUD();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.Gvspeed = new AGaugeApp.AGauge();
@@ -118,9 +118,9 @@
             this.contextMenuStripMap = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.flyToHereAltToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fixbattery = new System.Windows.Forms.ToolStripMenuItem();
+            this.landStartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ZedGraphTimer = new System.Windows.Forms.Timer(this.components);
             this.bindingSourceStatusTab = new System.Windows.Forms.BindingSource(this.components);
-            this.landStartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -172,8 +172,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer6);
-            this.splitContainer1.Size = new System.Drawing.Size(1040, 529);
-            this.splitContainer1.SplitterDistance = 460;
+            this.splitContainer1.Size = new System.Drawing.Size(1366, 768);
+            this.splitContainer1.SplitterDistance = 602;
             this.splitContainer1.TabIndex = 79;
             // 
             // splitContainer2
@@ -191,8 +191,8 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
             this.splitContainer2.Panel2.Controls.Add(this.panel1);
-            this.splitContainer2.Size = new System.Drawing.Size(460, 529);
-            this.splitContainer2.SplitterDistance = 215;
+            this.splitContainer2.Size = new System.Drawing.Size(602, 768);
+            this.splitContainer2.SplitterDistance = 311;
             this.splitContainer2.TabIndex = 81;
             // 
             // splitContainer5
@@ -209,8 +209,8 @@
             // splitContainer5.Panel2
             // 
             this.splitContainer5.Panel2.Controls.Add(this.hud2);
-            this.splitContainer5.Size = new System.Drawing.Size(460, 215);
-            this.splitContainer5.SplitterDistance = 224;
+            this.splitContainer5.Size = new System.Drawing.Size(602, 311);
+            this.splitContainer5.SplitterDistance = 293;
             this.splitContainer5.TabIndex = 6;
             // 
             // _3DMesh1
@@ -229,7 +229,7 @@
             this._3DMesh1.Name = "_3DMesh1";
             this._3DMesh1.pitch = 0F;
             this._3DMesh1.roll = 0F;
-            this._3DMesh1.Size = new System.Drawing.Size(224, 215);
+            this._3DMesh1.Size = new System.Drawing.Size(293, 311);
             this._3DMesh1.TabIndex = 0;
             this._3DMesh1.VSync = false;
             this._3DMesh1.AutoSizeChanged += new System.EventHandler(this._3DMesh1_AutoSizeChanged);
@@ -284,6 +284,8 @@
             this.hud2.DataBindings.Add(new System.Windows.Forms.Binding("wpno", this.bindingSourceHud, "wpno", true));
             this.hud2.DataBindings.Add(new System.Windows.Forms.Binding("xtrack_error", this.bindingSourceHud, "xtrack_error", true));
             this.hud2.datetime = new System.DateTime(((long)(0)));
+            this.hud2.displayekf = false;
+            this.hud2.displayvibe = false;
             this.hud2.disttowp = 0F;
             this.hud2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.hud2.ekfstatus = 0F;
@@ -296,7 +298,7 @@
             this.hud2.groundcourse = 0F;
             this.hud2.groundspeed = 0F;
             this.hud2.heading = 0F;
-            this.hud2.hudcolor = System.Drawing.Color.LightGray;
+            this.hud2.hudcolor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(241)))), ((int)(((byte)(30)))));
             this.hud2.linkqualitygcs = 0F;
             this.hud2.Location = new System.Drawing.Point(0, 0);
             this.hud2.lowairspeed = false;
@@ -313,7 +315,7 @@
             this.hud2.pitch = 0F;
             this.hud2.roll = 0F;
             this.hud2.Russian = false;
-            this.hud2.Size = new System.Drawing.Size(232, 215);
+            this.hud2.Size = new System.Drawing.Size(305, 311);
             this.hud2.status = false;
             this.hud2.streamjpg = null;
             this.hud2.TabIndex = 4;
@@ -321,7 +323,7 @@
             this.hud2.targetheading = 0F;
             this.hud2.targetspeed = 0F;
             this.hud2.turnrate = 0F;
-            this.hud2.UseOpenGL = false;
+            this.hud2.UseOpenGL = true;
             this.hud2.verticalspeed = 0F;
             this.hud2.vibex = 0F;
             this.hud2.vibey = 0F;
@@ -356,8 +358,10 @@
             this.splitContainer3.Panel2.Controls.Add(this.BUT_quickrtl);
             this.splitContainer3.Panel2.Controls.Add(this.BUT_quickauto);
             this.splitContainer3.Panel2.Controls.Add(this.BUTrestartmission);
-            this.splitContainer3.Size = new System.Drawing.Size(460, 310);
-            this.splitContainer3.SplitterDistance = 259;
+            this.splitContainer3.Panel2.Margin = new System.Windows.Forms.Padding(2);
+            this.splitContainer3.Panel2.Padding = new System.Windows.Forms.Padding(4);
+            this.splitContainer3.Size = new System.Drawing.Size(602, 453);
+            this.splitContainer3.SplitterDistance = 376;
             this.splitContainer3.TabIndex = 84;
             // 
             // splitContainer4
@@ -430,8 +434,8 @@
             this.splitContainer4.Panel2.Controls.Add(this.xtrack_value);
             this.splitContainer4.Panel2.Controls.Add(this.targetairspeed_value);
             this.splitContainer4.Panel2.Resize += new System.EventHandler(this.splitContainer4_Panel2_Resize);
-            this.splitContainer4.Size = new System.Drawing.Size(460, 259);
-            this.splitContainer4.SplitterDistance = 132;
+            this.splitContainer4.Size = new System.Drawing.Size(602, 376);
+            this.splitContainer4.SplitterDistance = 190;
             this.splitContainer4.TabIndex = 0;
             // 
             // Gvspeed
@@ -597,9 +601,9 @@
             this.Galt.BaseArcSweep = 270;
             this.Galt.BaseArcWidth = 2;
             this.Galt.Cap_Idx = ((byte)(0));
-            this.Galt.CapColor = System.Drawing.Color.White;
+            this.Galt.CapColor = System.Drawing.Color.DodgerBlue;
             this.Galt.CapColors = new System.Drawing.Color[] {
-        System.Drawing.Color.White,
+        System.Drawing.Color.DodgerBlue,
         System.Drawing.Color.Black,
         System.Drawing.Color.Black,
         System.Drawing.Color.Black,
@@ -623,8 +627,8 @@
             this.Galt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.Galt.Location = new System.Drawing.Point(245, 11);
             this.Galt.Margin = new System.Windows.Forms.Padding(0);
-            this.Galt.MaxValue = 17F;
-            this.Galt.MinValue = 14F;
+            this.Galt.MaxValue = 35F;
+            this.Galt.MinValue = 0F;
             this.Galt.Name = "Galt";
             this.Galt.Need_Idx = ((byte)(3));
             this.Galt.NeedleColor1 = AGaugeApp.AGauge.NeedleColorEnum.Red;
@@ -664,13 +668,13 @@
             this.Galt.NeedleType = 0;
             this.Galt.NeedleWidth = 2;
             this.Galt.Range_Idx = ((byte)(0));
-            this.Galt.RangeColor = System.Drawing.Color.LightGreen;
+            this.Galt.RangeColor = System.Drawing.Color.DodgerBlue;
             this.Galt.RangeEnabled = false;
-            this.Galt.RangeEndValue = 90F;
+            this.Galt.RangeEndValue = 28F;
             this.Galt.RangeInnerRadius = 1;
             this.Galt.RangeOuterRadius = 20;
             this.Galt.RangesColor = new System.Drawing.Color[] {
-        System.Drawing.Color.LightGreen,
+        System.Drawing.Color.DodgerBlue,
         System.Drawing.Color.Red,
         System.Drawing.Color.Orange,
         System.Drawing.SystemColors.Control,
@@ -682,7 +686,7 @@
         false,
         false};
             this.Galt.RangesEndValue = new float[] {
-        90F,
+        28F,
         200F,
         150F,
         0F,
@@ -706,21 +710,21 @@
         0F,
         0F};
             this.Galt.RangeStartValue = 0F;
-            this.Galt.ScaleLinesInterColor = System.Drawing.Color.White;
+            this.Galt.ScaleLinesInterColor = System.Drawing.Color.DodgerBlue;
             this.Galt.ScaleLinesInterInnerRadius = 52;
             this.Galt.ScaleLinesInterOuterRadius = 60;
             this.Galt.ScaleLinesInterWidth = 1;
-            this.Galt.ScaleLinesMajorColor = System.Drawing.Color.White;
+            this.Galt.ScaleLinesMajorColor = System.Drawing.Color.DodgerBlue;
             this.Galt.ScaleLinesMajorInnerRadius = 50;
             this.Galt.ScaleLinesMajorOuterRadius = 60;
-            this.Galt.ScaleLinesMajorStepValue = 14F;
+            this.Galt.ScaleLinesMajorStepValue = 5F;
             this.Galt.ScaleLinesMajorWidth = 1;
-            this.Galt.ScaleLinesMinorColor = System.Drawing.Color.White;
+            this.Galt.ScaleLinesMinorColor = System.Drawing.Color.DodgerBlue;
             this.Galt.ScaleLinesMinorInnerRadius = 55;
-            this.Galt.ScaleLinesMinorNumOf = 9;
+            this.Galt.ScaleLinesMinorNumOf = 5;
             this.Galt.ScaleLinesMinorOuterRadius = 60;
             this.Galt.ScaleLinesMinorWidth = 1;
-            this.Galt.ScaleNumbersColor = System.Drawing.Color.White;
+            this.Galt.ScaleNumbersColor = System.Drawing.Color.DodgerBlue;
             this.Galt.ScaleNumbersFormat = "0";
             this.Galt.ScaleNumbersRadius = 42;
             this.Galt.ScaleNumbersRotation = 0;
@@ -729,7 +733,7 @@
             this.Galt.Size = new System.Drawing.Size(92, 92);
             this.Galt.TabIndex = 141;
             this.Galt.Value = 0F;
-            this.Galt.Value0 = 14F;
+            this.Galt.Value0 = 22F;
             this.Galt.Value1 = 0F;
             this.Galt.Value2 = 0F;
             this.Galt.Value3 = 0F;
@@ -901,80 +905,94 @@
             // 
             // label16
             // 
-            this.label16.Location = new System.Drawing.Point(360, 52);
+            this.label16.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label16.Location = new System.Drawing.Point(396, 84);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(38, 14);
+            this.label16.Size = new System.Drawing.Size(70, 16);
             this.label16.TabIndex = 165;
-            this.label16.Text = "相机:";
+            this.label16.Text = "相机：";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // cameranum
             // 
             this.cameranum.ContextMenuStrip = this.contextMenuStripHud;
             this.cameranum.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "triggernum", true));
-            this.cameranum.Location = new System.Drawing.Point(396, 53);
+            this.cameranum.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cameranum.Location = new System.Drawing.Point(470, 84);
             this.cameranum.Name = "cameranum";
-            this.cameranum.Size = new System.Drawing.Size(55, 12);
+            this.cameranum.Size = new System.Drawing.Size(50, 16);
             this.cameranum.TabIndex = 166;
             this.cameranum.Text = "0";
             // 
             // quadbat_time
             // 
             this.quadbat_time.ContextMenuStrip = this.contextMenuStripHud;
-            this.quadbat_time.Location = new System.Drawing.Point(375, 89);
+            this.quadbat_time.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.quadbat_time.Location = new System.Drawing.Point(470, 104);
             this.quadbat_time.Name = "quadbat_time";
-            this.quadbat_time.Size = new System.Drawing.Size(83, 11);
+            this.quadbat_time.Size = new System.Drawing.Size(60, 16);
             this.quadbat_time.TabIndex = 164;
             this.quadbat_time.Text = "0";
             // 
             // label24
             // 
-            this.label24.Location = new System.Drawing.Point(311, 88);
+            this.label24.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label24.Location = new System.Drawing.Point(396, 104);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(73, 12);
+            this.label24.Size = new System.Drawing.Size(70, 16);
             this.label24.TabIndex = 163;
             this.label24.Text = "旋翼时间：";
+            this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // quadbat_used
             // 
             this.quadbat_used.ContextMenuStrip = this.contextMenuStripHud;
             this.quadbat_used.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "battery2_usedmah", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N0"));
-            this.quadbat_used.Location = new System.Drawing.Point(254, 88);
+            this.quadbat_used.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.quadbat_used.Location = new System.Drawing.Point(339, 104);
             this.quadbat_used.Name = "quadbat_used";
-            this.quadbat_used.Size = new System.Drawing.Size(63, 12);
+            this.quadbat_used.Size = new System.Drawing.Size(50, 16);
             this.quadbat_used.TabIndex = 162;
             this.quadbat_used.Text = "0";
             // 
             // label23
             // 
-            this.label23.Location = new System.Drawing.Point(195, 88);
+            this.label23.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label23.Location = new System.Drawing.Point(266, 104);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(72, 12);
+            this.label23.Size = new System.Drawing.Size(70, 16);
             this.label23.TabIndex = 161;
-            this.label23.Text = "旋翼耗电:";
+            this.label23.Text = "旋翼耗电：";
+            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label15
             // 
-            this.label15.Location = new System.Drawing.Point(7, 88);
+            this.label15.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label15.Location = new System.Drawing.Point(5, 104);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(60, 12);
+            this.label15.Size = new System.Drawing.Size(70, 16);
             this.label15.TabIndex = 157;
-            this.label15.Text = "旋翼电压:";
+            this.label15.Text = "旋翼电压：";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label19
             // 
-            this.label19.Location = new System.Drawing.Point(98, 88);
+            this.label19.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label19.Location = new System.Drawing.Point(135, 104);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(61, 12);
+            this.label19.Size = new System.Drawing.Size(70, 16);
             this.label19.TabIndex = 159;
-            this.label19.Text = "旋翼电流:";
+            this.label19.Text = "旋翼电流：";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // quad_vlt
             // 
             this.quad_vlt.ContextMenuStrip = this.contextMenuStripHud;
             this.quad_vlt.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "battery_voltage2", true));
-            this.quad_vlt.Location = new System.Drawing.Point(65, 88);
+            this.quad_vlt.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.quad_vlt.Location = new System.Drawing.Point(77, 104);
             this.quad_vlt.Name = "quad_vlt";
-            this.quad_vlt.Size = new System.Drawing.Size(42, 12);
+            this.quad_vlt.Size = new System.Drawing.Size(50, 16);
             this.quad_vlt.TabIndex = 158;
             this.quad_vlt.Text = "0";
             // 
@@ -982,91 +1000,105 @@
             // 
             this.quad_current.ContextMenuStrip = this.contextMenuStripHud;
             this.quad_current.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "current2", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N0"));
-            this.quad_current.Location = new System.Drawing.Point(158, 88);
+            this.quad_current.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.quad_current.Location = new System.Drawing.Point(207, 104);
             this.quad_current.Name = "quad_current";
-            this.quad_current.Size = new System.Drawing.Size(39, 12);
+            this.quad_current.Size = new System.Drawing.Size(50, 16);
             this.quad_current.TabIndex = 160;
             this.quad_current.Text = "0";
             // 
             // timeinair
             // 
             this.timeinair.ContextMenuStrip = this.contextMenuStripHud;
-            this.timeinair.Location = new System.Drawing.Point(282, 108);
+            this.timeinair.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.timeinair.Location = new System.Drawing.Point(207, 124);
             this.timeinair.Name = "timeinair";
-            this.timeinair.Size = new System.Drawing.Size(83, 11);
+            this.timeinair.Size = new System.Drawing.Size(60, 16);
             this.timeinair.TabIndex = 156;
             this.timeinair.Text = "0";
             // 
             // BUT_parachute
             // 
             this.BUT_parachute.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BUT_parachute.Location = new System.Drawing.Point(440, 5);
+            this.BUT_parachute.Location = new System.Drawing.Point(582, 4);
             this.BUT_parachute.Name = "BUT_parachute";
             this.BUT_parachute.Size = new System.Drawing.Size(17, 16);
             this.BUT_parachute.TabIndex = 85;
             this.BUT_parachute.Text = "强制开伞";
+            this.BUT_parachute.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.BUT_parachute.UseVisualStyleBackColor = true;
             this.BUT_parachute.Visible = false;
             this.BUT_parachute.Click += new System.EventHandler(this.BUT_parachute_Click);
             // 
             // label20
             // 
-            this.label20.Location = new System.Drawing.Point(218, 107);
+            this.label20.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label20.Location = new System.Drawing.Point(135, 124);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(73, 12);
+            this.label20.Size = new System.Drawing.Size(70, 16);
             this.label20.TabIndex = 155;
             this.label20.Text = "飞行时间：";
+            this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // traveled_inkm
             // 
             this.traveled_inkm.ContextMenuStrip = this.contextMenuStripHud;
-            this.traveled_inkm.Location = new System.Drawing.Point(152, 108);
+            this.traveled_inkm.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.traveled_inkm.Location = new System.Drawing.Point(77, 124);
             this.traveled_inkm.Name = "traveled_inkm";
-            this.traveled_inkm.Size = new System.Drawing.Size(58, 12);
+            this.traveled_inkm.Size = new System.Drawing.Size(50, 16);
             this.traveled_inkm.TabIndex = 154;
             this.traveled_inkm.Text = "0";
             // 
             // label18
             // 
-            this.label18.Location = new System.Drawing.Point(111, 108);
+            this.label18.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label18.Location = new System.Drawing.Point(5, 124);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(53, 12);
+            this.label18.Size = new System.Drawing.Size(70, 16);
             this.label18.TabIndex = 153;
             this.label18.Text = "里程：";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // bat_used
             // 
             this.bat_used.ContextMenuStrip = this.contextMenuStripHud;
             this.bat_used.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "battery_usedmah", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N0"));
-            this.bat_used.Location = new System.Drawing.Point(44, 108);
+            this.bat_used.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.bat_used.Location = new System.Drawing.Point(339, 84);
             this.bat_used.Name = "bat_used";
-            this.bat_used.Size = new System.Drawing.Size(63, 12);
+            this.bat_used.Size = new System.Drawing.Size(50, 16);
             this.bat_used.TabIndex = 152;
             this.bat_used.Text = "0";
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(7, 108);
+            this.label1.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(266, 84);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.Size = new System.Drawing.Size(70, 16);
             this.label1.TabIndex = 151;
             this.label1.Text = "耗电：";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label30
             // 
-            this.label30.Location = new System.Drawing.Point(137, 32);
+            this.label30.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label30.Location = new System.Drawing.Point(266, 24);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(59, 12);
+            this.label30.Size = new System.Drawing.Size(70, 16);
             this.label30.TabIndex = 137;
             this.label30.Text = "GPS状态：";
+            this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // groundspeed_value
             // 
             this.groundspeed_value.ContextMenuStrip = this.contextMenuStripHud;
             this.groundspeed_value.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "groundspeed", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N0"));
-            this.groundspeed_value.Location = new System.Drawing.Point(280, 32);
+            this.groundspeed_value.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.groundspeed_value.Location = new System.Drawing.Point(470, 24);
             this.groundspeed_value.Name = "groundspeed_value";
-            this.groundspeed_value.Size = new System.Drawing.Size(30, 12);
+            this.groundspeed_value.Size = new System.Drawing.Size(50, 16);
             this.groundspeed_value.TabIndex = 76;
             this.groundspeed_value.Text = "0";
             // 
@@ -1074,35 +1106,41 @@
             // 
             this.airspeederror_value.ContextMenuStrip = this.contextMenuStripHud;
             this.airspeederror_value.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "aspd_error", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N0"));
-            this.airspeederror_value.Location = new System.Drawing.Point(373, 32);
+            this.airspeederror_value.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.airspeederror_value.Location = new System.Drawing.Point(470, 4);
             this.airspeederror_value.Name = "airspeederror_value";
-            this.airspeederror_value.Size = new System.Drawing.Size(32, 12);
+            this.airspeederror_value.Size = new System.Drawing.Size(50, 16);
             this.airspeederror_value.TabIndex = 132;
             this.airspeederror_value.Text = "0";
             // 
             // voltage
             // 
-            this.voltage.Location = new System.Drawing.Point(8, 71);
+            this.voltage.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.voltage.Location = new System.Drawing.Point(5, 84);
             this.voltage.Name = "voltage";
-            this.voltage.Size = new System.Drawing.Size(41, 12);
+            this.voltage.Size = new System.Drawing.Size(70, 16);
             this.voltage.TabIndex = 71;
-            this.voltage.Text = "电压:";
+            this.voltage.Text = "电压：";
+            this.voltage.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label12
             // 
-            this.label12.Location = new System.Drawing.Point(310, 10);
+            this.label12.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label12.Location = new System.Drawing.Point(266, 4);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(65, 12);
+            this.label12.Size = new System.Drawing.Size(70, 16);
             this.label12.TabIndex = 93;
             this.label12.Text = "目标空速：";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // compass_value
             // 
             this.compass_value.ContextMenuStrip = this.contextMenuStripHud;
             this.compass_value.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "yaw", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N0"));
-            this.compass_value.Location = new System.Drawing.Point(299, 72);
+            this.compass_value.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.compass_value.Location = new System.Drawing.Point(339, 64);
             this.compass_value.Name = "compass_value";
-            this.compass_value.Size = new System.Drawing.Size(34, 12);
+            this.compass_value.Size = new System.Drawing.Size(50, 16);
             this.compass_value.TabIndex = 88;
             this.compass_value.Text = "0";
             // 
@@ -1110,115 +1148,135 @@
             // 
             this.latitude_value.ContextMenuStrip = this.contextMenuStripHud;
             this.latitude_value.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "lat", true));
-            this.latitude_value.Location = new System.Drawing.Point(299, 51);
+            this.latitude_value.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.latitude_value.Location = new System.Drawing.Point(207, 64);
             this.latitude_value.Name = "latitude_value";
-            this.latitude_value.Size = new System.Drawing.Size(38, 12);
+            this.latitude_value.Size = new System.Drawing.Size(50, 16);
             this.latitude_value.TabIndex = 98;
             this.latitude_value.Text = "0";
             // 
             // label13
             // 
-            this.label13.Location = new System.Drawing.Point(165, 52);
+            this.label13.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label13.Location = new System.Drawing.Point(5, 64);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(41, 12);
+            this.label13.Size = new System.Drawing.Size(70, 16);
             this.label13.TabIndex = 95;
             this.label13.Text = "经度：";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label7
             // 
-            this.label7.Location = new System.Drawing.Point(156, 10);
+            this.label7.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label7.Location = new System.Drawing.Point(5, 4);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(41, 12);
+            this.label7.Size = new System.Drawing.Size(70, 16);
             this.label7.TabIndex = 83;
             this.label7.Text = "油门：";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // longitude_value
             // 
             this.longitude_value.ContextMenuStrip = this.contextMenuStripHud;
             this.longitude_value.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "lng", true));
-            this.longitude_value.Location = new System.Drawing.Point(206, 52);
+            this.longitude_value.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.longitude_value.Location = new System.Drawing.Point(77, 64);
             this.longitude_value.Name = "longitude_value";
-            this.longitude_value.Size = new System.Drawing.Size(45, 12);
+            this.longitude_value.Size = new System.Drawing.Size(50, 16);
             this.longitude_value.TabIndex = 96;
             this.longitude_value.Text = "0";
             // 
             // label14
             // 
-            this.label14.Location = new System.Drawing.Point(257, 51);
+            this.label14.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label14.Location = new System.Drawing.Point(135, 64);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(41, 12);
+            this.label14.Size = new System.Drawing.Size(70, 16);
             this.label14.TabIndex = 97;
             this.label14.Text = "纬度：";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // height_value
             // 
             this.height_value.ContextMenuStrip = this.contextMenuStripHud;
             this.height_value.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "alt", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N0"));
-            this.height_value.Location = new System.Drawing.Point(138, 51);
+            this.height_value.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.height_value.Location = new System.Drawing.Point(77, 44);
             this.height_value.Name = "height_value";
-            this.height_value.Size = new System.Drawing.Size(30, 12);
+            this.height_value.Size = new System.Drawing.Size(50, 16);
             this.height_value.TabIndex = 80;
             this.height_value.Text = "0";
             // 
             // label11
             // 
-            this.label11.Location = new System.Drawing.Point(4, 51);
+            this.label11.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label11.Location = new System.Drawing.Point(135, 44);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(65, 12);
+            this.label11.Size = new System.Drawing.Size(70, 16);
             this.label11.TabIndex = 91;
             this.label11.Text = "目标高度：";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // targetaltitude_value
             // 
             this.targetaltitude_value.ContextMenuStrip = this.contextMenuStripHud;
             this.targetaltitude_value.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "targetalt", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N0"));
-            this.targetaltitude_value.Location = new System.Drawing.Point(70, 51);
+            this.targetaltitude_value.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.targetaltitude_value.Location = new System.Drawing.Point(207, 44);
             this.targetaltitude_value.Name = "targetaltitude_value";
-            this.targetaltitude_value.Size = new System.Drawing.Size(37, 12);
+            this.targetaltitude_value.Size = new System.Drawing.Size(50, 16);
             this.targetaltitude_value.TabIndex = 92;
             this.targetaltitude_value.Text = "0";
             // 
             // label28
             // 
-            this.label28.Location = new System.Drawing.Point(173, 70);
+            this.label28.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label28.Location = new System.Drawing.Point(396, 44);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(54, 14);
+            this.label28.Size = new System.Drawing.Size(70, 16);
             this.label28.TabIndex = 135;
-            this.label28.Text = "目标点:";
+            this.label28.Text = "目标点：";
+            this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label8
             // 
-            this.label8.Location = new System.Drawing.Point(81, 31);
+            this.label8.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label8.Location = new System.Drawing.Point(135, 24);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(41, 12);
+            this.label8.Size = new System.Drawing.Size(70, 16);
             this.label8.TabIndex = 85;
             this.label8.Text = "星数：";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(82, 71);
+            this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(135, 84);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 12);
+            this.label2.Size = new System.Drawing.Size(70, 16);
             this.label2.TabIndex = 73;
-            this.label2.Text = "电流:";
+            this.label2.Text = "电流：";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // voltage_value
             // 
             this.voltage_value.ContextMenuStrip = this.contextMenuStripHud;
             this.voltage_value.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "battery_voltage", true));
-            this.voltage_value.Location = new System.Drawing.Point(49, 71);
+            this.voltage_value.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.voltage_value.Location = new System.Drawing.Point(77, 84);
             this.voltage_value.Name = "voltage_value";
-            this.voltage_value.Size = new System.Drawing.Size(34, 12);
+            this.voltage_value.Size = new System.Drawing.Size(50, 16);
             this.voltage_value.TabIndex = 72;
             this.voltage_value.Text = "0";
             // 
             // mode_value
             // 
             this.mode_value.ContextMenuStrip = this.contextMenuStripHud;
+            this.mode_value.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.mode_value.ForeColor = System.Drawing.Color.Black;
-            this.mode_value.Location = new System.Drawing.Point(48, 30);
+            this.mode_value.Location = new System.Drawing.Point(77, 24);
             this.mode_value.Name = "mode_value";
-            this.mode_value.Size = new System.Drawing.Size(34, 12);
+            this.mode_value.Size = new System.Drawing.Size(50, 16);
             this.mode_value.TabIndex = 90;
             this.mode_value.Text = "0";
             // 
@@ -1226,37 +1284,43 @@
             // 
             this.throttle_value.ContextMenuStrip = this.contextMenuStripHud;
             this.throttle_value.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "ch3percent", true));
-            this.throttle_value.Location = new System.Drawing.Point(195, 10);
+            this.throttle_value.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.throttle_value.Location = new System.Drawing.Point(77, 4);
             this.throttle_value.Name = "throttle_value";
-            this.throttle_value.Size = new System.Drawing.Size(41, 12);
+            this.throttle_value.Size = new System.Drawing.Size(50, 16);
             this.throttle_value.TabIndex = 84;
             this.throttle_value.Text = "0";
+            this.throttle_value.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // airspeed_value
             // 
             this.airspeed_value.ContextMenuStrip = this.contextMenuStripHud;
             this.airspeed_value.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "airspeed", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N0"));
-            this.airspeed_value.Location = new System.Drawing.Point(280, 10);
+            this.airspeed_value.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.airspeed_value.Location = new System.Drawing.Point(207, 4);
             this.airspeed_value.Name = "airspeed_value";
-            this.airspeed_value.Size = new System.Drawing.Size(30, 12);
+            this.airspeed_value.Size = new System.Drawing.Size(50, 16);
             this.airspeed_value.TabIndex = 78;
             this.airspeed_value.Text = "0";
             // 
             // label4
             // 
-            this.label4.Location = new System.Drawing.Point(238, 10);
+            this.label4.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label4.Location = new System.Drawing.Point(135, 4);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 12);
+            this.label4.Size = new System.Drawing.Size(70, 16);
             this.label4.TabIndex = 77;
             this.label4.Text = "空速：";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // current_value
             // 
             this.current_value.ContextMenuStrip = this.contextMenuStripHud;
             this.current_value.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "current", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N0"));
-            this.current_value.Location = new System.Drawing.Point(121, 71);
+            this.current_value.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.current_value.Location = new System.Drawing.Point(207, 84);
             this.current_value.Name = "current_value";
-            this.current_value.Size = new System.Drawing.Size(39, 12);
+            this.current_value.Size = new System.Drawing.Size(50, 16);
             this.current_value.TabIndex = 74;
             this.current_value.Text = "0";
             // 
@@ -1264,9 +1328,10 @@
             // 
             this.targetwaypoint_value.ContextMenuStrip = this.contextMenuStripHud;
             this.targetwaypoint_value.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "wpno", true));
-            this.targetwaypoint_value.Location = new System.Drawing.Point(228, 72);
+            this.targetwaypoint_value.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.targetwaypoint_value.Location = new System.Drawing.Point(470, 44);
             this.targetwaypoint_value.Name = "targetwaypoint_value";
-            this.targetwaypoint_value.Size = new System.Drawing.Size(25, 12);
+            this.targetwaypoint_value.Size = new System.Drawing.Size(50, 16);
             this.targetwaypoint_value.TabIndex = 136;
             this.targetwaypoint_value.Text = "0";
             // 
@@ -1274,95 +1339,113 @@
             // 
             this.alterror_value.ContextMenuStrip = this.contextMenuStripHud;
             this.alterror_value.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "alt_error", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N0"));
-            this.alterror_value.Location = new System.Drawing.Point(52, 9);
+            this.alterror_value.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.alterror_value.Location = new System.Drawing.Point(339, 44);
             this.alterror_value.Name = "alterror_value";
-            this.alterror_value.Size = new System.Drawing.Size(32, 12);
+            this.alterror_value.Size = new System.Drawing.Size(50, 16);
             this.alterror_value.TabIndex = 134;
             this.alterror_value.Text = "0";
             // 
             // label26
             // 
-            this.label26.Location = new System.Drawing.Point(-1, 9);
+            this.label26.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label26.Location = new System.Drawing.Point(266, 44);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(53, 12);
+            this.label26.Size = new System.Drawing.Size(70, 16);
             this.label26.TabIndex = 133;
             this.label26.Text = "高度差：";
+            this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(106, 52);
+            this.label5.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label5.Location = new System.Drawing.Point(5, 44);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 12);
+            this.label5.Size = new System.Drawing.Size(70, 16);
             this.label5.TabIndex = 79;
             this.label5.Text = "高度：";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(238, 32);
+            this.label3.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Location = new System.Drawing.Point(396, 24);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 12);
+            this.label3.Size = new System.Drawing.Size(70, 16);
             this.label3.TabIndex = 75;
             this.label3.Text = "地速：";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // starcount_value
             // 
             this.starcount_value.ContextMenuStrip = this.contextMenuStripHud;
             this.starcount_value.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "satcount", true));
-            this.starcount_value.Location = new System.Drawing.Point(122, 31);
+            this.starcount_value.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.starcount_value.Location = new System.Drawing.Point(207, 24);
             this.starcount_value.Name = "starcount_value";
-            this.starcount_value.Size = new System.Drawing.Size(17, 12);
+            this.starcount_value.Size = new System.Drawing.Size(50, 16);
             this.starcount_value.TabIndex = 86;
             this.starcount_value.Text = "0";
             // 
             // gpsstate_value
             // 
             this.gpsstate_value.ContextMenuStrip = this.contextMenuStripHud;
-            this.gpsstate_value.Location = new System.Drawing.Point(195, 32);
+            this.gpsstate_value.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.gpsstate_value.Location = new System.Drawing.Point(339, 24);
             this.gpsstate_value.Name = "gpsstate_value";
-            this.gpsstate_value.Size = new System.Drawing.Size(41, 12);
+            this.gpsstate_value.Size = new System.Drawing.Size(50, 16);
             this.gpsstate_value.TabIndex = 138;
             this.gpsstate_value.Text = "0";
             // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(87, 10);
+            this.label6.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label6.Location = new System.Drawing.Point(396, 64);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(41, 12);
+            this.label6.Size = new System.Drawing.Size(70, 16);
             this.label6.TabIndex = 81;
             this.label6.Text = "偏航：";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label10
             // 
+            this.label10.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(5, 30);
+            this.label10.Location = new System.Drawing.Point(5, 24);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(41, 12);
+            this.label10.Size = new System.Drawing.Size(70, 16);
             this.label10.TabIndex = 89;
             this.label10.Text = "模式：";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label22
             // 
-            this.label22.Location = new System.Drawing.Point(312, 32);
+            this.label22.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label22.Location = new System.Drawing.Point(396, 4);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(53, 12);
+            this.label22.Size = new System.Drawing.Size(70, 16);
             this.label22.TabIndex = 131;
             this.label22.Text = "空速差：";
+            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label9
             // 
-            this.label9.Location = new System.Drawing.Point(256, 71);
+            this.label9.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label9.Location = new System.Drawing.Point(266, 64);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(41, 12);
+            this.label9.Size = new System.Drawing.Size(70, 16);
             this.label9.TabIndex = 87;
             this.label9.Text = "罗盘：";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // xtrack_value
             // 
             this.xtrack_value.ContextMenuStrip = this.contextMenuStripHud;
             this.xtrack_value.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "xtrack_error", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N0"));
-            this.xtrack_value.Location = new System.Drawing.Point(128, 11);
+            this.xtrack_value.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.xtrack_value.Location = new System.Drawing.Point(470, 64);
             this.xtrack_value.Name = "xtrack_value";
-            this.xtrack_value.Size = new System.Drawing.Size(35, 12);
+            this.xtrack_value.Size = new System.Drawing.Size(50, 16);
             this.xtrack_value.TabIndex = 82;
             this.xtrack_value.Text = "0";
             // 
@@ -1370,9 +1453,10 @@
             // 
             this.targetairspeed_value.ContextMenuStrip = this.contextMenuStripHud;
             this.targetairspeed_value.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceHud, "targetairspeed", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N0"));
-            this.targetairspeed_value.Location = new System.Drawing.Point(373, 10);
+            this.targetairspeed_value.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.targetairspeed_value.Location = new System.Drawing.Point(339, 4);
             this.targetairspeed_value.Name = "targetairspeed_value";
-            this.targetairspeed_value.Size = new System.Drawing.Size(32, 12);
+            this.targetairspeed_value.Size = new System.Drawing.Size(50, 16);
             this.targetairspeed_value.TabIndex = 94;
             this.targetairspeed_value.Text = "0";
             // 
@@ -1383,18 +1467,19 @@
             this.BUT_ARM.ColorNotEnabled = System.Drawing.Color.Empty;
             this.BUT_ARM.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.BUT_ARM.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BUT_ARM.Location = new System.Drawing.Point(407, 0);
+            this.BUT_ARM.Location = new System.Drawing.Point(531, 2);
             this.BUT_ARM.Name = "BUT_ARM";
-            this.BUT_ARM.Size = new System.Drawing.Size(43, 23);
+            this.BUT_ARM.Size = new System.Drawing.Size(68, 24);
             this.BUT_ARM.TabIndex = 98;
             this.BUT_ARM.Text = "解锁";
+            this.BUT_ARM.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.BUT_ARM.UseVisualStyleBackColor = true;
             this.BUT_ARM.Click += new System.EventHandler(this.BUT_ARM_Click);
             // 
             // lbl_logpercent
             // 
             this.lbl_logpercent.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.lbl_logpercent.Location = new System.Drawing.Point(341, 33);
+            this.lbl_logpercent.Location = new System.Drawing.Point(409, 32);
             this.lbl_logpercent.Name = "lbl_logpercent";
             this.lbl_logpercent.resize = false;
             this.lbl_logpercent.Size = new System.Drawing.Size(38, 14);
@@ -1405,7 +1490,7 @@
             // 
             this.CMB_playspeed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CMB_playspeed.FormattingEnabled = true;
-            this.CMB_playspeed.Location = new System.Drawing.Point(392, 28);
+            this.CMB_playspeed.Location = new System.Drawing.Point(450, 29);
             this.CMB_playspeed.Name = "CMB_playspeed";
             this.CMB_playspeed.Size = new System.Drawing.Size(53, 20);
             this.CMB_playspeed.TabIndex = 96;
@@ -1416,10 +1501,10 @@
             // 
             this.tracklog.AutoSize = false;
             this.tracklog.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.tracklog.Location = new System.Drawing.Point(118, 29);
+            this.tracklog.Location = new System.Drawing.Point(157, 29);
             this.tracklog.Maximum = 100;
             this.tracklog.Name = "tracklog";
-            this.tracklog.Size = new System.Drawing.Size(219, 23);
+            this.tracklog.Size = new System.Drawing.Size(223, 23);
             this.tracklog.TabIndex = 95;
             this.tracklog.TickFrequency = 5;
             this.tracklog.Scroll += new System.EventHandler(this.tracklog_Scroll);
@@ -1427,43 +1512,51 @@
             // BUT_playlog
             // 
             this.BUT_playlog.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BUT_playlog.Location = new System.Drawing.Point(64, 29);
+            this.BUT_playlog.Location = new System.Drawing.Point(78, 29);
             this.BUT_playlog.Name = "BUT_playlog";
-            this.BUT_playlog.Size = new System.Drawing.Size(46, 18);
+            this.BUT_playlog.Size = new System.Drawing.Size(68, 24);
             this.BUT_playlog.TabIndex = 94;
             this.BUT_playlog.Text = "播放";
+            this.BUT_playlog.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.BUT_playlog.UseVisualStyleBackColor = true;
             this.BUT_playlog.Click += new System.EventHandler(this.BUT_playlog_Click);
             // 
             // BUT_loadtelem
             // 
             this.BUT_loadtelem.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BUT_loadtelem.Location = new System.Drawing.Point(9, 29);
+            this.BUT_loadtelem.Location = new System.Drawing.Point(0, 29);
             this.BUT_loadtelem.Name = "BUT_loadtelem";
-            this.BUT_loadtelem.Size = new System.Drawing.Size(45, 18);
+            this.BUT_loadtelem.Size = new System.Drawing.Size(68, 24);
             this.BUT_loadtelem.TabIndex = 93;
             this.BUT_loadtelem.Text = "录像";
+            this.BUT_loadtelem.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.BUT_loadtelem.UseVisualStyleBackColor = true;
             this.BUT_loadtelem.Click += new System.EventHandler(this.BUT_loadtelem_Click);
             // 
             // BUT_camera
             // 
             this.BUT_camera.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BUT_camera.Location = new System.Drawing.Point(352, 2);
+            this.BUT_camera.Location = new System.Drawing.Point(450, 2);
             this.BUT_camera.Name = "BUT_camera";
-            this.BUT_camera.Size = new System.Drawing.Size(34, 21);
+            this.BUT_camera.Size = new System.Drawing.Size(68, 24);
             this.BUT_camera.TabIndex = 87;
             this.BUT_camera.Text = "相机";
+            this.BUT_camera.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.BUT_camera.UseVisualStyleBackColor = true;
             this.BUT_camera.Click += new System.EventHandler(this.BUT_camera_Click);
             // 
             // CMB_setwp
             // 
+            this.CMB_setwp.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.CMB_setwp.DropDownHeight = 60;
             this.CMB_setwp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CMB_setwp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CMB_setwp.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.CMB_setwp.FormattingEnabled = true;
+            this.CMB_setwp.IntegralHeight = false;
             this.CMB_setwp.Items.AddRange(new object[] {
             "0 (Home)"});
-            this.CMB_setwp.Location = new System.Drawing.Point(293, 3);
+            this.CMB_setwp.Location = new System.Drawing.Point(386, 2);
             this.CMB_setwp.Name = "CMB_setwp";
             this.CMB_setwp.Size = new System.Drawing.Size(53, 20);
             this.CMB_setwp.TabIndex = 86;
@@ -1475,53 +1568,58 @@
             this.BUT_standby.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.BUT_standby.Location = new System.Drawing.Point(0, 2);
             this.BUT_standby.Name = "BUT_standby";
-            this.BUT_standby.Size = new System.Drawing.Size(60, 21);
+            this.BUT_standby.Size = new System.Drawing.Size(68, 24);
             this.BUT_standby.TabIndex = 84;
             this.BUT_standby.Text = "待机状态";
+            this.BUT_standby.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.BUT_standby.UseVisualStyleBackColor = true;
             this.BUT_standby.Click += new System.EventHandler(this.BUT_standby_Click);
             // 
             // BUT_clear_track
             // 
             this.BUT_clear_track.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BUT_clear_track.Location = new System.Drawing.Point(62, 2);
+            this.BUT_clear_track.Location = new System.Drawing.Point(78, 2);
             this.BUT_clear_track.Name = "BUT_clear_track";
-            this.BUT_clear_track.Size = new System.Drawing.Size(60, 21);
+            this.BUT_clear_track.Size = new System.Drawing.Size(68, 24);
             this.BUT_clear_track.TabIndex = 81;
             this.BUT_clear_track.Text = "清除轨迹";
+            this.BUT_clear_track.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.BUT_clear_track.UseVisualStyleBackColor = true;
             this.BUT_clear_track.Click += new System.EventHandler(this.BUT_clear_track_Click);
             // 
             // BUT_quickrtl
             // 
             this.BUT_quickrtl.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BUT_quickrtl.Location = new System.Drawing.Point(240, 2);
+            this.BUT_quickrtl.Location = new System.Drawing.Point(312, 2);
             this.BUT_quickrtl.Name = "BUT_quickrtl";
-            this.BUT_quickrtl.Size = new System.Drawing.Size(47, 21);
+            this.BUT_quickrtl.Size = new System.Drawing.Size(68, 24);
             this.BUT_quickrtl.TabIndex = 83;
             this.BUT_quickrtl.Text = "返航";
+            this.BUT_quickrtl.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.BUT_quickrtl.UseVisualStyleBackColor = true;
             this.BUT_quickrtl.Click += new System.EventHandler(this.BUT_quickrtl_Click);
             // 
             // BUT_quickauto
             // 
             this.BUT_quickauto.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BUT_quickauto.Location = new System.Drawing.Point(189, 2);
+            this.BUT_quickauto.Location = new System.Drawing.Point(234, 2);
             this.BUT_quickauto.Name = "BUT_quickauto";
-            this.BUT_quickauto.Size = new System.Drawing.Size(47, 21);
+            this.BUT_quickauto.Size = new System.Drawing.Size(68, 24);
             this.BUT_quickauto.TabIndex = 82;
             this.BUT_quickauto.Text = "导航";
+            this.BUT_quickauto.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.BUT_quickauto.UseVisualStyleBackColor = true;
             this.BUT_quickauto.Click += new System.EventHandler(this.BUT_quickauto_Click);
             // 
             // BUTrestartmission
             // 
             this.BUTrestartmission.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BUTrestartmission.Location = new System.Drawing.Point(124, 2);
+            this.BUTrestartmission.Location = new System.Drawing.Point(156, 2);
             this.BUTrestartmission.Name = "BUTrestartmission";
-            this.BUTrestartmission.Size = new System.Drawing.Size(62, 21);
+            this.BUTrestartmission.Size = new System.Drawing.Size(68, 24);
             this.BUTrestartmission.TabIndex = 80;
             this.BUTrestartmission.Text = "重启任务";
+            this.BUTrestartmission.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.BUTrestartmission.UseVisualStyleBackColor = true;
             this.BUTrestartmission.Click += new System.EventHandler(this.BUTrestartmission_Click);
             // 
@@ -1531,7 +1629,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(460, 0);
+            this.panel1.Size = new System.Drawing.Size(602, 0);
             this.panel1.TabIndex = 78;
             // 
             // splitContainer6
@@ -1550,7 +1648,7 @@
             // 
             this.splitContainer6.Panel2.Controls.Add(this.windDir1);
             this.splitContainer6.Panel2.Controls.Add(this.gMapControl1);
-            this.splitContainer6.Size = new System.Drawing.Size(576, 529);
+            this.splitContainer6.Size = new System.Drawing.Size(760, 768);
             this.splitContainer6.SplitterDistance = 178;
             this.splitContainer6.TabIndex = 82;
             // 
@@ -1576,7 +1674,7 @@
             this.windDir1.BackColor = System.Drawing.Color.Transparent;
             this.windDir1.DataBindings.Add(new System.Windows.Forms.Binding("Direction", this.bindingSourceHud, "wind_dir", true));
             this.windDir1.DataBindings.Add(new System.Windows.Forms.Binding("Speed", this.bindingSourceHud, "wind_vel", true));
-            this.windDir1.Direction = 360D;
+            this.windDir1.Direction = 180D;
             this.windDir1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.windDir1.Location = new System.Drawing.Point(3, 3);
             this.windDir1.Name = "windDir1";
@@ -1610,7 +1708,7 @@
             this.gMapControl1.SelectedArea = ((GMap.NET.RectLatLng)(resources.GetObject("gMapControl1.SelectedArea")));
             this.gMapControl1.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.gMapControl1.ShowTileGridLines = false;
-            this.gMapControl1.Size = new System.Drawing.Size(576, 529);
+            this.gMapControl1.Size = new System.Drawing.Size(760, 768);
             this.gMapControl1.TabIndex = 79;
             this.gMapControl1.Zoom = 3D;
             this.gMapControl1.Click += new System.EventHandler(this.gMapControl1_Click);
@@ -1642,6 +1740,13 @@
             this.fixbattery.Text = "修正电池电压";
             this.fixbattery.Click += new System.EventHandler(this.changebatteryvalue);
             // 
+            // landStartToolStripMenuItem
+            // 
+            this.landStartToolStripMenuItem.Name = "landStartToolStripMenuItem";
+            this.landStartToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.landStartToolStripMenuItem.Text = "执行降落";
+            this.landStartToolStripMenuItem.Click += new System.EventHandler(this.landStartToolStripMenuItem_Click);
+            // 
             // ZedGraphTimer
             // 
             this.ZedGraphTimer.Tick += new System.EventHandler(this.timer1_Tick);
@@ -1650,13 +1755,6 @@
             // 
             this.bindingSourceStatusTab.DataSource = typeof(MissionPlanner.CurrentState);
             // 
-            // landStartToolStripMenuItem
-            // 
-            this.landStartToolStripMenuItem.Name = "landStartToolStripMenuItem";
-            this.landStartToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.landStartToolStripMenuItem.Text = "执行降落";
-            this.landStartToolStripMenuItem.Click += new System.EventHandler(this.landStartToolStripMenuItem_Click);
-            // 
             // HsdevFlightData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1664,7 +1762,7 @@
             this.BackColor = System.Drawing.Color.Silver;
             this.Controls.Add(this.splitContainer1);
             this.Name = "HsdevFlightData";
-            this.Size = new System.Drawing.Size(1040, 529);
+            this.Size = new System.Drawing.Size(1366, 768);
             this.Load += new System.EventHandler(this.HsdevFlightData_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -1770,7 +1868,7 @@
         private System.Windows.Forms.ToolStripMenuItem flyToHereAltToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fixbattery;
         private Mesh._3DMesh _3DMesh1;
-        private Controls.HUD hud2;
+        private Controls.HSHUD hud2;
         private Controls.MyLabel lbl_logpercent;
         private System.Windows.Forms.ComboBox CMB_playspeed;
         private System.Windows.Forms.TrackBar tracklog;

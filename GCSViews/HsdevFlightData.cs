@@ -63,7 +63,7 @@ namespace MissionPlanner.GCSViews
 
         const float deg2rad = (float)(1.0 / rad2deg);
 
-        public static Controls.HUD myhud = null;
+        public static Controls.HSHUD myhud = null;
         public static GMapControl mymap = null;
 
         bool playingLog = false;
@@ -368,7 +368,7 @@ namespace MissionPlanner.GCSViews
                     CustomMessageBox.Show("Max 10 at a time.");
                     ((CheckBox)sender).Checked = false;
                 }
-                ThemeManager.ApplyThemeTo(this);
+                //ThemeManager.ApplyThemeTo(this);
 
                 string selected = "";
                 try
