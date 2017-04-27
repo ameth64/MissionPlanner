@@ -364,13 +364,23 @@
       <DependentUpon>Tracker.cs</DependentUpon>
     </Compile>
     <Compile Include="Arduino\IArduinoComms.cs" />
+    <Compile Include="Comms\CommsSerialPipe.cs" />
     <Compile Include="Controls\ControlSensorsStatus.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\ControlSensorsStatus.Designer.cs">
       <DependentUpon>ControlSensorsStatus.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MyDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DistanceCaremaMOD.cs" />
+    <Compile Include="GCSViews\ConfigurationView\ConfigGPSInject.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GCSViews\ConfigurationView\ConfigGPSInject.Designer.cs">
+      <DependentUpon>ConfigGPSInject.cs</DependentUpon>
+    </Compile>
     <Compile Include="GCSViews\HsdevFlightData.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -949,7 +959,7 @@
       <DependentUpon>ScriptConsole.cs</DependentUpon>
     </Compile>
     <Compile Include="SerialInjectGPS.cs">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="SerialInjectGPS.Designer.cs">
       <DependentUpon>SerialInjectGPS.cs</DependentUpon>
@@ -998,6 +1008,7 @@
     <Compile Include="Utilities\AP_GPS_SBF.cs" />
     <Compile Include="Utilities\AP_Terrain.cs" />
     <Compile Include="Utilities\dxf.cs" />
+    <Compile Include="Utilities\ExpireType.cs" />
     <Compile Include="Utilities\Extensions.cs" />
     <Compile Include="Utilities\GMapMarkerOverlapCount.cs" />
     <Compile Include="Utilities\GMapMarkerPOI.cs" />
@@ -1023,7 +1034,9 @@
     <Compile Include="Utilities\ListExtension.cs" />
     <Compile Include="Utilities\LogAnalyzer.cs" />
     <Compile Include="NoFly\NoFly.cs" />
+    <Compile Include="Utilities\Math.cs" />
     <Compile Include="Utilities\NGEN.cs" />
+    <Compile Include="Utilities\nmea.cs" />
     <Compile Include="Utilities\OpticalFlow.cs" />
     <Compile Include="Utilities\ParameterMetaDataRepositoryAPM.cs" />
     <Compile Include="Utilities\ParameterMetaDataRepositoryPX4.cs" />
@@ -1643,6 +1656,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GCSViews\ConfigurationView\ConfigFriendlyParams.zh-Hans.resx">
       <DependentUpon>ConfigFriendlyParams.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GCSViews\ConfigurationView\ConfigGPSInject.resx">
+      <DependentUpon>ConfigGPSInject.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GCSViews\ConfigurationView\ConfigHWAirspeed.de-DE.resx">
       <DependentUpon>ConfigHWAirspeed.cs</DependentUpon>

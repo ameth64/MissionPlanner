@@ -16,12 +16,16 @@ using System.Text.RegularExpressions;
 
 namespace MissionPlanner.Comms
 {
-    public class CommsNTRIP : CommsBase,  ICommsSerial, IDisposable
+    public class CommsNTRIP : CommsBase, ICommsSerial, IDisposable
     {
         private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public TcpClient client = new TcpClient();
         IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Any, 0);
         private Uri remoteUri;
+
+        public double lat = 0;
+        public double lng = 0;
+        public double alt = 0;
 
         int retrys = 3;
 
@@ -30,7 +34,7 @@ namespace MissionPlanner.Comms
         public int WriteBufferSize { get; set; }
         public int WriteTimeout { get; set; }
         public bool RtsEnable { get; set; }
-        public Stream BaseStream { get { return this.BaseStream; } }
+        public Stream BaseStream { get { return client.GetStream(); } }
 
         public CommsNTRIP()
         {
@@ -48,16 +52,16 @@ namespace MissionPlanner.Comms
             set;// { client.ReceiveTimeout = value; }
         }
 
-        public int ReadBufferSize {get;set;}
+        public int ReadBufferSize { get; set; }
 
         public int BaudRate { get; set; }
         public StopBits StopBits { get; set; }
-        public  Parity Parity { get; set; }
-        public  int DataBits { get; set; }
+        public Parity Parity { get; set; }
+        public int DataBits { get; set; }
 
         public string PortName { get; set; }
 
-        public  int BytesToRead
+        public int BytesToRead
         {
             get { /*Console.WriteLine(DateTime.Now.Millisecond + " tcp btr " + (client.Available + rbuffer.Length - rbufferread));*/ return (int)client.Available; }
         }
@@ -133,7 +137,7 @@ namespace MissionPlanner.Comms
             Port = remoteUri.Port.ToString();
 
             client = new TcpClient(host, int.Parse(Port));
-            client.Client.IOControl(IOControlCode.KeepAliveValues, TcpKeepAlive(true,36000000, 3000), null);
+            client.Client.IOControl(IOControlCode.KeepAliveValues, TcpKeepAlive(true, 36000000, 3000), null);
 
             NetworkStream ns = client.GetStream();
 
@@ -143,14 +147,39 @@ namespace MissionPlanner.Comms
             string line = "GET " + remoteUri.PathAndQuery + " HTTP/1.1\r\n"
                           + "User-Agent: NTRIP Mission Planner/1.0\r\n"
                           + "Accept: */*\r\n"
-                          + auth 
+                          + auth
                           + "Connection: close\r\n\r\n";
 
             sw.Write(line);
 
+            log.Info(line);
+
             sw.Flush();
 
+            // vrs may take up to 60+ seconds to respond
+
+            if (lat != 0 || lng != 0)
+            {
+                double latdms = (int)lat + ((lat - (int)lat) * .6f);
+                double lngdms = (int)lng + ((lng - (int)lng) * .6f);
+
+                line = string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                 "$GP{0},{1:HHmmss.fff},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},", "GGA",
+                 DateTime.Now.ToUniversalTime(), Math.Abs(latdms * 100).ToString("0.00000"), lat < 0 ? "S" : "N",
+                 Math.Abs(lngdms * 100).ToString("0.00000"), lng < 0 ? "W" : "E", 1, 10,
+                 1, alt, "M", 0, "M", "");
+
+                string checksum = GetChecksum(line);
+                sw.WriteLine(line + "*" + checksum);
+
+                log.Info(line + "*" + checksum);
+
+                sw.Flush();
+            }
+
             line = sr.ReadLine();
+
+            log.Info(line);
 
             if (!line.Contains("200"))
             {
@@ -159,8 +188,42 @@ namespace MissionPlanner.Comms
                 throw new Exception("Bad ntrip Responce\n\n" + line);
             }
 
-
             VerifyConnected();
+        }
+
+
+        // Calculates the checksum for a sentence
+        string GetChecksum(string sentence)
+        {
+            // Loop through all chars to get a checksum
+            int Checksum = 0;
+            foreach (char Character in sentence.ToCharArray())
+            {
+                switch (Character)
+                {
+                    case '$':
+                        // Ignore the dollar sign
+                        break;
+                    case '*':
+                        // Stop processing before the asterisk
+                        continue;
+                    default:
+                        // Is this the first value for the checksum?
+                        if (Checksum == 0)
+                        {
+                            // Yes. Set the checksum to the value
+                            Checksum = Convert.ToByte(Character);
+                        }
+                        else
+                        {
+                            // No. XOR the checksum with this character's value
+                            Checksum = Checksum ^ Convert.ToByte(Character);
+                        }
+                        break;
+                }
+            }
+            // Return the checksum formatted as a two-character hexadecimal
+            return Checksum.ToString("X2");
         }
 
         void VerifyConnected()
@@ -185,26 +248,26 @@ namespace MissionPlanner.Comms
             }
         }
 
-        public  int Read(byte[] readto,int offset,int length)
+        public int Read(byte[] readto, int offset, int length)
         {
             VerifyConnected();
             try
             {
                 if (length < 1) { return 0; }
 
-				return client.Client.Receive(readto, offset, length, SocketFlags.Partial);
-/*
-                byte[] temp = new byte[length];
-                clientbuf.Read(temp, 0, length);
+                return client.Client.Receive(readto, offset, length, SocketFlags.Partial);
+                /*
+                                byte[] temp = new byte[length];
+                                clientbuf.Read(temp, 0, length);
 
-                temp.CopyTo(readto, offset);
+                                temp.CopyTo(readto, offset);
 
-                return length;*/
+                                return length;*/
             }
             catch { throw new Exception("ntrip Socket Closed"); }
         }
 
-        public  int ReadByte()
+        public int ReadByte()
         {
             VerifyConnected();
             int count = 0;
@@ -220,12 +283,12 @@ namespace MissionPlanner.Comms
             return buffer[0];
         }
 
-        public  int ReadChar()
+        public int ReadChar()
         {
             return ReadByte();
         }
 
-        public  string ReadExisting() 
+        public string ReadExisting()
         {
             VerifyConnected();
             byte[] data = new byte[client.Available];
@@ -237,40 +300,41 @@ namespace MissionPlanner.Comms
             return line;
         }
 
-        public  void WriteLine(string line)
+        public void WriteLine(string line)
         {
             VerifyConnected();
             line = line + "\n";
             Write(line);
         }
 
-        public  void Write(string line)
+        public void Write(string line)
         {
             VerifyConnected();
             byte[] data = new System.Text.ASCIIEncoding().GetBytes(line);
             Write(data, 0, data.Length);
         }
 
-        public  void Write(byte[] write, int offset, int length)
+        public void Write(byte[] write, int offset, int length)
         {
             VerifyConnected();
             try
             {
-                client.Client.Send(write, length,SocketFlags.None);
+                client.Client.Send(write, length, SocketFlags.None);
             }
             catch { }//throw new Exception("Comport / Socket Closed"); }
         }
 
-        public  void DiscardInBuffer()
+        public void DiscardInBuffer()
         {
             VerifyConnected();
             int size = (int)client.Available;
             byte[] crap = new byte[size];
-            log.InfoFormat("ntrip DiscardInBuffer {0}",size);
+            log.InfoFormat("ntrip DiscardInBuffer {0}", size);
             Read(crap, 0, size);
         }
 
-        public  string ReadLine() {
+        public string ReadLine()
+        {
             byte[] temp = new byte[4000];
             int count = 0;
             int timeout = 0;
@@ -294,7 +358,9 @@ namespace MissionPlanner.Comms
                     if (count == temp.Length)
                         break;
                     timeout = 0;
-                } else {
+                }
+                else
+                {
                     timeout++;
                     System.Threading.Thread.Sleep(5);
                 }

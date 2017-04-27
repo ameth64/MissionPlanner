@@ -117,13 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="$this.Text" xml:space="preserve">
-    <value>GPS Inject</value>
+  <data name="chk_m8p_130p.ToolTip" xml:space="preserve">
+    <value>Se o seu base e rover tem o firmware 1.30 ou superior, marque essa caixa.</value>
   </data>
-  <data name="lbl_status.Text" xml:space="preserve">
-    <value>label1</value>
+  <data name="txt_surveyinAcc.ToolTip" xml:space="preserve">
+    <value>Monitore em Triger preciso. Deve estar abaixo disso</value>
+  </data>
+  <data name="BaseName1.HeaderText" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>M8P</value>
+  </data>
+  <data name="chk_rtcmmsg.Text" xml:space="preserve">
+    <value>Nova Mensagem RTCM</value>
   </data>
   <data name="BUT_connect.Text" xml:space="preserve">
-    <value>Menghubungkan</value>
+    <value>Conectar</value>
+  </data>
+  <data name="but_save_basepos.Text" xml:space="preserve">
+    <value>Salvar posição da base</value>
+  </data>
+  <data name="but_base_pos.Text" xml:space="preserve">
+    <value>Posição da base</value>
   </data>
 </root>

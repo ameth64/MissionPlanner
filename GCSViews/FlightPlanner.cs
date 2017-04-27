@@ -1954,7 +1954,9 @@ namespace MissionPlanner.GCSViews
                             sw.Write("\t" +
                                      (double.Parse(Commands.Rows[a].Cells[Alt.Index].Value.ToString()) /
                                       CurrentState.multiplierdist).ToString("0.000000", new CultureInfo("en-US")));
-                            if (Commands.Rows[a].Cells[TagData.Index].Value != null)
+
+                            if (Commands.Rows[a].Cells[TagData.Index].Value != null &&
+                                 Commands.Rows[a].Cells[TagData.Index].Value.ToString() != "0")
                             {
                                 sw.Write("\t" +
                                          ((HsTag)Commands.Rows[a].Cells[TagData.Index].Value).wp_type);
