@@ -1494,16 +1494,16 @@ namespace MissionPlanner.GCSViews
                     myheight = tabGauges.Width / 2;
 
                 Gvspeed.Height = myheight;
-                rocker1.Height = myheight;
                 rocker2.Height = myheight;
+                rocker1.Height = myheight;
                 Gheading.Height = myheight;
 
                 Gvspeed.Location = new Point(0, 0);
-                rocker1.Location = new Point(Gvspeed.Right, 0);
+                rocker2.Location = new Point(Gvspeed.Right, 0);
 
 
-                rocker2.Location = new Point(0, rocker1.Bottom);
-                Gheading.Location = new Point(rocker2.Right, rocker1.Bottom);
+                rocker1.Location = new Point(0, rocker2.Bottom);
+                Gheading.Location = new Point(rocker1.Right, rocker2.Bottom);
 
                 return;
             }
@@ -1527,16 +1527,16 @@ namespace MissionPlanner.GCSViews
                 mywidth = tabGauges.Width / 4;
 
                 Gvspeed.Height = mywidth;
-                rocker1.Height = mywidth;
                 rocker2.Height = mywidth;
+                rocker1.Height = mywidth;
                 Gheading.Height = mywidth;
 
                 Gvspeed.Location = new Point(0, 0);
-                rocker1.Location = new Point(Gvspeed.Right, 0);
+                rocker2.Location = new Point(Gvspeed.Right, 0);
             }
 
-            rocker2.Location = new Point(rocker1.Right, 0);
-            Gheading.Location = new Point(rocker2.Right, 0);
+            rocker1.Location = new Point(rocker2.Right, 0);
+            Gheading.Location = new Point(rocker1.Right, 0);
         }
 
         private void splitContainer5_Panel1_Resize(object sender, EventArgs e)
