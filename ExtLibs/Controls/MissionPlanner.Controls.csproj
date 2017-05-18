@@ -209,6 +209,12 @@
     <Compile Include="RangeControl.Designer.cs">
       <DependentUpon>RangeControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Rocker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Rocker.Designer.cs">
+      <DependentUpon>Rocker.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sphere.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -297,6 +303,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RangeControl.resx">
       <DependentUpon>RangeControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rocker.resx">
+      <DependentUpon>Rocker.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ValuesControl.resx">
       <DependentUpon>ValuesControl.cs</DependentUpon>

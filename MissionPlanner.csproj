@@ -3694,6 +3694,9 @@
     <Content Include="Drivers\vrugimbal.inf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="planetype.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="texture.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
