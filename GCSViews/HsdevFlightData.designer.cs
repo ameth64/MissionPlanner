@@ -219,7 +219,7 @@
             this._3DMesh1.aileron_r = ((ushort)(0));
             this._3DMesh1.AutoSize = true;
             this._3DMesh1.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
-            this._3DMesh1.BackColor = System.Drawing.Color.Black;
+            this._3DMesh1.BackColor = System.Drawing.Color.Aqua;
             this._3DMesh1.DataBindings.Add(new System.Windows.Forms.Binding("heading", this.bindingSourceHud, "yaw", true));
             this._3DMesh1.DataBindings.Add(new System.Windows.Forms.Binding("pitch", this.bindingSourceHud, "pitch", true));
             this._3DMesh1.DataBindings.Add(new System.Windows.Forms.Binding("roll", this.bindingSourceHud, "roll", true));
@@ -323,7 +323,7 @@
             this.hud2.targetheading = 0F;
             this.hud2.targetspeed = 0F;
             this.hud2.turnrate = 0F;
-            this.hud2.UseOpenGL = false;
+            this.hud2.UseOpenGL = true;
             this.hud2.verticalspeed = 0F;
             this.hud2.vibex = 0F;
             this.hud2.vibey = 0F;
