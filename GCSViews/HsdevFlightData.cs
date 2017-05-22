@@ -125,11 +125,11 @@ namespace MissionPlanner.GCSViews
             CheckForIllegalCrossThreadCalls = false;
             m_SyncContext = SynchronizationContext.Current;
 
-            gMapControl1.MapProvider = GMap.NET.MapProviders.BingSatelliteMapProvider.Instance;
+            //gMapControl1.MapProvider = GMap.NET.MapProviders.BingSatelliteMapProvider.Instance;
 
             gMapControl1.OnMapZoomChanged += new MapZoomChanged(gMapControl1_OnMapZoomChanged);
 
-            gMapControl1.Zoom = 3;
+            gMapControl1.Zoom = 10;
 
             gMapControl1.DisableFocusOnMouseEnter = true;
 
@@ -458,7 +458,7 @@ namespace MissionPlanner.GCSViews
             //System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
 
             System.Threading.Thread.CurrentThread.IsBackground = true;
-            this.lbl_logpercent.Location = new System.Drawing.Point(354, 33);
+            //this.lbl_logpercent.Location = new System.Drawing.Point(354, 33);
             threadrun = 1;
             EndPoint Remote = (EndPoint)(new IPEndPoint(IPAddress.Any, 0));
 
@@ -1860,7 +1860,7 @@ namespace MissionPlanner.GCSViews
 
         private void HsdevFlightData_Resize(object sender, EventArgs e)
         {
-            this.lbl_logpercent.Location = new System.Drawing.Point(354, 33);
+            //this.lbl_logpercent.Location = new System.Drawing.Point(454, 33);
         }
 
         private void updatePlayPauseButton(bool playing)
@@ -1954,6 +1954,20 @@ namespace MissionPlanner.GCSViews
                 lbl_logpercent.Visible = false;
                 CMB_playspeed.Visible = false;
             }
+        }
+
+        private void HsdevFlightData_Layout(object sender, LayoutEventArgs e)
+        {
+            // 在此响应动态尺寸调整
+            int w = this.splitContainer1.Size.Width, h = splitContainer1.Size.Height;
+            splitContainer1.SplitterDistance = (int)(w * 0.45f);
+            splitContainer2.SplitterDistance = (int)(h * 0.35f);
+            splitContainer5.SplitterDistance = (int)(splitContainer2.Size.Width * 0.3f);
+        }
+
+        private void HsdevFlightData_SizeChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }
