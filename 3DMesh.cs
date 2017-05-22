@@ -502,7 +502,7 @@ void main() {
                 SwapBuffers();
                 Context.MakeCurrent(null);
             }
-            catch (Exception ex) { Console.WriteLine("HUD opengl OnPaint: %s", ex); }
+            catch (Exception ex) { Console.WriteLine("HUD opengl OnPaint: %s", ex.Message); }
             Thread.Sleep(1);
         }
 

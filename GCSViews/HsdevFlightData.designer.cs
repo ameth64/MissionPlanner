@@ -323,7 +323,7 @@
             this.hud2.targetheading = 0F;
             this.hud2.targetspeed = 0F;
             this.hud2.turnrate = 0F;
-            this.hud2.UseOpenGL = false;
+            this.hud2.UseOpenGL = true;
             this.hud2.verticalspeed = 0F;
             this.hud2.vibex = 0F;
             this.hud2.vibey = 0F;
@@ -1478,8 +1478,7 @@
             // 
             // lbl_logpercent
             // 
-            this.lbl_logpercent.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.lbl_logpercent.Location = new System.Drawing.Point(409, 32);
+            this.lbl_logpercent.Location = new System.Drawing.Point(0, 52);
             this.lbl_logpercent.Name = "lbl_logpercent";
             this.lbl_logpercent.resize = false;
             this.lbl_logpercent.Size = new System.Drawing.Size(38, 14);
@@ -1764,6 +1763,8 @@
             this.Name = "HsdevFlightData";
             this.Size = new System.Drawing.Size(1366, 768);
             this.Load += new System.EventHandler(this.HsdevFlightData_Load);
+            this.SizeChanged += new System.EventHandler(this.HsdevFlightData_SizeChanged);
+            this.Layout += new System.Windows.Forms.LayoutEventHandler(this.HsdevFlightData_Layout);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
