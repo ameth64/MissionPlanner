@@ -216,7 +216,7 @@ void main() {
 
                 // GL.Viewport(0, 0, Width, Height);
 
-                double aspect_ratio = Width / (double)Height;
+                double aspect_ratio = Width / (double)Width; //改为正方形视口, Width / (double)Height
 
                 OpenTK.Matrix4 perspective = OpenTK.Matrix4.CreatePerspectiveFieldOfView(MathHelper.PiOver4, (float)aspect_ratio, 0.1f, 64000f);
                 GL.MatrixMode(MatrixMode.Projection);
@@ -260,7 +260,7 @@ void main() {
             if (loaded == false)
                 return;
 
-            int ht = (int)(this.Width / 1.333f);
+            int ht = (int)(this.Width / 1.0f);
             if (ht >= this.Height + 5 || ht <= this.Height - 5)
             {
                 this.Height = ht;

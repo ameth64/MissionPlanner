@@ -1394,7 +1394,7 @@ namespace MissionPlanner.GCSViews
             {
                 ((Button)sender).Enabled = false;
 
-                MainV2.comPort.setWPCurrent(1); // set nav to
+                MainV2.comPort.setWPCurrent(3); // set nav to
 
             }
             catch { CustomMessageBox.Show("执行失败！", "Error"); }

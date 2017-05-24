@@ -97,6 +97,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.xtrack_value = new System.Windows.Forms.Label();
             this.targetairspeed_value = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             this.BUT_ARM = new MissionPlanner.Controls.MyButton();
             this.lbl_logpercent = new MissionPlanner.Controls.MyLabel();
             this.CMB_playspeed = new System.Windows.Forms.ComboBox();
@@ -311,7 +312,7 @@
             this.hud2.Name = "hud2";
             this.hud2.navpitch = 0F;
             this.hud2.navroll = 0F;
-            this.hud2.opengl = false;
+            this.hud2.opengl = true;
             this.hud2.pitch = 0F;
             this.hud2.roll = 0F;
             this.hud2.Russian = false;
@@ -345,13 +346,14 @@
             // 
             // splitContainer3.Panel2
             // 
+            this.splitContainer3.Panel2.Controls.Add(this.label17);
             this.splitContainer3.Panel2.Controls.Add(this.BUT_ARM);
+            this.splitContainer3.Panel2.Controls.Add(this.BUT_camera);
             this.splitContainer3.Panel2.Controls.Add(this.lbl_logpercent);
             this.splitContainer3.Panel2.Controls.Add(this.CMB_playspeed);
             this.splitContainer3.Panel2.Controls.Add(this.tracklog);
             this.splitContainer3.Panel2.Controls.Add(this.BUT_playlog);
             this.splitContainer3.Panel2.Controls.Add(this.BUT_loadtelem);
-            this.splitContainer3.Panel2.Controls.Add(this.BUT_camera);
             this.splitContainer3.Panel2.Controls.Add(this.CMB_setwp);
             this.splitContainer3.Panel2.Controls.Add(this.BUT_standby);
             this.splitContainer3.Panel2.Controls.Add(this.BUT_clear_track);
@@ -1460,6 +1462,16 @@
             this.targetairspeed_value.TabIndex = 94;
             this.targetairspeed_value.Text = "0";
             // 
+            // label17
+            // 
+            this.label17.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label17.Location = new System.Drawing.Point(384, 4);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(67, 19);
+            this.label17.TabIndex = 136;
+            this.label17.Text = "目标航点";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // BUT_ARM
             // 
             this.BUT_ARM.ColorMouseDown = System.Drawing.Color.Empty;
@@ -1467,7 +1479,7 @@
             this.BUT_ARM.ColorNotEnabled = System.Drawing.Color.Empty;
             this.BUT_ARM.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.BUT_ARM.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BUT_ARM.Location = new System.Drawing.Point(531, 2);
+            this.BUT_ARM.Location = new System.Drawing.Point(522, 2);
             this.BUT_ARM.Name = "BUT_ARM";
             this.BUT_ARM.Size = new System.Drawing.Size(68, 24);
             this.BUT_ARM.TabIndex = 98;
@@ -1478,7 +1490,7 @@
             // 
             // lbl_logpercent
             // 
-            this.lbl_logpercent.Location = new System.Drawing.Point(0, 52);
+            this.lbl_logpercent.Location = new System.Drawing.Point(401, 34);
             this.lbl_logpercent.Name = "lbl_logpercent";
             this.lbl_logpercent.resize = false;
             this.lbl_logpercent.Size = new System.Drawing.Size(38, 14);
@@ -1489,7 +1501,7 @@
             // 
             this.CMB_playspeed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CMB_playspeed.FormattingEnabled = true;
-            this.CMB_playspeed.Location = new System.Drawing.Point(450, 29);
+            this.CMB_playspeed.Location = new System.Drawing.Point(453, 29);
             this.CMB_playspeed.Name = "CMB_playspeed";
             this.CMB_playspeed.Size = new System.Drawing.Size(53, 20);
             this.CMB_playspeed.TabIndex = 96;
@@ -1503,7 +1515,7 @@
             this.tracklog.Location = new System.Drawing.Point(157, 29);
             this.tracklog.Maximum = 100;
             this.tracklog.Name = "tracklog";
-            this.tracklog.Size = new System.Drawing.Size(223, 23);
+            this.tracklog.Size = new System.Drawing.Size(232, 23);
             this.tracklog.TabIndex = 95;
             this.tracklog.TickFrequency = 5;
             this.tracklog.Scroll += new System.EventHandler(this.tracklog_Scroll);
@@ -1535,11 +1547,11 @@
             // BUT_camera
             // 
             this.BUT_camera.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BUT_camera.Location = new System.Drawing.Point(450, 2);
+            this.BUT_camera.Location = new System.Drawing.Point(602, 2);
             this.BUT_camera.Name = "BUT_camera";
             this.BUT_camera.Size = new System.Drawing.Size(68, 24);
             this.BUT_camera.TabIndex = 87;
-            this.BUT_camera.Text = "相机";
+            this.BUT_camera.Text = "相机测试";
             this.BUT_camera.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.BUT_camera.UseVisualStyleBackColor = true;
             this.BUT_camera.Click += new System.EventHandler(this.BUT_camera_Click);
@@ -1555,7 +1567,7 @@
             this.CMB_setwp.IntegralHeight = false;
             this.CMB_setwp.Items.AddRange(new object[] {
             "0 (Home)"});
-            this.CMB_setwp.Location = new System.Drawing.Point(386, 2);
+            this.CMB_setwp.Location = new System.Drawing.Point(453, 4);
             this.CMB_setwp.Name = "CMB_setwp";
             this.CMB_setwp.Size = new System.Drawing.Size(53, 20);
             this.CMB_setwp.TabIndex = 86;
@@ -1646,7 +1658,7 @@
             // splitContainer6.Panel2
             // 
             this.splitContainer6.Panel2.Controls.Add(this.windDir1);
-            this.splitContainer6.Panel2.Controls.Add(this.gMapControl1);
+            this.splitContainer6.Panel2.Controls.Add(this.gMapControl1);            
             this.splitContainer6.Size = new System.Drawing.Size(760, 768);
             this.splitContainer6.SplitterDistance = 178;
             this.splitContainer6.TabIndex = 82;
@@ -1673,7 +1685,7 @@
             this.windDir1.BackColor = System.Drawing.Color.Transparent;
             this.windDir1.DataBindings.Add(new System.Windows.Forms.Binding("Direction", this.bindingSourceHud, "wind_dir", true));
             this.windDir1.DataBindings.Add(new System.Windows.Forms.Binding("Speed", this.bindingSourceHud, "wind_vel", true));
-            this.windDir1.Direction = 360D;
+            this.windDir1.Direction = 180D;
             this.windDir1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.windDir1.Location = new System.Drawing.Point(3, 3);
             this.windDir1.Name = "windDir1";
@@ -1893,5 +1905,6 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label cameranum;
         private System.Windows.Forms.ToolStripMenuItem landStartToolStripMenuItem;
+        private System.Windows.Forms.Label label17;
     }
 }
