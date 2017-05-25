@@ -420,13 +420,13 @@ namespace MissionPlanner
                 // run lsq every second when more than 100 datapoints
                 if (datacompass1.Count > 100 && lastlsq.Second != DateTime.Now.Second)
                 {
-                    MainV2.comPort.requestDatastream(MAVLink.MAV_DATA_STREAM.ALL, 0);
+                    MainV2.comPort.requestDatastream(MAVLink.MAV_DATA_STREAM.ALL, 0);  
                     MainV2.comPort.requestDatastream(MAVLink.MAV_DATA_STREAM.RAW_SENSORS, 50);
 
                     lastlsq = DateTime.Now;
                     lock (datacompass1)
                     {
-                        var lsq = MagCalib.LeastSq(datacompass1, false);
+                        var lsq = MagCalib.LeastSq(datacompass1, false); //
                         // simple validation
                         if (Math.Abs(lsq[0]) < 999)
                         {
@@ -524,7 +524,7 @@ namespace MissionPlanner
                 }
                 radius /= datacompass1.Count;
 
-                //test that we can find one point near a set of points all around the sphere surface
+                //test that we can find one point near a set of points all around the sphere surface (在此生成12个白色标记点, 根据LSQ拟合半径实时重绘)
                 int pointshit = 0;
                 string displayresult = "";
                 int factor = 3; // pitch
@@ -1091,7 +1091,7 @@ namespace MissionPlanner
 
                 foreach (var item in state.fi)
                 {
-                    error += item;
+                    error += item; 
                 }
 
                 error = Math.Round(Math.Sqrt(Math.Abs(error)), 2);
