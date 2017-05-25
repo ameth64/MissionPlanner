@@ -323,7 +323,7 @@
             this.hud2.targetheading = 0F;
             this.hud2.targetspeed = 0F;
             this.hud2.turnrate = 0F;
-            this.hud2.UseOpenGL = true;
+            this.hud2.UseOpenGL = false;
             this.hud2.verticalspeed = 0F;
             this.hud2.vibex = 0F;
             this.hud2.vibey = 0F;
@@ -1478,7 +1478,7 @@
             // 
             // lbl_logpercent
             // 
-            this.lbl_logpercent.Location = new System.Drawing.Point(0, 52);
+            this.lbl_logpercent.Location = new System.Drawing.Point(386, 35);
             this.lbl_logpercent.Name = "lbl_logpercent";
             this.lbl_logpercent.resize = false;
             this.lbl_logpercent.Size = new System.Drawing.Size(38, 14);
@@ -1673,7 +1673,7 @@
             this.windDir1.BackColor = System.Drawing.Color.Transparent;
             this.windDir1.DataBindings.Add(new System.Windows.Forms.Binding("Direction", this.bindingSourceHud, "wind_dir", true));
             this.windDir1.DataBindings.Add(new System.Windows.Forms.Binding("Speed", this.bindingSourceHud, "wind_vel", true));
-            this.windDir1.Direction = 360D;
+            this.windDir1.Direction = 180D;
             this.windDir1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.windDir1.Location = new System.Drawing.Point(3, 3);
             this.windDir1.Name = "windDir1";

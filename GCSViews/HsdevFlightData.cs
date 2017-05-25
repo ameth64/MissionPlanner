@@ -1961,8 +1961,8 @@ namespace MissionPlanner.GCSViews
             // 在此响应动态尺寸调整
             int w = this.splitContainer1.Size.Width, h = splitContainer1.Size.Height;
             splitContainer1.SplitterDistance = (int)(w * 0.45f);
-            splitContainer2.SplitterDistance = (int)(h * 0.35f);
-            splitContainer5.SplitterDistance = (int)(splitContainer2.Size.Width * 0.3f);
+            splitContainer2.SplitterDistance = (int)(h * 0.395f);
+            splitContainer5.SplitterDistance = (int)(splitContainer2.Size.Width * 0.4236f);
         }
 
         private void HsdevFlightData_SizeChanged(object sender, EventArgs e)
