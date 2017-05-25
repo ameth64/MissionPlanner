@@ -155,6 +155,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.TRK_zoom = new MissionPlanner.Controls.MyTrackBar();
             this.map = new MissionPlanner.Controls.myGMAP();
+            this.chk_reverseGrid = new System.Windows.Forms.CheckBox();
             this.groupBox5.SuspendLayout();
             this.tabCamera.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -574,6 +575,7 @@
             // 
             resources.ApplyResources(this.BUT_samplephoto, "BUT_samplephoto");
             this.BUT_samplephoto.Name = "BUT_samplephoto";
+            this.BUT_samplephoto.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.BUT_samplephoto.UseVisualStyleBackColor = true;
             this.BUT_samplephoto.Click += new System.EventHandler(this.BUT_samplephoto_Click);
             // 
@@ -692,6 +694,7 @@
             // 
             resources.ApplyResources(this.BUT_save, "BUT_save");
             this.BUT_save.Name = "BUT_save";
+            this.BUT_save.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.BUT_save.UseVisualStyleBackColor = true;
             this.BUT_save.Click += new System.EventHandler(this.BUT_save_Click);
             // 
@@ -813,6 +816,7 @@
             // groupBox1
             // 
             resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Controls.Add(this.chk_reverseGrid);
             this.groupBox1.Controls.Add(this.chk_crossgrid);
             this.groupBox1.Controls.Add(this.label32);
             this.groupBox1.Controls.Add(this.NUM_leadin);
@@ -1228,6 +1232,7 @@
             // 
             resources.ApplyResources(this.BUT_Accept, "BUT_Accept");
             this.BUT_Accept.Name = "BUT_Accept";
+            this.BUT_Accept.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.BUT_Accept.UseVisualStyleBackColor = true;
             this.BUT_Accept.Click += new System.EventHandler(this.BUT_Accept_Click);
             // 
@@ -1278,6 +1283,13 @@
             this.map.Zoom = 3D;
             this.map.MouseDown += new System.Windows.Forms.MouseEventHandler(this.map_MouseDown);
             this.map.MouseMove += new System.Windows.Forms.MouseEventHandler(this.map_MouseMove);
+            // 
+            // chk_reverseGrid
+            // 
+            resources.ApplyResources(this.chk_reverseGrid, "chk_reverseGrid");
+            this.chk_reverseGrid.Name = "chk_reverseGrid";
+            this.chk_reverseGrid.UseVisualStyleBackColor = true;
+            this.chk_reverseGrid.Click += new System.EventHandler(this.domainReverse_ValueChanged);
             // 
             // GridUI
             // 
@@ -1467,5 +1479,6 @@
         private System.Windows.Forms.NumericUpDown num_setservono;
         private System.Windows.Forms.NumericUpDown NUM_windDir;
         private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.CheckBox chk_reverseGrid;
     }
 }
