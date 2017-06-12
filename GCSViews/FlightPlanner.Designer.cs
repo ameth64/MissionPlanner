@@ -215,6 +215,7 @@
             this.clearGridToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.autoWPMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.aeraToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.allPlanMove = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.Commands)).BeginInit();
             this.panel5.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -1383,7 +1384,8 @@
             this.clearWPToolStripMenuItem2,
             this.addGridToolStripMenuItem2,
             this.clearGridToolStripMenuItem3,
-            this.autoWPMenu});
+            this.autoWPMenu,
+            this.allPlanMove});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             resources.ApplyResources(this.contextMenuStrip2, "contextMenuStrip2");
             // 
@@ -1450,6 +1452,12 @@
             this.aeraToolStripMenuItem2.Name = "aeraToolStripMenuItem2";
             resources.ApplyResources(this.aeraToolStripMenuItem2, "aeraToolStripMenuItem2");
             this.aeraToolStripMenuItem2.Click += new System.EventHandler(this.aeraToolStripMenuItem2_Click);
+            // 
+            // allPlanMove
+            // 
+            this.allPlanMove.Name = "allPlanMove";
+            resources.ApplyResources(this.allPlanMove, "allPlanMove");
+            this.allPlanMove.Click += new System.EventHandler(this.allPlanMove_Click);
             // 
             // FlightPlanner
             // 
@@ -1643,5 +1651,6 @@
         private System.Windows.Forms.ToolStripMenuItem addGrid2ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveGridToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadGridToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem allPlanMove;
     }
 }

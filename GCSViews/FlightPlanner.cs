@@ -52,6 +52,7 @@ namespace MissionPlanner.GCSViews
         Hashtable param = new Hashtable();
         bool splinemode;
         altmode currentaltmode = altmode.Relative;
+        bool isAllWaypointDraging = false;
 
         bool grid;
 
@@ -3894,6 +3895,8 @@ namespace MissionPlanner.GCSViews
 
         void MainMap_MouseUp(object sender, MouseEventArgs e)
         {
+            MouseDownEnd = MainMap.FromLocalToLatLng(e.X, e.Y);
+
             if (isMouseClickOffMenu)
             {
                 isMouseClickOffMenu = false;
@@ -4225,18 +4228,84 @@ namespace MissionPlanner.GCSViews
                 {
                     double latdif = MouseDownStart.Lat - point.Lat;
                     double lngdif = MouseDownStart.Lng - point.Lng;
-
-                    try
+                    if (!isAllWaypointDraging)
                     {
-                        lock (thisLock)
+                        try
                         {
-                            if (!isMouseClickOffMenu)
-                                MainMap.Position = new PointLatLng(center.Position.Lat + latdif,
-                                    center.Position.Lng + lngdif);
+                            lock (thisLock)
+                            {
+                                if (!isMouseClickOffMenu)
+                                    MainMap.Position = new PointLatLng(center.Position.Lat + latdif,
+                                        center.Position.Lng + lngdif);
+                            }
+                        }
+                        catch
+                        {
                         }
                     }
-                    catch
+                    else
                     {
+                        int ii = 2;
+                        try
+                        {
+                            for (int i = 1; i < fullpointlist.Count - 1; i++)
+                            {
+                                objectsoverlay.Markers[ii].Position = new PointLatLng(fullpointlist[i].Lat - latdif, fullpointlist[i].Lng - lngdif);
+                                objectsoverlay.Markers[ii + 1].Position = new PointLatLng(fullpointlist[i].Lat - latdif, fullpointlist[i].Lng - lngdif);
+                                ii += 2;
+                                fullpointlist[i] = new PointLatLng(fullpointlist[i].Lat - latdif, fullpointlist[i].Lng - lngdif);
+                                //route.Points[i]
+                                if (Commands.Rows[i - 1].Cells[Lat.Index].Value.ToString() == "0" && Commands.Rows[i - 1].Cells[Lon.Index].Value.ToString() == "0")
+                                    continue;
+                                Commands.Rows[i - 1].Cells[Lat.Index].Value = (fullpointlist[i].Lat - latdif).ToString("0.0000000");
+                                Commands.Rows[i - 1].Cells[Lon.Index].Value = (fullpointlist[i].Lng - lngdif).ToString("0.0000000");
+                            }
+                            RegenerateWPRoute(fullpointlist);
+                            fullpointlist.RemoveAt(fullpointlist.Count-1);
+                        }
+                        catch (Exception ex)
+                        {
+                            CustomMessageBox.Show("" + ex);
+                        }
+                        lock (thisLock)
+                        {
+                            //RegenerateWPRoute(fullpointlist);
+
+                            if (fullpointlist.Count > 0)
+                            {
+                                double homedist = 0;
+                                string home = "";
+                                if (TXT_homealt.Text != "" && TXT_homelat.Text != "" && TXT_homelng.Text != "")
+                                {
+                                    home = string.Format("{0},{1},{2}\r\n", TXT_homelng.Text, TXT_homelat.Text, TXT_DefaultAlt.Text);
+                                }
+
+                               if (home.Length > 5)
+                                {
+                                    homedist = MainMap.MapProvider.Projection.GetDistance(fullpointlist[fullpointlist.Count - 1],
+                                        fullpointlist[0]);
+                                }
+
+                                double dist = 0;
+
+                                for (int a = 1; a < fullpointlist.Count; a++)
+                                {
+                                    if (fullpointlist[a - 1] == null)
+                                        continue;
+
+                                    if (fullpointlist[a] == null)
+                                        continue;
+
+                                    dist += MainMap.MapProvider.Projection.GetDistance(fullpointlist[a - 1], fullpointlist[a]);
+                                }
+
+                                lbl_distance.Text = rm.GetString("lbl_distance.Text") + ": " +
+                                                    FormatDistance(dist + homedist, false);
+                            }
+                        }
+                        MainMap.Invalidate();
+                        MouseDownStart.Lat = point.Lat;
+                        MouseDownStart.Lng = point.Lng;
                     }
                 }
             }
@@ -7913,6 +7982,20 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             }
 
             return ret;
+        }
+
+        private void allPlanMove_Click(object sender, EventArgs e)
+        {
+            if(isAllWaypointDraging == false)
+            {
+                allPlanMove.Text = "取消拖动";
+                isAllWaypointDraging = true;
+            }
+            else
+            {
+                allPlanMove.Text = "拖动航线";
+                isAllWaypointDraging = false;
+            }
         }
     }
 }
