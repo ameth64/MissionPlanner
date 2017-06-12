@@ -63,7 +63,7 @@ namespace MissionPlanner.GCSViews
 
         const float deg2rad = (float)(1.0 / rad2deg);
 
-        public static Controls.HUD myhud = null;
+        public static Controls.HSHUD myhud = null;
         public static GMapControl mymap = null;
 
         bool playingLog = false;
@@ -400,7 +400,7 @@ namespace MissionPlanner.GCSViews
                     CustomMessageBox.Show("Max 10 at a time.");
                     ((CheckBox)sender).Checked = false;
                 }
-                ThemeManager.ApplyThemeTo(this);
+                //ThemeManager.ApplyThemeTo(this);
 
                 string selected = "";
                 try
@@ -1576,7 +1576,7 @@ namespace MissionPlanner.GCSViews
 
         private void BUT_standby_Click(object sender, EventArgs e)
         {
-                MainV2.comPort.setMode("Stabilize");
+                MainV2.comPort.setMode("Manual");
         }
 
         private void BUT_parachute_Click(object sender, EventArgs e)
@@ -1946,9 +1946,9 @@ namespace MissionPlanner.GCSViews
                 else
                 {
                     if (!MainV2.comPort.MAV.cs.armed)
-                        BUT_ARM.Text = "解锁";
-                    else
                         BUT_ARM.Text = "锁定";
+                    else
+                        BUT_ARM.Text = "解锁";
                 }
             }
             catch

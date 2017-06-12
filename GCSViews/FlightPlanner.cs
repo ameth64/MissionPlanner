@@ -7722,17 +7722,20 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
 
         private void aeraToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            double aream2 = Math.Abs(calcpolygonarea(drawnpolygon.Points));
+            double aream2 = Math.Abs(calcpolygonarea(drawnpolygon.Points)) * 1e-6;
 
             double areaa = aream2 * 0.000247105;
 
             double areaha = aream2 * 1e-4;
 
             double areasqf = aream2 * 10.7639;
-
+            /*
             CustomMessageBox.Show(
-                "Area: " + aream2.ToString("0") + " m2\n\t" + areaa.ToString("0.00") + " Acre\n\t" +
+                "面积: " + aream2.ToString("0") + " m2\n\t" + areaa.ToString("0.00") + " Acre\n\t" +
                 areaha.ToString("0.00") + " Hectare\n\t" + areasqf.ToString("0") + " sqf", "Area");
+                */
+            CustomMessageBox.Show(
+                "面积: " + aream2.ToString("0.000") + " 平方公里", "Area");
         }
 
         public void setAdvancedFuction(bool f)

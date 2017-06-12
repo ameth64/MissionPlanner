@@ -103,6 +103,9 @@
     <Compile Include="HorizontalProgressBar2.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="HSHUD.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="HSI.cs">
       <SubType>UserControl</SubType>
     </Compile>

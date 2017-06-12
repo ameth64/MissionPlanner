@@ -242,6 +242,7 @@ namespace MissionPlanner
             // 
             resources.ApplyResources(this.menu, "menu");
             this.menu.Name = "menu";
+            this.menu.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.menu.UseVisualStyleBackColor = true;
             this.menu.MouseEnter += new System.EventHandler(this.menu_MouseEnter);
             // 
