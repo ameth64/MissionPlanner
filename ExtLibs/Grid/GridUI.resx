@@ -130,7 +130,7 @@
     <value>611, 59</value>
   </data>
   <data name="lbl_gndelev.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 12</value>
+    <value>44, 18</value>
   </data>
   <data name="lbl_gndelev.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -160,7 +160,7 @@
     <value>470, 59</value>
   </data>
   <data name="label40.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 12</value>
+    <value>161, 18</value>
   </data>
   <data name="label40.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -190,7 +190,7 @@
     <value>611, 46</value>
   </data>
   <data name="lbl_turnrad.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 12</value>
+    <value>44, 18</value>
   </data>
   <data name="lbl_turnrad.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -220,7 +220,7 @@
     <value>470, 46</value>
   </data>
   <data name="label36.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 12</value>
+    <value>170, 18</value>
   </data>
   <data name="label36.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -250,7 +250,7 @@
     <value>611, 33</value>
   </data>
   <data name="lbl_photoevery.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 12</value>
+    <value>44, 18</value>
   </data>
   <data name="lbl_photoevery.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -280,7 +280,7 @@
     <value>470, 33</value>
   </data>
   <data name="label35.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 12</value>
+    <value>170, 18</value>
   </data>
   <data name="label35.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -310,7 +310,7 @@
     <value>611, 20</value>
   </data>
   <data name="lbl_flighttime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 12</value>
+    <value>44, 18</value>
   </data>
   <data name="lbl_flighttime.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -340,7 +340,7 @@
     <value>470, 20</value>
   </data>
   <data name="label31.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 12</value>
+    <value>170, 18</value>
   </data>
   <data name="label31.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -370,7 +370,7 @@
     <value>381, 59</value>
   </data>
   <data name="lbl_distbetweenlines.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 12</value>
+    <value>44, 18</value>
   </data>
   <data name="lbl_distbetweenlines.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -400,7 +400,7 @@
     <value>240, 59</value>
   </data>
   <data name="label25.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 12</value>
+    <value>179, 18</value>
   </data>
   <data name="label25.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -430,7 +430,7 @@
     <value>381, 46</value>
   </data>
   <data name="lbl_footprint.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 12</value>
+    <value>44, 18</value>
   </data>
   <data name="lbl_footprint.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -460,7 +460,7 @@
     <value>240, 46</value>
   </data>
   <data name="label30.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 12</value>
+    <value>98, 18</value>
   </data>
   <data name="label30.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -490,7 +490,7 @@
     <value>381, 33</value>
   </data>
   <data name="lbl_strips.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 12</value>
+    <value>44, 18</value>
   </data>
   <data name="lbl_strips.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -520,7 +520,7 @@
     <value>381, 20</value>
   </data>
   <data name="lbl_pictures.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 12</value>
+    <value>44, 18</value>
   </data>
   <data name="lbl_pictures.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -550,7 +550,7 @@
     <value>240, 33</value>
   </data>
   <data name="label33.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 12</value>
+    <value>125, 18</value>
   </data>
   <data name="label33.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -580,7 +580,7 @@
     <value>240, 20</value>
   </data>
   <data name="label34.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 12</value>
+    <value>89, 18</value>
   </data>
   <data name="label34.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -610,7 +610,7 @@
     <value>154, 59</value>
   </data>
   <data name="lbl_grndres.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 12</value>
+    <value>44, 18</value>
   </data>
   <data name="lbl_grndres.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -640,7 +640,7 @@
     <value>13, 59</value>
   </data>
   <data name="label29.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 12</value>
+    <value>179, 18</value>
   </data>
   <data name="label29.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -670,7 +670,7 @@
     <value>154, 46</value>
   </data>
   <data name="lbl_spacing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 12</value>
+    <value>44, 18</value>
   </data>
   <data name="lbl_spacing.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -700,7 +700,7 @@
     <value>13, 46</value>
   </data>
   <data name="label27.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 12</value>
+    <value>233, 18</value>
   </data>
   <data name="label27.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -730,7 +730,7 @@
     <value>154, 33</value>
   </data>
   <data name="lbl_distance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 12</value>
+    <value>44, 18</value>
   </data>
   <data name="lbl_distance.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -760,7 +760,7 @@
     <value>154, 20</value>
   </data>
   <data name="lbl_area.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 12</value>
+    <value>44, 18</value>
   </data>
   <data name="lbl_area.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -790,7 +790,7 @@
     <value>13, 33</value>
   </data>
   <data name="label23.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 12</value>
+    <value>98, 18</value>
   </data>
   <data name="label23.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -820,7 +820,7 @@
     <value>13, 20</value>
   </data>
   <data name="label22.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 12</value>
+    <value>62, 18</value>
   </data>
   <data name="label22.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -877,7 +877,7 @@
     <value>6, 148</value>
   </data>
   <data name="label42.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 12</value>
+    <value>53, 18</value>
   </data>
   <data name="label42.TabIndex" type="System.Int32, mscorlib">
     <value>45</value>
@@ -901,7 +901,7 @@
     <value>9, 164</value>
   </data>
   <data name="num_setservono.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 21</value>
+    <value>51, 28</value>
   </data>
   <data name="num_setservono.TabIndex" type="System.Int32, mscorlib">
     <value>44</value>
@@ -928,7 +928,7 @@
     <value>120, 147</value>
   </data>
   <data name="label41.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 12</value>
+    <value>53, 18</value>
   </data>
   <data name="label41.TabIndex" type="System.Int32, mscorlib">
     <value>43</value>
@@ -958,7 +958,7 @@
     <value>64, 147</value>
   </data>
   <data name="label39.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 12</value>
+    <value>53, 18</value>
   </data>
   <data name="label39.TabIndex" type="System.Int32, mscorlib">
     <value>42</value>
@@ -982,7 +982,7 @@
     <value>66, 164</value>
   </data>
   <data name="num_setservolow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 21</value>
+    <value>51, 28</value>
   </data>
   <data name="num_setservolow.TabIndex" type="System.Int32, mscorlib">
     <value>41</value>
@@ -1003,7 +1003,7 @@
     <value>123, 164</value>
   </data>
   <data name="num_setservohigh.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 21</value>
+    <value>51, 28</value>
   </data>
   <data name="num_setservohigh.TabIndex" type="System.Int32, mscorlib">
     <value>40</value>
@@ -1030,7 +1030,7 @@
     <value>9, 127</value>
   </data>
   <data name="rad_do_set_servo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 16</value>
+    <value>141, 22</value>
   </data>
   <data name="rad_do_set_servo.TabIndex" type="System.Int32, mscorlib">
     <value>39</value>
@@ -1060,7 +1060,7 @@
     <value>134, 19</value>
   </data>
   <data name="chk_stopstart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 16</value>
+    <value>124, 22</value>
   </data>
   <data name="chk_stopstart.TabIndex" type="System.Int32, mscorlib">
     <value>38</value>
@@ -1090,7 +1090,7 @@
     <value>63, 85</value>
   </data>
   <data name="label18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 12</value>
+    <value>35, 18</value>
   </data>
   <data name="label18.TabIndex" type="System.Int32, mscorlib">
     <value>37</value>
@@ -1120,7 +1120,7 @@
     <value>120, 85</value>
   </data>
   <data name="label17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 12</value>
+    <value>134, 18</value>
   </data>
   <data name="label17.TabIndex" type="System.Int32, mscorlib">
     <value>36</value>
@@ -1150,7 +1150,7 @@
     <value>6, 85</value>
   </data>
   <data name="label16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>11, 12</value>
+    <value>17, 18</value>
   </data>
   <data name="label16.TabIndex" type="System.Int32, mscorlib">
     <value>35</value>
@@ -1174,7 +1174,7 @@
     <value>123, 101</value>
   </data>
   <data name="NUM_repttime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 21</value>
+    <value>51, 28</value>
   </data>
   <data name="NUM_repttime.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
@@ -1195,7 +1195,7 @@
     <value>66, 101</value>
   </data>
   <data name="num_reptpwm.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 21</value>
+    <value>51, 28</value>
   </data>
   <data name="num_reptpwm.TabIndex" type="System.Int32, mscorlib">
     <value>33</value>
@@ -1216,7 +1216,7 @@
     <value>9, 101</value>
   </data>
   <data name="NUM_reptservo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 21</value>
+    <value>51, 28</value>
   </data>
   <data name="NUM_reptservo.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
@@ -1243,7 +1243,7 @@
     <value>9, 42</value>
   </data>
   <data name="rad_digicam.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 16</value>
+    <value>195, 22</value>
   </data>
   <data name="rad_digicam.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
@@ -1273,7 +1273,7 @@
     <value>9, 65</value>
   </data>
   <data name="rad_repeatservo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 16</value>
+    <value>168, 22</value>
   </data>
   <data name="rad_repeatservo.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
@@ -1306,7 +1306,7 @@
     <value>9, 19</value>
   </data>
   <data name="rad_trigdist.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 16</value>
+    <value>159, 22</value>
   </data>
   <data name="rad_trigdist.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -1372,7 +1372,7 @@
     <value>BUT_samplephoto</value>
   </data>
   <data name="&gt;&gt;BUT_samplephoto.Type" xml:space="preserve">
-    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6247.27215, Culture=neutral, PublicKeyToken=null</value>
+    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6386.33307, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;BUT_samplephoto.Parent" xml:space="preserve">
     <value>groupBox2</value>
@@ -1390,7 +1390,7 @@
     <value>56, 232</value>
   </data>
   <data name="label21.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 12</value>
+    <value>161, 18</value>
   </data>
   <data name="label21.TabIndex" type="System.Int32, mscorlib">
     <value>67</value>
@@ -1420,7 +1420,7 @@
     <value>5, 277</value>
   </data>
   <data name="label19.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 12</value>
+    <value>116, 18</value>
   </data>
   <data name="label19.TabIndex" type="System.Int32, mscorlib">
     <value>66</value>
@@ -1450,7 +1450,7 @@
     <value>4, 250</value>
   </data>
   <data name="label20.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 12</value>
+    <value>116, 18</value>
   </data>
   <data name="label20.TabIndex" type="System.Int32, mscorlib">
     <value>65</value>
@@ -1474,7 +1474,7 @@
     <value>143, 274</value>
   </data>
   <data name="TXT_fovV.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 21</value>
+    <value>51, 28</value>
   </data>
   <data name="TXT_fovV.TabIndex" type="System.Int32, mscorlib">
     <value>64</value>
@@ -1495,7 +1495,7 @@
     <value>143, 247</value>
   </data>
   <data name="TXT_fovH.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 21</value>
+    <value>51, 28</value>
   </data>
   <data name="TXT_fovH.TabIndex" type="System.Int32, mscorlib">
     <value>63</value>
@@ -1522,7 +1522,7 @@
     <value>8, 152</value>
   </data>
   <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 12</value>
+    <value>170, 18</value>
   </data>
   <data name="label12.TabIndex" type="System.Int32, mscorlib">
     <value>62</value>
@@ -1546,7 +1546,7 @@
     <value>143, 149</value>
   </data>
   <data name="TXT_cmpixel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 21</value>
+    <value>51, 28</value>
   </data>
   <data name="TXT_cmpixel.TabIndex" type="System.Int32, mscorlib">
     <value>61</value>
@@ -1567,7 +1567,7 @@
     <value>143, 123</value>
   </data>
   <data name="TXT_sensheight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 21</value>
+    <value>51, 28</value>
   </data>
   <data name="TXT_sensheight.TabIndex" type="System.Int32, mscorlib">
     <value>57</value>
@@ -1591,7 +1591,7 @@
     <value>143, 97</value>
   </data>
   <data name="TXT_senswidth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 21</value>
+    <value>51, 28</value>
   </data>
   <data name="TXT_senswidth.TabIndex" type="System.Int32, mscorlib">
     <value>56</value>
@@ -1615,7 +1615,7 @@
     <value>143, 71</value>
   </data>
   <data name="TXT_imgheight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 21</value>
+    <value>51, 28</value>
   </data>
   <data name="TXT_imgheight.TabIndex" type="System.Int32, mscorlib">
     <value>55</value>
@@ -1639,7 +1639,7 @@
     <value>143, 45</value>
   </data>
   <data name="TXT_imgwidth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 21</value>
+    <value>51, 28</value>
   </data>
   <data name="TXT_imgwidth.TabIndex" type="System.Int32, mscorlib">
     <value>54</value>
@@ -1663,7 +1663,7 @@
     <value>143, 19</value>
   </data>
   <data name="NUM_focallength.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 21</value>
+    <value>51, 28</value>
   </data>
   <data name="NUM_focallength.TabIndex" type="System.Int32, mscorlib">
     <value>53</value>
@@ -1690,7 +1690,7 @@
     <value>7, 121</value>
   </data>
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 12</value>
+    <value>161, 18</value>
   </data>
   <data name="label9.TabIndex" type="System.Int32, mscorlib">
     <value>50</value>
@@ -1720,7 +1720,7 @@
     <value>7, 95</value>
   </data>
   <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 12</value>
+    <value>161, 18</value>
   </data>
   <data name="label10.TabIndex" type="System.Int32, mscorlib">
     <value>49</value>
@@ -1750,7 +1750,7 @@
     <value>7, 69</value>
   </data>
   <data name="label14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 12</value>
+    <value>143, 18</value>
   </data>
   <data name="label14.TabIndex" type="System.Int32, mscorlib">
     <value>48</value>
@@ -1780,7 +1780,7 @@
     <value>7, 43</value>
   </data>
   <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 12</value>
+    <value>143, 18</value>
   </data>
   <data name="label13.TabIndex" type="System.Int32, mscorlib">
     <value>47</value>
@@ -1810,7 +1810,7 @@
     <value>7, 21</value>
   </data>
   <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 12</value>
+    <value>89, 18</value>
   </data>
   <data name="label11.TabIndex" type="System.Int32, mscorlib">
     <value>46</value>
@@ -1849,7 +1849,7 @@
     <value>BUT_save</value>
   </data>
   <data name="&gt;&gt;BUT_save.Type" xml:space="preserve">
-    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6247.27215, Culture=neutral, PublicKeyToken=null</value>
+    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6386.33307, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;BUT_save.Parent" xml:space="preserve">
     <value>groupBox2</value>
@@ -1882,13 +1882,13 @@
     <value>1</value>
   </data>
   <data name="tabCamera.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
+    <value>4, 28</value>
   </data>
   <data name="tabCamera.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabCamera.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 511</value>
+    <value>245, 505</value>
   </data>
   <data name="tabCamera.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1921,7 +1921,7 @@
     <value>7, 25</value>
   </data>
   <data name="LBL_Alternating_lanes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 12</value>
+    <value>80, 18</value>
   </data>
   <data name="LBL_Alternating_lanes.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1951,7 +1951,7 @@
     <value>26, 49</value>
   </data>
   <data name="LBL_Lane_Dist.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 12</value>
+    <value>116, 18</value>
   </data>
   <data name="LBL_Lane_Dist.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -1975,7 +1975,7 @@
     <value>143, 47</value>
   </data>
   <data name="NUM_Lane_Dist.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 21</value>
+    <value>51, 28</value>
   </data>
   <data name="NUM_Lane_Dist.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -2002,7 +2002,7 @@
     <value>6, 23</value>
   </data>
   <data name="label28.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 12</value>
+    <value>0, 18</value>
   </data>
   <data name="label28.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -2023,7 +2023,7 @@
     <value>6, 362</value>
   </data>
   <data name="groupBox7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>233, 84</value>
+    <value>233, 78</value>
   </data>
   <data name="groupBox7.TabIndex" type="System.Int32, mscorlib">
     <value>63</value>
@@ -2053,7 +2053,7 @@
     <value>143, 48</value>
   </data>
   <data name="TXT_headinghold.Size" type="System.Drawing.Size, System.Drawing">
-    <value>31, 21</value>
+    <value>31, 28</value>
   </data>
   <data name="TXT_headinghold.TabIndex" type="System.Int32, mscorlib">
     <value>62</value>
@@ -2146,7 +2146,7 @@
     <value>32, 73</value>
   </data>
   <data name="CHK_copter_headingholdlock.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 16</value>
+    <value>196, 22</value>
   </data>
   <data name="CHK_copter_headingholdlock.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -2176,7 +2176,7 @@
     <value>9, 50</value>
   </data>
   <data name="CHK_copter_headinghold.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 16</value>
+    <value>133, 22</value>
   </data>
   <data name="CHK_copter_headinghold.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -2206,7 +2206,7 @@
     <value>6, 23</value>
   </data>
   <data name="LBL_copter_delay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 12</value>
+    <value>134, 18</value>
   </data>
   <data name="LBL_copter_delay.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -2230,7 +2230,7 @@
     <value>143, 21</value>
   </data>
   <data name="NUM_copter_delay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 21</value>
+    <value>51, 28</value>
   </data>
   <data name="NUM_copter_delay.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2251,7 +2251,7 @@
     <value>6, 259</value>
   </data>
   <data name="groupBox_copter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>233, 97</value>
+    <value>233, 91</value>
   </data>
   <data name="groupBox_copter.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2284,7 +2284,7 @@
     <value>10, 197</value>
   </data>
   <data name="chk_crossgrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 16</value>
+    <value>178, 22</value>
   </data>
   <data name="chk_crossgrid.TabIndex" type="System.Int32, mscorlib">
     <value>62</value>
@@ -2314,7 +2314,7 @@
     <value>7, 94</value>
   </data>
   <data name="label32.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 12</value>
+    <value>134, 18</value>
   </data>
   <data name="label32.TabIndex" type="System.Int32, mscorlib">
     <value>61</value>
@@ -2338,7 +2338,7 @@
     <value>143, 92</value>
   </data>
   <data name="NUM_leadin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 21</value>
+    <value>51, 28</value>
   </data>
   <data name="NUM_leadin.TabIndex" type="System.Int32, mscorlib">
     <value>60</value>
@@ -2365,7 +2365,7 @@
     <value>7, 68</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 12</value>
+    <value>143, 18</value>
   </data>
   <data name="label7.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -2389,7 +2389,7 @@
     <value>143, 66</value>
   </data>
   <data name="NUM_overshoot2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 21</value>
+    <value>51, 28</value>
   </data>
   <data name="NUM_overshoot2.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -2416,7 +2416,7 @@
     <value>7, 147</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 12</value>
+    <value>134, 18</value>
   </data>
   <data name="label8.TabIndex" type="System.Int32, mscorlib">
     <value>51</value>
@@ -2446,7 +2446,7 @@
     <value>7, 121</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 12</value>
+    <value>107, 18</value>
   </data>
   <data name="label6.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -2476,7 +2476,7 @@
     <value>7, 173</value>
   </data>
   <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 12</value>
+    <value>134, 18</value>
   </data>
   <data name="label15.TabIndex" type="System.Int32, mscorlib">
     <value>52</value>
@@ -2500,7 +2500,7 @@
     <value>103, 118</value>
   </data>
   <data name="CMB_startfrom.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 20</value>
+    <value>92, 26</value>
   </data>
   <data name="CMB_startfrom.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -2521,7 +2521,7 @@
     <value>143, 145</value>
   </data>
   <data name="num_overlap.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 21</value>
+    <value>51, 28</value>
   </data>
   <data name="num_overlap.TabIndex" type="System.Int32, mscorlib">
     <value>58</value>
@@ -2542,7 +2542,7 @@
     <value>143, 171</value>
   </data>
   <data name="num_sidelap.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 21</value>
+    <value>51, 28</value>
   </data>
   <data name="num_sidelap.TabIndex" type="System.Int32, mscorlib">
     <value>59</value>
@@ -2569,7 +2569,7 @@
     <value>7, 42</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 12</value>
+    <value>143, 18</value>
   </data>
   <data name="label5.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -2593,7 +2593,7 @@
     <value>143, 40</value>
   </data>
   <data name="NUM_overshoot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 21</value>
+    <value>51, 28</value>
   </data>
   <data name="NUM_overshoot.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -2620,7 +2620,7 @@
     <value>6, 16</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 12</value>
+    <value>98, 18</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -2644,7 +2644,7 @@
     <value>143, 14</value>
   </data>
   <data name="NUM_Distance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 21</value>
+    <value>51, 28</value>
   </data>
   <data name="NUM_Distance.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2665,7 +2665,7 @@
     <value>6, 6</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>233, 247</value>
+    <value>233, 241</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2695,7 +2695,7 @@
     <value>13, 463</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 12</value>
+    <value>125, 18</value>
   </data>
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -2722,7 +2722,7 @@
     <value>149, 461</value>
   </data>
   <data name="NUM_spacing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 21</value>
+    <value>51, 28</value>
   </data>
   <data name="NUM_spacing.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
@@ -2743,13 +2743,13 @@
     <value>4</value>
   </data>
   <data name="tabGrid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
+    <value>4, 28</value>
   </data>
   <data name="tabGrid.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabGrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 511</value>
+    <value>245, 505</value>
   </data>
   <data name="tabGrid.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2779,7 +2779,7 @@
     <value>3, 423</value>
   </data>
   <data name="label38.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 24</value>
+    <value>179, 36</value>
   </data>
   <data name="label38.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -2800,11 +2800,71 @@ Ctrl+O 可从文件读取</value>
   <data name="&gt;&gt;label38.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="CHK_hssideshot.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="CHK_hssideshot.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="CHK_hssideshot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>87, 188</value>
+  </data>
+  <data name="CHK_hssideshot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 22</value>
+  </data>
+  <data name="CHK_hssideshot.TabIndex" type="System.Int32, mscorlib">
+    <value>71</value>
+  </data>
+  <data name="CHK_hssideshot.Text" xml:space="preserve">
+    <value>慧视</value>
+  </data>
+  <data name="&gt;&gt;CHK_hssideshot.Name" xml:space="preserve">
+    <value>CHK_hssideshot</value>
+  </data>
+  <data name="&gt;&gt;CHK_hssideshot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CHK_hssideshot.Parent" xml:space="preserve">
+    <value>groupBox6</value>
+  </data>
+  <data name="&gt;&gt;CHK_hssideshot.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="CHK_sideshot.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="CHK_sideshot.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="CHK_sideshot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 188</value>
+  </data>
+  <data name="CHK_sideshot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 22</value>
+  </data>
+  <data name="CHK_sideshot.TabIndex" type="System.Int32, mscorlib">
+    <value>70</value>
+  </data>
+  <data name="CHK_sideshot.Text" xml:space="preserve">
+    <value>斜拍</value>
+  </data>
+  <data name="&gt;&gt;CHK_sideshot.Name" xml:space="preserve">
+    <value>CHK_sideshot</value>
+  </data>
+  <data name="&gt;&gt;CHK_sideshot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CHK_sideshot.Parent" xml:space="preserve">
+    <value>groupBox6</value>
+  </data>
+  <data name="&gt;&gt;CHK_sideshot.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="NUM_windDir.Location" type="System.Drawing.Point, System.Drawing">
     <value>43, 211</value>
   </data>
   <data name="NUM_windDir.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 21</value>
+    <value>65, 28</value>
   </data>
   <data name="NUM_windDir.TabIndex" type="System.Int32, mscorlib">
     <value>69</value>
@@ -2819,7 +2879,7 @@ Ctrl+O 可从文件读取</value>
     <value>groupBox6</value>
   </data>
   <data name="&gt;&gt;NUM_windDir.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="label43.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2828,7 +2888,7 @@ Ctrl+O 可从文件读取</value>
     <value>8, 213</value>
   </data>
   <data name="label43.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 12</value>
+    <value>44, 18</value>
   </data>
   <data name="label43.TabIndex" type="System.Int32, mscorlib">
     <value>68</value>
@@ -2846,7 +2906,7 @@ Ctrl+O 可从文件读取</value>
     <value>groupBox6</value>
   </data>
   <data name="&gt;&gt;label43.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="label37.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2858,7 +2918,7 @@ Ctrl+O 可从文件读取</value>
     <value>120, 214</value>
   </data>
   <data name="label37.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 12</value>
+    <value>80, 18</value>
   </data>
   <data name="label37.TabIndex" type="System.Int32, mscorlib">
     <value>67</value>
@@ -2876,13 +2936,13 @@ Ctrl+O 可从文件读取</value>
     <value>groupBox6</value>
   </data>
   <data name="&gt;&gt;label37.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="NUM_split.Location" type="System.Drawing.Point, System.Drawing">
     <value>179, 212</value>
   </data>
   <data name="NUM_split.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 21</value>
+    <value>51, 28</value>
   </data>
   <data name="NUM_split.TabIndex" type="System.Int32, mscorlib">
     <value>66</value>
@@ -2897,7 +2957,7 @@ Ctrl+O 可从文件读取</value>
     <value>groupBox6</value>
   </data>
   <data name="&gt;&gt;NUM_split.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="CHK_usespeed.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2906,10 +2966,10 @@ Ctrl+O 可从文件读取</value>
     <value>NoControl</value>
   </data>
   <data name="CHK_usespeed.Location" type="System.Drawing.Point, System.Drawing">
-    <value>43, 141</value>
+    <value>76, 141</value>
   </data>
   <data name="CHK_usespeed.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 16</value>
+    <value>178, 22</value>
   </data>
   <data name="CHK_usespeed.TabIndex" type="System.Int32, mscorlib">
     <value>65</value>
@@ -2927,7 +2987,7 @@ Ctrl+O 可从文件读取</value>
     <value>groupBox6</value>
   </data>
   <data name="&gt;&gt;CHK_usespeed.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="CHK_toandland_RTL.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2936,10 +2996,10 @@ Ctrl+O 可从文件读取</value>
     <value>NoControl</value>
   </data>
   <data name="CHK_toandland_RTL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>105, 185</value>
+    <value>167, 187</value>
   </data>
   <data name="CHK_toandland_RTL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>126, 16</value>
+    <value>187, 22</value>
   </data>
   <data name="CHK_toandland_RTL.TabIndex" type="System.Int32, mscorlib">
     <value>64</value>
@@ -2957,7 +3017,7 @@ Ctrl+O 可从文件读取</value>
     <value>groupBox6</value>
   </data>
   <data name="&gt;&gt;CHK_toandland_RTL.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="CHK_toandland.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2969,7 +3029,7 @@ Ctrl+O 可从文件读取</value>
     <value>11, 163</value>
   </data>
   <data name="CHK_toandland.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 16</value>
+    <value>196, 22</value>
   </data>
   <data name="CHK_toandland.TabIndex" type="System.Int32, mscorlib">
     <value>63</value>
@@ -2987,7 +3047,7 @@ Ctrl+O 可从文件读取</value>
     <value>groupBox6</value>
   </data>
   <data name="&gt;&gt;CHK_toandland.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="label24.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2999,7 +3059,7 @@ Ctrl+O 可从文件读取</value>
     <value>6, 117</value>
   </data>
   <data name="label24.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 12</value>
+    <value>134, 18</value>
   </data>
   <data name="label24.TabIndex" type="System.Int32, mscorlib">
     <value>62</value>
@@ -3017,13 +3077,13 @@ Ctrl+O 可从文件读取</value>
     <value>groupBox6</value>
   </data>
   <data name="&gt;&gt;label24.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="NUM_UpDownFlySpeed.Location" type="System.Drawing.Point, System.Drawing">
     <value>142, 115</value>
   </data>
   <data name="NUM_UpDownFlySpeed.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 21</value>
+    <value>51, 28</value>
   </data>
   <data name="NUM_UpDownFlySpeed.TabIndex" type="System.Int32, mscorlib">
     <value>61</value>
@@ -3038,7 +3098,7 @@ Ctrl+O 可从文件读取</value>
     <value>groupBox6</value>
   </data>
   <data name="&gt;&gt;NUM_UpDownFlySpeed.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="label26.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3050,7 +3110,7 @@ Ctrl+O 可从文件读取</value>
     <value>6, 16</value>
   </data>
   <data name="label26.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 12</value>
+    <value>80, 18</value>
   </data>
   <data name="label26.TabIndex" type="System.Int32, mscorlib">
     <value>45</value>
@@ -3068,7 +3128,7 @@ Ctrl+O 可从文件读取</value>
     <value>groupBox6</value>
   </data>
   <data name="&gt;&gt;label26.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
   </data>
   <data name="label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3080,7 +3140,7 @@ Ctrl+O 可从文件读取</value>
     <value>6, 68</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 12</value>
+    <value>107, 18</value>
   </data>
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -3098,13 +3158,13 @@ Ctrl+O 可从文件读取</value>
     <value>groupBox6</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>12</value>
   </data>
   <data name="NUM_angle.Location" type="System.Drawing.Point, System.Drawing">
     <value>142, 66</value>
   </data>
   <data name="NUM_angle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 21</value>
+    <value>51, 28</value>
   </data>
   <data name="NUM_angle.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -3119,13 +3179,13 @@ Ctrl+O 可从文件读取</value>
     <value>groupBox6</value>
   </data>
   <data name="&gt;&gt;NUM_angle.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>13</value>
   </data>
   <data name="CMB_camera.Location" type="System.Drawing.Point, System.Drawing">
     <value>105, 13</value>
   </data>
   <data name="CMB_camera.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 20</value>
+    <value>117, 26</value>
   </data>
   <data name="CMB_camera.TabIndex" type="System.Int32, mscorlib">
     <value>44</value>
@@ -3140,7 +3200,7 @@ Ctrl+O 可从文件读取</value>
     <value>groupBox6</value>
   </data>
   <data name="&gt;&gt;CMB_camera.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>14</value>
   </data>
   <data name="CHK_camdirection.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3152,7 +3212,7 @@ Ctrl+O 可从文件读取</value>
     <value>43, 92</value>
   </data>
   <data name="CHK_camdirection.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 16</value>
+    <value>106, 22</value>
   </data>
   <data name="CHK_camdirection.TabIndex" type="System.Int32, mscorlib">
     <value>60</value>
@@ -3170,13 +3230,13 @@ Ctrl+O 可从文件读取</value>
     <value>groupBox6</value>
   </data>
   <data name="&gt;&gt;CHK_camdirection.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>15</value>
   </data>
   <data name="NUM_altitude.Location" type="System.Drawing.Point, System.Drawing">
     <value>142, 40</value>
   </data>
   <data name="NUM_altitude.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 21</value>
+    <value>51, 28</value>
   </data>
   <data name="NUM_altitude.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3191,7 +3251,7 @@ Ctrl+O 可从文件读取</value>
     <value>groupBox6</value>
   </data>
   <data name="&gt;&gt;NUM_altitude.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>16</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3203,7 +3263,7 @@ Ctrl+O 可从文件读取</value>
     <value>6, 42</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 12</value>
+    <value>125, 18</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3221,7 +3281,7 @@ Ctrl+O 可从文件读取</value>
     <value>groupBox6</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>17</value>
   </data>
   <data name="groupBox6.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 6</value>
@@ -3257,7 +3317,7 @@ Ctrl+O 可从文件读取</value>
     <value>8, 135</value>
   </data>
   <data name="CHK_advanced.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 16</value>
+    <value>178, 22</value>
   </data>
   <data name="CHK_advanced.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -3287,7 +3347,7 @@ Ctrl+O 可从文件读取</value>
     <value>8, 112</value>
   </data>
   <data name="CHK_footprints.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 16</value>
+    <value>124, 22</value>
   </data>
   <data name="CHK_footprints.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -3317,7 +3377,7 @@ Ctrl+O 可从文件读取</value>
     <value>8, 89</value>
   </data>
   <data name="CHK_internals.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 16</value>
+    <value>115, 22</value>
   </data>
   <data name="CHK_internals.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -3347,7 +3407,7 @@ Ctrl+O 可从文件读取</value>
     <value>8, 66</value>
   </data>
   <data name="CHK_grid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 16</value>
+    <value>70, 22</value>
   </data>
   <data name="CHK_grid.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -3377,7 +3437,7 @@ Ctrl+O 可从文件读取</value>
     <value>8, 43</value>
   </data>
   <data name="CHK_markers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 16</value>
+    <value>97, 22</value>
   </data>
   <data name="CHK_markers.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3407,7 +3467,7 @@ Ctrl+O 可从文件读取</value>
     <value>8, 20</value>
   </data>
   <data name="CHK_boundary.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 16</value>
+    <value>106, 22</value>
   </data>
   <data name="CHK_boundary.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3458,7 +3518,7 @@ Ctrl+O 可从文件读取</value>
     <value>NoControl</value>
   </data>
   <data name="BUT_Accept.Location" type="System.Drawing.Point, System.Drawing">
-    <value>84, 479</value>
+    <value>84, 473</value>
   </data>
   <data name="BUT_Accept.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -3473,7 +3533,7 @@ Ctrl+O 可从文件读取</value>
     <value>BUT_Accept</value>
   </data>
   <data name="&gt;&gt;BUT_Accept.Type" xml:space="preserve">
-    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6247.27215, Culture=neutral, PublicKeyToken=null</value>
+    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6386.33307, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;BUT_Accept.Parent" xml:space="preserve">
     <value>tabSimple</value>
@@ -3482,13 +3542,13 @@ Ctrl+O 可从文件读取</value>
     <value>3</value>
   </data>
   <data name="tabSimple.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
+    <value>4, 28</value>
   </data>
   <data name="tabSimple.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabSimple.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 511</value>
+    <value>245, 505</value>
   </data>
   <data name="tabSimple.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -3545,7 +3605,7 @@ Ctrl+O 可从文件读取</value>
     <value>Vertical</value>
   </data>
   <data name="TRK_zoom.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 457</value>
+    <value>69, 457</value>
   </data>
   <data name="TRK_zoom.TabIndex" type="System.Int32, mscorlib">
     <value>47</value>
@@ -3554,7 +3614,7 @@ Ctrl+O 可从文件读取</value>
     <value>TRK_zoom</value>
   </data>
   <data name="&gt;&gt;TRK_zoom.Type" xml:space="preserve">
-    <value>MissionPlanner.Controls.MyTrackBar, MissionPlanner.Controls, Version=1.0.6247.27215, Culture=neutral, PublicKeyToken=null</value>
+    <value>MissionPlanner.Controls.MyTrackBar, MissionPlanner.Controls, Version=1.0.6386.33307, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;TRK_zoom.Parent" xml:space="preserve">
     <value>$this</value>
@@ -3586,7 +3646,7 @@ Ctrl+O 可从文件读取</value>
     <value>map</value>
   </data>
   <data name="&gt;&gt;map.Type" xml:space="preserve">
-    <value>MissionPlanner.Controls.myGMAP, MissionPlanner.Controls, Version=1.0.6247.27215, Culture=neutral, PublicKeyToken=null</value>
+    <value>MissionPlanner.Controls.myGMAP, MissionPlanner.Controls, Version=1.0.6386.33307, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;map.Parent" xml:space="preserve">
     <value>$this</value>

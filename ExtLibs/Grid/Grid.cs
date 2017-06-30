@@ -85,7 +85,7 @@ namespace MissionPlanner
             form.Show();
         }
 
-        public static List<PointLatLngAlt> CreateGrid(List<PointLatLngAlt> polygon, double altitude, double distance, double spacing, double angle, double overshoot1,double overshoot2, StartPosition startpos, bool shutter, float minLaneSeparation, float leadin = 0)
+        public static List<PointLatLngAlt> CreateGrid(List<PointLatLngAlt> polygon, double altitude, double distance, double spacing, double angle, double overshoot1,double overshoot2, StartPosition startpos, bool shutter, float minLaneSeparation, float leadin = 0, bool sideshot = false,bool hssideshot = false)
         {
             //DoDebug();
 
@@ -104,6 +104,8 @@ namespace MissionPlanner
                 minLaneSeparation += 0.5F;
             // Lane Separation in meters
             double minLaneSeparationINMeters = minLaneSeparation * distance;
+
+            List<utmpos> rutmpositions = new List<utmpos>();
 
             List<PointLatLngAlt> ans = new List<PointLatLngAlt>();
 
@@ -337,23 +339,41 @@ namespace MissionPlanner
             // E = end
             // ME = middle end
             // SM = start middle
-
+            utmpos temp;
+            double ds = 0.0f;
             while (grid.Count > 0)
             {
                 // for each line, check which end of the line is the next closest
                 if (closest.p1.GetDistance(lastpnt) < closest.p2.GetDistance(lastpnt))
                 {
-                    utmpos newstart = newpos(closest.p1, angle, -leadin);
+                    
+                    ds = hssideshot ? ( altitude) : ( 0.0f);
+                    utmpos newstart = newpos(closest.p1, angle, -leadin - ds);
                     newstart.Tag = "S";
 
                     addtomap(newstart, "S");
                     ans.Add(newstart);
 
-                    closest.p1.Tag = "SM";
-                    addtomap(closest.p1, "SM");
-                    ans.Add(closest.p1);
+                    if(sideshot)
+                    {
+                        temp = newpos(closest.p1, angle, -leadin - ds);
+                        temp.Tag = "E";
+                        rutmpositions.Add(temp);
+                    }
 
-                    if (spacing > 0)
+                    utmpos closestp1 = newpos(closest.p1, angle, - ds);
+                    closestp1.Tag = "SM";
+                    addtomap(closestp1, "SM");
+                    ans.Add(closestp1);
+
+                    if (sideshot)
+                    {
+                        temp = newpos(closest.p1, angle, ds);
+                        temp.Tag = "ME";
+                        rutmpositions.Add(temp);
+                    }
+
+                    if (spacing > 0&&!sideshot)
                     {
                         for (int d = (int)(spacing - ((closest.basepnt.GetDistance(closest.p1)) % spacing));
                             d < (closest.p1.GetDistance(closest.p2));
@@ -369,14 +389,29 @@ namespace MissionPlanner
                         }
                     }
 
-                    closest.p2.Tag = "ME";
-                    addtomap(closest.p2, "ME");
-                    ans.Add(closest.p2);
+                    utmpos closestp2 = newpos(closest.p2, angle, -ds);
+                    closestp2.Tag = "ME";
+                    addtomap(closestp2, "ME");
+                    ans.Add(closestp2);
 
-                    utmpos newend = newpos(closest.p2, angle, overshoot1);
+                    if (sideshot)
+                    {
+                        temp = newpos(closest.p2, angle, ds);
+                        temp.Tag = "SM";
+                        rutmpositions.Add(temp);
+                    }
+
+                    utmpos newend = newpos(closest.p2, angle, overshoot1 + ds);
                     newend.Tag = "E";
                     addtomap(newend, "E");
                     ans.Add(newend);
+
+                    if (sideshot)
+                    {
+                        temp = newpos(closest.p2, angle, overshoot1 + ds);
+                        temp.Tag = "E";
+                        rutmpositions.Add(temp);
+                    }
 
                     lastpnt = closest.p2;
 
@@ -388,16 +423,32 @@ namespace MissionPlanner
                 }
                 else
                 {
-                    utmpos newstart = newpos(closest.p2, angle, leadin);
+                    ds = hssideshot ? (altitude) : (0.0f);
+                    utmpos newstart = newpos(closest.p2, angle, leadin+ds);
                     newstart.Tag = "S";
                     addtomap(newstart, "S");
                     ans.Add(newstart);
 
-                    closest.p2.Tag = "SM";
-                    addtomap(closest.p2, "SM");
-                    ans.Add(closest.p2);
+                    if (sideshot)
+                    {
+                        temp = newpos(closest.p2, angle, leadin + ds);
+                        temp.Tag = "E";
+                        rutmpositions.Add(temp);
+                    }
 
-                    if (spacing > 0)
+                    utmpos closestp2 = newpos(closest.p2, angle, ds);
+                    closestp2.Tag = "SM";
+                    addtomap(closestp2, "SM");
+                    ans.Add(closestp2);
+
+                    if (sideshot)
+                    {
+                        temp = newpos(closest.p2, angle, -ds);
+                        temp.Tag = "ME";
+                        rutmpositions.Add(temp);
+                    }
+
+                    if (spacing > 0 && !sideshot)
                     {
                         for (int d = (int)((closest.basepnt.GetDistance(closest.p2)) % spacing);
                             d < (closest.p1.GetDistance(closest.p2));
@@ -413,14 +464,29 @@ namespace MissionPlanner
                         }
                     }
 
-                    closest.p1.Tag = "ME";
-                    addtomap(closest.p1, "ME");
-                    ans.Add(closest.p1);
+                    utmpos closestp1 = newpos(closest.p1, angle, ds);
+                    closestp1.Tag = "ME";
+                    addtomap(closestp1, "ME");
+                    ans.Add(closestp1);
 
-                    utmpos newend = newpos(closest.p1, angle, -overshoot2);
+                    if (sideshot)
+                    {
+                        temp = newpos(closest.p1, angle, -ds);
+                        temp.Tag = "SM";
+                        rutmpositions.Add(temp);
+                    }
+
+                    utmpos newend = newpos(closest.p1, angle, -overshoot2-ds);
                     newend.Tag = "E";
                     addtomap(newend, "E");
                     ans.Add(newend);
+
+                    if (sideshot)
+                    {
+                        temp = newpos(closest.p1, angle, -overshoot2 - ds);
+                        temp.Tag = "S";
+                        rutmpositions.Add(temp);
+                    }
 
                     lastpnt = closest.p1;
 
@@ -433,6 +499,68 @@ namespace MissionPlanner
 
             // set the altitude on all points
             ans.ForEach(plla => { plla.Alt = altitude; });
+
+            if(sideshot)
+            {
+
+                double ang1 = 90;
+                double ang2 = 90;
+                double ang3 = 90;
+
+                ang1 = ans[ans.Count - 2].GetBearing(ans[ans.Count - 1]);
+                ang2 = ans[ans.Count - 8].GetBearing(ans[ans.Count - 1]);
+
+                // utm zone distance calcs will be done in
+                utmzone = ans[0].GetUTMZone();
+
+                // utm position list
+                utmpositions = utmpos.ToList(PointLatLngAlt.ToUTM(utmzone, ans), utmzone);
+
+                temp = newpos(utmpositions[utmpositions.Count-1], ang1, 400);
+                temp.Tag = "E";
+                addtomap(temp, "E");
+                ans.Add(temp);
+
+                ang3 = ang1 + 90;
+                if (ang3 >= 360)
+                    ang3 -= 360;
+                double ang4 = Math.Abs(ang3 - ang2);
+                if (ang4 > 180)
+                    ang4 = 360 - ang4;
+                if(ang4 > 90)
+                {
+                    ang3 = ang1 - 90;
+                    if (ang3 < 0)
+                        ang3 += 360;
+                }
+                temp = newpos(temp, ang3, 400);
+                temp.Tag = "E";
+                addtomap(temp, "E");
+                ans.Add(temp);
+
+                ang1 += 180;
+                if (ang1 >= 360)
+                    ang1 -= 360;
+                temp = newpos(temp, ang1, 400);
+                temp.Tag = "E";
+                addtomap(temp, "E");
+                ans.Add(temp);
+
+                ang3 += 180;
+                if (ang3 >= 360)
+                    ang3 -= 360;
+                temp = newpos(temp, ang3, 400);
+                temp.Tag = "E";
+                addtomap(temp, "E");
+                ans.Add(temp);
+
+                for (int i = rutmpositions.Count-1; i >= 0; i--)
+                {
+                    ans.Add(rutmpositions[i]);
+                    addtomap(rutmpositions[i], rutmpositions[i].Tag.ToString());
+                }
+
+            }
 
             return ans;
         }
