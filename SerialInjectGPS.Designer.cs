@@ -235,6 +235,7 @@
             // dg_basepos
             // 
             resources.ApplyResources(this.dg_basepos, "dg_basepos");
+            this.dg_basepos.BackgroundColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.dg_basepos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dg_basepos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Lat,
@@ -243,6 +244,7 @@
             this.BaseName1,
             this.Use,
             this.Delete});
+            this.dg_basepos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dg_basepos.Name = "dg_basepos";
             this.dg_basepos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dg_basepos_CellContentClick);
             this.dg_basepos.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dg_basepos_CellEndEdit);

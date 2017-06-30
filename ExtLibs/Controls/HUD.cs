@@ -1780,6 +1780,10 @@ namespace MissionPlanner.Controls
                     {
                         gps = (HUDT.GPS5);
                     }
+                    else if (_fix == 6)
+                    {
+                        gps = "gps:rtk fixed";
+                    }
                     drawstring(graphicsObject, gps, font, fontsize + 2, col, this.Width - 13 * fontsize, this.Height - 30 - fontoffset);
                 }
 

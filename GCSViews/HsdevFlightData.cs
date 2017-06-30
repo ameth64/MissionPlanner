@@ -63,7 +63,7 @@ namespace MissionPlanner.GCSViews
 
         const float deg2rad = (float)(1.0 / rad2deg);
 
-        public static Controls.HSHUD myhud = null;
+        public static Controls.HUD myhud = null;
         public static GMapControl mymap = null;
 
         bool playingLog = false;
@@ -180,17 +180,17 @@ namespace MissionPlanner.GCSViews
                     string[] items = planetype.Split(' ');
                     if (items.Length == 10)
                     {
-                       // rocker1.checkBox1.Checked = (int.Parse(items[1]) == 1) ? true : false;
-                       // rocker1.checkBox2.Checked = (int.Parse(items[2]) == 1) ? true : false;
-                      //  rocker1.checkBox3.Checked = (int.Parse(items[3]) == 1) ? true : false;
-                      //  rocker1.checkBox4.Checked = (int.Parse(items[4]) == 1) ? true : false;
-                       // rocker1.mode = 0;
+                        rocker1.checkBox1.Checked = (int.Parse(items[1]) == 1) ? true : false;
+                        rocker1.checkBox2.Checked = (int.Parse(items[2]) == 1) ? true : false;
+                        rocker1.checkBox3.Checked = (int.Parse(items[3]) == 1) ? true : false;
+                        rocker1.checkBox4.Checked = (int.Parse(items[4]) == 1) ? true : false;
+                        rocker1.mode = 0;
 
-                       // rocker2.checkBox1.Checked = (int.Parse(items[5]) == 1) ? true : false;
-                       // rocker2.checkBox2.Checked = (int.Parse(items[6]) == 1) ? true : false;
-                       // rocker2.checkBox3.Checked = (int.Parse(items[7]) == 1) ? true : false;
-                       // rocker2.checkBox4.Checked = (int.Parse(items[8]) == 1) ? true : false;
-                       // rocker2.mode = int.Parse(items[9]);
+                        rocker2.checkBox1.Checked = (int.Parse(items[5]) == 1) ? true : false;
+                        rocker2.checkBox2.Checked = (int.Parse(items[6]) == 1) ? true : false;
+                        rocker2.checkBox3.Checked = (int.Parse(items[7]) == 1) ? true : false;
+                        rocker2.checkBox4.Checked = (int.Parse(items[8]) == 1) ? true : false;
+                        rocker2.mode = int.Parse(items[9]);
                         break;
                     }
                 }
@@ -400,7 +400,7 @@ namespace MissionPlanner.GCSViews
                     CustomMessageBox.Show("Max 10 at a time.");
                     ((CheckBox)sender).Checked = false;
                 }
-                //ThemeManager.ApplyThemeTo(this);
+                ThemeManager.ApplyThemeTo(this);
 
                 string selected = "";
                 try
@@ -1494,16 +1494,16 @@ namespace MissionPlanner.GCSViews
                     myheight = tabGauges.Width / 2;
 
                 Gvspeed.Height = myheight;
-                //rocker1.Height = myheight;
-               // rocker2.Height = myheight;
+                rocker2.Height = myheight;
+                rocker1.Height = myheight;
                 Gheading.Height = myheight;
 
                 Gvspeed.Location = new Point(0, 0);
-                //rocker1.Location = new Point(Gvspeed.Right, 0);
+                rocker2.Location = new Point(Gvspeed.Right, 0);
 
 
-               // rocker2.Location = new Point(0, rocker1.Bottom);
-               // Gheading.Location = new Point(rocker2.Right, rocker1.Bottom);
+                rocker1.Location = new Point(0, rocker2.Bottom);
+                Gheading.Location = new Point(rocker1.Right, rocker2.Bottom);
 
                 return;
             }
@@ -1527,16 +1527,16 @@ namespace MissionPlanner.GCSViews
                 mywidth = tabGauges.Width / 4;
 
                 Gvspeed.Height = mywidth;
-               // rocker1.Height = mywidth;
-               // rocker2.Height = mywidth;
+                rocker2.Height = mywidth;
+                rocker1.Height = mywidth;
                 Gheading.Height = mywidth;
 
                 Gvspeed.Location = new Point(0, 0);
-              //  rocker1.Location = new Point(Gvspeed.Right, 0);
+                rocker2.Location = new Point(Gvspeed.Right, 0);
             }
 
-          //  rocker2.Location = new Point(rocker1.Right, 0);
-           // Gheading.Location = new Point(rocker2.Right, 0);
+            rocker1.Location = new Point(rocker2.Right, 0);
+            Gheading.Location = new Point(rocker1.Right, 0);
         }
 
         private void splitContainer5_Panel1_Resize(object sender, EventArgs e)
@@ -1576,7 +1576,7 @@ namespace MissionPlanner.GCSViews
 
         private void BUT_standby_Click(object sender, EventArgs e)
         {
-                MainV2.comPort.setMode("Manual");
+                MainV2.comPort.setMode("Stabilize");
         }
 
         private void BUT_parachute_Click(object sender, EventArgs e)
@@ -1946,9 +1946,9 @@ namespace MissionPlanner.GCSViews
                 else
                 {
                     if (!MainV2.comPort.MAV.cs.armed)
-                        BUT_ARM.Text = "锁定";
-                    else
                         BUT_ARM.Text = "解锁";
+                    else
+                        BUT_ARM.Text = "锁定";
                 }
             }
             catch

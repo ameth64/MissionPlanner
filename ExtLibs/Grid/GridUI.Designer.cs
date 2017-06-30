@@ -128,6 +128,7 @@
             this.tabSimple = new System.Windows.Forms.TabPage();
             this.label38 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.CHK_sideshot = new System.Windows.Forms.CheckBox();
             this.NUM_windDir = new System.Windows.Forms.NumericUpDown();
             this.label43 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
@@ -155,6 +156,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.TRK_zoom = new MissionPlanner.Controls.MyTrackBar();
             this.map = new MissionPlanner.Controls.myGMAP();
+            this.CHK_hssideshot = new System.Windows.Forms.CheckBox();
             this.groupBox5.SuspendLayout();
             this.tabCamera.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -992,6 +994,8 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.CHK_hssideshot);
+            this.groupBox6.Controls.Add(this.CHK_sideshot);
             this.groupBox6.Controls.Add(this.NUM_windDir);
             this.groupBox6.Controls.Add(this.label43);
             this.groupBox6.Controls.Add(this.label37);
@@ -1011,6 +1015,13 @@
             resources.ApplyResources(this.groupBox6, "groupBox6");
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.TabStop = false;
+            // 
+            // CHK_sideshot
+            // 
+            resources.ApplyResources(this.CHK_sideshot, "CHK_sideshot");
+            this.CHK_sideshot.Name = "CHK_sideshot";
+            this.CHK_sideshot.UseVisualStyleBackColor = true;
+            this.CHK_sideshot.CheckedChanged += new System.EventHandler(this.domainUpDown1_ValueChanged);
             // 
             // NUM_windDir
             // 
@@ -1090,7 +1101,7 @@
             0});
             this.NUM_UpDownFlySpeed.Name = "NUM_UpDownFlySpeed";
             this.NUM_UpDownFlySpeed.Value = new decimal(new int[] {
-            17,
+            5,
             0,
             0,
             0});
@@ -1278,6 +1289,13 @@
             this.map.Zoom = 3D;
             this.map.MouseDown += new System.Windows.Forms.MouseEventHandler(this.map_MouseDown);
             this.map.MouseMove += new System.Windows.Forms.MouseEventHandler(this.map_MouseMove);
+            // 
+            // CHK_hssideshot
+            // 
+            resources.ApplyResources(this.CHK_hssideshot, "CHK_hssideshot");
+            this.CHK_hssideshot.Name = "CHK_hssideshot";
+            this.CHK_hssideshot.UseVisualStyleBackColor = true;
+            this.CHK_hssideshot.CheckedChanged += new System.EventHandler(this.domainUpDown1_ValueChanged);
             // 
             // GridUI
             // 
@@ -1467,5 +1485,7 @@
         private System.Windows.Forms.NumericUpDown num_setservono;
         private System.Windows.Forms.NumericUpDown NUM_windDir;
         private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.CheckBox CHK_sideshot;
+        private System.Windows.Forms.CheckBox CHK_hssideshot;
     }
 }
