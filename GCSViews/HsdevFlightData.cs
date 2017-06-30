@@ -186,6 +186,7 @@ namespace MissionPlanner.GCSViews
                         rocker1.checkBox4.Checked = (int.Parse(items[4]) == 1) ? true : false;
                         rocker1.mode = 0;
 
+
                         rocker2.checkBox1.Checked = (int.Parse(items[5]) == 1) ? true : false;
                         rocker2.checkBox2.Checked = (int.Parse(items[6]) == 1) ? true : false;
                         rocker2.checkBox3.Checked = (int.Parse(items[7]) == 1) ? true : false;
