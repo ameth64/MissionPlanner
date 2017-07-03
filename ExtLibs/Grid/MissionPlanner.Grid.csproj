@@ -110,6 +110,11 @@
       <DependentUpon>GridUI.cs</DependentUpon>
     </Compile>
     <Compile Include="GridPlugin.cs" />
+    <Compile Include="GridUI1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GridUI.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

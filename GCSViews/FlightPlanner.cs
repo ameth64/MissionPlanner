@@ -62,6 +62,8 @@ namespace MissionPlanner.GCSViews
 
         public List<PointLatLngAlt> pointlist = new List<PointLatLngAlt>(); // used to calc distance
         public List<PointLatLngAlt> fullpointlist = new List<PointLatLngAlt>();
+        List<int> wpmove = new List<int>();
+        List<int> fmove = new List<int>();
         public GMapRoute route = new GMapRoute("wp route");
         public GMapRoute homeroute = new GMapRoute("home route");
         static public Object thisLock = new Object();
@@ -1959,11 +1961,21 @@ namespace MissionPlanner.GCSViews
                             if (Commands.Rows[a].Cells[TagData.Index].Value != null &&
                                  Commands.Rows[a].Cells[TagData.Index].Value.ToString() != "0")
                             {
-                                sw.Write("\t" +
-                                         ((HsTag)Commands.Rows[a].Cells[TagData.Index].Value).wp_type);
+                                try
+                                {
+                                    sw.Write("\t" +
+                                             ((HsTag)Commands.Rows[a].Cells[TagData.Index].Value).wp_type);
 
-                                sw.Write("\t" +
-                                         ((HsTag)Commands.Rows[a].Cells[TagData.Index].Value).wp_color);
+                                    sw.Write("\t" +
+                                             ((HsTag)Commands.Rows[a].Cells[TagData.Index].Value).wp_color);
+                                }
+                                catch
+                                {
+                                    sw.Write("\t" +
+                                                "NormalWP");
+                                    sw.Write("\t" +
+                                             "green");
+                                }
                             }
                             else
                             {
@@ -2465,11 +2477,21 @@ namespace MissionPlanner.GCSViews
                             if (Commands.Rows[a].Cells[TagData.Index].Value != null &&
                                 Commands.Rows[a].Cells[TagData.Index].Value.ToString() != "0")
                             {
-                                sw.Write("\t" +
-                                         ((HsTag)Commands.Rows[a].Cells[TagData.Index].Value).wp_type);
+                                try
+                                {
+                                    sw.Write("\t" +
+                                             ((HsTag)Commands.Rows[a].Cells[TagData.Index].Value).wp_type);
 
-                                sw.Write("\t" +
-                                         ((HsTag)Commands.Rows[a].Cells[TagData.Index].Value).wp_color);
+                                    sw.Write("\t" +
+                                             ((HsTag)Commands.Rows[a].Cells[TagData.Index].Value).wp_color);
+                                }
+                                catch
+                                {
+                                    sw.Write("\t" +
+                                              "NormalWP");
+                                    sw.Write("\t" +
+                                             "green");
+                            }
                             }
                             else
                             {
@@ -3990,7 +4012,7 @@ namespace MissionPlanner.GCSViews
                     {
                         // cant add WP in existing rect
                     }
-                    else
+                    else if(!isAllWaypointDraging)
                     {
                         AddWPToMap(currentMarker.Position.Lat, currentMarker.Position.Lng, 0);
                     }
@@ -4090,6 +4112,7 @@ namespace MissionPlanner.GCSViews
             }
         }
 
+        int skipmove = 0;
         // move current marker with left holding
         void MainMap_MouseMove(object sender, MouseEventArgs e)
         {
@@ -4245,28 +4268,29 @@ namespace MissionPlanner.GCSViews
                     }
                     else
                     {
-                        int ii = 2;
-                        try
-                        {
-                            for (int i = 1; i < fullpointlist.Count - 1; i++)
+                                int i = 0;
+
+                                while (i < fmove.Count)
+                                {
+   
+                                        objectsoverlay.Markers[fmove[i]*2].Position = new PointLatLng(fullpointlist[fmove[i]].Lat - latdif, fullpointlist[fmove[i]].Lng - lngdif);
+                                        objectsoverlay.Markers[fmove[i] * 2 + 1].Position = new PointLatLng(fullpointlist[fmove[i]].Lat - latdif, fullpointlist[fmove[i]].Lng - lngdif);
+                                        fullpointlist[fmove[i]] = new PointLatLng(fullpointlist[fmove[i]].Lat - latdif, fullpointlist[fmove[i]].Lng - lngdif);
+                                        i++;
+                                }
+
+                            i = 0;
+                            while (i < wpmove.Count)
                             {
-                                objectsoverlay.Markers[ii].Position = new PointLatLng(fullpointlist[i].Lat - latdif, fullpointlist[i].Lng - lngdif);
-                                objectsoverlay.Markers[ii + 1].Position = new PointLatLng(fullpointlist[i].Lat - latdif, fullpointlist[i].Lng - lngdif);
-                                ii += 2;
-                                fullpointlist[i] = new PointLatLng(fullpointlist[i].Lat - latdif, fullpointlist[i].Lng - lngdif);
-                                //route.Points[i]
-                                if (Commands.Rows[i - 1].Cells[Lat.Index].Value.ToString() == "0" && Commands.Rows[i - 1].Cells[Lon.Index].Value.ToString() == "0")
-                                    continue;
-                                Commands.Rows[i - 1].Cells[Lat.Index].Value = (fullpointlist[i].Lat - latdif).ToString("0.0000000");
-                                Commands.Rows[i - 1].Cells[Lon.Index].Value = (fullpointlist[i].Lng - lngdif).ToString("0.0000000");
-                            }
+                                double lat = double.Parse(Commands.Rows[wpmove[i]].Cells[Lat.Index].Value.ToString());
+                                double lng = double.Parse(Commands.Rows[wpmove[i]].Cells[Lon.Index].Value.ToString());
+                                Commands.Rows[wpmove[i]].Cells[Lat.Index].Value = (lat - latdif).ToString("0.0000000");
+                                Commands.Rows[wpmove[i]].Cells[Lon.Index].Value = (lng - lngdif).ToString("0.0000000");
+                                i++;
+                        }
                             RegenerateWPRoute(fullpointlist);
                             fullpointlist.RemoveAt(fullpointlist.Count-1);
-                        }
-                        catch (Exception ex)
-                        {
-                            CustomMessageBox.Show("" + ex);
-                        }
+
                         lock (thisLock)
                         {
                             //RegenerateWPRoute(fullpointlist);
@@ -4306,6 +4330,7 @@ namespace MissionPlanner.GCSViews
                         MainMap.Invalidate();
                         MouseDownStart.Lat = point.Lat;
                         MouseDownStart.Lng = point.Lng;
+                        
                     }
                 }
             }
@@ -7993,6 +8018,56 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             {
                 allPlanMove.Text = "取消拖动";
                 isAllWaypointDraging = true;
+                wpmove.Clear();
+                fmove.Clear();
+                    int ii = 0;
+                    int i2 = 1;
+                try
+                {
+
+                    for (int i = 0; i < Commands.RowCount; i++)
+                    {
+                        try
+                        {
+                            if (((HsTag)Commands.Rows[i].Cells[TagData.Index].Tag).wp_type.ToString() != HsWPType.NormalWP.ToString())
+                            {
+                                continue;
+                            }
+
+                            if(Commands.Rows[i].Cells[Command.Index].Value.ToString().Contains("VTOL"))
+                            {
+                                continue;
+                            }
+                        }
+                        catch
+                        {
+                            if (Commands.Rows[i].Cells[Command.Index].Value.ToString() != "WAYPOINT")
+                                continue;
+                        }
+
+                        wpmove.Add(i);
+                        double lat = double.Parse(Commands.Rows[i].Cells[Lat.Index].Value.ToString());
+                        double lng = double.Parse(Commands.Rows[i].Cells[Lon.Index].Value.ToString());
+
+                        while (ii < fullpointlist.Count)
+                        {
+                            double latdiff = Math.Abs(fullpointlist[ii].Lat - lat);
+                            double londiff = Math.Abs(fullpointlist[ii].Lng - lng);
+                            if (latdiff < 0.00001f && londiff < 0.00001f)
+                            {
+                                fmove.Add(ii);
+                                ii++;
+                                break;
+                            }
+                            ii++;
+
+                        }
+
+                    }
+                }
+                catch
+                { }
+
             }
             else
             {
