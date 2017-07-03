@@ -52,6 +52,7 @@ namespace MissionPlanner.GCSViews
         Hashtable param = new Hashtable();
         bool splinemode;
         altmode currentaltmode = altmode.Relative;
+        bool isAllWaypointDraging = false;
 
         bool grid;
 
@@ -61,6 +62,8 @@ namespace MissionPlanner.GCSViews
 
         public List<PointLatLngAlt> pointlist = new List<PointLatLngAlt>(); // used to calc distance
         public List<PointLatLngAlt> fullpointlist = new List<PointLatLngAlt>();
+        List<int> wpmove = new List<int>();
+        List<int> fmove = new List<int>();
         public GMapRoute route = new GMapRoute("wp route");
         public GMapRoute homeroute = new GMapRoute("home route");
         static public Object thisLock = new Object();
@@ -1958,11 +1961,21 @@ namespace MissionPlanner.GCSViews
                             if (Commands.Rows[a].Cells[TagData.Index].Value != null &&
                                  Commands.Rows[a].Cells[TagData.Index].Value.ToString() != "0")
                             {
-                                sw.Write("\t" +
-                                         ((HsTag)Commands.Rows[a].Cells[TagData.Index].Value).wp_type);
+                                try
+                                {
+                                    sw.Write("\t" +
+                                             ((HsTag)Commands.Rows[a].Cells[TagData.Index].Value).wp_type);
 
-                                sw.Write("\t" +
-                                         ((HsTag)Commands.Rows[a].Cells[TagData.Index].Value).wp_color);
+                                    sw.Write("\t" +
+                                             ((HsTag)Commands.Rows[a].Cells[TagData.Index].Value).wp_color);
+                                }
+                                catch
+                                {
+                                    sw.Write("\t" +
+                                                "NormalWP");
+                                    sw.Write("\t" +
+                                             "green");
+                                }
                             }
                             else
                             {
@@ -2464,11 +2477,21 @@ namespace MissionPlanner.GCSViews
                             if (Commands.Rows[a].Cells[TagData.Index].Value != null &&
                                 Commands.Rows[a].Cells[TagData.Index].Value.ToString() != "0")
                             {
-                                sw.Write("\t" +
-                                         ((HsTag)Commands.Rows[a].Cells[TagData.Index].Value).wp_type);
+                                try
+                                {
+                                    sw.Write("\t" +
+                                             ((HsTag)Commands.Rows[a].Cells[TagData.Index].Value).wp_type);
 
-                                sw.Write("\t" +
-                                         ((HsTag)Commands.Rows[a].Cells[TagData.Index].Value).wp_color);
+                                    sw.Write("\t" +
+                                             ((HsTag)Commands.Rows[a].Cells[TagData.Index].Value).wp_color);
+                                }
+                                catch
+                                {
+                                    sw.Write("\t" +
+                                              "NormalWP");
+                                    sw.Write("\t" +
+                                             "green");
+                            }
                             }
                             else
                             {
@@ -3894,6 +3917,8 @@ namespace MissionPlanner.GCSViews
 
         void MainMap_MouseUp(object sender, MouseEventArgs e)
         {
+            MouseDownEnd = MainMap.FromLocalToLatLng(e.X, e.Y);
+
             if (isMouseClickOffMenu)
             {
                 isMouseClickOffMenu = false;
@@ -3987,7 +4012,7 @@ namespace MissionPlanner.GCSViews
                     {
                         // cant add WP in existing rect
                     }
-                    else
+                    else if(!isAllWaypointDraging)
                     {
                         AddWPToMap(currentMarker.Position.Lat, currentMarker.Position.Lng, 0);
                     }
@@ -4087,6 +4112,7 @@ namespace MissionPlanner.GCSViews
             }
         }
 
+        int skipmove = 0;
         // move current marker with left holding
         void MainMap_MouseMove(object sender, MouseEventArgs e)
         {
@@ -4225,18 +4251,86 @@ namespace MissionPlanner.GCSViews
                 {
                     double latdif = MouseDownStart.Lat - point.Lat;
                     double lngdif = MouseDownStart.Lng - point.Lng;
-
-                    try
+                    if (!isAllWaypointDraging)
                     {
-                        lock (thisLock)
+                        try
                         {
-                            if (!isMouseClickOffMenu)
-                                MainMap.Position = new PointLatLng(center.Position.Lat + latdif,
-                                    center.Position.Lng + lngdif);
+                            lock (thisLock)
+                            {
+                                if (!isMouseClickOffMenu)
+                                    MainMap.Position = new PointLatLng(center.Position.Lat + latdif,
+                                        center.Position.Lng + lngdif);
+                            }
+                        }
+                        catch
+                        {
                         }
                     }
-                    catch
+                    else
                     {
+                                int i = 0;
+
+                                while (i < fmove.Count)
+                                {
+   
+                                        objectsoverlay.Markers[fmove[i]*2].Position = new PointLatLng(fullpointlist[fmove[i]].Lat - latdif, fullpointlist[fmove[i]].Lng - lngdif);
+                                        objectsoverlay.Markers[fmove[i] * 2 + 1].Position = new PointLatLng(fullpointlist[fmove[i]].Lat - latdif, fullpointlist[fmove[i]].Lng - lngdif);
+                                        fullpointlist[fmove[i]] = new PointLatLng(fullpointlist[fmove[i]].Lat - latdif, fullpointlist[fmove[i]].Lng - lngdif);
+                                        i++;
+                                }
+
+                            i = 0;
+                            while (i < wpmove.Count)
+                            {
+                                double lat = double.Parse(Commands.Rows[wpmove[i]].Cells[Lat.Index].Value.ToString());
+                                double lng = double.Parse(Commands.Rows[wpmove[i]].Cells[Lon.Index].Value.ToString());
+                                Commands.Rows[wpmove[i]].Cells[Lat.Index].Value = (lat - latdif).ToString("0.0000000");
+                                Commands.Rows[wpmove[i]].Cells[Lon.Index].Value = (lng - lngdif).ToString("0.0000000");
+                                i++;
+                        }
+                            RegenerateWPRoute(fullpointlist);
+                            fullpointlist.RemoveAt(fullpointlist.Count-1);
+
+                        lock (thisLock)
+                        {
+                            //RegenerateWPRoute(fullpointlist);
+
+                            if (fullpointlist.Count > 0)
+                            {
+                                double homedist = 0;
+                                string home = "";
+                                if (TXT_homealt.Text != "" && TXT_homelat.Text != "" && TXT_homelng.Text != "")
+                                {
+                                    home = string.Format("{0},{1},{2}\r\n", TXT_homelng.Text, TXT_homelat.Text, TXT_DefaultAlt.Text);
+                                }
+
+                               if (home.Length > 5)
+                                {
+                                    homedist = MainMap.MapProvider.Projection.GetDistance(fullpointlist[fullpointlist.Count - 1],
+                                        fullpointlist[0]);
+                                }
+
+                                double dist = 0;
+
+                                for (int a = 1; a < fullpointlist.Count; a++)
+                                {
+                                    if (fullpointlist[a - 1] == null)
+                                        continue;
+
+                                    if (fullpointlist[a] == null)
+                                        continue;
+
+                                    dist += MainMap.MapProvider.Projection.GetDistance(fullpointlist[a - 1], fullpointlist[a]);
+                                }
+
+                                lbl_distance.Text = rm.GetString("lbl_distance.Text") + ": " +
+                                                    FormatDistance(dist + homedist, false);
+                            }
+                        }
+                        MainMap.Invalidate();
+                        MouseDownStart.Lat = point.Lat;
+                        MouseDownStart.Lng = point.Lng;
+                        
                     }
                 }
             }
@@ -7916,6 +8010,70 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             }
 
             return ret;
+        }
+
+        private void allPlanMove_Click(object sender, EventArgs e)
+        {
+            if(isAllWaypointDraging == false)
+            {
+                allPlanMove.Text = "取消拖动";
+                isAllWaypointDraging = true;
+                wpmove.Clear();
+                fmove.Clear();
+                    int ii = 0;
+                    int i2 = 1;
+                try
+                {
+
+                    for (int i = 0; i < Commands.RowCount; i++)
+                    {
+                        try
+                        {
+                            if (((HsTag)Commands.Rows[i].Cells[TagData.Index].Tag).wp_type.ToString() != HsWPType.NormalWP.ToString())
+                            {
+                                continue;
+                            }
+
+                            if(Commands.Rows[i].Cells[Command.Index].Value.ToString().Contains("VTOL"))
+                            {
+                                continue;
+                            }
+                        }
+                        catch
+                        {
+                            if (Commands.Rows[i].Cells[Command.Index].Value.ToString() != "WAYPOINT")
+                                continue;
+                        }
+
+                        wpmove.Add(i);
+                        double lat = double.Parse(Commands.Rows[i].Cells[Lat.Index].Value.ToString());
+                        double lng = double.Parse(Commands.Rows[i].Cells[Lon.Index].Value.ToString());
+
+                        while (ii < fullpointlist.Count)
+                        {
+                            double latdiff = Math.Abs(fullpointlist[ii].Lat - lat);
+                            double londiff = Math.Abs(fullpointlist[ii].Lng - lng);
+                            if (latdiff < 0.00001f && londiff < 0.00001f)
+                            {
+                                fmove.Add(ii);
+                                ii++;
+                                break;
+                            }
+                            ii++;
+
+                        }
+
+                    }
+                }
+                catch
+                { }
+
+            }
+            else
+            {
+                allPlanMove.Text = "拖动航线";
+                isAllWaypointDraging = false;
+            }
         }
     }
 }

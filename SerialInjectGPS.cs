@@ -121,6 +121,8 @@ namespace MissionPlanner
             rtcm3.ObsMessage += Rtcm3_ObsMessage;
 
             MissionPlanner.Utilities.Tracking.AddPage(this.GetType().ToString(), this.Text);
+
+            dg_basepos.ForeColor = Color.Black;
         }
 
         private void Rtcm3_ObsMessage(object sender, EventArgs e)
@@ -984,15 +986,95 @@ namespace MissionPlanner
 
             if (e.ColumnIndex == Lat.Index)
             {
-                baseposList[e.RowIndex].Lat = double.Parse(dg_basepos[e.ColumnIndex, e.RowIndex].Value.ToString());
+                double lat = 0.0f;
+                string[] items = dg_basepos[e.ColumnIndex, e.RowIndex].Value.ToString()
+                                    .Split(new char[] { (char)':' }, StringSplitOptions.RemoveEmptyEntries);
+                if (items.Count() == 1)
+                {
+                    if(double.TryParse(items[0], out lat))
+                        baseposList[e.RowIndex].Lat = lat;
+                    else
+                    {
+                        MessageBox.Show("输入错误！");
+                        return;
+                    }
+                }
+                else if(items.Count() == 3)
+                {
+                    int dd = 0;
+                    double min = 0.0f;
+                    double frac_mm = 0.0f;
+                    bool d = int.TryParse(items[0], out dd);
+                    bool m = double.TryParse(items[1], out min);
+                    bool mm = double.TryParse(items[2], out frac_mm);
+                    if(!d || !m || !mm)
+                    {
+                        MessageBox.Show("输入错误！");
+                        return;
+                    }
+                    lat = dd + min / 60.0f + frac_mm / 3600.0f;
+                    baseposList[e.RowIndex].Lat = lat;
+                    dg_basepos[e.ColumnIndex, e.RowIndex].Value = lat.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("输入错误！");
+                    return;
+                }
             }
             if (e.ColumnIndex == Long.Index)
             {
-                baseposList[e.RowIndex].Lng = double.Parse(dg_basepos[e.ColumnIndex, e.RowIndex].Value.ToString());
+                //baseposList[e.RowIndex].Lng = double.Parse(dg_basepos[e.ColumnIndex, e.RowIndex].Value.ToString());
+
+                double lng = 0.0f;
+                string[] items = dg_basepos[e.ColumnIndex, e.RowIndex].Value.ToString()
+                                    .Split(new char[] { (char)':' }, StringSplitOptions.RemoveEmptyEntries);
+                if (items.Count() == 1)
+                {
+                    if (double.TryParse(items[0], out lng))
+                        baseposList[e.RowIndex].Lng = lng;
+                    else
+                    {
+                        MessageBox.Show("输入错误！");
+                        return;
+                    }
+                }
+                else if (items.Count() == 3)
+                {
+                    int dd = 0;
+                    double min = 0.0f;
+                    double frac_mm = 0.0f;
+                    bool d = int.TryParse(items[0], out dd);
+                    bool m = double.TryParse(items[1], out min);
+                    bool mm = double.TryParse(items[2], out frac_mm);
+                    if (!d || !m || !mm)
+                    {
+                        MessageBox.Show("输入错误！");
+                        return;
+                    }
+                    lng = dd + min / 60.0f + frac_mm / 3600.0f;
+                    baseposList[e.RowIndex].Lng = lng;
+                    dg_basepos[e.ColumnIndex, e.RowIndex].Value = lng.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("输入错误！");
+                    return;
+                }
             }
             if (e.ColumnIndex == Alt.Index)
             {
-                baseposList[e.RowIndex].Alt = double.Parse(dg_basepos[e.ColumnIndex, e.RowIndex].Value.ToString());
+                //baseposList[e.RowIndex].Alt = double.Parse(dg_basepos[e.ColumnIndex, e.RowIndex].Value.ToString());
+                double alt = 0.0f;
+
+                if (double.TryParse(dg_basepos[e.ColumnIndex, e.RowIndex].Value.ToString(), out alt))
+                    baseposList[e.RowIndex].Alt = alt;
+                    else
+                    {
+                        MessageBox.Show("输入错误！");
+                        return;
+                    }
+               
             }
             if (e.ColumnIndex == BaseName1.Index)
             {
