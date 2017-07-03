@@ -1001,31 +1001,31 @@ namespace MissionPlanner.GCSViews
                 // voltage_value.Update();
                 if (MainV2.comPort.MAV.cs.mode == "Manual")
                 {
-                    mode_value.Text = "手动";
+                    val_mode.Text = "手动";
                 }
                 else if (MainV2.comPort.MAV.cs.mode == "RTL")
                 {
-                    mode_value.Text = "返航";
+                    val_mode.Text = "返航";
                 }
                 else if (MainV2.comPort.MAV.cs.mode == "Auto")
                 {
-                    mode_value.Text = "导航";
+                    val_mode.Text = "导航";
                 }
                 else if (MainV2.comPort.MAV.cs.mode == "STABILIZE")
                 {
-                    mode_value.Text = "增稳";
+                    val_mode.Text = "增稳";
                 }
                 else
-                    mode_value.Text = MainV2.comPort.MAV.cs.mode.ToString();
+                    val_mode.Text = MainV2.comPort.MAV.cs.mode.ToString();
 
                 if (MainV2.comPort.MAV.cs.gpsstatus == 3)
-                    gpsstate_value.Text = "3D锁定";
+                    val_gps_mode.Text = "3D锁定";
                 else if (MainV2.comPort.MAV.cs.gpsstatus == 2)
-                    gpsstate_value.Text = "锁定";
+                    val_gps_mode.Text = "锁定";
                 else if (MainV2.comPort.MAV.cs.gpsstatus == 1)
-                    gpsstate_value.Text = "未锁定";
+                    val_gps_mode.Text = "未锁定";
                 else if (MainV2.comPort.MAV.cs.gpsstatus == 0)
-                    gpsstate_value.Text = "无GPS";
+                    val_gps_mode.Text = "无GPS";
 
                 if (MainV2.comPort.MAV.cs.gpsstatus == 3)
                 {
@@ -1040,15 +1040,15 @@ namespace MissionPlanner.GCSViews
                 hh = ((int)(MainV2.comPort.MAV.cs.timeInAir / 3600.0f)).ToString();
                 mm = ((int)(MainV2.comPort.MAV.cs.timeInAir - (int.Parse(hh) * 3600)) / 60).ToString();
                 ss = (MainV2.comPort.MAV.cs.timeInAir - (int.Parse(hh) * 3600) - (int.Parse(mm) * 60)).ToString();
-                timeinair.Text = hh + ":" + mm + ":" + ss;
+                val_timeinair.Text = hh + ":" + mm + ":" + ss;
 
                 //String hh2 = ""; string mm2 = ""; string ss2 = "";
                 hh = ((int)(MainV2.comPort.MAV.cs.time2InAir / 3600.0f)).ToString();
                 mm = ((int)(MainV2.comPort.MAV.cs.time2InAir - (int.Parse(hh) * 3600)) / 60).ToString();
                 ss = (MainV2.comPort.MAV.cs.time2InAir - (int.Parse(hh) * 3600) - (int.Parse(mm) * 60)).ToString();
-                quadbat_time.Text = hh + ":" + mm + ":" + ss;
+                val_quadbat_time.Text = hh + ":" + mm + ":" + ss;
 
-                traveled_inkm.Text = (MainV2.comPort.MAV.cs.distTraveled / 1000.00f).ToString();
+                val_traveled_km.Text = (MainV2.comPort.MAV.cs.distTraveled / 1000.00f).ToString();
 
                 try
                 {
@@ -1451,7 +1451,7 @@ namespace MissionPlanner.GCSViews
             Control tabGauges = sender as Control;
 
             float scale = tabGauges.Width / (float)tabGauges.Height;
-
+            /*
             if (scale > 0.5 && scale < 1.9)
             {// square
                 Gvspeed.Visible = true;
@@ -1476,7 +1476,7 @@ namespace MissionPlanner.GCSViews
                 return;
             }
 
-          /*
+          
             if (tabGauges.Width < 500)
             {
                 Gvspeed.Visible = false;
@@ -1489,7 +1489,7 @@ namespace MissionPlanner.GCSViews
                 Gspeed.Location = new Point(0, 0);
             }
             else
-           */
+           
             {
                 Gvspeed.Visible = true;
                 mywidth = tabGauges.Width / 4;
@@ -1505,12 +1505,13 @@ namespace MissionPlanner.GCSViews
 
             Galt.Location = new Point(Gspeed.Right, 0);
             Gheading.Location = new Point(Galt.Right, 0);
+            */
         }
 
         private void splitContainer5_Panel1_Resize(object sender, EventArgs e)
         {
-            int Width = splitContainer5.Panel1.Width;
-            int Height = splitContainer5.Panel1.Height;
+            int Width = splitContainer_3dview_hud.Panel1.Width;
+            int Height = splitContainer_3dview_hud.Panel1.Height;
         }
 
         private void splitContainer5_Panel2_Resize(object sender, EventArgs e)
@@ -1807,8 +1808,8 @@ namespace MissionPlanner.GCSViews
                 {
                     if (tracklog.Visible)
                         tracklog.Value = (int)(MainV2.comPort.logplaybackfile.BaseStream.Position / (double)MainV2.comPort.logplaybackfile.BaseStream.Length * 100);
-                    if (lbl_logpercent.Visible)
-                        lbl_logpercent.Text = (MainV2.comPort.logplaybackfile.BaseStream.Position / (double)MainV2.comPort.logplaybackfile.BaseStream.Length).ToString("0.00%");
+                    if (lblrepl_logpercent.Visible)
+                        lblrepl_logpercent.Text = (MainV2.comPort.logplaybackfile.BaseStream.Position / (double)MainV2.comPort.logplaybackfile.BaseStream.Length).ToString("0.00%");
                 }
                 catch { }
             });
@@ -1943,15 +1944,18 @@ namespace MissionPlanner.GCSViews
                 BUT_loadtelem.Visible = true;
                 BUT_playlog.Visible = true;
                 tracklog.Visible = true;
-                lbl_logpercent.Visible = true;
+                lblrepl_logpercent.Visible = true;
+                lblrepl_replay_speed.Visible = true;
                 CMB_playspeed.Visible = true;
+                
             }
             else
             {
                 BUT_loadtelem.Visible = false;
                 BUT_playlog.Visible = false;
                 tracklog.Visible = false;
-                lbl_logpercent.Visible = false;
+                lblrepl_logpercent.Visible = false;
+                lblrepl_replay_speed.Visible = false;
                 CMB_playspeed.Visible = false;
             }
         }
@@ -1959,15 +1963,44 @@ namespace MissionPlanner.GCSViews
         private void HsdevFlightData_Layout(object sender, LayoutEventArgs e)
         {
             // 在此响应动态尺寸调整
-            int w = this.splitContainer1.Size.Width, h = splitContainer1.Size.Height;
-            splitContainer1.SplitterDistance = (int)(w * 0.45f);
-            splitContainer2.SplitterDistance = (int)(h * 0.395f);
-            splitContainer5.SplitterDistance = (int)(splitContainer2.Size.Width * 0.4236f);
+            int w = this.splitContainer_main_map.Size.Width, h = splitContainer_main_map.Size.Height;
+            if(w > 5)
+            {
+                splitContainer_main_map.SplitterDistance = (int)(w * 0.5f);
+                splitContainer_main_left.SplitterDistance = (int)(h * 0.395f);
+                splitContainer_3dview_hud.SplitterDistance = (int)(splitContainer_main_left.Size.Width * 0.4236f);
+                splitContainer_info_system_more.SplitterDistance = (int)(splitContainer_main_left.Size.Width * 0.4236f);
+                splitContainer_info_fixedwing_copter.SplitterDistance = (int)(splitContainer_info_fixedwing_copter.Height * 0.5);
+                splitContainer_3dview_msg.SplitterDistance = (int)(splitContainer_main_left.Width * 0.4236f * 3f / 4f);
+
+                //设置飞行状态面板字体
+                float seg_width = panel_sysinfo.Width / 3, font_size = seg_width / 10;
+                //panel_sysinfo.SuspendLayout();
+                panel_sysinfo.Font = new System.Drawing.Font("Microsoft YaHei", font_size, System.Drawing.FontStyle.Bold);
+                //panel_sysinfo.ResumeLayout();
+            }            
         }
 
-        private void HsdevFlightData_SizeChanged(object sender, EventArgs e)
+        private void btn_force_disarm_Click(object sender, EventArgs e)
         {
-            
+            if (!MainV2.comPort.BaseStream.IsOpen)
+                return;
+
+            // disarm the MAV
+            try
+            {
+                if (MainV2.comPort.MAV.cs.armed)
+                {
+                    bool ans = MainV2.comPort.doARM(!MainV2.comPort.MAV.cs.armed);
+                    if (ans == false)
+                        CustomMessageBox.Show(Strings.ErrorRejectedByMAV, Strings.ERROR);
+                }                
+            }
+            catch
+            {
+                CustomMessageBox.Show(Strings.ErrorNoResponce, Strings.ERROR);
+            }
         }
     }
 }
+    
