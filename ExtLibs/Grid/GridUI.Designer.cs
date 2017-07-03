@@ -1082,8 +1082,6 @@
             // CHK_toandland_RTL
             // 
             resources.ApplyResources(this.CHK_toandland_RTL, "CHK_toandland_RTL");
-            this.CHK_toandland_RTL.Checked = true;
-            this.CHK_toandland_RTL.CheckState = System.Windows.Forms.CheckState.Checked;
             this.CHK_toandland_RTL.Name = "CHK_toandland_RTL";
             this.CHK_toandland_RTL.UseVisualStyleBackColor = true;
             // 

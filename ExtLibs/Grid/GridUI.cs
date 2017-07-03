@@ -1964,31 +1964,7 @@ namespace MissionPlanner
                     (double)NUM_overshoot.Value, (double)NUM_overshoot2.Value,
                     Grid.StartPosition.Point, false,
                     (float)NUM_Lane_Dist.Value, (float)NUM_leadin.Value));
-            }
-            if (chk_reverseGrid.Checked)
-            {
-                grid.Reverse();
-                foreach(PointLatLngAlt item in grid)
-                {
-                    if (item.Tag == "SM")
-                    {
-                        item.Tag = "ME";
-                    }
-                    else if (item.Tag == "S")
-                    {
-                        item.Tag = "E";
-                    }
-                    else if (item.Tag == "E")
-                    {
-                        item.Tag = "S";
-                    }
-                    else if (item.Tag == "ME")
-                    {
-                        item.Tag = "SM";
-                    }
-                }
-            }
-                
+            }                
 
             if (CHK_boundary.Checked)
                 AddDrawPolygon();
