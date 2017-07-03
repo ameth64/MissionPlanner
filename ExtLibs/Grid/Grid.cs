@@ -560,6 +560,8 @@ namespace MissionPlanner
                     addtomap(rutmpositions[i], rutmpositions[i].Tag.ToString());
                 }
 
+                ans.ForEach(plla => { plla.Alt = altitude; });
+
             }
 
             return ans;
