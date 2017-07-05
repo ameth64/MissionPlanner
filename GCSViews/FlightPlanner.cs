@@ -4038,7 +4038,7 @@ namespace MissionPlanner.GCSViews
                     {
                         // cant add WP in existing rect
                     }
-                    else if(!isAllWaypointDraging && wpeditmode)
+                    else if(!isAllWaypointDraging && (wpeditmode || polygongridmode))
                     {
                         AddWPToMap(currentMarker.Position.Lat, currentMarker.Position.Lng, 0);
                     }
