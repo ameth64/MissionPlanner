@@ -49,6 +49,7 @@ namespace MissionPlanner.GCSViews
         bool isonline = true;
         bool sethome;
         bool polygongridmode;
+        bool wpeditmode;
         Hashtable param = new Hashtable();
         bool splinemode;
         altmode currentaltmode = altmode.Relative;
@@ -859,6 +860,8 @@ namespace MissionPlanner.GCSViews
             config(false);
 
             quickadd = false;
+
+            wpeditmode = false;
 
             POI.POIModified += POI_POIModified;
 
@@ -3954,6 +3957,29 @@ namespace MissionPlanner.GCSViews
                 return;
             }
 
+            // check if the mouse up happend over our button
+            if (polyicon2.Rectangle.Contains(e.Location))
+            {
+                polyicon2.IsSelected = !polyicon2.IsSelected;
+
+                if (e.Button == MouseButtons.Right)
+                {
+                    polyicon.IsSelected = false;
+                    return;
+                }
+
+                if (polyicon2.IsSelected)
+                {
+                    wpeditmode = true;
+                }
+                else
+                {
+                    wpeditmode = false;
+                }
+
+                return;
+            }
+
             MouseDownEnd = MainMap.FromLocalToLatLng(e.X, e.Y);
 
             // Console.WriteLine("MainMap MU");
@@ -4012,7 +4038,7 @@ namespace MissionPlanner.GCSViews
                     {
                         // cant add WP in existing rect
                     }
-                    else if(!isAllWaypointDraging)
+                    else if(!isAllWaypointDraging && wpeditmode)
                     {
                         AddWPToMap(currentMarker.Position.Lat, currentMarker.Position.Lng, 0);
                     }
@@ -4071,9 +4097,125 @@ namespace MissionPlanner.GCSViews
                         }
                         else
                         {
+                            int testno = 0;
+                            if(int.TryParse(CurentRectMarker.InnerMarker.Tag.ToString(),out testno))
+                            {
+                                //爬升点
+                                try
+                                {
+                                    if (((HsTag)Commands.Rows[testno-1].Cells[TagData.Index].Tag).wp_type.ToString() == HsWPType.Takeoff_LoiterToAlt.ToString() && testno!=1)
+                                    {
+                                        double lat1 = CurentRectMarker.Position.Lat;
+                                        //double lat2 = double.Parse(Commands.Rows[testno-2].Cells[Lat.Index].Value.ToString());
+                                        double lat2 = 0;
+                                        if (!double.TryParse(TXT_homelat.Text, out lat2))
+                                            goto outside;
+                                        double lng1 = CurentRectMarker.Position.Lng;
+                                        //double lng2 = double.Parse(Commands.Rows[testno - 2].Cells[Lon.Index].Value.ToString());
+                                        double lng2 = 0;
+                                        if (!double.TryParse(TXT_homelng.Text, out lng2))
+                                            goto outside;
+
+                                        double testdistance = MainMap.MapProvider.Projection.GetDistance(
+                                            new PointLatLng(lat1, lng1), new PointLatLng(lat2, lng2));
+
+                                        if(testdistance<0.4)
+                                        {
+                                            if (testdistance == 0.0)
+                                                testdistance = 0.00001;
+                                            MessageBox.Show("错误，爬升点距离起飞点不能小于400米。");
+                                            double exp = (0.4) / (testdistance);
+                                            PointLatLng myresult = new PointLatLng();
+                                            myresult.Lat = lat2 + ((lat1 - lat2) * exp);
+                                            myresult.Lng = lng2 + ((lng1 - lng2) * exp);
+                                            callMeDrag(CurentRectMarker.InnerMarker.Tag.ToString(),
+                                                myresult.Lat,
+                                                myresult.Lng, -2);
+                                            goto badresult;
+                                        }
+                                    }
+                                }
+                                catch
+                                {
+                                    goto outside;
+                                }
+
+                                //下降点
+                                try
+                                {
+                                    if (((HsTag)Commands.Rows[testno - 1].Cells[TagData.Index].Tag).wp_type.ToString().Contains("Landing") && testno<Commands.RowCount)
+                                    {
+
+                                        if (((HsTag)Commands.Rows[testno].Cells[TagData.Index].Tag).wp_type.ToString().Contains("Landing_LoiterToAlt") == false
+                                            && !Commands.Rows[testno].Cells[Command.Index].Value.ToString().Contains("VTOL"))
+                                        {
+                                            double lat1 = CurentRectMarker.Position.Lat;
+                                            double lat2 = double.Parse(Commands.Rows[testno].Cells[Lat.Index].Value.ToString());
+                                            double lng1 = CurentRectMarker.Position.Lng;
+                                            double lng2 = double.Parse(Commands.Rows[testno].Cells[Lon.Index].Value.ToString());
+
+                                            double alt1 = double.Parse(Commands.Rows[testno - 1].Cells[Alt.Index].Value.ToString());
+                                            double alt2 = double.Parse(Commands.Rows[testno].Cells[Alt.Index].Value.ToString());
+                                            double alt = Math.Abs(alt1 - alt2)/1000.0f;
+                                            double testdistance = MainMap.MapProvider.Projection.GetDistance(
+                                            new PointLatLng(lat1, lng1), new PointLatLng(lat2, lng2));
+                                            double ang = Math.Atan(alt / testdistance) / Math.PI * 180;
+                                            if (ang > 8)
+                                            {
+                                                if (testdistance == 0.0)
+                                                    testdistance = 0.00001;
+                                                MessageBox.Show("错误，下降角度不能大于8度。");
+                                                //double exp = (0.4) / (testdistance);
+                                                // PointLatLng myresult = new PointLatLng();
+                                                // myresult.Lat = lat2 + ((lat1 - lat2) * exp);
+                                                // myresult.Lng = lng2 + ((lng1 - lng2) * exp);
+                                                //callMeDrag(CurentRectMarker.InnerMarker.Tag.ToString(),
+                                                // myresult.Lat,
+                                                // myresult.Lng, -2);
+                                                writeKML();
+                                                goto badresult;
+                                            }
+                                        }
+
+                                        if (((HsTag)Commands.Rows[testno-1].Cells[TagData.Index].Tag).wp_type.ToString().Contains("Landing_LoiterToAlt") == true)
+                                            goto outside;
+
+                                        if (((HsTag)Commands.Rows[testno-2].Cells[TagData.Index].Tag).wp_type.ToString().Contains("Landing") == true)
+                                        {
+                                            double lat1 = CurentRectMarker.Position.Lat;
+                                            double lat2 = double.Parse(Commands.Rows[testno-2].Cells[Lat.Index].Value.ToString());
+                                            double lng1 = CurentRectMarker.Position.Lng;
+                                            double lng2 = double.Parse(Commands.Rows[testno-2].Cells[Lon.Index].Value.ToString());
+
+                                            double alt1 = double.Parse(Commands.Rows[testno - 1].Cells[Alt.Index].Value.ToString());
+                                            double alt2 = double.Parse(Commands.Rows[testno-2].Cells[Alt.Index].Value.ToString());
+                                            double alt = Math.Abs(alt1 - alt2) / 1000.0f;
+                                            double testdistance = MainMap.MapProvider.Projection.GetDistance(
+                                            new PointLatLng(lat1, lng1), new PointLatLng(lat2, lng2));
+                                            double ang = Math.Atan(alt / testdistance) / Math.PI * 180;
+                                            if (ang > 8)
+                                            {
+                                                if (testdistance == 0.0)
+                                                    testdistance = 0.00001;
+                                                MessageBox.Show("错误，下降角度不能大于8度。");
+                                                writeKML();
+                                                goto badresult;
+                                            }
+                                        }
+
+                                    }
+                                }
+                                catch
+                                {
+                                    goto outside;
+                                }
+
+                            }
+outside:
                             callMeDrag(CurentRectMarker.InnerMarker.Tag.ToString(), currentMarker.Position.Lat,
                                 currentMarker.Position.Lng, -2);
                         }
+badresult:
                         CurentRectMarker = null;
                     }
                 }
@@ -6643,10 +6785,15 @@ namespace MissionPlanner.GCSViews
 
             polyicon.Location = new Point(10,100);
             polyicon.Paint(e.Graphics);
+
+            e.Graphics.ResetTransform();
+
+            polyicon2.Location = new Point(10, 60);
+            polyicon2.Paint(e.Graphics);
         }
 
         MissionPlanner.Controls.Icon.Polygon polyicon = new MissionPlanner.Controls.Icon.Polygon();
-
+        MissionPlanner.Controls.Icon.PolygonWp polyicon2 = new MissionPlanner.Controls.Icon.PolygonWp();
         private void chk_grid_CheckedChanged(object sender, EventArgs e)
         {
             grid = chk_grid.Checked;

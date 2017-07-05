@@ -1823,7 +1823,7 @@ namespace MissionPlanner
                             rtl_bearing = wind_dir + 90;
                             PointLatLngAlt land_c1 = rtl_final.newpos(rtl_bearing, 200), land_slowdown = rtl_final.newpos(rtl_bearing, 100);
                             //添加减速航点
-                            plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_CHANGE_SPEED, 0, 17, 75, 0, 0, 0, 0, hstag);
+                           // plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_CHANGE_SPEED, 0, 17, 75, 0, 0, 0, 0, hstag);
                             //生成四转弯起点
                             plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, 0, 0, 0, 0, land_c1.Lng, land_c1.Lat,
                                 (int)(95 * CurrentState.multiplierdist), hstag);
