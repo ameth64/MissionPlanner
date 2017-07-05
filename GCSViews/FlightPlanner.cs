@@ -4146,8 +4146,7 @@ namespace MissionPlanner.GCSViews
                                     if (((HsTag)Commands.Rows[testno - 1].Cells[TagData.Index].Tag).wp_type.ToString().Contains("Landing") && testno<Commands.RowCount)
                                     {
 
-                                        if (((HsTag)Commands.Rows[testno].Cells[TagData.Index].Tag).wp_type.ToString().Contains("Landing_LoiterToAlt") == false
-                                            && !Commands.Rows[testno].Cells[Command.Index].Value.ToString().Contains("VTOL"))
+                                        if (((HsTag)Commands.Rows[testno].Cells[TagData.Index].Tag).wp_type.ToString().Contains("Landing_LoiterToAlt") == false)
                                         {
                                             double lat1 = CurentRectMarker.Position.Lat;
                                             double lat2 = double.Parse(Commands.Rows[testno].Cells[Lat.Index].Value.ToString());
@@ -4160,18 +4159,19 @@ namespace MissionPlanner.GCSViews
                                             double testdistance = MainMap.MapProvider.Projection.GetDistance(
                                             new PointLatLng(lat1, lng1), new PointLatLng(lat2, lng2));
                                             double ang = Math.Atan(alt / testdistance) / Math.PI * 180;
-                                            if (ang > 8)
+                                            if (ang > 8 && !Commands.Rows[testno].Cells[Command.Index].Value.ToString().Contains("VTOL"))
                                             {
                                                 if (testdistance == 0.0)
                                                     testdistance = 0.00001;
-                                                MessageBox.Show("错误，下降角度不能大于8度。");
-                                                //double exp = (0.4) / (testdistance);
-                                                // PointLatLng myresult = new PointLatLng();
-                                                // myresult.Lat = lat2 + ((lat1 - lat2) * exp);
-                                                // myresult.Lng = lng2 + ((lng1 - lng2) * exp);
-                                                //callMeDrag(CurentRectMarker.InnerMarker.Tag.ToString(),
-                                                // myresult.Lat,
-                                                // myresult.Lng, -2);
+                                                MessageBox.Show("错误:下降角度不能大于8度。");
+                                                writeKML();
+                                                goto badresult;
+                                            }
+                                            if (testdistance < 0.12)
+                                            {
+                                                if (testdistance == 0.0)
+                                                    testdistance = 0.00001;
+                                                MessageBox.Show("错误:" + testno.ToString() + "和" + (testno+1).ToString() + "距离不能小于120米");
                                                 writeKML();
                                                 goto badresult;
                                             }
@@ -4201,6 +4201,14 @@ namespace MissionPlanner.GCSViews
                                                 writeKML();
                                                 goto badresult;
                                             }
+                                            if (testdistance < 0.12)
+                                            {
+                                                if (testdistance == 0.0)
+                                                    testdistance = 0.00001;
+                                                MessageBox.Show("错误:" + testno.ToString() + "和" + (testno - 1).ToString() + "距离不能小于120米");
+                                                writeKML();
+                                                goto badresult;
+                                            }
                                         }
 
                                     }
@@ -4208,6 +4216,24 @@ namespace MissionPlanner.GCSViews
                                 catch
                                 {
                                     goto outside;
+                                }
+
+                                if(Commands.Rows[testno-1].Cells[Command.Index].Value.ToString().Contains("VTOL_LAND"))
+                                {
+                                    double lat1 = CurentRectMarker.Position.Lat;
+                                    double lat2 = double.Parse(Commands.Rows[testno - 2].Cells[Lat.Index].Value.ToString());
+                                    double lng1 = CurentRectMarker.Position.Lng;
+                                    double lng2 = double.Parse(Commands.Rows[testno - 2].Cells[Lon.Index].Value.ToString());
+                                    double testdistance = MainMap.MapProvider.Projection.GetDistance(
+                                    new PointLatLng(lat1, lng1), new PointLatLng(lat2, lng2));
+                                    if (testdistance < 0.12)
+                                    {
+                                        if (testdistance == 0.0)
+                                            testdistance = 0.00001;
+                                        MessageBox.Show("错误:" + testno.ToString() + "和" + (testno - 1).ToString() + "距离不能小于120米");
+                                        writeKML();
+                                        goto badresult;
+                                    }
                                 }
 
                             }
