@@ -8211,6 +8211,9 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
                             {
                                 continue;
                             }
+
+                            if (Commands.Rows[i].Cells[Command.Index].Value.ToString() != "WAYPOINT")
+                                continue;
                         }
                         catch
                         {
