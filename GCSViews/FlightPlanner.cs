@@ -636,7 +636,7 @@ namespace MissionPlanner.GCSViews
             CMB_altmode.DataSource = EnumTranslator.EnumToList<altmode>();
 
             //set default
-            CMB_altmode.SelectedItem = altmode.Relative;
+            CMB_altmode.SelectedValue = (int)altmode.Relative;
 
             RegeneratePolygon();
 
@@ -2526,6 +2526,7 @@ namespace MissionPlanner.GCSViews
         /// <param name="e"></param>
         public void BUT_write_Click(object sender, EventArgs e)
         {
+            CMB_altmode.SelectedValue = (int)altmode.Relative;
             CMB_displaywp.SelectedIndex = 0;
             writeKML();
             savecurrentwaypoints();
@@ -7383,6 +7384,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
 
         private void BUT_saveWPFile_Click(object sender, EventArgs e)
         {
+            CMB_altmode.SelectedValue = (int)altmode.Relative;
             SaveFile_Click(null, null);
         }
 
