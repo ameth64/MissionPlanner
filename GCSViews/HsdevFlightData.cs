@@ -1639,14 +1639,7 @@ namespace MissionPlanner.GCSViews
         }
 
         private void CMB_setwp_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                //((Button)sender).Enabled = false;
-                MainV2.comPort.setWPCurrent((ushort)CMB_setwp.SelectedIndex); // set nav to
-            }
-            catch { CustomMessageBox.Show("The command failed to execute", "Error"); }
-            //((Button)sender).Enabled = true;
+        {            
         }
 
         
@@ -2003,25 +1996,17 @@ namespace MissionPlanner.GCSViews
             }            
         }
 
-        private void btn_force_disarm_Click(object sender, EventArgs e)
+        private void BUT_setwp_Click(object sender, EventArgs e)
         {
-            if (!MainV2.comPort.BaseStream.IsOpen)
+            if (CMB_setwp.SelectedIndex == -1)
                 return;
-
-            // disarm the MAV
             try
             {
-                if (MainV2.comPort.MAV.cs.armed)
-                {
-                    bool ans = MainV2.comPort.doARM(!MainV2.comPort.MAV.cs.armed);
-                    if (ans == false)
-                        CustomMessageBox.Show(Strings.ErrorRejectedByMAV, Strings.ERROR);
-                }                
+                ((Button)sender).Enabled = false;
+                MainV2.comPort.setWPCurrent((ushort)CMB_setwp.SelectedIndex); // set nav to
             }
-            catch
-            {
-                CustomMessageBox.Show(Strings.ErrorNoResponce, Strings.ERROR);
-            }
+            catch { CustomMessageBox.Show("The command failed to execute", "Error"); }
+            ((Button)sender).Enabled = true;
         }
     }
 }
