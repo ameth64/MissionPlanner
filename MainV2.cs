@@ -3595,5 +3595,14 @@ namespace MissionPlanner
         {
             new ConnectionOptions().Show(this);
         }
+
+        private void toolStripMenuCalCompass_Click(object sender, EventArgs e)
+        {
+            if (MainV2.comPort.MAV.cs.armed)
+            {
+                MessageBox.Show("解锁后不能校准罗盘！");
+            }else
+                new CalibrationCompassFrom().Show(this);
+        }
     }
 }

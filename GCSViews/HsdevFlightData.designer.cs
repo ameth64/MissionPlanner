@@ -129,6 +129,7 @@
             this.bindingSourceGaugesTab = new System.Windows.Forms.BindingSource(this.components);
             this.ZedGraphTimer = new System.Windows.Forms.Timer(this.components);
             this.bindingSourceStatusTab = new System.Windows.Forms.BindingSource(this.components);
+            this.speedUintToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_main_map)).BeginInit();
             this.splitContainer_main_map.Panel1.SuspendLayout();
             this.splitContainer_main_map.Panel2.SuspendLayout();
@@ -272,6 +273,7 @@
             this._3DMesh1.Size = new System.Drawing.Size(356, 239);
             this._3DMesh1.TabIndex = 2;
             this._3DMesh1.VSync = false;
+            this._3DMesh1.Load += new System.EventHandler(this._3DMesh1_Load);
             // 
             // bindingSourceHud
             // 
@@ -1480,7 +1482,7 @@
             this.windDir1.BackColor = System.Drawing.Color.Transparent;
             this.windDir1.DataBindings.Add(new System.Windows.Forms.Binding("Direction", this.bindingSourceHud, "wind_dir", true));
             this.windDir1.DataBindings.Add(new System.Windows.Forms.Binding("Speed", this.bindingSourceHud, "wind_vel", true));
-            this.windDir1.Direction = 360D;
+            this.windDir1.Direction = 180D;
             this.windDir1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.windDir1.Location = new System.Drawing.Point(3, 3);
             this.windDir1.Name = "windDir1";
@@ -1528,9 +1530,10 @@
             this.contextMenuStripMap.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.flyToHereAltToolStripMenuItem,
             this.fixbattery,
+            this.speedUintToolStripMenuItem,
             this.landStartToolStripMenuItem});
             this.contextMenuStripMap.Name = "contextMenuStrip1";
-            this.contextMenuStripMap.Size = new System.Drawing.Size(161, 70);
+            this.contextMenuStripMap.Size = new System.Drawing.Size(161, 92);
             // 
             // flyToHereAltToolStripMenuItem
             // 
@@ -1564,6 +1567,13 @@
             // bindingSourceStatusTab
             // 
             this.bindingSourceStatusTab.DataSource = typeof(MissionPlanner.CurrentState);
+            // 
+            // speedUintToolStripMenuItem
+            // 
+            this.speedUintToolStripMenuItem.Name = "speedUintToolStripMenuItem";
+            this.speedUintToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.speedUintToolStripMenuItem.Text = "更改速度单位";
+            this.speedUintToolStripMenuItem.Click += new System.EventHandler(this.speedUintToolStripMenuItem_Click);
             // 
             // HsdevFlightData
             // 
@@ -1728,5 +1738,6 @@
         private System.Windows.Forms.Label lbl_airspeed_error;
         private System.Windows.Forms.Label lblbtn_set_target_wp;
         private Controls.MyButton BUT_setwp;
+        private System.Windows.Forms.ToolStripMenuItem speedUintToolStripMenuItem;
     }
 }

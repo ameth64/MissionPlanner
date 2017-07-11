@@ -55,6 +55,7 @@ namespace MissionPlanner
             this.MenuDonate = new System.Windows.Forms.ToolStripMenuItem();
             this.menu = new MissionPlanner.Controls.MyButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.MenuCalCompass = new System.Windows.Forms.ToolStripButton();
             this.MainMenu.SuspendLayout();
             this.CTX_mainmenu.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -78,6 +79,7 @@ namespace MissionPlanner
             this.MenuLogManger,
             this.MenuConnect,
             this.MenuDownLoadPos,
+            this.MenuCalCompass,
             this.toolStripConnectionControl,
             this.MenuDonate});
             resources.ApplyResources(this.MainMenu, "MainMenu");
@@ -256,6 +258,16 @@ namespace MissionPlanner
             this.panel1.Name = "panel1";
             this.panel1.MouseLeave += new System.EventHandler(this.MainMenu_MouseLeave);
             // 
+            // MenuCalCompass
+            // 
+            resources.ApplyResources(this.MenuCalCompass, "MenuCalCompass");
+            this.MenuCalCompass.ForeColor = System.Drawing.Color.White;
+            this.MenuCalCompass.Image = global::MissionPlanner.Properties.Resources.dark_terminal_icon;
+            this.MenuCalCompass.Margin = new System.Windows.Forms.Padding(0);
+            this.MenuCalCompass.Name = "MenuCalCompass";
+            this.MenuCalCompass.Padding = new System.Windows.Forms.Padding(0, 0, 10, 0);
+            this.MenuCalCompass.Click += new System.EventHandler(this.toolStripMenuCalCompass_Click);
+            // 
             // MainV2
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -300,5 +312,6 @@ namespace MissionPlanner
         private System.Windows.Forms.ToolStripButton MenuHsFilghtData;
         private System.Windows.Forms.ToolStripButton MenuLogManger;
         public System.Windows.Forms.ToolStripButton MenuDownLoadPos;
+        private System.Windows.Forms.ToolStripButton MenuCalCompass;
     }
 }
