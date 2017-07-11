@@ -1871,6 +1871,7 @@ namespace MissionPlanner.GCSViews
         /// </summary>
         private void savewaypoints()
         {
+            CMB_altmode.SelectedValue = (int)altmode.Relative; //added by MobiuS@20170710 to use relative alt mode as default.
             using (SaveFileDialog fd = new SaveFileDialog())
             {
                 fd.Filter = "Mission|*.waypoints;*.txt|Mission JSON|*.mission|KML|*.kml";
@@ -2393,6 +2394,7 @@ namespace MissionPlanner.GCSViews
 
         private void savecurrentwaypoints()
         {
+            CMB_altmode.SelectedValue = (int)altmode.Relative; // added by MobiuS@20170710 to use relative alt mode as default.
             StreamWriter sw = null;
                 string file = "currentwp.txt";
                 if (file != "" )
@@ -2526,9 +2528,12 @@ namespace MissionPlanner.GCSViews
         /// <param name="e"></param>
         public void BUT_write_Click(object sender, EventArgs e)
         {
+            CMB_altmode.SelectedValue = (int)altmode.Relative; //added by MobiuS@20170710 to use relative alt mode as default
             CMB_displaywp.SelectedIndex = 0;
             writeKML();
             savecurrentwaypoints();
+            // use relative alt mode instead, added by MobiuS@20170710
+            /*
             if ((altmode) CMB_altmode.SelectedValue == altmode.Absolute)
             {
                 if (DialogResult.No ==
@@ -2537,6 +2542,7 @@ namespace MissionPlanner.GCSViews
                     CMB_altmode.SelectedValue = (int) altmode.Relative;
                 }
             }
+            */
 
             // check home
             Locationwp home = new Locationwp();
