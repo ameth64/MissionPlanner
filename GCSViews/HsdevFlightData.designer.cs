@@ -129,6 +129,7 @@
             this.bindingSourceGaugesTab = new System.Windows.Forms.BindingSource(this.components);
             this.ZedGraphTimer = new System.Windows.Forms.Timer(this.components);
             this.bindingSourceStatusTab = new System.Windows.Forms.BindingSource(this.components);
+            this.speedUintToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_main_map)).BeginInit();
             this.splitContainer_main_map.Panel1.SuspendLayout();
             this.splitContainer_main_map.Panel2.SuspendLayout();
@@ -272,6 +273,7 @@
             this._3DMesh1.Size = new System.Drawing.Size(356, 239);
             this._3DMesh1.TabIndex = 2;
             this._3DMesh1.VSync = false;
+            this._3DMesh1.Load += new System.EventHandler(this._3DMesh1_Load);
             // 
             // bindingSourceHud
             // 
@@ -348,7 +350,7 @@
             this.hud2.Name = "hud2";
             this.hud2.navpitch = 0F;
             this.hud2.navroll = 0F;
-            this.hud2.opengl = true;
+            this.hud2.opengl = false;
             this.hud2.pitch = 0F;
             this.hud2.roll = 0F;
             this.hud2.Russian = false;
@@ -527,7 +529,7 @@
             this.lbl_fw_voltage.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl_fw_voltage.Location = new System.Drawing.Point(3, 0);
             this.lbl_fw_voltage.Name = "lbl_fw_voltage";
-            
+            this.lbl_fw_voltage.Size = new System.Drawing.Size(82, 23);
             this.lbl_fw_voltage.TabIndex = 71;
             this.lbl_fw_voltage.Text = "电压：";
             this.lbl_fw_voltage.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -537,7 +539,8 @@
             this.val_timeinair.ContextMenuStrip = this.contextMenuStripHud;
             this.val_timeinair.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.val_timeinair.Location = new System.Drawing.Point(267, 58);
-            this.val_timeinair.Name = "val_timeinair";            
+            this.val_timeinair.Name = "val_timeinair";
+            this.val_timeinair.Size = new System.Drawing.Size(84, 23);
             this.val_timeinair.TabIndex = 156;
             this.val_timeinair.Text = "0";
             // 
@@ -548,7 +551,7 @@
             this.val_fw_mah_used.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.val_fw_mah_used.Location = new System.Drawing.Point(91, 29);
             this.val_fw_mah_used.Name = "val_fw_mah_used";
-            
+            this.val_fw_mah_used.Size = new System.Drawing.Size(82, 23);
             this.val_fw_mah_used.TabIndex = 152;
             this.val_fw_mah_used.Text = "0";
             // 
@@ -557,7 +560,7 @@
             this.lbl_fw_mah_used.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl_fw_mah_used.Location = new System.Drawing.Point(3, 29);
             this.lbl_fw_mah_used.Name = "lbl_fw_mah_used";
-            
+            this.lbl_fw_mah_used.Size = new System.Drawing.Size(82, 23);
             this.lbl_fw_mah_used.TabIndex = 151;
             this.lbl_fw_mah_used.Text = "耗电(mAh)：";
             this.lbl_fw_mah_used.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -568,7 +571,7 @@
             this.val_traveled_km.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.val_traveled_km.Location = new System.Drawing.Point(91, 58);
             this.val_traveled_km.Name = "val_traveled_km";
-            
+            this.val_traveled_km.Size = new System.Drawing.Size(82, 23);
             this.val_traveled_km.TabIndex = 154;
             this.val_traveled_km.Text = "0";
             // 
@@ -577,7 +580,7 @@
             this.lbl_traveled_km.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl_traveled_km.Location = new System.Drawing.Point(3, 58);
             this.lbl_traveled_km.Name = "lbl_traveled_km";
-            
+            this.lbl_traveled_km.Size = new System.Drawing.Size(82, 23);
             this.lbl_traveled_km.TabIndex = 153;
             this.lbl_traveled_km.Text = "里程：";
             this.lbl_traveled_km.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -589,7 +592,7 @@
             this.val_fw_current.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.val_fw_current.Location = new System.Drawing.Point(267, 0);
             this.val_fw_current.Name = "val_fw_current";
-            this.val_fw_current.DataBindings[0].FormatString = "F2";
+            this.val_fw_current.Size = new System.Drawing.Size(84, 23);
             this.val_fw_current.TabIndex = 74;
             this.val_fw_current.Text = "0";
             // 
@@ -600,7 +603,7 @@
             this.val_fw_voltage.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.val_fw_voltage.Location = new System.Drawing.Point(91, 0);
             this.val_fw_voltage.Name = "val_fw_voltage";
-            this.val_fw_voltage.DataBindings[0].FormatString = "F2";
+            this.val_fw_voltage.Size = new System.Drawing.Size(82, 23);
             this.val_fw_voltage.TabIndex = 72;
             this.val_fw_voltage.Text = "0";
             // 
@@ -609,7 +612,7 @@
             this.lbl_fw_current.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl_fw_current.Location = new System.Drawing.Point(179, 0);
             this.lbl_fw_current.Name = "lbl_fw_current";
-            
+            this.lbl_fw_current.Size = new System.Drawing.Size(82, 23);
             this.lbl_fw_current.TabIndex = 73;
             this.lbl_fw_current.Text = "电流：";
             this.lbl_fw_current.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -619,7 +622,7 @@
             this.lbl_fw_timeinair.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl_fw_timeinair.Location = new System.Drawing.Point(179, 58);
             this.lbl_fw_timeinair.Name = "lbl_fw_timeinair";
-            
+            this.lbl_fw_timeinair.Size = new System.Drawing.Size(82, 23);
             this.lbl_fw_timeinair.TabIndex = 155;
             this.lbl_fw_timeinair.Text = "飞行时间：";
             this.lbl_fw_timeinair.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -689,7 +692,7 @@
             this.lbl_quad_voltage.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl_quad_voltage.Location = new System.Drawing.Point(3, 0);
             this.lbl_quad_voltage.Name = "lbl_quad_voltage";
-            
+            this.lbl_quad_voltage.Size = new System.Drawing.Size(82, 23);
             this.lbl_quad_voltage.TabIndex = 71;
             this.lbl_quad_voltage.Text = "电压：";
             this.lbl_quad_voltage.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -700,7 +703,7 @@
             this.val_quadbat_time.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.val_quadbat_time.Location = new System.Drawing.Point(91, 62);
             this.val_quadbat_time.Name = "val_quadbat_time";
-            
+            this.val_quadbat_time.Size = new System.Drawing.Size(82, 23);
             this.val_quadbat_time.TabIndex = 164;
             this.val_quadbat_time.Text = "0";
             // 
@@ -711,7 +714,7 @@
             this.val_quad_voltage.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.val_quad_voltage.Location = new System.Drawing.Point(91, 0);
             this.val_quad_voltage.Name = "val_quad_voltage";
-            this.val_quad_voltage.DataBindings[0].FormatString = "F2";
+            this.val_quad_voltage.Size = new System.Drawing.Size(82, 23);
             this.val_quad_voltage.TabIndex = 158;
             this.val_quad_voltage.Text = "0";
             // 
@@ -720,7 +723,7 @@
             this.lbl_quadbat_time.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl_quadbat_time.Location = new System.Drawing.Point(3, 62);
             this.lbl_quadbat_time.Name = "lbl_quadbat_time";
-            
+            this.lbl_quadbat_time.Size = new System.Drawing.Size(82, 23);
             this.lbl_quadbat_time.TabIndex = 155;
             this.lbl_quadbat_time.Text = "飞行时间：";
             this.lbl_quadbat_time.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -732,7 +735,7 @@
             this.val_quad_mah_used.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.val_quad_mah_used.Location = new System.Drawing.Point(91, 31);
             this.val_quad_mah_used.Name = "val_quad_mah_used";
-            
+            this.val_quad_mah_used.Size = new System.Drawing.Size(82, 23);
             this.val_quad_mah_used.TabIndex = 162;
             this.val_quad_mah_used.Text = "0";
             // 
@@ -741,7 +744,7 @@
             this.lbl_quad_current.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl_quad_current.Location = new System.Drawing.Point(179, 0);
             this.lbl_quad_current.Name = "lbl_quad_current";
-            
+            this.lbl_quad_current.Size = new System.Drawing.Size(82, 23);
             this.lbl_quad_current.TabIndex = 73;
             this.lbl_quad_current.Text = "电流：";
             this.lbl_quad_current.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -751,7 +754,7 @@
             this.lbl_quad_mah_used.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl_quad_mah_used.Location = new System.Drawing.Point(3, 31);
             this.lbl_quad_mah_used.Name = "lbl_quad_mah_used";
-            
+            this.lbl_quad_mah_used.Size = new System.Drawing.Size(82, 23);
             this.lbl_quad_mah_used.TabIndex = 151;
             this.lbl_quad_mah_used.Text = "耗电(mAh)：";
             this.lbl_quad_mah_used.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -763,7 +766,7 @@
             this.val_quad_current.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.val_quad_current.Location = new System.Drawing.Point(267, 0);
             this.val_quad_current.Name = "val_quad_current";
-            this.val_quad_current.DataBindings[0].FormatString = "F2";
+            this.val_quad_current.Size = new System.Drawing.Size(84, 23);
             this.val_quad_current.TabIndex = 160;
             this.val_quad_current.Text = "0";
             // 
@@ -863,7 +866,7 @@
             this.lbl_mode.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl_mode.Location = new System.Drawing.Point(3, 0);
             this.lbl_mode.Name = "lbl_mode";
-            
+            this.lbl_mode.Size = new System.Drawing.Size(56, 23);
             this.lbl_mode.TabIndex = 89;
             this.lbl_mode.Text = "模式：";
             this.lbl_mode.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -875,7 +878,7 @@
             this.val_cam_num.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.val_cam_num.Location = new System.Drawing.Point(313, 175);
             this.val_cam_num.Name = "val_cam_num";
-            
+            this.val_cam_num.Size = new System.Drawing.Size(59, 23);
             this.val_cam_num.TabIndex = 166;
             this.val_cam_num.Text = "0";
             // 
@@ -884,7 +887,7 @@
             this.lbl_cam_num.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl_cam_num.Location = new System.Drawing.Point(251, 175);
             this.lbl_cam_num.Name = "lbl_cam_num";
-            
+            this.lbl_cam_num.Size = new System.Drawing.Size(56, 23);
             this.lbl_cam_num.TabIndex = 165;
             this.lbl_cam_num.Text = "拍照数：";
             this.lbl_cam_num.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -896,7 +899,7 @@
             this.val_alt_error.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.val_alt_error.Location = new System.Drawing.Point(313, 70);
             this.val_alt_error.Name = "val_alt_error";
-            
+            this.val_alt_error.Size = new System.Drawing.Size(59, 23);
             this.val_alt_error.TabIndex = 134;
             this.val_alt_error.Text = "0";
             // 
@@ -905,7 +908,7 @@
             this.lbl_alt_error.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl_alt_error.Location = new System.Drawing.Point(251, 70);
             this.lbl_alt_error.Name = "lbl_alt_error";
-            
+            this.lbl_alt_error.Size = new System.Drawing.Size(56, 23);
             this.lbl_alt_error.TabIndex = 133;
             this.lbl_alt_error.Tag = "r-3";
             this.lbl_alt_error.Text = "高度差：";
@@ -918,7 +921,7 @@
             this.val_target_wp.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.val_target_wp.Location = new System.Drawing.Point(189, 175);
             this.val_target_wp.Name = "val_target_wp";
-            
+            this.val_target_wp.Size = new System.Drawing.Size(56, 23);
             this.val_target_wp.TabIndex = 136;
             this.val_target_wp.Text = "0";
             // 
@@ -927,7 +930,7 @@
             this.lbl_target_wp.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl_target_wp.Location = new System.Drawing.Point(127, 175);
             this.lbl_target_wp.Name = "lbl_target_wp";
-            
+            this.lbl_target_wp.Size = new System.Drawing.Size(56, 23);
             this.lbl_target_wp.TabIndex = 135;
             this.lbl_target_wp.Text = "目标点：";
             this.lbl_target_wp.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -939,7 +942,7 @@
             this.val_gps_ground_vel.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.val_gps_ground_vel.Location = new System.Drawing.Point(313, 105);
             this.val_gps_ground_vel.Name = "val_gps_ground_vel";
-            
+            this.val_gps_ground_vel.Size = new System.Drawing.Size(59, 23);
             this.val_gps_ground_vel.TabIndex = 76;
             this.val_gps_ground_vel.Text = "0";
             // 
@@ -950,7 +953,7 @@
             this.val_compass.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.val_compass.Location = new System.Drawing.Point(313, 140);
             this.val_compass.Name = "val_compass";
-            
+            this.val_compass.Size = new System.Drawing.Size(59, 23);
             this.val_compass.TabIndex = 88;
             this.val_compass.Text = "0";
             // 
@@ -961,7 +964,7 @@
             this.val_xtrack_error.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.val_xtrack_error.Location = new System.Drawing.Point(65, 175);
             this.val_xtrack_error.Name = "val_xtrack_error";
-            
+            this.val_xtrack_error.Size = new System.Drawing.Size(56, 23);
             this.val_xtrack_error.TabIndex = 82;
             this.val_xtrack_error.Text = "0";
             // 
@@ -970,7 +973,7 @@
             this.lbl_xtrack_error.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl_xtrack_error.Location = new System.Drawing.Point(3, 175);
             this.lbl_xtrack_error.Name = "lbl_xtrack_error";
-            
+            this.lbl_xtrack_error.Size = new System.Drawing.Size(56, 23);
             this.lbl_xtrack_error.TabIndex = 81;
             this.lbl_xtrack_error.Text = "偏航距(m)：";
             this.lbl_xtrack_error.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -980,7 +983,7 @@
             this.lbl_sat_count.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl_sat_count.Location = new System.Drawing.Point(127, 105);
             this.lbl_sat_count.Name = "lbl_sat_count";
-            
+            this.lbl_sat_count.Size = new System.Drawing.Size(56, 23);
             this.lbl_sat_count.TabIndex = 85;
             this.lbl_sat_count.Text = "星数：";
             this.lbl_sat_count.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -992,7 +995,7 @@
             this.val_latitude.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.val_latitude.Location = new System.Drawing.Point(189, 140);
             this.val_latitude.Name = "val_latitude";
-            
+            this.val_latitude.Size = new System.Drawing.Size(56, 23);
             this.val_latitude.TabIndex = 98;
             this.val_latitude.Text = "0";
             // 
@@ -1002,7 +1005,7 @@
             this.val_gps_mode.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.val_gps_mode.Location = new System.Drawing.Point(65, 105);
             this.val_gps_mode.Name = "val_gps_mode";
-            
+            this.val_gps_mode.Size = new System.Drawing.Size(56, 23);
             this.val_gps_mode.TabIndex = 138;
             this.val_gps_mode.Text = "0";
             // 
@@ -1011,7 +1014,7 @@
             this.lbl_gps_mode.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl_gps_mode.Location = new System.Drawing.Point(3, 105);
             this.lbl_gps_mode.Name = "lbl_gps_mode";
-            
+            this.lbl_gps_mode.Size = new System.Drawing.Size(56, 23);
             this.lbl_gps_mode.TabIndex = 137;
             this.lbl_gps_mode.Text = "GPS状态：";
             this.lbl_gps_mode.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1021,7 +1024,7 @@
             this.lbl_compass.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl_compass.Location = new System.Drawing.Point(251, 140);
             this.lbl_compass.Name = "lbl_compass";
-            
+            this.lbl_compass.Size = new System.Drawing.Size(56, 23);
             this.lbl_compass.TabIndex = 87;
             this.lbl_compass.Tag = "r-3";
             this.lbl_compass.Text = "罗盘：";
@@ -1032,7 +1035,7 @@
             this.lbl_longtitude.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl_longtitude.Location = new System.Drawing.Point(3, 140);
             this.lbl_longtitude.Name = "lbl_longtitude";
-            
+            this.lbl_longtitude.Size = new System.Drawing.Size(56, 23);
             this.lbl_longtitude.TabIndex = 95;
             this.lbl_longtitude.Text = "经度：";
             this.lbl_longtitude.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1044,7 +1047,7 @@
             this.val_sat_count.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.val_sat_count.Location = new System.Drawing.Point(189, 105);
             this.val_sat_count.Name = "val_sat_count";
-            
+            this.val_sat_count.Size = new System.Drawing.Size(56, 23);
             this.val_sat_count.TabIndex = 86;
             this.val_sat_count.Text = "0";
             // 
@@ -1053,7 +1056,7 @@
             this.lbl_latitude.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl_latitude.Location = new System.Drawing.Point(127, 140);
             this.lbl_latitude.Name = "lbl_latitude";
-            
+            this.lbl_latitude.Size = new System.Drawing.Size(56, 23);
             this.lbl_latitude.TabIndex = 97;
             this.lbl_latitude.Text = "纬度：";
             this.lbl_latitude.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1065,7 +1068,7 @@
             this.val_longitude.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.val_longitude.Location = new System.Drawing.Point(65, 140);
             this.val_longitude.Name = "val_longitude";
-            
+            this.val_longitude.Size = new System.Drawing.Size(56, 23);
             this.val_longitude.TabIndex = 96;
             this.val_longitude.Text = "0";
             // 
@@ -1074,7 +1077,7 @@
             this.lbl_alt.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl_alt.Location = new System.Drawing.Point(3, 70);
             this.lbl_alt.Name = "lbl_alt";
-            
+            this.lbl_alt.Size = new System.Drawing.Size(56, 23);
             this.lbl_alt.TabIndex = 79;
             this.lbl_alt.Text = "高度：";
             this.lbl_alt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1084,7 +1087,7 @@
             this.lbl_gps_ground_vel.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl_gps_ground_vel.Location = new System.Drawing.Point(251, 105);
             this.lbl_gps_ground_vel.Name = "lbl_gps_ground_vel";
-            
+            this.lbl_gps_ground_vel.Size = new System.Drawing.Size(56, 23);
             this.lbl_gps_ground_vel.TabIndex = 75;
             this.lbl_gps_ground_vel.Tag = "r-3";
             this.lbl_gps_ground_vel.Text = "GPS地速：";
@@ -1097,7 +1100,7 @@
             this.val_airspeed_error.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.val_airspeed_error.Location = new System.Drawing.Point(313, 35);
             this.val_airspeed_error.Name = "val_airspeed_error";
-            
+            this.val_airspeed_error.Size = new System.Drawing.Size(59, 23);
             this.val_airspeed_error.TabIndex = 132;
             this.val_airspeed_error.Text = "0";
             // 
@@ -1108,7 +1111,7 @@
             this.val_alt_target.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.val_alt_target.Location = new System.Drawing.Point(189, 70);
             this.val_alt_target.Name = "val_alt_target";
-            
+            this.val_alt_target.Size = new System.Drawing.Size(56, 23);
             this.val_alt_target.TabIndex = 92;
             this.val_alt_target.Text = "0";
             // 
@@ -1118,7 +1121,7 @@
             this.val_mode.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.val_mode.Location = new System.Drawing.Point(65, 0);
             this.val_mode.Name = "val_mode";
-            
+            this.val_mode.Size = new System.Drawing.Size(56, 23);
             this.val_mode.TabIndex = 90;
             this.val_mode.Text = "0";
             // 
@@ -1127,7 +1130,7 @@
             this.lbl_alt_target.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl_alt_target.Location = new System.Drawing.Point(127, 70);
             this.lbl_alt_target.Name = "lbl_alt_target";
-            
+            this.lbl_alt_target.Size = new System.Drawing.Size(56, 23);
             this.lbl_alt_target.TabIndex = 91;
             this.lbl_alt_target.Text = "目标高度：";
             this.lbl_alt_target.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1137,7 +1140,7 @@
             this.lbl_throttle.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl_throttle.Location = new System.Drawing.Point(127, 0);
             this.lbl_throttle.Name = "lbl_throttle";
-            
+            this.lbl_throttle.Size = new System.Drawing.Size(56, 23);
             this.lbl_throttle.TabIndex = 83;
             this.lbl_throttle.Text = "油门：";
             this.lbl_throttle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1149,7 +1152,7 @@
             this.val_throttle.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.val_throttle.Location = new System.Drawing.Point(189, 0);
             this.val_throttle.Name = "val_throttle";
-            
+            this.val_throttle.Size = new System.Drawing.Size(56, 23);
             this.val_throttle.TabIndex = 84;
             this.val_throttle.Text = "0";
             this.val_throttle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1159,7 +1162,7 @@
             this.lbl_airspeed.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl_airspeed.Location = new System.Drawing.Point(3, 35);
             this.lbl_airspeed.Name = "lbl_airspeed";
-            
+            this.lbl_airspeed.Size = new System.Drawing.Size(56, 23);
             this.lbl_airspeed.TabIndex = 77;
             this.lbl_airspeed.Text = "空速：";
             this.lbl_airspeed.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1171,7 +1174,7 @@
             this.val_alt.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.val_alt.Location = new System.Drawing.Point(65, 70);
             this.val_alt.Name = "val_alt";
-            
+            this.val_alt.Size = new System.Drawing.Size(56, 23);
             this.val_alt.TabIndex = 80;
             this.val_alt.Text = "0";
             this.val_alt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1183,7 +1186,7 @@
             this.val_airspeed.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.val_airspeed.Location = new System.Drawing.Point(65, 35);
             this.val_airspeed.Name = "val_airspeed";
-            
+            this.val_airspeed.Size = new System.Drawing.Size(56, 23);
             this.val_airspeed.TabIndex = 78;
             this.val_airspeed.Text = "0";
             // 
@@ -1192,7 +1195,7 @@
             this.lbl_airspeed_target.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl_airspeed_target.Location = new System.Drawing.Point(127, 35);
             this.lbl_airspeed_target.Name = "lbl_airspeed_target";
-            
+            this.lbl_airspeed_target.Size = new System.Drawing.Size(56, 23);
             this.lbl_airspeed_target.TabIndex = 93;
             this.lbl_airspeed_target.Text = "目标空速：";
             this.lbl_airspeed_target.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1204,7 +1207,7 @@
             this.val_airspeed_target.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.val_airspeed_target.Location = new System.Drawing.Point(189, 35);
             this.val_airspeed_target.Name = "val_airspeed_target";
-            
+            this.val_airspeed_target.Size = new System.Drawing.Size(56, 23);
             this.val_airspeed_target.TabIndex = 94;
             this.val_airspeed_target.Text = "0";
             // 
@@ -1213,7 +1216,7 @@
             this.lbl_airspeed_error.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl_airspeed_error.Location = new System.Drawing.Point(251, 35);
             this.lbl_airspeed_error.Name = "lbl_airspeed_error";
-            
+            this.lbl_airspeed_error.Size = new System.Drawing.Size(56, 23);
             this.lbl_airspeed_error.TabIndex = 131;
             this.lbl_airspeed_error.Tag = "r-3";
             this.lbl_airspeed_error.Text = "空速差：";
@@ -1320,7 +1323,6 @@
             this.CMB_setwp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CMB_setwp.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.CMB_setwp.FormattingEnabled = true;
-            this.CMB_setwp.IntegralHeight = true;
             this.CMB_setwp.Items.AddRange(new object[] {
             "0 (Home)"});
             this.CMB_setwp.Location = new System.Drawing.Point(481, 7);
@@ -1485,7 +1487,7 @@
             this.windDir1.BackColor = System.Drawing.Color.Transparent;
             this.windDir1.DataBindings.Add(new System.Windows.Forms.Binding("Direction", this.bindingSourceHud, "wind_dir", true));
             this.windDir1.DataBindings.Add(new System.Windows.Forms.Binding("Speed", this.bindingSourceHud, "wind_vel", true));
-            this.windDir1.Direction = 360D;
+            this.windDir1.Direction = 180D;
             this.windDir1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.windDir1.Location = new System.Drawing.Point(3, 3);
             this.windDir1.Name = "windDir1";
@@ -1533,9 +1535,10 @@
             this.contextMenuStripMap.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.flyToHereAltToolStripMenuItem,
             this.fixbattery,
+            this.speedUintToolStripMenuItem,
             this.landStartToolStripMenuItem});
             this.contextMenuStripMap.Name = "contextMenuStrip1";
-            this.contextMenuStripMap.Size = new System.Drawing.Size(161, 70);
+            this.contextMenuStripMap.Size = new System.Drawing.Size(161, 92);
             // 
             // flyToHereAltToolStripMenuItem
             // 
@@ -1569,6 +1572,13 @@
             // bindingSourceStatusTab
             // 
             this.bindingSourceStatusTab.DataSource = typeof(MissionPlanner.CurrentState);
+            // 
+            // speedUintToolStripMenuItem
+            // 
+            this.speedUintToolStripMenuItem.Name = "speedUintToolStripMenuItem";
+            this.speedUintToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.speedUintToolStripMenuItem.Text = "更改速度单位";
+            this.speedUintToolStripMenuItem.Click += new System.EventHandler(this.speedUintToolStripMenuItem_Click);
             // 
             // HsdevFlightData
             // 
@@ -1733,5 +1743,6 @@
         private System.Windows.Forms.Label val_airspeed_target;
         private System.Windows.Forms.Label lbl_airspeed_error;
         private System.Windows.Forms.Label lblbtn_set_target_wp;
+        private System.Windows.Forms.ToolStripMenuItem speedUintToolStripMenuItem;
     }
 }

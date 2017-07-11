@@ -2023,6 +2023,24 @@ namespace MissionPlanner.GCSViews
                 CustomMessageBox.Show(Strings.ErrorNoResponce, Strings.ERROR);
             }
         }
+
+        private void _3DMesh1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void speedUintToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Settings.Instance["speedunits"] == "kph")
+            {
+                Settings.Instance["speedunits"] = "meters_per_second";
+            }
+            else if(Settings.Instance["speedunits"] == "meters_per_second")
+            {
+                Settings.Instance["speedunits"] = "kph";
+            }
+            MainV2.instance.ChangeUnits();
+        }
     }
 }
     
