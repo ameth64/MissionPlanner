@@ -1031,7 +1031,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;MainMenu.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="menu.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -1055,13 +1055,43 @@
     <value>menu</value>
   </data>
   <data name="&gt;&gt;menu.Type" xml:space="preserve">
-    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6401.19342, Culture=neutral, PublicKeyToken=null</value>
+    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6403.18717, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;menu.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;menu.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="CHK_hsmav.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="CHK_hsmav.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="CHK_hsmav.Location" type="System.Drawing.Point, System.Drawing">
+    <value>623, 42</value>
+  </data>
+  <data name="CHK_hsmav.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 16</value>
+  </data>
+  <data name="CHK_hsmav.TabIndex" type="System.Int32, mscorlib">
+    <value>73</value>
+  </data>
+  <data name="CHK_hsmav.Text" xml:space="preserve">
+    <value>慧视</value>
+  </data>
+  <data name="&gt;&gt;CHK_hsmav.Name" xml:space="preserve">
+    <value>CHK_hsmav</value>
+  </data>
+  <data name="&gt;&gt;CHK_hsmav.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CHK_hsmav.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;CHK_hsmav.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 57</value>
@@ -2861,7 +2891,7 @@
     <value>toolStripConnectionControl</value>
   </data>
   <data name="&gt;&gt;toolStripConnectionControl.Type" xml:space="preserve">
-    <value>MissionPlanner.Controls.ToolStripConnectionControl, MissionPlanner, Version=1.1.6401.23572, Culture=neutral, PublicKeyToken=null</value>
+    <value>MissionPlanner.Controls.ToolStripConnectionControl, MissionPlanner, Version=1.1.6403.19034, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;MenuDonate.Name" xml:space="preserve">
     <value>MenuDonate</value>

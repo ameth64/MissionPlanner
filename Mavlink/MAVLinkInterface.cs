@@ -3350,7 +3350,10 @@ Please check the following
             // calc extra bit of crc for mavlink 1.0/2.0
             if (message.header == 0xfe || message.header == 0xfd)
             {
-                crc = MavlinkCRC.crc_accumulate(msginfo.crc, crc);
+                byte mod = 0;
+                if (MainV2.instance.CHK_hsmav.Checked)
+                    mod = (byte)(~msginfo.crc);
+                crc = MavlinkCRC.crc_accumulate((byte)(msginfo.crc + mod), crc);
             }
 
             // check message length size vs table (mavlink1 explicit size check | mavlink2 oversize check, no undersize because of 0 trimming)

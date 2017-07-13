@@ -51,11 +51,12 @@ namespace MissionPlanner
             this.MenuLogManger = new System.Windows.Forms.ToolStripButton();
             this.MenuConnect = new System.Windows.Forms.ToolStripButton();
             this.MenuDownLoadPos = new System.Windows.Forms.ToolStripButton();
+            this.MenuCalCompass = new System.Windows.Forms.ToolStripButton();
             this.toolStripConnectionControl = new MissionPlanner.Controls.ToolStripConnectionControl();
             this.MenuDonate = new System.Windows.Forms.ToolStripMenuItem();
             this.menu = new MissionPlanner.Controls.MyButton();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.MenuCalCompass = new System.Windows.Forms.ToolStripButton();
+            this.CHK_hsmav = new System.Windows.Forms.CheckBox();
             this.MainMenu.SuspendLayout();
             this.CTX_mainmenu.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -225,6 +226,16 @@ namespace MissionPlanner
             this.MenuDownLoadPos.Padding = new System.Windows.Forms.Padding(0, 0, 10, 0);
             this.MenuDownLoadPos.Click += new System.EventHandler(this.MenuDownLoadPos_Click);
             // 
+            // MenuCalCompass
+            // 
+            resources.ApplyResources(this.MenuCalCompass, "MenuCalCompass");
+            this.MenuCalCompass.ForeColor = System.Drawing.Color.White;
+            this.MenuCalCompass.Image = global::MissionPlanner.Properties.Resources.dark_terminal_icon;
+            this.MenuCalCompass.Margin = new System.Windows.Forms.Padding(0);
+            this.MenuCalCompass.Name = "MenuCalCompass";
+            this.MenuCalCompass.Padding = new System.Windows.Forms.Padding(0, 0, 10, 0);
+            this.MenuCalCompass.Click += new System.EventHandler(this.toolStripMenuCalCompass_Click);
+            // 
             // toolStripConnectionControl
             // 
             this.toolStripConnectionControl.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -253,20 +264,21 @@ namespace MissionPlanner
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.CHK_hsmav);
             this.panel1.Controls.Add(this.MainMenu);
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             this.panel1.MouseLeave += new System.EventHandler(this.MainMenu_MouseLeave);
             // 
-            // MenuCalCompass
+            // CHK_hsmav
             // 
-            resources.ApplyResources(this.MenuCalCompass, "MenuCalCompass");
-            this.MenuCalCompass.ForeColor = System.Drawing.Color.White;
-            this.MenuCalCompass.Image = global::MissionPlanner.Properties.Resources.dark_terminal_icon;
-            this.MenuCalCompass.Margin = new System.Windows.Forms.Padding(0);
-            this.MenuCalCompass.Name = "MenuCalCompass";
-            this.MenuCalCompass.Padding = new System.Windows.Forms.Padding(0, 0, 10, 0);
-            this.MenuCalCompass.Click += new System.EventHandler(this.toolStripMenuCalCompass_Click);
+            resources.ApplyResources(this.CHK_hsmav, "CHK_hsmav");
+            this.CHK_hsmav.BackColor = System.Drawing.Color.Transparent;
+            this.CHK_hsmav.Checked = true;
+            this.CHK_hsmav.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CHK_hsmav.Name = "CHK_hsmav";
+            this.CHK_hsmav.UseVisualStyleBackColor = false;
+            this.MainMenu.Resize += new System.EventHandler(this.resize);
             // 
             // MainV2
             // 
@@ -313,5 +325,6 @@ namespace MissionPlanner
         private System.Windows.Forms.ToolStripButton MenuLogManger;
         public System.Windows.Forms.ToolStripButton MenuDownLoadPos;
         private System.Windows.Forms.ToolStripButton MenuCalCompass;
+        public System.Windows.Forms.CheckBox CHK_hsmav;
     }
 }

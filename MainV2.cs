@@ -2794,6 +2794,8 @@ namespace MissionPlanner
             }
 
             // show wizard on first use
+            // 取消向导
+            /*
             if (Settings.Instance["newuser"] == null)
             {
                 if (CustomMessageBox.Show("This is your first run, Do you wish to use the setup wizard?\nRecomended for new users.", "Wizard", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
@@ -2807,6 +2809,13 @@ namespace MissionPlanner
 
                 Settings.Instance["newuser"] = DateTime.Now.ToShortDateString();
             }
+            */
+            CHK_hsmav.Location = new Point(this.MainMenu.Width - 400, this.MainMenu.Height - 20 );
+        }
+
+        private void resize(object sender, EventArgs e)
+        {
+            CHK_hsmav.Location = new Point(this.MainMenu.Width - 400, this.MainMenu.Height - 20);
         }
 
         private void BGFirmwareCheck(object state)
