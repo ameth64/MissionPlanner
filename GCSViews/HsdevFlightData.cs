@@ -1048,6 +1048,12 @@ namespace MissionPlanner.GCSViews
                     val_gps_mode.Text = "未锁定";
                 else if (MainV2.comPort.MAV.cs.gpsstatus == 0)
                     val_gps_mode.Text = "无GPS";
+                else if (MainV2.comPort.MAV.cs.gpsstatus == 4)
+                    val_gps_mode.Text = "高精度GPS";
+                else if (MainV2.comPort.MAV.cs.gpsstatus == 5)
+                    val_gps_mode.Text = "浮点解";
+                else if (MainV2.comPort.MAV.cs.gpsstatus == 6)
+                    val_gps_mode.Text = "固定解";
 
                 if (MainV2.comPort.MAV.cs.gpsstatus == 3)
                 {
