@@ -3860,7 +3860,7 @@
     <None Include="Resources\maggps.png" />
     <Content Include="mpdesktop.ico" />
     <Content Include="ParameterMetaDataBackup.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\APM_rover-firmware.png" />
     <None Include="Resources\frames-h.png" />
