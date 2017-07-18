@@ -88,6 +88,7 @@ namespace MissionPlanner
             this.MainMenu.Stretch = false;
             this.MainMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.MainMenu_ItemClicked);
             this.MainMenu.MouseLeave += new System.EventHandler(this.MainMenu_MouseLeave);
+            this.MainMenu.Resize += new System.EventHandler(this.resize);
             // 
             // CTX_mainmenu
             // 
@@ -274,11 +275,8 @@ namespace MissionPlanner
             // 
             resources.ApplyResources(this.CHK_hsmav, "CHK_hsmav");
             this.CHK_hsmav.BackColor = System.Drawing.Color.Transparent;
-            this.CHK_hsmav.Checked = true;
-            this.CHK_hsmav.CheckState = System.Windows.Forms.CheckState.Checked;
             this.CHK_hsmav.Name = "CHK_hsmav";
             this.CHK_hsmav.UseVisualStyleBackColor = false;
-            this.MainMenu.Resize += new System.EventHandler(this.resize);
             // 
             // MainV2
             // 
