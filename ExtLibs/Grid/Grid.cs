@@ -373,7 +373,7 @@ namespace MissionPlanner
                         rutmpositions.Add(temp);
                     }
 
-                    if (spacing > 0&&!sideshot)
+                    if (spacing > 0)
                     {
                         for (int d = (int)(spacing - ((closest.basepnt.GetDistance(closest.p1)) % spacing));
                             d < (closest.p1.GetDistance(closest.p2));
@@ -386,6 +386,7 @@ namespace MissionPlanner
                             var utmpos1 = new utmpos(ax, ay, utmzone) {Tag = "M"};
                             addtomap(utmpos1, "M");
                             ans.Add(utmpos1);
+                            rutmpositions.Add(utmpos1);
                         }
                     }
 
@@ -448,7 +449,7 @@ namespace MissionPlanner
                         rutmpositions.Add(temp);
                     }
 
-                    if (spacing > 0 && !sideshot)
+                    if (spacing > 0)
                     {
                         for (int d = (int)((closest.basepnt.GetDistance(closest.p2)) % spacing);
                             d < (closest.p1.GetDistance(closest.p2));
@@ -461,6 +462,7 @@ namespace MissionPlanner
                             var utmpos2 = new utmpos(ax, ay, utmzone) {Tag = "M"};
                             addtomap(utmpos2, "M");
                             ans.Add(utmpos2);
+                            rutmpositions.Add(utmpos2);
                         }
                     }
 
