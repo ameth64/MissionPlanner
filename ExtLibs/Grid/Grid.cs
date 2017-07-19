@@ -339,7 +339,7 @@ namespace MissionPlanner
             // E = end
             // ME = middle end
             // SM = start middle
-            utmpos temp;
+            utmpos temp = newpos(closest.p1, angle, 0); ;
             double ds = 0.0f;
             while (grid.Count > 0)
             {
@@ -379,14 +379,22 @@ namespace MissionPlanner
                             d < (closest.p1.GetDistance(closest.p2));
                             d += (int)spacing)
                         {
-                            double ax = closest.p1.x;
-                            double ay = closest.p1.y;
+                            double ax = closestp1.x;
+                            double ay = closestp1.y;
 
                             newpos(ref ax, ref ay, angle, d);
                             var utmpos1 = new utmpos(ax, ay, utmzone) {Tag = "M"};
                             addtomap(utmpos1, "M");
                             ans.Add(utmpos1);
-                            rutmpositions.Add(utmpos1);
+                            if (sideshot)
+                            {
+                                ax = temp.x;
+                                ay = temp.y;
+
+                                newpos(ref ax, ref ay, angle, d);
+                                utmpos1 = new utmpos(ax, ay, utmzone) { Tag = "M" };
+                                rutmpositions.Add(utmpos1);
+                            }
                         }
                     }
 
@@ -455,14 +463,22 @@ namespace MissionPlanner
                             d < (closest.p1.GetDistance(closest.p2));
                             d += (int)spacing)
                         {
-                            double ax = closest.p2.x;
-                            double ay = closest.p2.y;
+                            double ax = closestp2.x;
+                            double ay = closestp2.y;
 
                             newpos(ref ax, ref ay, angle, -d);
                             var utmpos2 = new utmpos(ax, ay, utmzone) {Tag = "M"};
                             addtomap(utmpos2, "M");
                             ans.Add(utmpos2);
-                            rutmpositions.Add(utmpos2);
+                            if (sideshot)
+                            {
+                                ax = temp.x;
+                                ay = temp.y;
+
+                                newpos(ref ax, ref ay, angle, -d);
+                                utmpos2 = new utmpos(ax, ay, utmzone) { Tag = "M" };
+                                rutmpositions.Add(utmpos2);
+                            }
                         }
                     }
 
