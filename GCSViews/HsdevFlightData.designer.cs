@@ -1534,6 +1534,7 @@
             this.landStartToolStripMenuItem});
             this.contextMenuStripMap.Name = "contextMenuStrip1";
             this.contextMenuStripMap.Size = new System.Drawing.Size(161, 92);
+            /*
             // 
             // flyToHereAltToolStripMenuItem
             // 
@@ -1555,6 +1556,7 @@
             this.landStartToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.landStartToolStripMenuItem.Text = "执行降落";
             this.landStartToolStripMenuItem.Click += new System.EventHandler(this.landStartToolStripMenuItem_Click);
+            */
             // 
             // bindingSourceGaugesTab
             // 

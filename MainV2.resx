@@ -1055,7 +1055,7 @@
     <value>menu</value>
   </data>
   <data name="&gt;&gt;menu.Type" xml:space="preserve">
-    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6406.22082, Culture=neutral, PublicKeyToken=null</value>
+    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6406.22025, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;menu.Parent" xml:space="preserve">
     <value>$this</value>
@@ -5758,7 +5758,7 @@
     <value>toolStripConnectionControl</value>
   </data>
   <data name="&gt;&gt;toolStripConnectionControl.Type" xml:space="preserve">
-    <value>MissionPlanner.Controls.ToolStripConnectionControl, MissionPlanner, Version=1.1.6406.22087, Culture=neutral, PublicKeyToken=null</value>
+    <value>MissionPlanner.Controls.ToolStripConnectionControl, MissionPlanner, Version=1.1.6410.19694, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;MenuDonate.Name" xml:space="preserve">
     <value>MenuDonate</value>

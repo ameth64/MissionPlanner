@@ -231,7 +231,7 @@ namespace MissionPlanner
             // 
             resources.ApplyResources(this.MenuCalCompass, "MenuCalCompass");
             this.MenuCalCompass.ForeColor = System.Drawing.Color.White;
-            this.MenuCalCompass.Image = global::MissionPlanner.Properties.Resources.dark_terminal_icon;
+            this.MenuCalCompass.Image = global::MissionPlanner.Properties.Resources.compass_cal;
             this.MenuCalCompass.Margin = new System.Windows.Forms.Padding(0);
             this.MenuCalCompass.Name = "MenuCalCompass";
             this.MenuCalCompass.Padding = new System.Windows.Forms.Padding(0, 0, 10, 0);

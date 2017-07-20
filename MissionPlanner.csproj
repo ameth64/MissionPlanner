@@ -3705,6 +3705,7 @@
     <Content Include="Drivers\vrugimbal.inf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\compass_cal.png" />
     <Content Include="Resources\mpdesktop.ico" />
     <Content Include="texture.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
