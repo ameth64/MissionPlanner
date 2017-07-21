@@ -366,6 +366,12 @@
       <DependentUpon>Tracker.cs</DependentUpon>
     </Compile>
     <Compile Include="Arduino\IArduinoComms.cs" />
+    <Compile Include="CalibrationCompassFrom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CalibrationCompassFrom.Designer.cs">
+      <DependentUpon>CalibrationCompassFrom.cs</DependentUpon>
+    </Compile>
     <Compile Include="Comms\CommsSerialPipe.cs" />
     <Compile Include="Controls\ControlSensorsStatus.cs">
       <SubType>UserControl</SubType>
@@ -1145,6 +1151,9 @@
     </Compile>
     <EmbeddedResource Include="3DMesh.resx">
       <DependentUpon>3DMesh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CalibrationCompassFrom.resx">
+      <DependentUpon>CalibrationCompassFrom.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\AuthKeys.resx">
       <DependentUpon>AuthKeys.cs</DependentUpon>
@@ -3851,7 +3860,7 @@
     <None Include="Resources\maggps.png" />
     <Content Include="mpdesktop.ico" />
     <Content Include="ParameterMetaDataBackup.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\APM_rover-firmware.png" />
     <None Include="Resources\frames-h.png" />

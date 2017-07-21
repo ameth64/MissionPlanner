@@ -604,6 +604,17 @@ namespace MissionPlanner
             if (loading)
                 return;
 
+            if (CHK_hssideshot.Checked)
+            {
+                NUM_refaltitude.Enabled = true;
+                label44.Enabled = true;
+            }
+            else
+            {
+                NUM_refaltitude.Enabled = false;
+                label44.Enabled = false;
+            }
+
             if (CMB_camera.Text != "")
             {
                 doCalc();
@@ -615,7 +626,8 @@ namespace MissionPlanner
                 (double) NUM_Distance.Value, (double) NUM_spacing.Value, (double) NUM_angle.Value,
                 (double) NUM_overshoot.Value, (double) NUM_overshoot2.Value,
                 (Grid.StartPosition) Enum.Parse(typeof (Grid.StartPosition), CMB_startfrom.Text), false,
-                (float) NUM_Lane_Dist.Value, (float) NUM_leadin.Value,CHK_sideshot.Checked, CHK_hssideshot.Checked);
+                (float) NUM_Lane_Dist.Value, (float) NUM_leadin.Value,CHK_sideshot.Checked, CHK_hssideshot.Checked,
+                CurrentState.fromDistDisplayUnit((double)NUM_refaltitude.Value));
 
             map.HoldInvalidation = true;
 
@@ -639,7 +651,8 @@ namespace MissionPlanner
                     (double) NUM_Distance.Value, (double) NUM_spacing.Value, (double) NUM_angle.Value + 90.0,
                     (double) NUM_overshoot.Value, (double) NUM_overshoot2.Value,
                     Grid.StartPosition.Point, false,
-                    (float) NUM_Lane_Dist.Value, (float) NUM_leadin.Value, CHK_sideshot.Checked, CHK_hssideshot.Checked));
+                    (float) NUM_Lane_Dist.Value, (float) NUM_leadin.Value, CHK_sideshot.Checked, CHK_hssideshot.Checked,
+                    CurrentState.fromDistDisplayUnit((double)NUM_refaltitude.Value)));
             }
 
             if (CHK_boundary.Checked)

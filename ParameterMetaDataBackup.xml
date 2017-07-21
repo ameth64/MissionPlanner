@@ -46,7 +46,7 @@
     <SERIAL4_PROTOCOL>
       <DisplayName>Serial4 protocol selection</DisplayName>
       <Description>Control what protocol Serial4 port should be used for. Note that the Frsky options require external converter hardware. See the wiki for details.</Description>
-      <Values>1:GCS Mavlink, 3:Frsky D-PORT, 4:Frsky S-PORT, 5:GPS, 7:Alexmos Gimbal Serial, 8:SToRM32 Gimbal Serial, 9:Lidar</Values>
+      <Values>1:GCS Mavlink, 3:Frsky D-PORT, 4:Frsky S-PORT, 5:GPS, 7:Alexmos Gimbal Serial, 8:SToRM32 Gimbal Serial, 9:Lidar, 14:NanoRadar</Values>
       <User>Standard</User>
     </SERIAL4_PROTOCOL>
     <SERIAL4_BAUD>
@@ -3667,7 +3667,7 @@
     <RNGFND_TYPE>
       <DisplayName>Rangefinder type</DisplayName>
       <Description>What type of rangefinder device that is connected</Description>
-      <Values>0:None,1:Analog,2:APM2-MaxbotixI2C,3:APM2-PulsedLightI2C,4:PX4-I2C,5:PX4-PWM,6:BBB-PRU,7:LightWareI2C,8:LightWareSerial</Values>
+      <Values>0:None,1:Analog,2:APM2-MaxbotixI2C,3:APM2-PulsedLightI2C,4:PX4-I2C,5:PX4-PWM,6:BBB-PRU,7:LightWareI2C,8:LightWareSerial,14:NanoRadar</Values>
       <User>Standard</User>
     </RNGFND_TYPE>
     <RNGFND_PIN>
@@ -4747,7 +4747,7 @@
     <SERIAL4_PROTOCOL>
       <DisplayName>Serial4 protocol selection</DisplayName>
       <Description>Control what protocol Serial4 port should be used for. Note that the Frsky options require external converter hardware. See the wiki for details.</Description>
-      <Values>-1:None, 1:MAVLink1, 2:MAVLink2, 3:Frsky D, 4:Frsky SPort, 5:GPS, 7:Alexmos Gimbal Serial, 8:SToRM32 Gimbal Serial, 9:Lidar, 10:FrSky SPort Passthrough (OpenTX)</Values>
+      <Values>-1:None, 1:MAVLink1, 2:MAVLink2, 3:Frsky D, 4:Frsky SPort, 5:GPS, 7:Alexmos Gimbal Serial, 8:SToRM32 Gimbal Serial, 9:Lidar, 10:FrSky SPort Passthrough (OpenTX), 14:NanoRadar</Values>
       <User>Standard</User>
     </SERIAL4_PROTOCOL>
     <SERIAL4_BAUD>
@@ -5064,7 +5064,7 @@
     <RNGFND_TYPE>
       <DisplayName>Rangefinder type</DisplayName>
       <Description>What type of rangefinder device that is connected</Description>
-      <Values>0:None,1:Analog,2:APM2-MaxbotixI2C,3:APM2-PulsedLightI2C,4:PX4-I2C,5:PX4-PWM,6:BBB-PRU,7:LightWareI2C,8:LightWareSerial,9:Bebop,10:MAVLink</Values>
+      <Values>0:None,1:Analog,2:APM2-MaxbotixI2C,3:APM2-PulsedLightI2C,4:PX4-I2C,5:PX4-PWM,6:BBB-PRU,7:LightWareI2C,8:LightWareSerial,9:Bebop,10:MAVLink,14:NanoRadar</Values>
       <User>Standard</User>
     </RNGFND_TYPE>
     <RNGFND_PIN>
@@ -13637,7 +13637,7 @@
     <SERIAL4_PROTOCOL>
       <DisplayName>Serial4 protocol selection</DisplayName>
       <Description>Control what protocol Serial4 port should be used for. Note that the Frsky options require external converter hardware. See the wiki for details.</Description>
-      <Values>-1:None, 1:MAVlink1, 2:MAVLink2, 3:Frsky D-PORT, 4:Frsky S-PORT, 5:GPS, 7:Alexmos Gimbal Serial, 8:SToRM32 Gimbal Serial, 9:Lidar</Values>
+      <Values>-1:None, 1:MAVlink1, 2:MAVLink2, 3:Frsky D-PORT, 4:Frsky S-PORT, 5:GPS, 7:Alexmos Gimbal Serial, 8:SToRM32 Gimbal Serial, 9:Lidar, 14:NanoRadar</Values>
       <User>Standard</User>
     </SERIAL4_PROTOCOL>
     <SERIAL4_BAUD>
@@ -13680,7 +13680,7 @@
     <RNGFND_TYPE>
       <DisplayName>Rangefinder type</DisplayName>
       <Description>What type of rangefinder device that is connected</Description>
-      <Values>0:None,1:Analog,2:APM2-MaxbotixI2C,3:APM2-PulsedLightI2C,4:PX4-I2C,5:PX4-PWM,6:BBB-PRU,7:LightWareI2C,8:LightWareSerial,9:Bebop,10:MAVLink</Values>
+      <Values>0:None,1:Analog,2:APM2-MaxbotixI2C,3:APM2-PulsedLightI2C,4:PX4-I2C,5:PX4-PWM,6:BBB-PRU,7:LightWareI2C,8:LightWareSerial,9:Bebop,10:MAVLink,14:NanoRadar</Values>
       <User>Standard</User>
     </RNGFND_TYPE>
     <RNGFND_PIN>
@@ -17271,7 +17271,7 @@
     <SERIAL4_PROTOCOL>
       <DisplayName>Serial4 protocol selection</DisplayName>
       <Description>Control what protocol Serial4 port should be used for. Note that the Frsky options require external converter hardware. See the wiki for details.</Description>
-      <Values>-1:None, 1:MAVLink1, 2:MAVLink2, 3:Frsky D, 4:Frsky SPort, 5:GPS, 7:Alexmos Gimbal Serial, 8:SToRM32 Gimbal Serial, 9:Lidar, 10:FrSky SPort Passthrough (OpenTX), 11:Lidar360</Values>
+      <Values>-1:None, 1:MAVLink1, 2:MAVLink2, 3:Frsky D, 4:Frsky SPort, 5:GPS, 7:Alexmos Gimbal Serial, 8:SToRM32 Gimbal Serial, 9:Lidar, 10:FrSky SPort Passthrough (OpenTX), 11:Lidar360, 14:NanoRadar</Values>
       <User>Standard</User>
     </SERIAL4_PROTOCOL>
     <SERIAL4_BAUD>

@@ -2794,6 +2794,8 @@ namespace MissionPlanner
             }
 
             // show wizard on first use
+            // 取消向导
+            /*
             if (Settings.Instance["newuser"] == null)
             {
                 if (CustomMessageBox.Show("This is your first run, Do you wish to use the setup wizard?\nRecomended for new users.", "Wizard", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
@@ -2807,6 +2809,13 @@ namespace MissionPlanner
 
                 Settings.Instance["newuser"] = DateTime.Now.ToShortDateString();
             }
+            */
+            CHK_hsmav.Location = new Point(this.MainMenu.Width - 400, this.MainMenu.Height - 20 );
+        }
+
+        private void resize(object sender, EventArgs e)
+        {
+            CHK_hsmav.Location = new Point(this.MainMenu.Width - 400, this.MainMenu.Height - 20);
         }
 
         private void BGFirmwareCheck(object state)
@@ -3594,6 +3603,15 @@ namespace MissionPlanner
         private void connectionOptionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new ConnectionOptions().Show(this);
+        }
+
+        private void toolStripMenuCalCompass_Click(object sender, EventArgs e)
+        {
+            if (MainV2.comPort.MAV.cs.armed)
+            {
+                MessageBox.Show("解锁后不能校准罗盘！");
+            }else
+                new CalibrationCompassFrom().Show(this);
         }
     }
 }

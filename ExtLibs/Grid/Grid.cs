@@ -85,7 +85,7 @@ namespace MissionPlanner
             form.Show();
         }
 
-        public static List<PointLatLngAlt> CreateGrid(List<PointLatLngAlt> polygon, double altitude, double distance, double spacing, double angle, double overshoot1,double overshoot2, StartPosition startpos, bool shutter, float minLaneSeparation, float leadin = 0, bool sideshot = false,bool hssideshot = false)
+        public static List<PointLatLngAlt> CreateGrid(List<PointLatLngAlt> polygon, double altitude, double distance, double spacing, double angle, double overshoot1,double overshoot2, StartPosition startpos, bool shutter, float minLaneSeparation, float leadin = 0, bool sideshot = false,bool hssideshot = false,double refalt = 0.0f)
         {
             //DoDebug();
 
@@ -339,7 +339,7 @@ namespace MissionPlanner
             // E = end
             // ME = middle end
             // SM = start middle
-            utmpos temp;
+            utmpos temp = newpos(closest.p1, angle, 0); ;
             double ds = 0.0f;
             while (grid.Count > 0)
             {
@@ -373,19 +373,28 @@ namespace MissionPlanner
                         rutmpositions.Add(temp);
                     }
 
-                    if (spacing > 0&&!sideshot)
+                    if (spacing > 0)
                     {
                         for (int d = (int)(spacing - ((closest.basepnt.GetDistance(closest.p1)) % spacing));
                             d < (closest.p1.GetDistance(closest.p2));
                             d += (int)spacing)
                         {
-                            double ax = closest.p1.x;
-                            double ay = closest.p1.y;
+                            double ax = closestp1.x;
+                            double ay = closestp1.y;
 
                             newpos(ref ax, ref ay, angle, d);
                             var utmpos1 = new utmpos(ax, ay, utmzone) {Tag = "M"};
                             addtomap(utmpos1, "M");
                             ans.Add(utmpos1);
+                            if (sideshot)
+                            {
+                                ax = temp.x;
+                                ay = temp.y;
+
+                                newpos(ref ax, ref ay, angle, d);
+                                utmpos1 = new utmpos(ax, ay, utmzone) { Tag = "M" };
+                                rutmpositions.Add(utmpos1);
+                            }
                         }
                     }
 
@@ -448,19 +457,28 @@ namespace MissionPlanner
                         rutmpositions.Add(temp);
                     }
 
-                    if (spacing > 0 && !sideshot)
+                    if (spacing > 0)
                     {
                         for (int d = (int)((closest.basepnt.GetDistance(closest.p2)) % spacing);
                             d < (closest.p1.GetDistance(closest.p2));
                             d += (int)spacing)
                         {
-                            double ax = closest.p2.x;
-                            double ay = closest.p2.y;
+                            double ax = closestp2.x;
+                            double ay = closestp2.y;
 
                             newpos(ref ax, ref ay, angle, -d);
                             var utmpos2 = new utmpos(ax, ay, utmzone) {Tag = "M"};
                             addtomap(utmpos2, "M");
                             ans.Add(utmpos2);
+                            if (sideshot)
+                            {
+                                ax = temp.x;
+                                ay = temp.y;
+
+                                newpos(ref ax, ref ay, angle, -d);
+                                utmpos2 = new utmpos(ax, ay, utmzone) { Tag = "M" };
+                                rutmpositions.Add(utmpos2);
+                            }
                         }
                     }
 
@@ -498,7 +516,7 @@ namespace MissionPlanner
             }
 
             // set the altitude on all points
-            ans.ForEach(plla => { plla.Alt = altitude; });
+            // ans.ForEach(plla => { plla.Alt = altitude; });
 
             if(sideshot)
             {
@@ -559,10 +577,12 @@ namespace MissionPlanner
                     ans.Add(rutmpositions[i]);
                     addtomap(rutmpositions[i], rutmpositions[i].Tag.ToString());
                 }
-
-                ans.ForEach(plla => { plla.Alt = altitude; });
-
             }
+
+            if (hssideshot)
+                altitude += refalt;
+
+            ans.ForEach(plla => { plla.Alt = altitude; });
 
             return ans;
         }

@@ -1048,6 +1048,12 @@ namespace MissionPlanner.GCSViews
                     val_gps_mode.Text = "未锁定";
                 else if (MainV2.comPort.MAV.cs.gpsstatus == 0)
                     val_gps_mode.Text = "无GPS";
+                else if (MainV2.comPort.MAV.cs.gpsstatus == 4)
+                    val_gps_mode.Text = "高精度GPS";
+                else if (MainV2.comPort.MAV.cs.gpsstatus == 5)
+                    val_gps_mode.Text = "浮点解";
+                else if (MainV2.comPort.MAV.cs.gpsstatus == 6)
+                    val_gps_mode.Text = "固定解";
 
                 if (MainV2.comPort.MAV.cs.gpsstatus == 3)
                 {
@@ -1639,14 +1645,7 @@ namespace MissionPlanner.GCSViews
         }
 
         private void CMB_setwp_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                //((Button)sender).Enabled = false;
-                MainV2.comPort.setWPCurrent((ushort)CMB_setwp.SelectedIndex); // set nav to
-            }
-            catch { CustomMessageBox.Show("The command failed to execute", "Error"); }
-            //((Button)sender).Enabled = true;
+        {            
         }
 
         
@@ -2003,25 +2002,35 @@ namespace MissionPlanner.GCSViews
             }            
         }
 
-        private void btn_force_disarm_Click(object sender, EventArgs e)
+        private void BUT_setwp_Click(object sender, EventArgs e)
         {
-            if (!MainV2.comPort.BaseStream.IsOpen)
+            if (CMB_setwp.SelectedIndex == -1)
                 return;
-
-            // disarm the MAV
             try
             {
-                if (MainV2.comPort.MAV.cs.armed)
-                {
-                    bool ans = MainV2.comPort.doARM(!MainV2.comPort.MAV.cs.armed);
-                    if (ans == false)
-                        CustomMessageBox.Show(Strings.ErrorRejectedByMAV, Strings.ERROR);
-                }                
+                ((Button)sender).Enabled = false;
+                MainV2.comPort.setWPCurrent((ushort)CMB_setwp.SelectedIndex); // set nav to
             }
-            catch
+            catch { CustomMessageBox.Show("The command failed to execute", "Error"); }
+            ((Button)sender).Enabled = true;
+        }
+
+        private void _3DMesh1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void speedUintToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Settings.Instance["speedunits"] == "kph")
             {
-                CustomMessageBox.Show(Strings.ErrorNoResponce, Strings.ERROR);
+                Settings.Instance["speedunits"] = "meters_per_second";
             }
+            else if(Settings.Instance["speedunits"] == "meters_per_second")
+            {
+                Settings.Instance["speedunits"] = "kph";
+            }
+            MainV2.instance.ChangeUnits();
         }
     }
 }
