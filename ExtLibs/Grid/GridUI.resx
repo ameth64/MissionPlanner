@@ -160,13 +160,13 @@
     <value>470, 59</value>
   </data>
   <data name="label40.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 12</value>
+    <value>71, 12</value>
   </data>
   <data name="label40.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
   </data>
   <data name="label40.Text" xml:space="preserve">
-    <value>Ground Elevation:</value>
+    <value>地表高程差:</value>
   </data>
   <data name="&gt;&gt;label40.Name" xml:space="preserve">
     <value>label40</value>
@@ -220,13 +220,13 @@
     <value>470, 46</value>
   </data>
   <data name="label36.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 12</value>
+    <value>83, 12</value>
   </data>
   <data name="label36.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
   <data name="label36.Text" xml:space="preserve">
-    <value>Turn Dia (at 45d):</value>
+    <value>预估转弯半径:</value>
   </data>
   <data name="&gt;&gt;label36.Name" xml:space="preserve">
     <value>label36</value>
@@ -280,13 +280,13 @@
     <value>470, 33</value>
   </data>
   <data name="label35.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 12</value>
+    <value>83, 12</value>
   </data>
   <data name="label35.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
   </data>
   <data name="label35.Text" xml:space="preserve">
-    <value>Photo every (est):</value>
+    <value>预估拍摄间隔:</value>
   </data>
   <data name="&gt;&gt;label35.Name" xml:space="preserve">
     <value>label35</value>
@@ -340,13 +340,13 @@
     <value>470, 20</value>
   </data>
   <data name="label31.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 12</value>
+    <value>83, 12</value>
   </data>
   <data name="label31.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
   <data name="label31.Text" xml:space="preserve">
-    <value>Flight Time (est):</value>
+    <value>预估飞行时间:</value>
   </data>
   <data name="&gt;&gt;label31.Name" xml:space="preserve">
     <value>label31</value>
@@ -400,13 +400,13 @@
     <value>240, 59</value>
   </data>
   <data name="label25.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 12</value>
+    <value>47, 12</value>
   </data>
   <data name="label25.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
   <data name="label25.Text" xml:space="preserve">
-    <value>Dist between lines:</value>
+    <value>航间距:</value>
   </data>
   <data name="&gt;&gt;label25.Name" xml:space="preserve">
     <value>label25</value>
@@ -460,13 +460,13 @@
     <value>240, 46</value>
   </data>
   <data name="label30.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 12</value>
+    <value>59, 12</value>
   </data>
   <data name="label30.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
   <data name="label30.Text" xml:space="preserve">
-    <value>Footprint:</value>
+    <value>投影面积:</value>
   </data>
   <data name="&gt;&gt;label30.Name" xml:space="preserve">
     <value>label30</value>
@@ -550,13 +550,13 @@
     <value>240, 33</value>
   </data>
   <data name="label33.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 12</value>
+    <value>47, 12</value>
   </data>
   <data name="label33.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
   <data name="label33.Text" xml:space="preserve">
-    <value>No of Strips:</value>
+    <value>航带数:</value>
   </data>
   <data name="&gt;&gt;label33.Name" xml:space="preserve">
     <value>label33</value>
@@ -580,13 +580,13 @@
     <value>240, 20</value>
   </data>
   <data name="label34.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 12</value>
+    <value>47, 12</value>
   </data>
   <data name="label34.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
   <data name="label34.Text" xml:space="preserve">
-    <value>Pictures:</value>
+    <value>照片数:</value>
   </data>
   <data name="&gt;&gt;label34.Name" xml:space="preserve">
     <value>label34</value>
@@ -640,13 +640,13 @@
     <value>13, 59</value>
   </data>
   <data name="label29.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 12</value>
+    <value>77, 12</value>
   </data>
   <data name="label29.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
   <data name="label29.Text" xml:space="preserve">
-    <value>Ground Resolution: </value>
+    <value>地表分辨率: </value>
   </data>
   <data name="&gt;&gt;label29.Name" xml:space="preserve">
     <value>label29</value>
@@ -700,13 +700,13 @@
     <value>13, 46</value>
   </data>
   <data name="label27.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 12</value>
+    <value>65, 12</value>
   </data>
   <data name="label27.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="label27.Text" xml:space="preserve">
-    <value>Distance between images: </value>
+    <value>拍照间距: </value>
   </data>
   <data name="&gt;&gt;label27.Name" xml:space="preserve">
     <value>label27</value>
@@ -790,13 +790,13 @@
     <value>13, 33</value>
   </data>
   <data name="label23.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 12</value>
+    <value>41, 12</value>
   </data>
   <data name="label23.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="label23.Text" xml:space="preserve">
-    <value>Distance: </value>
+    <value>里程: </value>
   </data>
   <data name="&gt;&gt;label23.Name" xml:space="preserve">
     <value>label23</value>
@@ -826,7 +826,7 @@
     <value>0</value>
   </data>
   <data name="label22.Text" xml:space="preserve">
-    <value>Area: </value>
+    <value>面积: </value>
   </data>
   <data name="&gt;&gt;label22.Name" xml:space="preserve">
     <value>label22</value>
@@ -1372,7 +1372,7 @@
     <value>BUT_samplephoto</value>
   </data>
   <data name="&gt;&gt;BUT_samplephoto.Type" xml:space="preserve">
-    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6393.21878, Culture=neutral, PublicKeyToken=null</value>
+    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6395.32897, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;BUT_samplephoto.Parent" xml:space="preserve">
     <value>groupBox2</value>
@@ -1849,7 +1849,7 @@
     <value>BUT_save</value>
   </data>
   <data name="&gt;&gt;BUT_save.Type" xml:space="preserve">
-    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6393.21878, Culture=neutral, PublicKeyToken=null</value>
+    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6395.32897, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;BUT_save.Parent" xml:space="preserve">
     <value>groupBox2</value>
@@ -2810,13 +2810,13 @@ Ctrl+O 可从文件读取</value>
     <value>174, 185</value>
   </data>
   <data name="CHK_hssideshot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 16</value>
+    <value>54, 16</value>
   </data>
   <data name="CHK_hssideshot.TabIndex" type="System.Int32, mscorlib">
     <value>71</value>
   </data>
   <data name="CHK_hssideshot.Text" xml:space="preserve">
-    <value>慧视</value>
+    <value>HsDev</value>
   </data>
   <data name="&gt;&gt;CHK_hssideshot.Name" xml:space="preserve">
     <value>CHK_hssideshot</value>
@@ -3317,13 +3317,13 @@ Ctrl+O 可从文件读取</value>
     <value>8, 135</value>
   </data>
   <data name="CHK_advanced.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 16</value>
+    <value>72, 16</value>
   </data>
   <data name="CHK_advanced.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="CHK_advanced.Text" xml:space="preserve">
-    <value>Advanced Options</value>
+    <value>高级选项</value>
   </data>
   <data name="&gt;&gt;CHK_advanced.Name" xml:space="preserve">
     <value>CHK_advanced</value>
@@ -3347,13 +3347,13 @@ Ctrl+O 可从文件读取</value>
     <value>8, 112</value>
   </data>
   <data name="CHK_footprints.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 16</value>
+    <value>72, 16</value>
   </data>
   <data name="CHK_footprints.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="CHK_footprints.Text" xml:space="preserve">
-    <value>Footprints</value>
+    <value>航摄投影</value>
   </data>
   <data name="&gt;&gt;CHK_footprints.Name" xml:space="preserve">
     <value>CHK_footprints</value>
@@ -3377,13 +3377,13 @@ Ctrl+O 可从文件读取</value>
     <value>8, 89</value>
   </data>
   <data name="CHK_internals.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 16</value>
+    <value>60, 16</value>
   </data>
   <data name="CHK_internals.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="CHK_internals.Text" xml:space="preserve">
-    <value>Internals</value>
+    <value>拍照点</value>
   </data>
   <data name="&gt;&gt;CHK_internals.Name" xml:space="preserve">
     <value>CHK_internals</value>
@@ -3413,7 +3413,7 @@ Ctrl+O 可从文件读取</value>
     <value>2</value>
   </data>
   <data name="CHK_grid.Text" xml:space="preserve">
-    <value>Grid</value>
+    <value>航线</value>
   </data>
   <data name="&gt;&gt;CHK_grid.Name" xml:space="preserve">
     <value>CHK_grid</value>
@@ -3437,13 +3437,13 @@ Ctrl+O 可从文件读取</value>
     <value>8, 43</value>
   </data>
   <data name="CHK_markers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 16</value>
+    <value>48, 16</value>
   </data>
   <data name="CHK_markers.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="CHK_markers.Text" xml:space="preserve">
-    <value>Markers</value>
+    <value>航点</value>
   </data>
   <data name="&gt;&gt;CHK_markers.Name" xml:space="preserve">
     <value>CHK_markers</value>
@@ -3467,13 +3467,13 @@ Ctrl+O 可从文件读取</value>
     <value>8, 20</value>
   </data>
   <data name="CHK_boundary.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 16</value>
+    <value>60, 16</value>
   </data>
   <data name="CHK_boundary.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="CHK_boundary.Text" xml:space="preserve">
-    <value>Boundary</value>
+    <value>范围线</value>
   </data>
   <data name="&gt;&gt;CHK_boundary.Name" xml:space="preserve">
     <value>CHK_boundary</value>
@@ -3533,7 +3533,7 @@ Ctrl+O 可从文件读取</value>
     <value>BUT_Accept</value>
   </data>
   <data name="&gt;&gt;BUT_Accept.Type" xml:space="preserve">
-    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6393.21878, Culture=neutral, PublicKeyToken=null</value>
+    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6395.32897, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;BUT_Accept.Parent" xml:space="preserve">
     <value>tabSimple</value>
@@ -3614,7 +3614,7 @@ Ctrl+O 可从文件读取</value>
     <value>TRK_zoom</value>
   </data>
   <data name="&gt;&gt;TRK_zoom.Type" xml:space="preserve">
-    <value>MissionPlanner.Controls.MyTrackBar, MissionPlanner.Controls, Version=1.0.6393.21878, Culture=neutral, PublicKeyToken=null</value>
+    <value>MissionPlanner.Controls.MyTrackBar, MissionPlanner.Controls, Version=1.0.6395.32897, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;TRK_zoom.Parent" xml:space="preserve">
     <value>$this</value>
@@ -3646,7 +3646,7 @@ Ctrl+O 可从文件读取</value>
     <value>map</value>
   </data>
   <data name="&gt;&gt;map.Type" xml:space="preserve">
-    <value>MissionPlanner.Controls.myGMAP, MissionPlanner.Controls, Version=1.0.6393.21878, Culture=neutral, PublicKeyToken=null</value>
+    <value>MissionPlanner.Controls.myGMAP, MissionPlanner.Controls, Version=1.0.6395.32897, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;map.Parent" xml:space="preserve">
     <value>$this</value>

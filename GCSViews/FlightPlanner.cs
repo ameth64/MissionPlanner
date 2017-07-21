@@ -4171,7 +4171,7 @@ namespace MissionPlanner.GCSViews
                                             {
                                                 if (testdistance == 0.0)
                                                     testdistance = 0.00001;
-                                                MessageBox.Show("错误:" + testno.ToString() + "和" + (testno+1).ToString() + "距离不能小于120米");
+                                                MessageBox.Show("错误: 航点" + testno.ToString() + "和" + (testno+1).ToString() + "距离不能小于120米");
                                                 writeKML();
                                                 goto badresult;
                                             }
@@ -4205,7 +4205,7 @@ namespace MissionPlanner.GCSViews
                                             {
                                                 if (testdistance == 0.0)
                                                     testdistance = 0.00001;
-                                                MessageBox.Show("错误:" + testno.ToString() + "和" + (testno - 1).ToString() + "距离不能小于120米");
+                                                MessageBox.Show("错误: 航点" + testno.ToString() + "和" + (testno - 1).ToString() + "距离不能小于120米");
                                                 writeKML();
                                                 goto badresult;
                                             }
@@ -4230,7 +4230,7 @@ namespace MissionPlanner.GCSViews
                                     {
                                         if (testdistance == 0.0)
                                             testdistance = 0.00001;
-                                        MessageBox.Show("错误:" + testno.ToString() + "和" + (testno - 1).ToString() + "距离不能小于120米");
+                                        MessageBox.Show("错误: 航点" + testno.ToString() + "和" + (testno - 1).ToString() + "距离不能小于120米");
                                         writeKML();
                                         goto badresult;
                                     }
