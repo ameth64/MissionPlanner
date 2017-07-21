@@ -240,4 +240,12 @@
     <senh>4.62</senh>
     <senw>6.16</senw>
   </Camera>
+  <Camera>
+    <name>Sony RX1RM II</name>
+    <flen>35</flen>
+    <imgh>5304</imgh>
+    <imgw>7952</imgw>
+    <senh>24.0</senh>
+    <senw>35.9</senw>
+  </Camera>
 </Cameras>
