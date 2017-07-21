@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="TXT_seriallog.Location" type="System.Drawing.Point, System.Drawing">
-    <value>474, 31</value>
+    <value>474, 25</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="TXT_seriallog.Multiline" type="System.Boolean, mscorlib">
@@ -142,13 +142,13 @@
     <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="CHK_logs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 31</value>
+    <value>3, 25</value>
   </data>
   <data name="CHK_logs.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>250, 4</value>
   </data>
   <data name="CHK_logs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>465, 349</value>
+    <value>465, 372</value>
   </data>
   <data name="CHK_logs.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -175,7 +175,7 @@
     <value>5, 5, 5, 5</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 18</value>
+    <value>65, 12</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -202,13 +202,13 @@
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="LabelStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>476, 502</value>
+    <value>476, 526</value>
   </data>
   <data name="LabelStatus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
   </data>
   <data name="LabelStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 40</value>
+    <value>358, 13</value>
   </data>
   <data name="LabelStatus.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -238,7 +238,7 @@
     <value>5, 5, 5, 5</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 18</value>
+    <value>47, 12</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -277,7 +277,7 @@
     <value>3, 3</value>
   </data>
   <data name="progressBar1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>393, 20</value>
+    <value>414, 20</value>
   </data>
   <data name="progressBar1.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -301,13 +301,13 @@
     <value>True</value>
   </data>
   <data name="labelBytes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>404, 5</value>
+    <value>425, 5</value>
   </data>
   <data name="labelBytes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
   </data>
   <data name="labelBytes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 18</value>
+    <value>41, 12</value>
   </data>
   <data name="labelBytes.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -328,7 +328,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 497</value>
+    <value>0, 521</value>
   </data>
   <data name="tableLayoutPanel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -337,7 +337,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>471, 50</value>
+    <value>471, 26</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -397,7 +397,7 @@
     <value>BUT_redokml</value>
   </data>
   <data name="&gt;&gt;BUT_redokml.Type" xml:space="preserve">
-    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6244.28344, Culture=neutral, PublicKeyToken=null</value>
+    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6411.17479, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;BUT_redokml.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
@@ -426,11 +426,14 @@
   <data name="BUT_clearlogs.ToolTip" xml:space="preserve">
     <value>Delete all logs on your connected drone.</value>
   </data>
+  <data name="BUT_clearlogs.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;BUT_clearlogs.Name" xml:space="preserve">
     <value>BUT_clearlogs</value>
   </data>
   <data name="&gt;&gt;BUT_clearlogs.Type" xml:space="preserve">
-    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6244.28344, Culture=neutral, PublicKeyToken=null</value>
+    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6411.17479, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;BUT_clearlogs.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
@@ -469,7 +472,7 @@
     <value>BUT_bintolog</value>
   </data>
   <data name="&gt;&gt;BUT_bintolog.Type" xml:space="preserve">
-    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6244.28344, Culture=neutral, PublicKeyToken=null</value>
+    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6411.17479, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;BUT_bintolog.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
@@ -499,7 +502,7 @@
     <value>BUT_DLthese</value>
   </data>
   <data name="&gt;&gt;BUT_DLthese.Type" xml:space="preserve">
-    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6244.28344, Culture=neutral, PublicKeyToken=null</value>
+    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6411.17479, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;BUT_DLthese.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
@@ -523,7 +526,7 @@
     <value>BUT_DLthesePos</value>
   </data>
   <data name="&gt;&gt;BUT_DLthesePos.Type" xml:space="preserve">
-    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6244.28344, Culture=neutral, PublicKeyToken=null</value>
+    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6411.17479, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;BUT_DLthesePos.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
@@ -562,7 +565,7 @@
     <value>BUT_firstperson</value>
   </data>
   <data name="&gt;&gt;BUT_firstperson.Type" xml:space="preserve">
-    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6244.28344, Culture=neutral, PublicKeyToken=null</value>
+    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6411.17479, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;BUT_firstperson.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
@@ -595,7 +598,7 @@
     <value>BUT_DLall</value>
   </data>
   <data name="&gt;&gt;BUT_DLall.Type" xml:space="preserve">
-    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6244.28344, Culture=neutral, PublicKeyToken=null</value>
+    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6411.17479, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;BUT_DLall.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
@@ -604,7 +607,7 @@
     <value>6</value>
   </data>
   <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 386</value>
+    <value>3, 410</value>
   </data>
   <data name="tableLayoutPanel3.RowCount" type="System.Int32, mscorlib">
     <value>5</value>
@@ -661,7 +664,7 @@
     <value>Vertical</value>
   </data>
   <data name="TXT_seriallog.Size" type="System.Drawing.Size, System.Drawing">
-    <value>399, 463</value>
+    <value>399, 493</value>
   </data>
   <data name="TXT_seriallog.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>

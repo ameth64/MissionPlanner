@@ -50,10 +50,10 @@ namespace MissionPlanner.Log
             Done
         }
 
-        public LogDownloadMavLink()
+        public LogDownloadMavLink(bool show_delete = false)
         {
             InitializeComponent();
-
+            BUT_clearlogs.Visible = show_delete;
             labelBytes.Text = "";
 
             ThemeManager.ApplyThemeTo(this);

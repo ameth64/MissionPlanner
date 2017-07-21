@@ -388,6 +388,7 @@ namespace MissionPlanner
         private ConnectionStats _connectionStats;
 
         public bool posdownlaoding = false;
+        private Form logdlmgr_form;
 
         /// <summary>
         /// This 'Control' is the toolstrip control that holds the comport combo, baudrate combo etc
@@ -1174,11 +1175,11 @@ namespace MissionPlanner
                 if (posdownlaoding == false)
                 {
                     posdownlaoding = true;
-
-                    var form = new LogDownloadMavLink();
-
-                    form.Show();
-
+                    if(logdlmgr_form == null || logdlmgr_form.IsDisposed)
+                    {
+                        logdlmgr_form = new LogDownloadMavLink(showcontrol);
+                        logdlmgr_form.Show();
+                    }
                     
                 }
                 else
@@ -3045,6 +3046,7 @@ namespace MissionPlanner
                 {
                     int win = NativeMethods.FindWindow("ConsoleWindowClass", null);
                     NativeMethods.ShowWindow(win, NativeMethods.SW_HIDE); // hide window
+                    logdlmgr_form.Close(); //将已打开的日志管理对话框关闭
                 }
                 MenuSimulation.Visible = !MenuSimulation.Visible;
                 MenuFlightData.Visible = !MenuFlightData.Visible;
@@ -3054,6 +3056,7 @@ namespace MissionPlanner
                 MenuHelp.Visible = !MenuHelp.Visible;
                 fladv = !fladv;
                 FlightPlanner.setAdvancedFuction(fladv);
+                CHK_hsmav.Visible = !CHK_hsmav.Visible; // 控制协议复选框隐藏
                 //MyFlightData.zg1show();
                 //  public System.Windows.Forms.ToolStripButton MenuFlightData;
                 // public System.Windows.Forms.ToolStripButton MenuFlightPlanner;

@@ -202,8 +202,8 @@ namespace MissionPlanner.Log
         protected override void OnClosing(CancelEventArgs e)
         {
             if (status == SerialStatus.Reading)
-            {
-                if (CustomMessageBox.Show(LogStrings.CancelDownload, "取消下载", MessageBoxButtons.YesNo) ==
+            { //去掉原版的 LogStrings.CancelDownload
+                if (CustomMessageBox.Show("您的POS日志正在下载, 确定要取消吗?", "取消下载", MessageBoxButtons.YesNo) ==
                     System.Windows.Forms.DialogResult.No)
                 {
                     e.Cancel = true;

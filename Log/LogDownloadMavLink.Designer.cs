@@ -63,6 +63,7 @@
             // 
             resources.ApplyResources(this.BUT_DLall, "BUT_DLall");
             this.BUT_DLall.Name = "BUT_DLall";
+            this.BUT_DLall.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.BUT_DLall.UseVisualStyleBackColor = true;
             this.BUT_DLall.Click += new System.EventHandler(this.BUT_DLall_Click);
             // 
@@ -70,6 +71,7 @@
             // 
             resources.ApplyResources(this.BUT_DLthese, "BUT_DLthese");
             this.BUT_DLthese.Name = "BUT_DLthese";
+            this.BUT_DLthese.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.toolTip1.SetToolTip(this.BUT_DLthese, resources.GetString("BUT_DLthese.ToolTip"));
             this.BUT_DLthese.UseVisualStyleBackColor = true;
             this.BUT_DLthese.Click += new System.EventHandler(this.BUT_DLthese_Click);
@@ -78,6 +80,7 @@
             // 
             resources.ApplyResources(this.BUT_clearlogs, "BUT_clearlogs");
             this.BUT_clearlogs.Name = "BUT_clearlogs";
+            this.BUT_clearlogs.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.toolTip1.SetToolTip(this.BUT_clearlogs, resources.GetString("BUT_clearlogs.ToolTip"));
             this.BUT_clearlogs.UseVisualStyleBackColor = true;
             this.BUT_clearlogs.Click += new System.EventHandler(this.BUT_clearlogs_Click);
@@ -93,6 +96,7 @@
             // 
             resources.ApplyResources(this.BUT_redokml, "BUT_redokml");
             this.BUT_redokml.Name = "BUT_redokml";
+            this.BUT_redokml.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.toolTip1.SetToolTip(this.BUT_redokml, resources.GetString("BUT_redokml.ToolTip"));
             this.BUT_redokml.UseVisualStyleBackColor = true;
             this.BUT_redokml.Click += new System.EventHandler(this.BUT_redokml_Click);
@@ -101,6 +105,7 @@
             // 
             resources.ApplyResources(this.BUT_bintolog, "BUT_bintolog");
             this.BUT_bintolog.Name = "BUT_bintolog";
+            this.BUT_bintolog.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.toolTip1.SetToolTip(this.BUT_bintolog, resources.GetString("BUT_bintolog.ToolTip"));
             this.BUT_bintolog.UseVisualStyleBackColor = true;
             this.BUT_bintolog.Click += new System.EventHandler(this.BUT_bintolog_Click);
@@ -166,6 +171,7 @@
             // 
             resources.ApplyResources(this.BUT_DLthesePos, "BUT_DLthesePos");
             this.BUT_DLthesePos.Name = "BUT_DLthesePos";
+            this.BUT_DLthesePos.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.BUT_DLthesePos.UseVisualStyleBackColor = true;
             this.BUT_DLthesePos.Click += new System.EventHandler(this.BUT_DLthesePos_Click);
             // 
@@ -173,6 +179,7 @@
             // 
             resources.ApplyResources(this.BUT_firstperson, "BUT_firstperson");
             this.BUT_firstperson.Name = "BUT_firstperson";
+            this.BUT_firstperson.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.toolTip1.SetToolTip(this.BUT_firstperson, resources.GetString("BUT_firstperson.ToolTip"));
             this.BUT_firstperson.UseVisualStyleBackColor = true;
             this.BUT_firstperson.Click += new System.EventHandler(this.BUT_firstperson_Click);

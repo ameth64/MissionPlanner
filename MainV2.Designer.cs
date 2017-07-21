@@ -275,6 +275,8 @@ namespace MissionPlanner
             // 
             resources.ApplyResources(this.CHK_hsmav, "CHK_hsmav");
             this.CHK_hsmav.BackColor = System.Drawing.Color.Transparent;
+            this.CHK_hsmav.Checked = true;
+            this.CHK_hsmav.CheckState = System.Windows.Forms.CheckState.Checked;
             this.CHK_hsmav.Name = "CHK_hsmav";
             this.CHK_hsmav.UseVisualStyleBackColor = false;
             // 

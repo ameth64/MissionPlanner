@@ -47,9 +47,9 @@
             this.labelBytes.Location = new System.Drawing.Point(246, 5);
             this.labelBytes.Margin = new System.Windows.Forms.Padding(5);
             this.labelBytes.Name = "labelBytes";
-            this.labelBytes.Size = new System.Drawing.Size(41, 12);
+            this.labelBytes.Size = new System.Drawing.Size(47, 12);
             this.labelBytes.TabIndex = 19;
-            this.labelBytes.Text = "label3";
+            this.labelBytes.Text = "下载中.";
             // 
             // PosDownLoadCurrent
             // 
