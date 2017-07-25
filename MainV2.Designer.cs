@@ -231,7 +231,7 @@ namespace MissionPlanner
             // 
             resources.ApplyResources(this.MenuCalCompass, "MenuCalCompass");
             this.MenuCalCompass.ForeColor = System.Drawing.Color.White;
-            this.MenuCalCompass.Image = global::MissionPlanner.Properties.Resources.dark_terminal_icon;
+            this.MenuCalCompass.Image = global::MissionPlanner.Properties.Resources.compass_cal;
             this.MenuCalCompass.Margin = new System.Windows.Forms.Padding(0);
             this.MenuCalCompass.Name = "MenuCalCompass";
             this.MenuCalCompass.Padding = new System.Windows.Forms.Padding(0, 0, 10, 0);
@@ -275,6 +275,8 @@ namespace MissionPlanner
             // 
             resources.ApplyResources(this.CHK_hsmav, "CHK_hsmav");
             this.CHK_hsmav.BackColor = System.Drawing.Color.Transparent;
+            this.CHK_hsmav.Checked = true;
+            this.CHK_hsmav.CheckState = System.Windows.Forms.CheckState.Checked;
             this.CHK_hsmav.Name = "CHK_hsmav";
             this.CHK_hsmav.UseVisualStyleBackColor = false;
             // 
