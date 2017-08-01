@@ -734,6 +734,30 @@ namespace MissionPlanner.Log
             }
         }
 
+        public void default_open(string file)
+        {
+                    this.Text = "Log - " + Path.GetFileName(file);
+
+                    List<string> fields = GetLogFileValidFields(file);
+
+                    zg1.GraphPane.CurveList.Clear();
+
+                    //GetLogFileData(zg1, openFileDialog1.FileName, fields);
+
+                    try
+                    {
+                        // fix new line types
+                        ThemeManager.ApplyThemeTo(this);
+
+                        zg1.Invalidate();
+                        zg1.AxisChange();
+                    }
+                    catch
+                    {
+                    }
+
+        }
+
         static int[] ColourValues = new int[]
         {
             0xFF0000, 0x00FF00, 0x0000FF, 0xFFFF00, 0xFF00FF, 0x00FFFF,
@@ -1782,6 +1806,12 @@ namespace MissionPlanner.Log
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
+        }
+
+        public void default_Graph()
+        {
+            GraphItem("AHRS2", "pitch", false);
+            GraphItem("AHRS2", "roll", false);
         }
     }
 }

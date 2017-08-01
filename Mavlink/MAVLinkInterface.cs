@@ -69,7 +69,7 @@ namespace MissionPlanner
 
         public event EventHandler CommsClose;
 
-	 public PointLatLngAlt camera_feedback_new = null;
+	    public PointLatLngAlt camera_feedback_new = null;
 
         const int gcssysid = 255;
 
@@ -3739,6 +3739,27 @@ Please check the following
 // flush on heartbeat - 1 seconds
                                     logfile.Flush();
                                     rawlogfile.Flush();
+                                }
+                            }
+                        }
+
+                        if(MainV2.instance.FlightData.recordext_path!="" && MainV2.instance.FlightData.recordext_file !=null)
+                        {
+                            lock(MainV2.instance.FlightData.recordext_file)
+                            {
+                                if (MainV2.instance.FlightData.recordext_file != null)
+                                {
+                                    byte[] datearray = BitConverter.GetBytes(
+                                                    (UInt64)((DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalMilliseconds * 1000));
+                                    Array.Reverse(datearray);
+                                    MainV2.instance.FlightData.recordext_file.Write(datearray, 0, datearray.Length);
+                                    MainV2.instance.FlightData.recordext_file.Write(buffer, 0, buffer.Length);
+
+                                    if (msgid == 0)
+                                    {
+                                        // flush on heartbeat - 1 seconds
+                                        MainV2.instance.FlightData.recordext_file.Flush();
+                                    }
                                 }
                             }
                         }
