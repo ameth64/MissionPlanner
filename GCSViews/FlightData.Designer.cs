@@ -164,6 +164,7 @@
             this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.Messagetabtimer = new System.Windows.Forms.Timer(this.components);
             this.bindingSourceStatusTab = new System.Windows.Forms.BindingSource(this.components);
+            this.chk_rec_quadplane = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.MainH)).BeginInit();
             this.MainH.Panel1.SuspendLayout();
             this.MainH.Panel2.SuspendLayout();
@@ -1456,6 +1457,7 @@
             this.tableLayoutPaneltlogs.Controls.Add(this.BUT_log2kml, 0, 2);
             this.tableLayoutPaneltlogs.Controls.Add(this.BUT_playlog, 0, 1);
             this.tableLayoutPaneltlogs.Controls.Add(this.panel2, 1, 2);
+            this.tableLayoutPaneltlogs.Controls.Add(this.chk_rec_quadplane, 1, 3);
             this.tableLayoutPaneltlogs.Name = "tableLayoutPaneltlogs";
             // 
             // BTN_recordlog
@@ -1971,7 +1973,7 @@
             this.windDir1.BackColor = System.Drawing.Color.Transparent;
             this.windDir1.DataBindings.Add(new System.Windows.Forms.Binding("Direction", this.bindingSource1, "wind_dir", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.windDir1.DataBindings.Add(new System.Windows.Forms.Binding("Speed", this.bindingSource1, "wind_vel", true, System.Windows.Forms.DataSourceUpdateMode.Never));
-            this.windDir1.Direction = 360D;
+            this.windDir1.Direction = 180D;
             resources.ApplyResources(this.windDir1, "windDir1");
             this.windDir1.Name = "windDir1";
             this.windDir1.Speed = 0D;
@@ -2187,6 +2189,12 @@
             // bindingSourceStatusTab
             // 
             this.bindingSourceStatusTab.DataSource = typeof(MissionPlanner.CurrentState);
+            // 
+            // chk_rec_quadplane
+            // 
+            resources.ApplyResources(this.chk_rec_quadplane, "chk_rec_quadplane");
+            this.chk_rec_quadplane.Name = "chk_rec_quadplane";
+            this.chk_rec_quadplane.UseVisualStyleBackColor = true;
             // 
             // FlightData
             // 
@@ -2406,5 +2414,6 @@
         private System.Windows.Forms.ToolStripMenuItem onOffCameraOverlapToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem altitudeAngelSettingsToolStripMenuItem;
         private Controls.MyButton BTN_recordlog;
+        private System.Windows.Forms.CheckBox chk_rec_quadplane;
     }
 }

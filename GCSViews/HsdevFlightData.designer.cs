@@ -125,11 +125,13 @@
             this.contextMenuStripMap = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.flyToHereAltToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fixbattery = new System.Windows.Forms.ToolStripMenuItem();
+            this.speedUintToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.landStartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bindingSourceGaugesTab = new System.Windows.Forms.BindingSource(this.components);
             this.ZedGraphTimer = new System.Windows.Forms.Timer(this.components);
             this.bindingSourceStatusTab = new System.Windows.Forms.BindingSource(this.components);
-            this.speedUintToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.but_qrtl = new MissionPlanner.Controls.MyButton();
+            this.but_qland = new MissionPlanner.Controls.MyButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_main_map)).BeginInit();
             this.splitContainer_main_map.Panel1.SuspendLayout();
             this.splitContainer_main_map.Panel2.SuspendLayout();
@@ -350,7 +352,7 @@
             this.hud2.Name = "hud2";
             this.hud2.navpitch = 0F;
             this.hud2.navroll = 0F;
-            this.hud2.opengl = false;
+            this.hud2.opengl = true;
             this.hud2.pitch = 0F;
             this.hud2.roll = 0F;
             this.hud2.Russian = false;
@@ -411,6 +413,8 @@
             // 
             // splitContainer4.Panel2
             // 
+            this.splitContainer4.Panel2.Controls.Add(this.but_qland);
+            this.splitContainer4.Panel2.Controls.Add(this.but_qrtl);
             this.splitContainer4.Panel2.Controls.Add(this.BUT_setwp);
             this.splitContainer4.Panel2.Controls.Add(this.lblbtn_set_target_wp);
             this.splitContainer4.Panel2.Controls.Add(this.BUT_ARM);
@@ -1482,7 +1486,7 @@
             this.windDir1.BackColor = System.Drawing.Color.Transparent;
             this.windDir1.DataBindings.Add(new System.Windows.Forms.Binding("Direction", this.bindingSourceHud, "wind_dir", true));
             this.windDir1.DataBindings.Add(new System.Windows.Forms.Binding("Speed", this.bindingSourceHud, "wind_vel", true));
-            this.windDir1.Direction = 180D;
+            this.windDir1.Direction = 360D;
             this.windDir1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.windDir1.Location = new System.Drawing.Point(3, 3);
             this.windDir1.Name = "windDir1";
@@ -1533,30 +1537,29 @@
             this.speedUintToolStripMenuItem,
             this.landStartToolStripMenuItem});
             this.contextMenuStripMap.Name = "contextMenuStrip1";
-            this.contextMenuStripMap.Size = new System.Drawing.Size(161, 92);
-            /*
+            this.contextMenuStripMap.Size = new System.Drawing.Size(149, 92);
             // 
             // flyToHereAltToolStripMenuItem
             // 
             this.flyToHereAltToolStripMenuItem.Name = "flyToHereAltToolStripMenuItem";
-            this.flyToHereAltToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.flyToHereAltToolStripMenuItem.Text = "指点飞行到这里";
-            this.flyToHereAltToolStripMenuItem.Click += new System.EventHandler(this.goHereToolStripMenuItem_Click);
+            this.flyToHereAltToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             // 
             // fixbattery
             // 
             this.fixbattery.Name = "fixbattery";
-            this.fixbattery.Size = new System.Drawing.Size(160, 22);
-            this.fixbattery.Text = "修正电池电压";
-            this.fixbattery.Click += new System.EventHandler(this.changebatteryvalue);
+            this.fixbattery.Size = new System.Drawing.Size(148, 22);
+            // 
+            // speedUintToolStripMenuItem
+            // 
+            this.speedUintToolStripMenuItem.Name = "speedUintToolStripMenuItem";
+            this.speedUintToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.speedUintToolStripMenuItem.Text = "更改速度单位";
+            this.speedUintToolStripMenuItem.Click += new System.EventHandler(this.speedUintToolStripMenuItem_Click);
             // 
             // landStartToolStripMenuItem
             // 
             this.landStartToolStripMenuItem.Name = "landStartToolStripMenuItem";
-            this.landStartToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.landStartToolStripMenuItem.Text = "执行降落";
-            this.landStartToolStripMenuItem.Click += new System.EventHandler(this.landStartToolStripMenuItem_Click);
-            */
+            this.landStartToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             // 
             // bindingSourceGaugesTab
             // 
@@ -1570,12 +1573,29 @@
             // 
             this.bindingSourceStatusTab.DataSource = typeof(MissionPlanner.CurrentState);
             // 
-            // speedUintToolStripMenuItem
+            // but_qrtl
             // 
-            this.speedUintToolStripMenuItem.Name = "speedUintToolStripMenuItem";
-            this.speedUintToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.speedUintToolStripMenuItem.Text = "更改速度单位";
-            this.speedUintToolStripMenuItem.Click += new System.EventHandler(this.speedUintToolStripMenuItem_Click);
+            this.but_qrtl.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.but_qrtl.Location = new System.Drawing.Point(184, 40);
+            this.but_qrtl.Name = "but_qrtl";
+            this.but_qrtl.Size = new System.Drawing.Size(78, 24);
+            this.but_qrtl.TabIndex = 102;
+            this.but_qrtl.Text = "多轴返航";
+            this.but_qrtl.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.but_qrtl.UseVisualStyleBackColor = true;
+            this.but_qrtl.Click += new System.EventHandler(this.but_qrtl_Click);
+            // 
+            // but_qland
+            // 
+            this.but_qland.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.but_qland.Location = new System.Drawing.Point(273, 40);
+            this.but_qland.Name = "but_qland";
+            this.but_qland.Size = new System.Drawing.Size(78, 24);
+            this.but_qland.TabIndex = 103;
+            this.but_qland.Text = "多轴着陆";
+            this.but_qland.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.but_qland.UseVisualStyleBackColor = true;
+            this.but_qland.Click += new System.EventHandler(this.but_qland_Click);
             // 
             // HsdevFlightData
             // 
@@ -1741,5 +1761,7 @@
         private System.Windows.Forms.Label lblbtn_set_target_wp;
         private Controls.MyButton BUT_setwp;
         private System.Windows.Forms.ToolStripMenuItem speedUintToolStripMenuItem;
+        private Controls.MyButton but_qland;
+        private Controls.MyButton but_qrtl;
     }
 }

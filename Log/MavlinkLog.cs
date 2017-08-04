@@ -1808,10 +1808,26 @@ namespace MissionPlanner.Log
         {
         }
 
-        public void default_Graph()
+        public void default_Graph(bool is_quadplane)
         {
-            GraphItem("AHRS2", "pitch", false);
-            GraphItem("AHRS2", "roll", false);
+            if (is_quadplane)
+            {
+                GraphItem("ATTITUDE", "pitch", true);
+                GraphItem("ATTITUDE", "roll", true);
+                GraphItem("NAV_CONTROLLER_OUTPUT", "nav_pitch", true);
+                GraphItem("NAV_CONTROLLER_OUTPUT", "nav_roll", true);
+                GraphItem("RAW_IMU", "zgyro", false);
+                GraphItem("RC_CHANNELS_RAW", "chan4_raw", false);
+            }
+            else
+            {
+                GraphItem("ATTITUDE", "pitch", true);
+                GraphItem("ATTITUDE", "roll", true);
+                GraphItem("NAV_CONTROLLER_OUTPUT", "nav_pitch", true);
+                GraphItem("NAV_CONTROLLER_OUTPUT", "nav_roll", true);
+                GraphItem("SERVO_OUTPUT_RAW", "servo1_raw", false);
+                GraphItem("SERVO_OUTPUT_RAW", "servo2_raw", false);
+            }
         }
     }
 }

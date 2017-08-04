@@ -4388,7 +4388,7 @@ namespace MissionPlanner.GCSViews
                 Directory.CreateDirectory(Settings.Instance.LogDir);
 
 
-                recordext_path = Settings.Instance.LogDir + Path.DirectorySeparatorChar +
+                recordext_path = Settings.Instance.LogDir + Path.DirectorySeparatorChar + "pid_tune_" + 
                             DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + ".tlog";
 
                 recordext_file =
@@ -4411,7 +4411,7 @@ namespace MissionPlanner.GCSViews
                 Form frm = new MavlinkLog();
                 ThemeManager.ApplyThemeTo(frm);
                 ((MavlinkLog)frm).default_open(recordext_path);
-                ((MavlinkLog)frm).default_Graph();
+                ((MavlinkLog)frm).default_Graph(chk_rec_quadplane.Checked);
                 frm.Show();
                 recordext_path = "";
             }

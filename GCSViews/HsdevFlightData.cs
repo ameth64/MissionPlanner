@@ -2032,6 +2032,28 @@ namespace MissionPlanner.GCSViews
             }
             MainV2.instance.ChangeUnits();
         }
+
+        private void but_qrtl_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ((Button)sender).Enabled = false;
+                MainV2.comPort.setMode("QRTL");
+            }
+            catch { CustomMessageBox.Show("指令执行失败", "错误"); }
+            ((Button)sender).Enabled = true;
+        }
+
+        private void but_qland_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ((Button)sender).Enabled = false;
+                MainV2.comPort.setMode("QLAND");
+            }
+            catch { CustomMessageBox.Show("指令执行失败", "错误"); }
+            ((Button)sender).Enabled = true;
+        }
     }
 }
     
