@@ -607,12 +607,12 @@ namespace MissionPlanner
             if (CHK_hssideshot.Checked)
             {
                 NUM_refaltitude.Enabled = true;
-                label44.Enabled = true;
+                //label44.Enabled = true;
             }
             else
             {
                 NUM_refaltitude.Enabled = false;
-                label44.Enabled = false;
+                //label44.Enabled = false;
             }
 
             if (CMB_camera.Text != "")

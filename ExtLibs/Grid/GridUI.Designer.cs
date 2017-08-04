@@ -146,19 +146,19 @@
             this.CHK_camdirection = new System.Windows.Forms.CheckBox();
             this.NUM_altitude = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.NUM_refaltitude = new System.Windows.Forms.NumericUpDown();
+            this.CHK_advanced = new System.Windows.Forms.CheckBox();
+            this.CHK_footprints = new System.Windows.Forms.CheckBox();
+            this.label45 = new System.Windows.Forms.Label();
+            this.CHK_internals = new System.Windows.Forms.CheckBox();
+            this.CHK_grid = new System.Windows.Forms.CheckBox();
+            this.CHK_markers = new System.Windows.Forms.CheckBox();
+            this.CHK_boundary = new System.Windows.Forms.CheckBox();
             this.BUT_Accept = new MissionPlanner.Controls.MyButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.TRK_zoom = new MissionPlanner.Controls.MyTrackBar();
             this.map = new MissionPlanner.Controls.myGMAP();
-            this.CHK_boundary = new System.Windows.Forms.CheckBox();
-            this.CHK_markers = new System.Windows.Forms.CheckBox();
-            this.CHK_grid = new System.Windows.Forms.CheckBox();
-            this.CHK_internals = new System.Windows.Forms.CheckBox();
-            this.CHK_footprints = new System.Windows.Forms.CheckBox();
-            this.CHK_advanced = new System.Windows.Forms.CheckBox();
-            this.label44 = new System.Windows.Forms.Label();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.NUM_refaltitude = new System.Windows.Forms.NumericUpDown();
             this.groupBox5.SuspendLayout();
             this.tabCamera.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -190,10 +190,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.NUM_UpDownFlySpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUM_angle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUM_altitude)).BeginInit();
-            this.tabControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TRK_zoom)).BeginInit();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NUM_refaltitude)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TRK_zoom)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox5
@@ -1185,6 +1185,90 @@
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.NUM_refaltitude);
+            this.groupBox4.Controls.Add(this.CHK_advanced);
+            this.groupBox4.Controls.Add(this.CHK_footprints);
+            this.groupBox4.Controls.Add(this.label45);
+            this.groupBox4.Controls.Add(this.CHK_internals);
+            this.groupBox4.Controls.Add(this.CHK_grid);
+            this.groupBox4.Controls.Add(this.CHK_markers);
+            this.groupBox4.Controls.Add(this.CHK_boundary);
+            resources.ApplyResources(this.groupBox4, "groupBox4");
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.TabStop = false;
+            // 
+            // NUM_refaltitude
+            // 
+            this.NUM_refaltitude.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            resources.ApplyResources(this.NUM_refaltitude, "NUM_refaltitude");
+            this.NUM_refaltitude.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.NUM_refaltitude.Name = "NUM_refaltitude";
+            this.NUM_refaltitude.ValueChanged += new System.EventHandler(this.domainUpDown1_ValueChanged);
+            this.NUM_refaltitude.KeyUp += new System.Windows.Forms.KeyEventHandler(this.domainUpDown1_ValueChanged);
+            // 
+            // CHK_advanced
+            // 
+            resources.ApplyResources(this.CHK_advanced, "CHK_advanced");
+            this.CHK_advanced.Name = "CHK_advanced";
+            this.CHK_advanced.UseVisualStyleBackColor = true;
+            this.CHK_advanced.CheckedChanged += new System.EventHandler(this.CHK_advanced_CheckedChanged);
+            // 
+            // CHK_footprints
+            // 
+            resources.ApplyResources(this.CHK_footprints, "CHK_footprints");
+            this.CHK_footprints.Name = "CHK_footprints";
+            this.CHK_footprints.UseVisualStyleBackColor = true;
+            this.CHK_footprints.CheckedChanged += new System.EventHandler(this.domainUpDown1_ValueChanged);
+            // 
+            // label45
+            // 
+            resources.ApplyResources(this.label45, "label45");
+            this.label45.Name = "label45";
+            // 
+            // CHK_internals
+            // 
+            resources.ApplyResources(this.CHK_internals, "CHK_internals");
+            this.CHK_internals.Name = "CHK_internals";
+            this.CHK_internals.UseVisualStyleBackColor = true;
+            this.CHK_internals.CheckedChanged += new System.EventHandler(this.domainUpDown1_ValueChanged);
+            // 
+            // CHK_grid
+            // 
+            resources.ApplyResources(this.CHK_grid, "CHK_grid");
+            this.CHK_grid.Checked = true;
+            this.CHK_grid.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CHK_grid.Name = "CHK_grid";
+            this.CHK_grid.UseVisualStyleBackColor = true;
+            this.CHK_grid.CheckedChanged += new System.EventHandler(this.domainUpDown1_ValueChanged);
+            // 
+            // CHK_markers
+            // 
+            resources.ApplyResources(this.CHK_markers, "CHK_markers");
+            this.CHK_markers.Checked = true;
+            this.CHK_markers.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CHK_markers.Name = "CHK_markers";
+            this.CHK_markers.UseVisualStyleBackColor = true;
+            this.CHK_markers.CheckedChanged += new System.EventHandler(this.domainUpDown1_ValueChanged);
+            // 
+            // CHK_boundary
+            // 
+            resources.ApplyResources(this.CHK_boundary, "CHK_boundary");
+            this.CHK_boundary.Checked = true;
+            this.CHK_boundary.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CHK_boundary.Name = "CHK_boundary";
+            this.CHK_boundary.UseVisualStyleBackColor = true;
+            this.CHK_boundary.CheckedChanged += new System.EventHandler(this.domainUpDown1_ValueChanged);
+            // 
             // BUT_Accept
             // 
             resources.ApplyResources(this.BUT_Accept, "BUT_Accept");
@@ -1241,90 +1325,6 @@
             this.map.MouseDown += new System.Windows.Forms.MouseEventHandler(this.map_MouseDown);
             this.map.MouseMove += new System.Windows.Forms.MouseEventHandler(this.map_MouseMove);
             // 
-            // CHK_boundary
-            // 
-            resources.ApplyResources(this.CHK_boundary, "CHK_boundary");
-            this.CHK_boundary.Checked = true;
-            this.CHK_boundary.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CHK_boundary.Name = "CHK_boundary";
-            this.CHK_boundary.UseVisualStyleBackColor = true;
-            this.CHK_boundary.CheckedChanged += new System.EventHandler(this.domainUpDown1_ValueChanged);
-            // 
-            // CHK_markers
-            // 
-            resources.ApplyResources(this.CHK_markers, "CHK_markers");
-            this.CHK_markers.Checked = true;
-            this.CHK_markers.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CHK_markers.Name = "CHK_markers";
-            this.CHK_markers.UseVisualStyleBackColor = true;
-            this.CHK_markers.CheckedChanged += new System.EventHandler(this.domainUpDown1_ValueChanged);
-            // 
-            // CHK_grid
-            // 
-            resources.ApplyResources(this.CHK_grid, "CHK_grid");
-            this.CHK_grid.Checked = true;
-            this.CHK_grid.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CHK_grid.Name = "CHK_grid";
-            this.CHK_grid.UseVisualStyleBackColor = true;
-            this.CHK_grid.CheckedChanged += new System.EventHandler(this.domainUpDown1_ValueChanged);
-            // 
-            // CHK_internals
-            // 
-            resources.ApplyResources(this.CHK_internals, "CHK_internals");
-            this.CHK_internals.Name = "CHK_internals";
-            this.CHK_internals.UseVisualStyleBackColor = true;
-            this.CHK_internals.CheckedChanged += new System.EventHandler(this.domainUpDown1_ValueChanged);
-            // 
-            // CHK_footprints
-            // 
-            resources.ApplyResources(this.CHK_footprints, "CHK_footprints");
-            this.CHK_footprints.Name = "CHK_footprints";
-            this.CHK_footprints.UseVisualStyleBackColor = true;
-            this.CHK_footprints.CheckedChanged += new System.EventHandler(this.domainUpDown1_ValueChanged);
-            // 
-            // CHK_advanced
-            // 
-            resources.ApplyResources(this.CHK_advanced, "CHK_advanced");
-            this.CHK_advanced.Name = "CHK_advanced";
-            this.CHK_advanced.UseVisualStyleBackColor = true;
-            this.CHK_advanced.CheckedChanged += new System.EventHandler(this.CHK_advanced_CheckedChanged);
-            // 
-            // label44
-            // 
-            resources.ApplyResources(this.label44, "label44");
-            this.label44.Name = "label44";
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.NUM_refaltitude);
-            this.groupBox4.Controls.Add(this.label44);
-            this.groupBox4.Controls.Add(this.CHK_advanced);
-            this.groupBox4.Controls.Add(this.CHK_footprints);
-            this.groupBox4.Controls.Add(this.CHK_internals);
-            this.groupBox4.Controls.Add(this.CHK_grid);
-            this.groupBox4.Controls.Add(this.CHK_markers);
-            this.groupBox4.Controls.Add(this.CHK_boundary);
-            resources.ApplyResources(this.groupBox4, "groupBox4");
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.TabStop = false;
-            // 
-            // NUM_refaltitude
-            // 
-            this.NUM_refaltitude.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            resources.ApplyResources(this.NUM_refaltitude, "NUM_refaltitude");
-            this.NUM_refaltitude.Maximum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            0});
-            this.NUM_refaltitude.Name = "NUM_refaltitude";
-            this.NUM_refaltitude.ValueChanged += new System.EventHandler(this.domainUpDown1_ValueChanged);
-            this.NUM_refaltitude.KeyUp += new System.Windows.Forms.KeyEventHandler(this.domainUpDown1_ValueChanged);
-            // 
             // GridUI
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1376,11 +1376,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.NUM_UpDownFlySpeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUM_angle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUM_altitude)).EndInit();
-            this.tabControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.TRK_zoom)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NUM_refaltitude)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.TRK_zoom)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1511,12 +1511,12 @@
         private System.Windows.Forms.CheckBox CHK_hssideshot;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.NumericUpDown NUM_refaltitude;
-        private System.Windows.Forms.Label label44;
         private System.Windows.Forms.CheckBox CHK_advanced;
         private System.Windows.Forms.CheckBox CHK_footprints;
         private System.Windows.Forms.CheckBox CHK_internals;
         private System.Windows.Forms.CheckBox CHK_grid;
         private System.Windows.Forms.CheckBox CHK_markers;
         private System.Windows.Forms.CheckBox CHK_boundary;
+        private System.Windows.Forms.Label label45;
     }
 }

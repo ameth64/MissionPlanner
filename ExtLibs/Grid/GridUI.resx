@@ -1372,7 +1372,7 @@
     <value>BUT_samplephoto</value>
   </data>
   <data name="&gt;&gt;BUT_samplephoto.Type" xml:space="preserve">
-    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6395.32897, Culture=neutral, PublicKeyToken=null</value>
+    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6415.26354, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;BUT_samplephoto.Parent" xml:space="preserve">
     <value>groupBox2</value>
@@ -1849,7 +1849,7 @@
     <value>BUT_save</value>
   </data>
   <data name="&gt;&gt;BUT_save.Type" xml:space="preserve">
-    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6395.32897, Culture=neutral, PublicKeyToken=null</value>
+    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6415.26354, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;BUT_save.Parent" xml:space="preserve">
     <value>groupBox2</value>
@@ -3307,6 +3307,27 @@ Ctrl+O 可从文件读取</value>
   <data name="&gt;&gt;groupBox6.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="NUM_refaltitude.Location" type="System.Drawing.Point, System.Drawing">
+    <value>174, 15</value>
+  </data>
+  <data name="NUM_refaltitude.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 21</value>
+  </data>
+  <data name="NUM_refaltitude.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;NUM_refaltitude.Name" xml:space="preserve">
+    <value>NUM_refaltitude</value>
+  </data>
+  <data name="&gt;&gt;NUM_refaltitude.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;NUM_refaltitude.Parent" xml:space="preserve">
+    <value>groupBox4</value>
+  </data>
+  <data name="&gt;&gt;NUM_refaltitude.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="CHK_advanced.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -3335,7 +3356,7 @@ Ctrl+O 可从文件读取</value>
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;CHK_advanced.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="CHK_footprints.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3365,7 +3386,37 @@ Ctrl+O 可从文件读取</value>
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;CHK_footprints.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
+  </data>
+  <data name="label45.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label45.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label45.Location" type="System.Drawing.Point, System.Drawing">
+    <value>117, 20</value>
+  </data>
+  <data name="label45.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 12</value>
+  </data>
+  <data name="label45.TabIndex" type="System.Int32, mscorlib">
+    <value>67</value>
+  </data>
+  <data name="label45.Text" xml:space="preserve">
+    <value>测区高差</value>
+  </data>
+  <data name="&gt;&gt;label45.Name" xml:space="preserve">
+    <value>label45</value>
+  </data>
+  <data name="&gt;&gt;label45.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label45.Parent" xml:space="preserve">
+    <value>groupBox4</value>
+  </data>
+  <data name="&gt;&gt;label45.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="CHK_internals.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3395,7 +3446,7 @@ Ctrl+O 可从文件读取</value>
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;CHK_internals.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="CHK_grid.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3425,7 +3476,7 @@ Ctrl+O 可从文件读取</value>
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;CHK_grid.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="CHK_markers.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3455,7 +3506,7 @@ Ctrl+O 可从文件读取</value>
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;CHK_markers.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="CHK_boundary.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3485,7 +3536,7 @@ Ctrl+O 可从文件读取</value>
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;CHK_boundary.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 260</value>
@@ -3533,7 +3584,7 @@ Ctrl+O 可从文件读取</value>
     <value>BUT_Accept</value>
   </data>
   <data name="&gt;&gt;BUT_Accept.Type" xml:space="preserve">
-    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6395.32897, Culture=neutral, PublicKeyToken=null</value>
+    <value>MissionPlanner.Controls.MyButton, MissionPlanner.Controls, Version=1.0.6415.26354, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;BUT_Accept.Parent" xml:space="preserve">
     <value>tabSimple</value>
@@ -3614,7 +3665,7 @@ Ctrl+O 可从文件读取</value>
     <value>TRK_zoom</value>
   </data>
   <data name="&gt;&gt;TRK_zoom.Type" xml:space="preserve">
-    <value>MissionPlanner.Controls.MyTrackBar, MissionPlanner.Controls, Version=1.0.6395.32897, Culture=neutral, PublicKeyToken=null</value>
+    <value>MissionPlanner.Controls.MyTrackBar, MissionPlanner.Controls, Version=1.0.6415.26354, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;TRK_zoom.Parent" xml:space="preserve">
     <value>$this</value>
@@ -3646,7 +3697,7 @@ Ctrl+O 可从文件读取</value>
     <value>map</value>
   </data>
   <data name="&gt;&gt;map.Type" xml:space="preserve">
-    <value>MissionPlanner.Controls.myGMAP, MissionPlanner.Controls, Version=1.0.6395.32897, Culture=neutral, PublicKeyToken=null</value>
+    <value>MissionPlanner.Controls.myGMAP, MissionPlanner.Controls, Version=1.0.6415.26354, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;map.Parent" xml:space="preserve">
     <value>$this</value>
