@@ -734,6 +734,30 @@ namespace MissionPlanner.Log
             }
         }
 
+        public void default_open(string file)
+        {
+                    this.Text = "Log - " + Path.GetFileName(file);
+
+                    List<string> fields = GetLogFileValidFields(file);
+
+                    zg1.GraphPane.CurveList.Clear();
+
+                    //GetLogFileData(zg1, openFileDialog1.FileName, fields);
+
+                    try
+                    {
+                        // fix new line types
+                        ThemeManager.ApplyThemeTo(this);
+
+                        zg1.Invalidate();
+                        zg1.AxisChange();
+                    }
+                    catch
+                    {
+                    }
+
+        }
+
         static int[] ColourValues = new int[]
         {
             0xFF0000, 0x00FF00, 0x0000FF, 0xFFFF00, 0xFF00FF, 0x00FFFF,
@@ -1782,6 +1806,28 @@ namespace MissionPlanner.Log
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
+        }
+
+        public void default_Graph(bool is_quadplane)
+        {
+            if (is_quadplane)
+            {
+                GraphItem("ATTITUDE", "pitch", true);
+                GraphItem("ATTITUDE", "roll", true);
+                GraphItem("NAV_CONTROLLER_OUTPUT", "nav_pitch", true);
+                GraphItem("NAV_CONTROLLER_OUTPUT", "nav_roll", true);
+                GraphItem("RAW_IMU", "zgyro", false);
+                GraphItem("RC_CHANNELS_RAW", "chan4_raw", false);
+            }
+            else
+            {
+                GraphItem("ATTITUDE", "pitch", true);
+                GraphItem("ATTITUDE", "roll", true);
+                GraphItem("NAV_CONTROLLER_OUTPUT", "nav_pitch", true);
+                GraphItem("NAV_CONTROLLER_OUTPUT", "nav_roll", true);
+                GraphItem("SERVO_OUTPUT_RAW", "servo1_raw", false);
+                GraphItem("SERVO_OUTPUT_RAW", "servo2_raw", false);
+            }
         }
     }
 }

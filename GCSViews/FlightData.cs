@@ -4369,5 +4369,53 @@ namespace MissionPlanner.GCSViews
         {
             new Utilities.AltitudeAngel.AASettings().Show(this);
         }
+
+
+        public bool recordext = false;
+        public BufferedStream recordext_file = null;
+        public string recordext_path = "";
+        private void BTN_recordlog_Click(object sender, EventArgs e)
+        {
+            recordext = !recordext;
+            if(recordext)
+            {
+                if(!MainV2.comPort.BaseStream.IsOpen)
+                {
+                    recordext = false;
+                    return;
+                }
+                BTN_recordlog.Text = "结束记录";
+                Directory.CreateDirectory(Settings.Instance.LogDir);
+
+
+                recordext_path = Settings.Instance.LogDir + Path.DirectorySeparatorChar + "pid_tune_" + 
+                            DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + ".tlog";
+
+                recordext_file =
+                    new BufferedStream(
+                        File.Open(recordext_path
+                            , FileMode.CreateNew,
+                            FileAccess.ReadWrite, FileShare.None));
+            }
+            else
+            {
+                BTN_recordlog.Text = "开始记录";
+               // 
+
+                lock (recordext_file)
+                {
+                    recordext_file.Close();
+                    recordext_file = null;
+                }
+
+                Form frm = new MavlinkLog();
+                ThemeManager.ApplyThemeTo(frm);
+                ((MavlinkLog)frm).default_open(recordext_path);
+                ((MavlinkLog)frm).default_Graph(chk_rec_quadplane.Checked);
+                frm.Show();
+                recordext_path = "";
+            }
+
+        }
     }
 }
