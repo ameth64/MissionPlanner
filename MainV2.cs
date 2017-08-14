@@ -3047,7 +3047,10 @@ namespace MissionPlanner
                 {
                     int win = NativeMethods.FindWindow("ConsoleWindowClass", null);
                     NativeMethods.ShowWindow(win, NativeMethods.SW_HIDE); // hide window
-                    logdlmgr_form.Close(); //将已打开的日志管理对话框关闭
+                    if(logdlmgr_form != null)
+                    {
+                        logdlmgr_form.Close(); //将已打开的日志管理对话框关闭
+                    }                    
                 }
                 MenuSimulation.Visible = !MenuSimulation.Visible;
                 MenuFlightData.Visible = !MenuFlightData.Visible;
