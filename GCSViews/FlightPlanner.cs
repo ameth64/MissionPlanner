@@ -1879,7 +1879,7 @@ namespace MissionPlanner.GCSViews
                 fd.FileName = wpfilename;
                 DialogResult result = fd.ShowDialog();
                 string file = fd.FileName;
-                if (file != "" && fd.FilterIndex != 3)
+                if (file != "" && fd.FilterIndex != 2)
                 {
                     try
                     {
@@ -2001,7 +2001,7 @@ namespace MissionPlanner.GCSViews
                     }
                 }
 
-                if (file != "" && fd.FilterIndex == 3)
+                if (file != "" && fd.FilterIndex == 2)
                 {
                     double homealt;
                     double.TryParse(TXT_homealt.Text, out homealt);
