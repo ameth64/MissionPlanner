@@ -186,7 +186,15 @@ namespace MissionPlanner.Controls {
                 return ResourceManager.GetString("GPS5", resourceCulture);
             }
         }
-        
+
+        internal static string GPS6
+        {
+            get
+            {
+                return ResourceManager.GetString("GPS6", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to GS .
         /// </summary>

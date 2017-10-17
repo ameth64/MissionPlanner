@@ -794,7 +794,7 @@ namespace MissionPlanner
 
         public float HomeAlt
         {
-            get { return HomeLocation.Alt; }
+            get { return (float)HomeLocation.Alt; }
             set { }
         }
 
@@ -1355,7 +1355,7 @@ namespace MissionPlanner
         }
 
 		//const float rad2deg = (float) (180/Math.PI);
- -      //const float deg2rad = (float) (1.0/rad2deg);
+        //const float deg2rad = (float) (1.0/rad2deg);
         public List<string> GetItemList()
         {
             List<string> ans = new List<string>();

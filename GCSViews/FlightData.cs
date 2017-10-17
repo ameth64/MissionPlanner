@@ -4389,9 +4389,9 @@ namespace MissionPlanner.GCSViews
         private void BTN_recordlog_Click(object sender, EventArgs e)
         {
             recordext = !recordext;
-            if(recordext)
+            if (recordext)
             {
-                if(!MainV2.comPort.BaseStream.IsOpen)
+                if (!MainV2.comPort.BaseStream.IsOpen)
                 {
                     recordext = false;
                     return;
@@ -4400,7 +4400,7 @@ namespace MissionPlanner.GCSViews
                 Directory.CreateDirectory(Settings.Instance.LogDir);
 
 
-                recordext_path = Settings.Instance.LogDir + Path.DirectorySeparatorChar + "pid_tune_" + 
+                recordext_path = Settings.Instance.LogDir + Path.DirectorySeparatorChar + "pid_tune_" +
                             DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + ".tlog";
 
                 recordext_file =
@@ -4412,8 +4412,9 @@ namespace MissionPlanner.GCSViews
             else
             {
                 BTN_recordlog.Text = "开始记录";
-               // 
-
+                // 
+            }
+        }
         Random random = new Random();
         private Process gst;
 
@@ -4435,8 +4436,7 @@ namespace MissionPlanner.GCSViews
                 ((MavlinkLog)frm).default_open(recordext_path);
                 ((MavlinkLog)frm).default_Graph(chk_rec_quadplane.Checked);
                 frm.Show();
-                recordext_path = "";
-            }
+            recordext_path = "";
 
             var col = Color.FromArgb(red, green, blue);
 

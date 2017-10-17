@@ -1802,7 +1802,7 @@ Please check the following
                     GUI = DateTime.Now;
 
 
-                    uicallback?.Invoke();??
+                    //uicallback?.Invoke();??
 
                     MainV2.instance.Invalidate();
                     MainV2.instance.FlightData.Invalidate();

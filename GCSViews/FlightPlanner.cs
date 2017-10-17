@@ -2354,67 +2354,68 @@ namespace MissionPlanner.GCSViews
 
                     ushort cmd =
                         (ushort)
-                                Enum.Parse(typeof (MAVLink.MAV_CMD),
+                                Enum.Parse(typeof(MAVLink.MAV_CMD),
                                     Commands.Rows[a].Cells[Command.Index].Value.ToString(), false);
 
-                    if (cmd < (ushort) MAVLink.MAV_CMD.LAST &&
+                    if (cmd < (ushort)MAVLink.MAV_CMD.LAST &&
                         double.Parse(Commands[Alt.Index, a].Value.ToString()) < double.Parse(TXT_altwarn.Text))
                     {
-                        if (cmd != (ushort) MAVLink.MAV_CMD.TAKEOFF &&
-                            cmd != (ushort) MAVLink.MAV_CMD.LAND &&
-                            cmd != (ushort) MAVLink.MAV_CMD.RETURN_TO_LAUNCH)
-                    if (int.Parse(items[0]) == 0)
-                        continue;
-                    HsTag t = new HsTag();
-                    t.wp_type = HsWPType.NormalWP;
-                    t.wp_color = GMarkerGoogleType.green;
-                    double latdiff = Math.Abs(double.Parse(items[8]) - double.Parse(Commands.Rows[a].Cells[Lat.Index].Value.ToString()));
-                    double londiff = Math.Abs(double.Parse(items[9]) - double.Parse(Commands.Rows[a].Cells[Lon.Index].Value.ToString()));
-                    if (latdiff < 0.00001f && londiff <0.00001f) 
-                    {
-                        try
+                        if (cmd != (ushort)MAVLink.MAV_CMD.TAKEOFF &&
+                            cmd != (ushort)MAVLink.MAV_CMD.LAND &&
+                            cmd != (ushort)MAVLink.MAV_CMD.RETURN_TO_LAUNCH)
+                            if (int.Parse(items[0]) == 0)
+                                continue;
+                        HsTag t = new HsTag();
+                        t.wp_type = HsWPType.NormalWP;
+                        t.wp_color = GMarkerGoogleType.green;
+                        double latdiff = Math.Abs(double.Parse(items[8]) - double.Parse(Commands.Rows[a].Cells[Lat.Index].Value.ToString()));
+                        double londiff = Math.Abs(double.Parse(items[9]) - double.Parse(Commands.Rows[a].Cells[Lon.Index].Value.ToString()));
+                        if (latdiff < 0.00001f && londiff < 0.00001f)
                         {
-                            if (items[11] == HsWPType.NormalWP.ToString())
-                                t.wp_type = HsWPType.NormalWP;
-                            else if (items[11] == HsWPType.Takeoff_Adjust.ToString())
-                                t.wp_type = HsWPType.Takeoff_Adjust;
-                            else if (items[11] == HsWPType.Takeoff_LoiterToAlt.ToString())
-                                t.wp_type = HsWPType.Takeoff_LoiterToAlt;
-                            else if (items[11] == HsWPType.Landing_LoiterToAlt.ToString())
-                                t.wp_type = HsWPType.Landing_LoiterToAlt;
-                            else if (items[11] == HsWPType.Landing_Adjust.ToString())
-                                t.wp_type = HsWPType.Landing_Adjust;
-                            else if (items[11] == HsWPType.Landing_Leadin.ToString())
-                                t.wp_type = HsWPType.Landing_Leadin;
+                            try
+                            {
+                                if (items[11] == HsWPType.NormalWP.ToString())
+                                    t.wp_type = HsWPType.NormalWP;
+                                else if (items[11] == HsWPType.Takeoff_Adjust.ToString())
+                                    t.wp_type = HsWPType.Takeoff_Adjust;
+                                else if (items[11] == HsWPType.Takeoff_LoiterToAlt.ToString())
+                                    t.wp_type = HsWPType.Takeoff_LoiterToAlt;
+                                else if (items[11] == HsWPType.Landing_LoiterToAlt.ToString())
+                                    t.wp_type = HsWPType.Landing_LoiterToAlt;
+                                else if (items[11] == HsWPType.Landing_Adjust.ToString())
+                                    t.wp_type = HsWPType.Landing_Adjust;
+                                else if (items[11] == HsWPType.Landing_Leadin.ToString())
+                                    t.wp_type = HsWPType.Landing_Leadin;
 
-                            if (items[12] == GMarkerGoogleType.green.ToString())
-                                t.wp_color = GMarkerGoogleType.green;
-                            else if (items[12] == GMarkerGoogleType.blue.ToString())
-                                t.wp_color = GMarkerGoogleType.blue;
-                            else if (items[12] == GMarkerGoogleType.orange.ToString())
-                                t.wp_color = GMarkerGoogleType.orange;
+                                if (items[12] == GMarkerGoogleType.green.ToString())
+                                    t.wp_color = GMarkerGoogleType.green;
+                                else if (items[12] == GMarkerGoogleType.blue.ToString())
+                                    t.wp_color = GMarkerGoogleType.blue;
+                                else if (items[12] == GMarkerGoogleType.orange.ToString())
+                                    t.wp_color = GMarkerGoogleType.orange;
 
-                            Commands.Rows[a].Cells[TagData.Index].Tag = t;
-                            Commands.Rows[a].Cells[TagData.Index].Value = t;
-                            a++;
+                                Commands.Rows[a].Cells[TagData.Index].Tag = t;
+                                Commands.Rows[a].Cells[TagData.Index].Value = t;
+                                a++;
+                            }
+                            catch
+                            {
+                                CustomMessageBox.Show("Line invalid\n" + line);
+                            }
                         }
-                        catch
+                        else
                         {
-                            CustomMessageBox.Show("Line invalid\n" + line);
+                            CustomMessageBox.Show("读出航点与本地缓存不一致");
+                            break;
                         }
                     }
-                    else
-                    {
-                        CustomMessageBox.Show("读出航点与本地缓存不一致");
-                        break;
-                    }
+
+                    sr.Close();
+                    sr.Dispose();
+                    writeKML();
+
+                    MainMap.ZoomAndCenterMarkers("objects");
                 }
-
-                sr.Close();
-                sr.Dispose();
-                writeKML();
-
-                MainMap.ZoomAndCenterMarkers("objects");
             }
         }
 
@@ -2423,136 +2424,129 @@ namespace MissionPlanner.GCSViews
             CMB_altmode.SelectedValue = (int)altmode.Relative; // added by MobiuS@20170710 to use relative alt mode as default.
             StreamWriter sw = null;
                 string file = "currentwp.txt";
-                if (file != "" )
+            if (file != "")
+            {
+                try
                 {
-                    temp.id =
-                        (ushort) 
-                                Enum.Parse(typeof (MAVLink.MAV_CMD),
-                                    Commands.Rows[a].Cells[Command.Index].Value.ToString(),
-                                    false);
-                }
-                temp.p1 = float.Parse(Commands.Rows[a].Cells[Param1.Index].Value.ToString());
-                    try
+                    if (file.EndsWith(".mission"))
                     {
-                        if (file.EndsWith(".mission"))
-                        {
-                            var list = GetCommandList();
-                            Locationwp home = new Locationwp();
-                            try
-                            {
-                                home.id = (ushort)MAVLink.MAV_CMD.WAYPOINT;
-                                home.lat = (double.Parse(TXT_homelat.Text));
-                                home.lng = (double.Parse(TXT_homelng.Text));
-                                home.alt = (float.Parse(TXT_homealt.Text) / CurrentState.multiplierdist); // use saved home
-                            }
-                            catch { }
-
-                            list.Insert(0, home);
-
-                            var format = MissionFile.ConvertFromLocationwps(list, (byte)(altmode)CMB_altmode.SelectedValue);
-
-                            MissionFile.WriteFile(file, format);
-                            return;
-                        }
-
-                        sw = new StreamWriter(file);
-                        sw.WriteLine("QGC WPL 110");
+                        var list = GetCommandList();
+                        Locationwp home = new Locationwp();
                         try
                         {
-                            sw.WriteLine("0\t1\t0\t16\t0\t0\t0\t0\t" +
-                                         double.Parse(TXT_homelat.Text).ToString("0.000000", new CultureInfo("en-US")) +
-                                         "\t" +
-                                         double.Parse(TXT_homelng.Text).ToString("0.000000", new CultureInfo("en-US")) +
-                                         "\t" +
-                                         double.Parse(TXT_homealt.Text).ToString("0.000000", new CultureInfo("en-US")) +
-                                         "\t1");
+                            home.id = (ushort)MAVLink.MAV_CMD.WAYPOINT;
+                            home.lat = (double.Parse(TXT_homelat.Text));
+                            home.lng = (double.Parse(TXT_homelng.Text));
+                            home.alt = (float.Parse(TXT_homealt.Text) / CurrentState.multiplierdist); // use saved home
                         }
-                        catch
+                        catch { }
+
+                        list.Insert(0, home);
+
+                        var format = MissionFile.ConvertFromLocationwps(list, (byte)(altmode)CMB_altmode.SelectedValue);
+
+                        MissionFile.WriteFile(file, format);
+                        return;
+                    }
+
+                    sw = new StreamWriter(file);
+                    sw.WriteLine("QGC WPL 110");
+                    try
+                    {
+                        sw.WriteLine("0\t1\t0\t16\t0\t0\t0\t0\t" +
+                                     double.Parse(TXT_homelat.Text).ToString("0.000000", new CultureInfo("en-US")) +
+                                     "\t" +
+                                     double.Parse(TXT_homelng.Text).ToString("0.000000", new CultureInfo("en-US")) +
+                                     "\t" +
+                                     double.Parse(TXT_homealt.Text).ToString("0.000000", new CultureInfo("en-US")) +
+                                     "\t1");
+                    }
+                    catch
+                    {
+                        sw.WriteLine("0\t1\t0\t0\t0\t0\t0\t0\t0\t0\t0\t1");
+                    }
+                    for (int a = 0; a < Commands.Rows.Count - 0; a++)
+                    {
+                        ushort mode = 0;
+
+                        if (Commands.Rows[a].Cells[0].Value.ToString() == "UNKNOWN")
                         {
-                            sw.WriteLine("0\t1\t0\t0\t0\t0\t0\t0\t0\t0\t0\t1");
+                            mode = (ushort)Commands.Rows[a].Cells[Command.Index].Tag;
                         }
-                        for (int a = 0; a < Commands.Rows.Count - 0; a++)
+                        else
                         {
-                            ushort mode = 0;
+                            mode =
+                            (ushort)
+                                (MAVLink.MAV_CMD)
+                                    Enum.Parse(typeof(MAVLink.MAV_CMD), Commands.Rows[a].Cells[Command.Index].Value.ToString());
+                        }
 
-                            if (Commands.Rows[a].Cells[0].Value.ToString() == "UNKNOWN")
-                            {
-                                mode = (ushort)Commands.Rows[a].Cells[Command.Index].Tag;
-                            }
-                            else
-                            {
-                                mode =
-                                (ushort)
-                                    (MAVLink.MAV_CMD)
-                                        Enum.Parse(typeof(MAVLink.MAV_CMD), Commands.Rows[a].Cells[Command.Index].Value.ToString());
-                            }
-
-                            sw.Write((a + 1)); // seq
-                            sw.Write("\t" + 0); // current
-                            sw.Write("\t" + CMB_altmode.SelectedValue); //frame 
-                            sw.Write("\t" + mode);
-                            sw.Write("\t" +
-                                     double.Parse(Commands.Rows[a].Cells[Param1.Index].Value.ToString())
-                                         .ToString("0.000000", new CultureInfo("en-US")));
-                            sw.Write("\t" +
-                                     double.Parse(Commands.Rows[a].Cells[Param2.Index].Value.ToString())
-                                         .ToString("0.000000", new CultureInfo("en-US")));
-                            sw.Write("\t" +
-                                     double.Parse(Commands.Rows[a].Cells[Param3.Index].Value.ToString())
-                                         .ToString("0.000000", new CultureInfo("en-US")));
-                            sw.Write("\t" +
-                                     double.Parse(Commands.Rows[a].Cells[Param4.Index].Value.ToString())
-                                         .ToString("0.000000", new CultureInfo("en-US")));
-                            sw.Write("\t" +
-                                     double.Parse(Commands.Rows[a].Cells[Lat.Index].Value.ToString())
-                                         .ToString("0.000000", new CultureInfo("en-US")));
-                            sw.Write("\t" +
-                                     double.Parse(Commands.Rows[a].Cells[Lon.Index].Value.ToString())
-                                         .ToString("0.000000", new CultureInfo("en-US")));
-                            sw.Write("\t" +
-                                     (double.Parse(Commands.Rows[a].Cells[Alt.Index].Value.ToString()) /
-                                      CurrentState.multiplierdist).ToString("0.000000", new CultureInfo("en-US")));
-                            if (Commands.Rows[a].Cells[TagData.Index].Value != null &&
-                                Commands.Rows[a].Cells[TagData.Index].Value.ToString() != "0")
-                            {
-                                try
-                                {
-                                    sw.Write("\t" +
-                                             ((HsTag)Commands.Rows[a].Cells[TagData.Index].Value).wp_type);
-
-                                    sw.Write("\t" +
-                                             ((HsTag)Commands.Rows[a].Cells[TagData.Index].Value).wp_color);
-                                }
-                                catch
-                                {
-                                    sw.Write("\t" +
-                                              "NormalWP");
-                                    sw.Write("\t" +
-                                             "green");
-                            }
-                            }
-                            else
+                        sw.Write((a + 1)); // seq
+                        sw.Write("\t" + 0); // current
+                        sw.Write("\t" + CMB_altmode.SelectedValue); //frame 
+                        sw.Write("\t" + mode);
+                        sw.Write("\t" +
+                                 double.Parse(Commands.Rows[a].Cells[Param1.Index].Value.ToString())
+                                     .ToString("0.000000", new CultureInfo("en-US")));
+                        sw.Write("\t" +
+                                 double.Parse(Commands.Rows[a].Cells[Param2.Index].Value.ToString())
+                                     .ToString("0.000000", new CultureInfo("en-US")));
+                        sw.Write("\t" +
+                                 double.Parse(Commands.Rows[a].Cells[Param3.Index].Value.ToString())
+                                     .ToString("0.000000", new CultureInfo("en-US")));
+                        sw.Write("\t" +
+                                 double.Parse(Commands.Rows[a].Cells[Param4.Index].Value.ToString())
+                                     .ToString("0.000000", new CultureInfo("en-US")));
+                        sw.Write("\t" +
+                                 double.Parse(Commands.Rows[a].Cells[Lat.Index].Value.ToString())
+                                     .ToString("0.000000", new CultureInfo("en-US")));
+                        sw.Write("\t" +
+                                 double.Parse(Commands.Rows[a].Cells[Lon.Index].Value.ToString())
+                                     .ToString("0.000000", new CultureInfo("en-US")));
+                        sw.Write("\t" +
+                                 (double.Parse(Commands.Rows[a].Cells[Alt.Index].Value.ToString()) /
+                                  CurrentState.multiplierdist).ToString("0.000000", new CultureInfo("en-US")));
+                        if (Commands.Rows[a].Cells[TagData.Index].Value != null &&
+                            Commands.Rows[a].Cells[TagData.Index].Value.ToString() != "0")
+                        {
+                            try
                             {
                                 sw.Write("\t" +
-                                         "NormalWP");
+                                         ((HsTag)Commands.Rows[a].Cells[TagData.Index].Value).wp_type);
+
+                                sw.Write("\t" +
+                                         ((HsTag)Commands.Rows[a].Cells[TagData.Index].Value).wp_color);
+                            }
+                            catch
+                            {
+                                sw.Write("\t" +
+                                          "NormalWP");
                                 sw.Write("\t" +
                                          "green");
                             }
-                            sw.Write("\t" + 1);
-                            sw.WriteLine("");
                         }
-                        sw.Close();
-                        sw.Dispose();
-                    
-
-                        lbl_wpfile.Text = "Saved " + Path.GetFileName(file);
+                        else
+                        {
+                            sw.Write("\t" +
+                                     "NormalWP");
+                            sw.Write("\t" +
+                                     "green");
+                        }
+                        sw.Write("\t" + 1);
+                        sw.WriteLine("");
                     }
-                    catch (Exception)
-                    {
-                        CustomMessageBox.Show(Strings.ERROR);
-                     }
+                    sw.Close();
+                    sw.Dispose();
+
+
+                    lbl_wpfile.Text = "Saved " + Path.GetFileName(file);
                 }
-        }
+                catch (Exception)
+                {
+                    CustomMessageBox.Show(Strings.ERROR);
+                }
+            }
+         }
 
         /// <summary>
         /// Writes the mission from the datagrid and values to the EEPROM
@@ -3069,12 +3063,8 @@ namespace MissionPlanner.GCSViews
                     if (cellhome.Value != null)
                     {
                         if (cellhome.Value.ToString() != TXT_homelat.Text && cellhome.Value.ToString() != "0")
-                        DialogResult dr = CustomMessageBox.Show("重新加载home", "重新加载home坐标",
-                            MessageBoxButtons.YesNo);
-
-                        if (dr == DialogResult.Yes)
                         {
-                            DialogResult dr = CustomMessageBox.Show("Reset Home to loaded coords", "Reset Home Coords",
+                            DialogResult dr = CustomMessageBox.Show("重新加载home", "重新加载home坐标",
                                 MessageBoxButtons.YesNo);
 
                             if (dr == DialogResult.Yes)
@@ -3084,7 +3074,7 @@ namespace MissionPlanner.GCSViews
                                 TXT_homelng.Text = (double.Parse(cellhome.Value.ToString())).ToString();
                                 cellhome = Commands.Rows[0].Cells[Alt.Index] as DataGridViewTextBoxCell;
                                 TXT_homealt.Text =
-                                    (double.Parse(cellhome.Value.ToString())*CurrentState.multiplierdist).ToString();
+                                    (double.Parse(cellhome.Value.ToString()) * CurrentState.multiplierdist).ToString();
                             }
                         }
                     }

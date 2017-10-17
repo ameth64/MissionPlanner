@@ -234,6 +234,7 @@
     </Reference>
     <Reference Include="IronPython.SQLite, Version=2.7.7.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
       <HintPath>packages\IronPython.2.7.7\lib\Net45\IronPython.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="Meshomatic, Version=1.0.5687.28066, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>ExtLibs\Meshomatic.dll</HintPath>
@@ -462,7 +463,6 @@
     <Compile Include="Antenna\Tracker.Designer.cs">
       <DependentUpon>Tracker.cs</DependentUpon>
     </Compile>
-    <Compile Include="Arduino\IArduinoComms.cs" />
     <Compile Include="CalibrationCompassFrom.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -518,6 +518,7 @@
     </Compile>
     <Compile Include="Strings.Designer.cs">
       <DependentUpon>Strings.cs</DependentUpon>
+    </Compile>
     <Compile Include="GCSViews\HsdevFlightData.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1149,7 +1150,6 @@
     <Compile Include="Utilities\Proximity.cs" />
     <Compile Include="Utilities\Speech.cs" />
     <Compile Include="Utilities\Tools.cs" />
-    <Compile Include="Utilities\nmea.cs" />
     <Compile Include="Utilities\Tracking.cs" />
     <Compile Include="Utilities\ubx_m8p.cs" />
     <Compile Include="Utilities\UDPMavlinkShim.cs" />
@@ -1260,6 +1260,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ConnectionOptions.ar.resx">
       <DependentUpon>ConnectionOptions.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CalibrationCompassFrom.resx">
       <DependentUpon>CalibrationCompassFrom.cs</DependentUpon>
     </EmbeddedResource>
@@ -1325,9 +1326,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GCSViews\ConfigurationView\ConfigAccelerometerCalibration.ar.resx">
       <DependentUpon>ConfigAccelerometerCalibration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Loading.resx">
-      <DependentUpon>Loading.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GCSViews\ConfigurationView\ConfigAccelerometerCalibration.de-DE.resx">
       <DependentUpon>ConfigAccelerometerCalibration.cs</DependentUpon>
@@ -1415,29 +1413,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GCSViews\ConfigurationView\ConfigAntennaTracker.resx">
       <DependentUpon>ConfigAntennaTracker.cs</DependentUpon>
-    <EmbeddedResource Include="GCSViews\ConfigurationView\ConfigAP_Limits.de-DE.resx">
-      <DependentUpon>ConfigAP_Limits.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GCSViews\ConfigurationView\ConfigAP_Limits.fr.resx">
-      <DependentUpon>ConfigAP_Limits.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GCSViews\ConfigurationView\ConfigAP_Limits.id-ID.resx">
-      <DependentUpon>ConfigAP_Limits.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GCSViews\ConfigurationView\ConfigAP_Limits.it-IT.resx">
-      <DependentUpon>ConfigAP_Limits.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GCSViews\ConfigurationView\ConfigAP_Limits.ja-JP.resx">
-      <DependentUpon>ConfigAP_Limits.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GCSViews\ConfigurationView\ConfigAP_Limits.ko-KR.resx">
-      <DependentUpon>ConfigAP_Limits.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GCSViews\ConfigurationView\ConfigAP_Limits.resx">
-      <DependentUpon>ConfigAP_Limits.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GCSViews\ConfigurationView\ConfigAP_Limits.zh-Hans.resx">
-      <DependentUpon>ConfigAP_Limits.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GCSViews\ConfigurationView\ConfigArducopter.de-DE.resx">
       <DependentUpon>ConfigArducopter.cs</DependentUpon>
@@ -2774,6 +2749,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Grid\GridUI.resx">
       <DependentUpon>GridUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Joystick\JoystickSetup.ar.resx">
       <DependentUpon>JoystickSetup.cs</DependentUpon>
@@ -2882,6 +2858,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SerialOutputPass.ar.resx">
       <DependentUpon>SerialOutputPass.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Log\PosDownLoadCurrent.resx">
       <DependentUpon>PosDownLoadCurrent.cs</DependentUpon>
     </EmbeddedResource>

@@ -402,6 +402,7 @@ namespace MissionPlanner
         /// control for layout reasons.
         /// </summary>
         static internal ConnectionControl _connectionControl;
+        public static bool TerminalTheming = true;
 
         public void updateLayout(object sender, EventArgs e)
         {
@@ -748,7 +749,7 @@ namespace MissionPlanner
             LayoutChanged(null, EventArgs.Empty);
 
             if (Settings.Instance["CHK_GDIPlus"] != null)
-                GCSViews.FlightData.myhud.UseOpenGL = !bool.Parse(Settings.Instance["CHK_GDIPlus"].ToString());
+                GCSViews.FlightData.myhud.opengl = !bool.Parse(Settings.Instance["CHK_GDIPlus"].ToString());
 
             if (Settings.Instance["CHK_hudshow"] != null)
                 GCSViews.FlightData.myhud.hudon = bool.Parse(Settings.Instance["CHK_hudshow"].ToString());

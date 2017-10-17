@@ -1685,7 +1685,7 @@ namespace MissionPlanner.GCSViews
             try
             {
                 float measuredvoltage = float.Parse(battery_value);
-                float voltage = MainV2.comPort.MAV.cs.battery_voltage;
+                float voltage = (float)MainV2.comPort.MAV.cs.battery_voltage;
                 string TXT_divider = "";
                 // new
                 if (MainV2.comPort.MAV.param["BATT_VOLT_MULT"] != null)
