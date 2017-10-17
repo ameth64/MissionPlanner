@@ -471,12 +471,7 @@ namespace MissionPlanner.GCSViews
                 hud1.Dock = DockStyle.Fill;
             }
 
-            if (Settings.Instance.ContainsKey("quickViewRows"))
-            {
-                setQuickViewRowsCols(Settings.Instance["quickViewCols"], Settings.Instance["quickViewRows"]);
-            }
-
-            for (int f = 1; f < 30; f++)
+            for (int f = 1; f < 10; f++)
             {
                 // load settings
                 if (Settings.Instance["quickView" + f] != null)
@@ -827,12 +822,6 @@ namespace MissionPlanner.GCSViews
 
                 if (!MainV2.comPort.logreadmode)
                     Thread.Sleep(50); // max is only ever 10 hz but we go a little faster to empty the serial queue
-
-                if (this.IsDisposed)
-                {
-                    threadrun = false;
-                    break;
-                }
 
                 try
                 {
@@ -1200,20 +1189,13 @@ namespace MissionPlanner.GCSViews
                             if (MainV2.ShowAirports)
                             {
                                 // airports
-                                foreach (var item in Airports.getAirports(gMapControl1.Position).ToArray())
+                                foreach (var item in Airports.getAirports(gMapControl1.Position))
                                 {
-                                    try
+                                    rallypointoverlay.Markers.Add(new GMapMarkerAirport(item)
                                     {
-                                        rallypointoverlay.Markers.Add(new GMapMarkerAirport(item)
-                                        {
-                                            ToolTipText = item.Tag,
-                                            ToolTipMode = MarkerTooltipMode.OnMouseOver
-                                        });
-                                    }
-                                    catch (Exception e)
-                                    {
-                                        log.Error(e);
-                                    }
+                                        ToolTipText = item.Tag,
+                                        ToolTipMode = MarkerTooltipMode.OnMouseOver
+                                    });
                                 }
                             }
                             waypoints = DateTime.Now;
@@ -3876,6 +3858,8 @@ namespace MissionPlanner.GCSViews
             var form = new LogDownloadMavLink();
 
             form.Show();
+
+            form.SetFullVersion();
         }
 
         int messagecount;
@@ -4398,73 +4382,37 @@ namespace MissionPlanner.GCSViews
             new Utilities.AltitudeAngel.AASettings().Show(this);
         }
 
-        private void setViewCountToolStripMenuItem_Click(object sender, EventArgs e)
+
+        public bool recordext = false;
+        public BufferedStream recordext_file = null;
+        public string recordext_path = "";
+        private void BTN_recordlog_Click(object sender, EventArgs e)
         {
-            string cols = "2", rows = "3";
-
-            if (Settings.Instance["quickViewRows"]!= null)
+            recordext = !recordext;
+            if(recordext)
             {
-                rows = Settings.Instance["quickViewRows"];
-                cols = Settings.Instance["quickViewCols"]; 
-            }
-
-            if (InputBox.Show("Columns", "Enter number of columns to have.", ref cols) == DialogResult.OK)
-            {
-                if (InputBox.Show("Rows", "Enter number of rows to have.", ref rows) == DialogResult.OK)
+                if(!MainV2.comPort.BaseStream.IsOpen)
                 {
-                    setQuickViewRowsCols(cols, rows);
-
-                    Activate();
+                    recordext = false;
+                    return;
                 }
+                BTN_recordlog.Text = "结束记录";
+                Directory.CreateDirectory(Settings.Instance.LogDir);
+
+
+                recordext_path = Settings.Instance.LogDir + Path.DirectorySeparatorChar + "pid_tune_" + 
+                            DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + ".tlog";
+
+                recordext_file =
+                    new BufferedStream(
+                        File.Open(recordext_path
+                            , FileMode.CreateNew,
+                            FileAccess.ReadWrite, FileShare.None));
             }
-        }
-
-        private void setQuickViewRowsCols(string cols, string rows)
-        {
-            tableLayoutPanelQuick.ColumnCount = int.Parse(cols);
-            tableLayoutPanelQuick.RowCount = int.Parse(rows);
-
-            Settings.Instance["quickViewRows"] = tableLayoutPanelQuick.RowCount.ToString();
-            Settings.Instance["quickViewCols"] = tableLayoutPanelQuick.ColumnCount.ToString();
-
-            int total = tableLayoutPanelQuick.ColumnCount * tableLayoutPanelQuick.RowCount;
-
-            // clean up extra
-            while (tableLayoutPanelQuick.Controls.Count > total)
-                tableLayoutPanelQuick.Controls.RemoveAt(tableLayoutPanelQuick.Controls.Count - 1);
-
-            // add extra
-            while (total != tableLayoutPanelQuick.Controls.Count)
+            else
             {
-                var QV = new QuickView()
-                {
-                    Name = "quickView" + (tableLayoutPanelQuick.Controls.Count + 1)
-                };
-                QV.DoubleClick += quickView_DoubleClick;
-                QV.ContextMenuStrip = contextMenuStripQuickView;
-                QV.Dock = DockStyle.Fill;
-                QV.numberColor = GetColor();
-                QV.number = 0;
-
-                tableLayoutPanelQuick.Controls.Add(QV);
-                QV.GetFontSize();
-            }
-
-            for (int i = 0; i < tableLayoutPanelQuick.ColumnCount; i++)
-            {
-                if (tableLayoutPanelQuick.ColumnStyles.Count <= i)
-                    tableLayoutPanelQuick.ColumnStyles.Add(new ColumnStyle());
-                tableLayoutPanelQuick.ColumnStyles[i].SizeType = SizeType.Percent;
-                tableLayoutPanelQuick.ColumnStyles[i].Width = 100.0f / tableLayoutPanelQuick.ColumnCount;
-            }
-            for (int j = 0; j < tableLayoutPanelQuick.RowCount; j++)
-            {
-                if (tableLayoutPanelQuick.RowStyles.Count <= j)
-                    tableLayoutPanelQuick.RowStyles.Add(new RowStyle());
-                tableLayoutPanelQuick.RowStyles[j].SizeType = SizeType.Percent;
-                tableLayoutPanelQuick.RowStyles[j].Height = 100.0f / tableLayoutPanelQuick.RowCount;
-            }
-        }
+                BTN_recordlog.Text = "开始记录";
+               // 
 
         Random random = new Random();
         private Process gst;
@@ -4476,13 +4424,18 @@ namespace MissionPlanner.GCSViews
             int red = random.Next(256);
             int green = random.Next(256);
             int blue = random.Next(256);
+                lock (recordext_file)
+                {
+                    recordext_file.Close();
+                    recordext_file = null;
+                }
 
-            // mix the color
-            if (mix != null)
-            {
-                red = (red + mix.R) / 2;
-                green = (green + mix.G) / 2;
-                blue = (blue + mix.B) / 2;
+                Form frm = new MavlinkLog();
+                ThemeManager.ApplyThemeTo(frm);
+                ((MavlinkLog)frm).default_open(recordext_path);
+                ((MavlinkLog)frm).default_Graph(chk_rec_quadplane.Checked);
+                frm.Show();
+                recordext_path = "";
             }
 
             var col = Color.FromArgb(red, green, blue);
@@ -4490,6 +4443,7 @@ namespace MissionPlanner.GCSViews
             this.LogInfo("GetColor() " + col);
 
             return col;
+
         }
 
         private void setGStreamerSourceToolStripMenuItem_Click(object sender, EventArgs e)
@@ -4511,4 +4465,3 @@ namespace MissionPlanner.GCSViews
         }
     }
 }
- 

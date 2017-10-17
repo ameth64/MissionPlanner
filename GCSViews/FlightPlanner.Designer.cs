@@ -107,6 +107,9 @@ namespace MissionPlanner.GCSViews
             this.lbl_status = new System.Windows.Forms.Label();
             this.panelWaypoints = new BSE.Windows.Forms.Panel();
             this.splitter1 = new BSE.Windows.Forms.Splitter();
+            this.CMB_displaywp = new System.Windows.Forms.ComboBox();
+            this.but_kml = new MissionPlanner.Controls.MyButton();
+            this.BUT_CheckElevation = new MissionPlanner.Controls.MyButton();
             this.CMB_altmode = new System.Windows.Forms.ComboBox();
             this.CHK_splinedefault = new System.Windows.Forms.CheckBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -206,6 +209,18 @@ namespace MissionPlanner.GCSViews
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.surveyGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.deleteWPToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.addWPToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearWPToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.addGridToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.addGrid2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearGridToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.autoWPMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.aeraToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.allPlanMove = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.Commands)).BeginInit();
             this.panel5.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -219,6 +234,7 @@ namespace MissionPlanner.GCSViews
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.panelBASE.SuspendLayout();
+            this.contextMenuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // Commands
@@ -472,6 +488,7 @@ namespace MissionPlanner.GCSViews
             // 
             resources.ApplyResources(this.BUT_write, "BUT_write");
             this.BUT_write.Name = "BUT_write";
+            this.BUT_write.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.BUT_write.UseVisualStyleBackColor = true;
             this.BUT_write.Click += new System.EventHandler(this.BUT_write_Click);
             // 
@@ -479,6 +496,7 @@ namespace MissionPlanner.GCSViews
             // 
             resources.ApplyResources(this.BUT_read, "BUT_read");
             this.BUT_read.Name = "BUT_read";
+            this.BUT_read.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.BUT_read.UseVisualStyleBackColor = true;
             this.BUT_read.Click += new System.EventHandler(this.BUT_read_Click);
             // 
@@ -582,6 +600,9 @@ namespace MissionPlanner.GCSViews
             this.panelWaypoints.CaptionFont = new System.Drawing.Font("Segoe UI", 11.75F, System.Drawing.FontStyle.Bold);
             this.panelWaypoints.CaptionHeight = 21;
             this.panelWaypoints.ColorScheme = BSE.Windows.Forms.ColorScheme.Custom;
+            this.panelWaypoints.Controls.Add(this.CMB_displaywp);
+            this.panelWaypoints.Controls.Add(this.but_kml);
+            this.panelWaypoints.Controls.Add(this.BUT_CheckElevation);
             this.panelWaypoints.Controls.Add(this.CMB_altmode);
             this.panelWaypoints.Controls.Add(this.CHK_splinedefault);
             this.panelWaypoints.Controls.Add(this.label17);
@@ -598,16 +619,16 @@ namespace MissionPlanner.GCSViews
             this.panelWaypoints.CustomColors.BorderColor = System.Drawing.Color.Black;
             this.panelWaypoints.CustomColors.CaptionCloseIcon = System.Drawing.Color.White;
             this.panelWaypoints.CustomColors.CaptionExpandIcon = System.Drawing.Color.White;
-            this.panelWaypoints.CustomColors.CaptionGradientBegin = System.Drawing.Color.FromArgb(((int)(((byte)(148)))), ((int)(((byte)(193)))), ((int)(((byte)(31)))));
-            this.panelWaypoints.CustomColors.CaptionGradientEnd = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(226)))), ((int)(((byte)(150)))));
+            this.panelWaypoints.CustomColors.CaptionGradientBegin = System.Drawing.Color.DodgerBlue;
+            this.panelWaypoints.CustomColors.CaptionGradientEnd = System.Drawing.Color.DodgerBlue;
             this.panelWaypoints.CustomColors.CaptionGradientMiddle = System.Drawing.Color.Transparent;
             this.panelWaypoints.CustomColors.CaptionSelectedGradientBegin = System.Drawing.Color.Transparent;
             this.panelWaypoints.CustomColors.CaptionSelectedGradientEnd = System.Drawing.Color.Transparent;
-            this.panelWaypoints.CustomColors.CaptionText = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(87)))), ((int)(((byte)(4)))));
-            this.panelWaypoints.CustomColors.CollapsedCaptionText = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(87)))), ((int)(((byte)(4)))));
+            this.panelWaypoints.CustomColors.CaptionText = System.Drawing.Color.White;
+            this.panelWaypoints.CustomColors.CollapsedCaptionText = System.Drawing.Color.White;
             this.panelWaypoints.CustomColors.ContentGradientBegin = System.Drawing.SystemColors.ButtonFace;
             this.panelWaypoints.CustomColors.ContentGradientEnd = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
-            this.panelWaypoints.CustomColors.InnerBorderColor = System.Drawing.SystemColors.Window;
+            this.panelWaypoints.CustomColors.InnerBorderColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.panelWaypoints, "panelWaypoints");
             this.panelWaypoints.ForeColor = System.Drawing.SystemColors.ControlText;
             this.panelWaypoints.Image = null;
@@ -625,10 +646,35 @@ namespace MissionPlanner.GCSViews
             this.splitter1.Name = "splitter1";
             this.splitter1.TabStop = false;
             // 
+            // CMB_displaywp
+            // 
+            this.CMB_displaywp.FormattingEnabled = true;
+            resources.ApplyResources(this.CMB_displaywp, "CMB_displaywp");
+            this.CMB_displaywp.Name = "CMB_displaywp";
+            this.CMB_displaywp.SelectedIndexChanged += new System.EventHandler(this.CMB_displaywp_SelectedIndexChanged);
+            // 
+            // but_kml
+            // 
+            resources.ApplyResources(this.but_kml, "but_kml");
+            this.but_kml.Name = "but_kml";
+            this.but_kml.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.toolTip1.SetToolTip(this.but_kml, resources.GetString("but_kml.ToolTip"));
+            this.but_kml.UseVisualStyleBackColor = true;
+            this.but_kml.Click += new System.EventHandler(this.but_kml_Click);
+            // 
+            // BUT_CheckElevation
+            // 
+            resources.ApplyResources(this.BUT_CheckElevation, "BUT_CheckElevation");
+            this.BUT_CheckElevation.Name = "BUT_CheckElevation";
+            this.BUT_CheckElevation.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.toolTip1.SetToolTip(this.BUT_CheckElevation, resources.GetString("BUT_CheckElevation.ToolTip"));
+            this.BUT_CheckElevation.UseVisualStyleBackColor = true;
+            this.BUT_CheckElevation.Click += new System.EventHandler(this.BUT_CheckElevation_Click);
+            // 
             // CMB_altmode
             // 
-            this.CMB_altmode.FormattingEnabled = true;
             resources.ApplyResources(this.CMB_altmode, "CMB_altmode");
+            this.CMB_altmode.FormattingEnabled = true;
             this.CMB_altmode.Name = "CMB_altmode";
             this.CMB_altmode.SelectedIndexChanged += new System.EventHandler(this.CMB_altmode_SelectedIndexChanged);
             // 
@@ -653,6 +699,7 @@ namespace MissionPlanner.GCSViews
             // 
             resources.ApplyResources(this.BUT_Add, "BUT_Add");
             this.BUT_Add.Name = "BUT_Add";
+            this.BUT_Add.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.toolTip1.SetToolTip(this.BUT_Add, resources.GetString("BUT_Add.ToolTip"));
             this.BUT_Add.UseVisualStyleBackColor = true;
             this.BUT_Add.Click += new System.EventHandler(this.BUT_Add_Click);
@@ -668,16 +715,16 @@ namespace MissionPlanner.GCSViews
             this.panelAction.CustomColors.BorderColor = System.Drawing.Color.Black;
             this.panelAction.CustomColors.CaptionCloseIcon = System.Drawing.Color.White;
             this.panelAction.CustomColors.CaptionExpandIcon = System.Drawing.Color.White;
-            this.panelAction.CustomColors.CaptionGradientBegin = System.Drawing.Color.FromArgb(((int)(((byte)(148)))), ((int)(((byte)(193)))), ((int)(((byte)(31)))));
-            this.panelAction.CustomColors.CaptionGradientEnd = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(226)))), ((int)(((byte)(150)))));
+            this.panelAction.CustomColors.CaptionGradientBegin = System.Drawing.Color.DodgerBlue;
+            this.panelAction.CustomColors.CaptionGradientEnd = System.Drawing.Color.DodgerBlue;
             this.panelAction.CustomColors.CaptionGradientMiddle = System.Drawing.Color.Transparent;
             this.panelAction.CustomColors.CaptionSelectedGradientBegin = System.Drawing.Color.Transparent;
             this.panelAction.CustomColors.CaptionSelectedGradientEnd = System.Drawing.Color.Transparent;
-            this.panelAction.CustomColors.CaptionText = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(87)))), ((int)(((byte)(4)))));
+            this.panelAction.CustomColors.CaptionText = System.Drawing.Color.White;
             this.panelAction.CustomColors.CollapsedCaptionText = System.Drawing.Color.White;
             this.panelAction.CustomColors.ContentGradientBegin = System.Drawing.SystemColors.ButtonFace;
             this.panelAction.CustomColors.ContentGradientEnd = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
-            this.panelAction.CustomColors.InnerBorderColor = System.Drawing.SystemColors.Window;
+            this.panelAction.CustomColors.InnerBorderColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.panelAction, "panelAction");
             this.panelAction.ForeColor = System.Drawing.SystemColors.ControlText;
             this.panelAction.Image = null;
@@ -758,6 +805,7 @@ namespace MissionPlanner.GCSViews
             // 
             resources.ApplyResources(this.BUT_loadwpfile, "BUT_loadwpfile");
             this.BUT_loadwpfile.Name = "BUT_loadwpfile";
+            this.BUT_loadwpfile.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.BUT_loadwpfile.UseVisualStyleBackColor = true;
             this.BUT_loadwpfile.Click += new System.EventHandler(this.BUT_loadwpfile_Click);
             // 
@@ -765,6 +813,7 @@ namespace MissionPlanner.GCSViews
             // 
             resources.ApplyResources(this.BUT_saveWPFile, "BUT_saveWPFile");
             this.BUT_saveWPFile.Name = "BUT_saveWPFile";
+            this.BUT_saveWPFile.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.BUT_saveWPFile.UseVisualStyleBackColor = true;
             this.BUT_saveWPFile.Click += new System.EventHandler(this.BUT_saveWPFile_Click);
             // 
@@ -1360,6 +1409,88 @@ namespace MissionPlanner.GCSViews
             this.surveyGridToolStripMenuItem.Name = "surveyGridToolStripMenuItem";
             resources.ApplyResources(this.surveyGridToolStripMenuItem, "surveyGridToolStripMenuItem");
             this.surveyGridToolStripMenuItem.Click += new System.EventHandler(this.surveyGridToolStripMenuItem_Click);
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteWPToolStripMenuItem2,
+            this.addWPToolStripMenuItem2,
+            this.clearWPToolStripMenuItem2,
+            this.addGridToolStripMenuItem2,
+            this.clearGridToolStripMenuItem3,
+            this.autoWPMenu,
+            this.allPlanMove});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            resources.ApplyResources(this.contextMenuStrip2, "contextMenuStrip2");
+            // 
+            // deleteWPToolStripMenuItem2
+            // 
+            this.deleteWPToolStripMenuItem2.Name = "deleteWPToolStripMenuItem2";
+            resources.ApplyResources(this.deleteWPToolStripMenuItem2, "deleteWPToolStripMenuItem2");
+            this.deleteWPToolStripMenuItem2.Click += new System.EventHandler(this.deleteWPToolStripMenuItem2_Click);
+            // 
+            // addWPToolStripMenuItem2
+            // 
+            this.addWPToolStripMenuItem2.Name = "addWPToolStripMenuItem2";
+            resources.ApplyResources(this.addWPToolStripMenuItem2, "addWPToolStripMenuItem2");
+            this.addWPToolStripMenuItem2.Click += new System.EventHandler(this.addWPToolStripMenuItem2_Click);
+            // 
+            // clearWPToolStripMenuItem2
+            // 
+            this.clearWPToolStripMenuItem2.Name = "clearWPToolStripMenuItem2";
+            resources.ApplyResources(this.clearWPToolStripMenuItem2, "clearWPToolStripMenuItem2");
+            this.clearWPToolStripMenuItem2.Click += new System.EventHandler(this.clearWPToolStripMenuItem2_Click);
+            // 
+            // addGridToolStripMenuItem2
+            // 
+            this.addGridToolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addGrid2ToolStripMenuItem,
+            this.saveGridToolStripMenuItem,
+            this.loadGridToolStripMenuItem});
+            this.addGridToolStripMenuItem2.Name = "addGridToolStripMenuItem2";
+            resources.ApplyResources(this.addGridToolStripMenuItem2, "addGridToolStripMenuItem2");
+            // 
+            // addGrid2ToolStripMenuItem
+            // 
+            this.addGrid2ToolStripMenuItem.Name = "addGrid2ToolStripMenuItem";
+            resources.ApplyResources(this.addGrid2ToolStripMenuItem, "addGrid2ToolStripMenuItem");
+            this.addGrid2ToolStripMenuItem.Click += new System.EventHandler(this.addGridToolStripMenuItem2_Click);
+            // 
+            // saveGridToolStripMenuItem
+            // 
+            this.saveGridToolStripMenuItem.Name = "saveGridToolStripMenuItem";
+            resources.ApplyResources(this.saveGridToolStripMenuItem, "saveGridToolStripMenuItem");
+            this.saveGridToolStripMenuItem.Click += new System.EventHandler(this.saveGridToolStripMenuItem_Click);
+            // 
+            // loadGridToolStripMenuItem
+            // 
+            this.loadGridToolStripMenuItem.Name = "loadGridToolStripMenuItem";
+            resources.ApplyResources(this.loadGridToolStripMenuItem, "loadGridToolStripMenuItem");
+            this.loadGridToolStripMenuItem.Click += new System.EventHandler(this.loadGridToolStripMenuItem_Click);
+            // 
+            // clearGridToolStripMenuItem3
+            // 
+            this.clearGridToolStripMenuItem3.Name = "clearGridToolStripMenuItem3";
+            resources.ApplyResources(this.clearGridToolStripMenuItem3, "clearGridToolStripMenuItem3");
+            this.clearGridToolStripMenuItem3.Click += new System.EventHandler(this.clearGridToolStripMenuItem3_Click);
+            // 
+            // autoWPMenu
+            // 
+            this.autoWPMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aeraToolStripMenuItem2});
+            this.autoWPMenu.Name = "autoWPMenu";
+            resources.ApplyResources(this.autoWPMenu, "autoWPMenu");
+            // 
+            // aeraToolStripMenuItem2
+            // 
+            this.aeraToolStripMenuItem2.Name = "aeraToolStripMenuItem2";
+            resources.ApplyResources(this.aeraToolStripMenuItem2, "aeraToolStripMenuItem2");
+            this.aeraToolStripMenuItem2.Click += new System.EventHandler(this.aeraToolStripMenuItem2_Click);
+            // 
+            // allPlanMove
+            // 
+            this.allPlanMove.Name = "allPlanMove";
+            resources.ApplyResources(this.allPlanMove, "allPlanMove");
+            this.allPlanMove.Click += new System.EventHandler(this.allPlanMove_Click);
             // 
             // FlightPlanner
             // 
@@ -1389,6 +1520,7 @@ namespace MissionPlanner.GCSViews
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.panelBASE.ResumeLayout(false);
+            this.contextMenuStrip2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1412,12 +1544,13 @@ namespace MissionPlanner.GCSViews
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lbl_status;
         private Controls.MyDataGridView Commands;
+        public System.Windows.Forms.DataGridView Commands;
         private Controls.MyButton BUT_Add;
         private System.Windows.Forms.Label LBL_WPRad;
         private System.Windows.Forms.Label LBL_defalutalt;
         private System.Windows.Forms.Label label5;
-        public BSE.Windows.Forms.Panel panelWaypoints;
-        public BSE.Windows.Forms.Panel panelAction;
+        private BSE.Windows.Forms.Panel panelWaypoints;
+        private BSE.Windows.Forms.Panel panelAction;
         private System.Windows.Forms.Panel panelMap;
         public Controls.myGMAP MainMap;
         private Controls.MyTrackBar trackBar1;
@@ -1517,14 +1650,14 @@ namespace MissionPlanner.GCSViews
         private System.Windows.Forms.ToolStripMenuItem areaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem setHomeHereToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem areaToolStripMenuItem1;
-        private System.Windows.Forms.DataGridViewComboBoxColumn Command;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Param1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Param2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Param3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Param4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Lat;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Lon;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Alt;
+        public System.Windows.Forms.DataGridViewComboBoxColumn Command;
+        public System.Windows.Forms.DataGridViewTextBoxColumn Param1;
+        public System.Windows.Forms.DataGridViewTextBoxColumn Param2;
+        public System.Windows.Forms.DataGridViewTextBoxColumn Param3;
+        public System.Windows.Forms.DataGridViewTextBoxColumn Param4;
+        public System.Windows.Forms.DataGridViewTextBoxColumn Lat;
+        public System.Windows.Forms.DataGridViewTextBoxColumn Lon;
+        public System.Windows.Forms.DataGridViewTextBoxColumn Alt;
         private System.Windows.Forms.DataGridViewTextBoxColumn coordZone;
         private System.Windows.Forms.DataGridViewTextBoxColumn coordEasting;
         private System.Windows.Forms.DataGridViewTextBoxColumn coordNorthing;
@@ -1537,9 +1670,25 @@ namespace MissionPlanner.GCSViews
         private System.Windows.Forms.DataGridViewTextBoxColumn Dist;
         private System.Windows.Forms.DataGridViewTextBoxColumn AZ;
         private System.Windows.Forms.DataGridViewTextBoxColumn TagData;
-        private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem createCircleSurveyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem currentPositionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem surveyGridToolStripMenuItem;
+        public System.Windows.Forms.DataGridViewTextBoxColumn TagData;
+        public System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
+        private Controls.MyButton BUT_CheckElevation;
+        public System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem deleteWPToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem addWPToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem addGridToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem autoWPMenu;
+        private System.Windows.Forms.ToolStripMenuItem aeraToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem clearWPToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem clearGridToolStripMenuItem3;
+        private Controls.MyButton but_kml;
+        public System.Windows.Forms.ComboBox CMB_displaywp;
+        private System.Windows.Forms.ToolStripMenuItem addGrid2ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveGridToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadGridToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem allPlanMove;
     }
 }

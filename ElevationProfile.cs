@@ -9,6 +9,8 @@ using ZedGraph;
 using GMap.NET;
 using System.Xml;
 using MissionPlanner.Utilities; // GE xml alt reader
+using OSGeo.GDAL;
+using System.IO;
 
 namespace MissionPlanner
 {
@@ -45,7 +47,7 @@ namespace MissionPlanner
 
             if (planlocs.Count <= 1)
             {
-                CustomMessageBox.Show("Please plan something first", Strings.ERROR);
+                CustomMessageBox.Show("没有航线", Strings.ERROR);
                 return;
             }
 
@@ -66,9 +68,10 @@ namespace MissionPlanner
 
             this.homealt = homealt/CurrentState.multiplierdist;
 
-            Form frm = Common.LoadingBox("Loading", "using alt data");
-
-            gelocs = getGEAltPath(planlocs);
+            Form frm = Common.LoadingBox("读取中", "读取高度数据");
+           // Gdal.AllRegister();
+            //gelocs = getGEAltPath(planlocs);
+            gelocs = getSTRM90Path(planlocs);
 
             srtmlocs = getSRTMAltPath(planlocs);
 
@@ -137,6 +140,121 @@ namespace MissionPlanner
             }
             // draw graph
             CreateChart(zg1);
+        }
+
+        List<PointLatLngAlt> getSTRM90Path(List<PointLatLngAlt> list)
+        {
+            List<PointLatLngAlt> answer = new List<PointLatLngAlt>();
+
+            double alt = 0;
+            double lat = 0;
+            double lng = 0;
+
+            int pos = 0;
+            //add by hdl
+            int firstpoint = 0;
+
+            if (list.Count <= 2)
+            {
+                CustomMessageBox.Show("航点太少", "错误");
+                return answer;
+            }
+            //Ogr.RegisterAll();
+            Gdal.AllRegister();
+
+            PointLatLngAlt[] starttemp = new PointLatLngAlt[1];
+            list.CopyTo(0, starttemp, 0, 1);
+            PointLatLngAlt start = new PointLatLngAlt();
+            start = starttemp[0];
+
+            foreach (PointLatLngAlt loc in list)
+            {
+
+                PointLatLngAlt end = loc;
+                if (start == end)
+                    continue;
+                int Getpointdistance = 0;
+                double disInKm = start.GetDistance2(end);
+                double exp = 0;
+                double Xgeo = 0; double Ygeo = 0;
+                string xx;
+                string yy;
+                Dataset ds = null;
+                string oldpath = "";
+                double dTemp = 0.0;
+                double[] trans = new double[6];
+                Band demband = null;
+                while (true)
+                {
+                    if ((double)Getpointdistance < (disInKm))
+                    {
+                        exp = ((double)Getpointdistance) / (disInKm);
+                        Ygeo = start.Lat + ((end.Lat - start.Lat) * exp);
+                        Xgeo = start.Lng + ((end.Lng - start.Lng) * exp);
+                    }
+                    else
+                    {
+                        Ygeo = end.Lat;
+                        Xgeo = end.Lng;
+
+                        start = end;
+                    }
+
+                    xx = Math.Ceiling(((Xgeo + 180) / (5))).ToString();
+                    yy = Math.Ceiling(((60 - Ygeo) / (5))).ToString();
+
+                    if (yy.Length == 1)
+                        yy = "0" + yy;
+
+                    string path = Path.GetDirectoryName(Application.ExecutablePath) + Path.DirectorySeparatorChar + "srtm_90\\srtm_" + xx + "_" + yy + ".tif";
+                    if (oldpath != path)
+                    {
+                        try
+                        {
+                            ds = Gdal.Open(path, Access.GA_ReadOnly);
+                        }
+                        catch (Exception e)
+                        {
+                            CustomMessageBox.Show("没找到文件" + "srtm_" + xx + "_" + yy + ".tif" + " 可能超出范围");
+                            return answer;
+                        }
+
+                        oldpath = path;
+                        demband = ds.GetRasterBand(1);
+
+                        //double testx = 0; double testy = 0;
+
+                        ds.GetGeoTransform(trans);
+                        //testx = trans[0] + 1 * trans[1] + 1 * trans[2];
+                        //testy = trans[3] + 1 * trans[4] + 1 * trans[5]; // 计算像素坐标为(100, 100)的点的实际地理坐标
+                        dTemp = trans[1] * trans[5] - trans[2] * trans[4];
+                    }
+                    //int XSize = ds.RasterXSize;
+                    //int YSize = ds.RasterYSize;
+                    //int count = ds.RasterCount;
+
+                    double dCol = 0.0; double dRow = 0.0;
+                    dCol = (trans[5] * (Xgeo - trans[0]) - trans[2] * (Ygeo - trans[3])) / dTemp + 0.5;
+                    dRow = (trans[1] * (Ygeo - trans[3]) - trans[4] * (Xgeo - trans[0])) / dTemp + 0.5;
+                    int dx = (int)dCol;
+                    int dy = (int)dRow;
+                    int len = 1;
+                    double[] dem = new double[1];
+                    demband.ReadRaster(dx, dy, len, len, dem, len, len, len, len);
+                    if (dem[0] < 0)
+                        dem[0] = 0.0;
+                    PointLatLngAlt getloc = new PointLatLngAlt(Ygeo, Xgeo, dem[0], "");
+                    answer.Add(getloc);
+                    firstpoint++;
+                    //if (firstpoint == 1)
+                        //homealt1 = dem[0];
+                    if (start == end)
+                        break;
+                    Getpointdistance += 100;
+                }
+            }
+
+            return answer;
         }
 
         List<PointLatLngAlt> getSRTMAltPath(List<PointLatLngAlt> list)
@@ -273,15 +391,15 @@ namespace MissionPlanner
             GraphPane myPane = zgc.GraphPane;
 
             // Set the titles and axis labels
-            myPane.Title.Text = "Elevation above ground";
-            myPane.XAxis.Title.Text = "Distance (m)";
-            myPane.YAxis.Title.Text = "Elevation (m)";
+            myPane.Title.Text = "地面以上高程";
+            myPane.XAxis.Title.Text = "距离 (米)";
+            myPane.YAxis.Title.Text = "高程 (米)";
 
             LineItem myCurve;
 
-            myCurve = myPane.AddCurve("Planned Path", list1, Color.Red, SymbolType.None);
-            myCurve = myPane.AddCurve("Google", list2, Color.Green, SymbolType.None);
-            myCurve = myPane.AddCurve("SRTM", list3, Color.Blue, SymbolType.None);
+            myCurve = myPane.AddCurve("任务航线高度", list1, Color.Red, SymbolType.None);
+            myCurve = myPane.AddCurve("NASA卫星扫描高度", list2, Color.Green, SymbolType.None);
+            myCurve = myPane.AddCurve("高度", list3, Color.Blue, SymbolType.None);
 
             foreach (PointPair pp in list1)
             {

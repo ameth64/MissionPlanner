@@ -151,6 +151,13 @@ namespace MissionPlanner
         {
             get { return Math.Sqrt(Math.Pow(vx, 2) + Math.Pow(vy, 2) + Math.Pow(vz, 2)); }
         }
+		
+        public UInt32 mytimeinair { get; set; }
+        public UInt32 mydistraveled { get; set; }
+        public bool mydtdata = false;
+
+        [DisplayText("camera trigger times")]
+        public UInt32 triggernum { get; set; }
 
         [DisplayText("Alt Home Offset (dist)")]
         public float altoffsethome { get; set; }
@@ -596,6 +603,9 @@ namespace MissionPlanner
         [DisplayText("Time in Air (sec)")]
         public float timeInAir { get; set; }
 
+        [DisplayText("Time2 in Air (sec)")]
+        public float time2InAir { get; set; }
+
         // calced turn rate
         [DisplayText("Turn Rate (speed)")]
         public float turnrate
@@ -728,6 +738,7 @@ namespace MissionPlanner
         }
 
         private DateTime _lastcurrent = DateTime.MinValue;
+        private DateTime _lastcurrent2 = DateTime.MinValue;
 
         [DisplayText("Bat efficiency (mah/km)")]
         public double battery_mahperkm { get {return battery_usedmah / (distTraveled/1000.0f); } }
@@ -766,14 +777,22 @@ namespace MissionPlanner
             get { return _current2; }
             set
             {
-                if (value < 0) return;
+                if (_lastcurrent2 == DateTime.MinValue) _lastcurrent2 = datetime;
+                if (value < 1) return;
+
+                battery2_usedmah += (float)((value * 1000.0) * (datetime - _lastcurrent).TotalHours);
                 _current2 = value;
+                _lastcurrent2 = datetime;
             }
         }
 
         private double _current2;
 
-        public double HomeAlt
+        [DisplayText("Bat2 used EST (mah)")]
+        public float battery2_usedmah { get; set; }
+
+
+        public float HomeAlt
         {
             get { return HomeLocation.Alt; }
             set { }
@@ -1324,15 +1343,19 @@ namespace MissionPlanner
                 raterc = ratercbackup;
                 datetime = DateTime.MinValue;
                 battery_usedmah = 0;
+                battery2_usedmah = 0;
                 _lastcurrent = DateTime.MinValue;
                 distTraveled = 0;
                 timeInAir = 0;
+                time2InAir = 0;
                 version = new Version();
                 voltageflag = (uint)MAVLink.MAV_POWER_STATUS.USB_CONNECTED;
                 capabilities = (uint)MAVLink.MAV_PROTOCOL_CAPABILITY.MISSION_FLOAT;
             }
         }
 
+		//const float rad2deg = (float) (180/Math.PI);
+ -      //const float deg2rad = (float) (1.0/rad2deg);
         public List<string> GetItemList()
         {
             List<string> ans = new List<string>();
@@ -1465,6 +1488,9 @@ namespace MissionPlanner
 
                             distTraveled += (float) lastpos.GetDistance(new PointLatLngAlt(lat, lng, 0, ""))*
                                             multiplierdist;
+                            if (mydtdata)
+                                distTraveled = (float)((float)mydistraveled);
+
                             lastpos = new PointLatLngAlt(lat, lng, 0, "");
                         }
                         else
@@ -1473,8 +1499,14 @@ namespace MissionPlanner
                         }
 
                         // throttle is up, or groundspeed is > 3 m/s
-                        if ((ch3percent > 12  || _groundspeed > 3.0) && armed)
+                        if (ch3percent > 12 || _groundspeed > 3.0)
                             timeInAir++;
+
+                        if (mydtdata)
+                            timeInAir = (float)mytimeinair;
+                        // throttle is up, or groundspeed is > 3 m/s
+                        if (current2>2)
+                            time2InAir++;
 
                         if (!gotwind)
                             dowindcalc();
@@ -2263,16 +2295,6 @@ namespace MissionPlanner
                         ch6out = servoout.servo6_raw;
                         ch7out = servoout.servo7_raw;
                         ch8out = servoout.servo8_raw;
-
-                        // mavlink2 extension
-                        ch9out = servoout.servo9_raw;
-                        ch10out = servoout.servo10_raw;
-                        ch11out = servoout.servo11_raw;
-                        ch12out = servoout.servo12_raw;
-                        ch13out = servoout.servo13_raw;
-                        ch14out = servoout.servo14_raw;
-                        ch15out = servoout.servo15_raw;
-                        ch16out = servoout.servo16_raw;
 
                         MAV.clearPacket((uint)MAVLink.MAVLINK_MSG_ID.SERVO_OUTPUT_RAW);
                     }

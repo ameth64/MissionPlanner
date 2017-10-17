@@ -14,14 +14,17 @@ namespace MissionPlanner
 
         public MAVLinkInterface parent;
 
-        public MAVState(MAVLinkInterface mavLinkInterface, byte sysid, byte compid)
+        public MAVState(MAVLinkInterface mavLinkInterface)
         {
             this.parent = mavLinkInterface;
             this.sysid = sysid;
             this.compid = compid;
             this.packetspersecond = new Dictionary<uint, double>();
             this.packetspersecondbuild = new Dictionary<uint, DateTime>();
+
             this.lastvalidpacket = DateTime.MinValue;
+            this.sysid = 0;
+            this.compid = 0;
             sendlinkid = (byte)(new Random().Next(256));
             signing = false;
             this.param = new MAVLinkParamList();
@@ -33,6 +36,7 @@ namespace MissionPlanner
             this.SoftwareVersions = "";
             this.SerialString = "";
             this.FrameString = "";
+
             if (sysid != 255 && !(compid == 0 && sysid == 0)) // && !parent.logreadmode)
                 this.Proximity = new Proximity(this);
 
@@ -68,15 +72,10 @@ namespace MissionPlanner
         /// </summary>
         public CurrentState cs = new CurrentState();
 
-        private byte _sysid;
         /// <summary>
         /// mavlink remote sysid
         /// </summary>
-        public byte sysid
-        {
-            get { return _sysid; }
-            set { _sysid = value; }
-        }
+        public byte sysid { get; set; }
 
         /// <summary>
         /// mavlink remove compid
@@ -155,8 +154,7 @@ namespace MissionPlanner
 
         public void Dispose()
         {
-            if (Proximity != null)
-                Proximity.Dispose();
+             Proximity.Dispose();
         }
 
         /// <summary>

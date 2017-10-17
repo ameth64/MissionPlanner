@@ -82,7 +82,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
             PTCH2SRV_IMAX.setup(0, 0, 100, 0, "PTCH2SRV_IMAX", MainV2.comPort.MAV.param);
             PTCH2SRV_D.setup(0, 0, 1, 0, "PTCH2SRV_D", MainV2.comPort.MAV.param);
             PTCH2SRV_I.setup(0, 0, 1, 0, "PTCH2SRV_I", MainV2.comPort.MAV.param);
-            PTCH2SRV_P.setup(0, 0, 1, 0, "PTCH2SRV_P", MainV2.comPort.MAV.param);
+            PTCH2SRV_P.setup(0, 0, 2, 0, "PTCH2SRV_P", MainV2.comPort.MAV.param);
 
             RLL2SRV_IMAX.setup(0, 0, 100, 0, "RLL2SRV_IMAX", MainV2.comPort.MAV.param);
             RLL2SRV_D.setup(0, 0, 1, 0, "RLL2SRV_D", MainV2.comPort.MAV.param);

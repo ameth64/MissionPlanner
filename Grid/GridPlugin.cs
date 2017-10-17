@@ -12,6 +12,7 @@ namespace MissionPlanner
         
 
         ToolStripMenuItem but;
+        ToolStripMenuItem but2;
 
         public override string Name
         {
@@ -55,6 +56,21 @@ namespace MissionPlanner
                 }
             }
 
+            //用户菜单
+            but2 = new ToolStripMenuItem("自动生成航线");
+            but2.Click += but_Click;
+            ToolStripItemCollection col2 = Host.FPMenuMap2.Items;
+            index = col2.Count;
+            foreach (ToolStripItem item in col2)
+            {
+                if (item.Text.Equals("生成航线"))
+                {
+                    index = col2.IndexOf(item);
+                    ((ToolStripMenuItem)item).DropDownItems.Add(but2);
+                    break;
+                }
+            }
+
             if (hit == false)
                 col.Add(but);
 
@@ -74,7 +90,7 @@ namespace MissionPlanner
                 else
                 {
                     if (
-                        CustomMessageBox.Show("No polygon defined. Load a file?", "Load File", MessageBoxButtons.YesNo) ==
+                        CustomMessageBox.Show("没有选定范围，是否加载范围文件?", "范围文件", MessageBoxButtons.YesNo) ==
                         DialogResult.Yes)
                     {
                         gridui.LoadGrid();
@@ -82,7 +98,7 @@ namespace MissionPlanner
                     }
                     else
                     {
-                        CustomMessageBox.Show("Please define a polygon.", "Error");
+                        CustomMessageBox.Show("请先添加范围.", "错误");
                     }
                 }
             }

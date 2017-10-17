@@ -57,7 +57,7 @@ namespace MissionPlanner
             static public int SW_HIDE = 0;
         }
 
-        public static menuicons displayicons = new burntkermitmenuicons();
+        static menuicons displayicons = new burntkermitmenuicons();
 
         public abstract class menuicons
         {
@@ -72,7 +72,6 @@ namespace MissionPlanner
             public abstract Image connect { get; }
             public abstract Image disconnect { get; }
             public abstract Image bg { get; }
-            public abstract Image wizard { get; }
         }
 
         public class burntkermitmenuicons : menuicons
@@ -130,10 +129,6 @@ namespace MissionPlanner
             public override Image bg
             {
                 get { return global::MissionPlanner.Properties.Resources.bgdark; }
-            }
-            public override Image wizard
-            {
-                get { return global::MissionPlanner.Properties.Resources.wizardicon; }
             }
         }
 
@@ -193,11 +188,9 @@ namespace MissionPlanner
             {
                 get { return null; }
             }
-            public override Image wizard
-            {
-                get { return global::MissionPlanner.Properties.Resources.wizardicon; }
-            }
         }
+
+
 
         Controls.MainSwitcher MyView;
 
@@ -393,12 +386,15 @@ namespace MissionPlanner
         /// ie configuration gets reloaded on every click
         /// </summary>
         public GCSViews.FlightData FlightData;
-
+        public GCSViews.HsdevFlightData HsdevFlightData;
         public GCSViews.FlightPlanner FlightPlanner;
         Controls.SITL Simulation;
 
         private Form connectionStatsForm;
         private ConnectionStats _connectionStats;
+
+        public bool posdownlaoding = false;
+        private Form logdlmgr_form;
 
         /// <summary>
         /// This 'Control' is the toolstrip control that holds the comport combo, baudrate combo etc
@@ -407,17 +403,17 @@ namespace MissionPlanner
         /// </summary>
         static internal ConnectionControl _connectionControl;
 
-        public static bool TerminalTheming = true;
-
         public void updateLayout(object sender, EventArgs e)
         {
             MenuSimulation.Visible = DisplayConfiguration.displaySimulation;
             MenuTerminal.Visible = DisplayConfiguration.displayTerminal;
+            //MenuDonate.Visible = DisplayConfiguration.displayDonate;
             MenuHelp.Visible = DisplayConfiguration.displayHelp;
             MissionPlanner.Controls.BackstageView.BackstageView.Advanced = DisplayConfiguration.isAdvancedMode;
 
             if (MainV2.instance.FlightData != null)
             {
+                
                 TabControl t = MainV2.instance.FlightData.tabControlactions;
 
                 if (DisplayConfiguration.displayAdvActionsTab && !t.TabPages.Contains(FlightData.tabActions))
@@ -507,15 +503,8 @@ namespace MissionPlanner
             }
 
             InitializeComponent();
-            try
-            {
-                if(Settings.Instance["theme"] != null)
-                    ThemeManager.SetTheme((ThemeManager.Themes)Enum.Parse(typeof(ThemeManager.Themes), Settings.Instance["theme"]));
-            }
-            catch
-            {
-            }
-            Utilities.ThemeManager.ApplyThemeTo(this);
+            //Utilities.ThemeManager.ApplyThemeTo(this);
+            CHK_hsmav.Checked = false; //临时禁用协议复选框
             MyView = new MainSwitcher(this);
 
             View = MyView;
@@ -565,7 +554,6 @@ namespace MissionPlanner
             splash.Refresh();
             Application.DoEvents();
 
-            // load last saved connection settings
             string temp = Settings.Instance.ComPort;
             if (!string.IsNullOrEmpty(temp))
             {
@@ -616,8 +604,10 @@ namespace MissionPlanner
                 changelanguage(CultureInfoEx.GetCultureInfo(Settings.Instance["language"]));
             }
 
-            this.Text = splash.Text;
-            titlebar = splash.Text;
+            //this.Text = splash.Text + " - HSGCS";
+            //titlebar = splash.Text + " - HSGCS";
+            this.Text = "HSGCS - V0.9";
+            titlebar = "HSGCS - V0.9";
 
             if (!MONO) // windows only
             {
@@ -695,6 +685,7 @@ namespace MissionPlanner
             {
                 log.Info("Create FD");
                 FlightData = new GCSViews.FlightData();
+                HsdevFlightData = new GCSViews.HsdevFlightData();
                 log.Info("Create FP");
                 FlightPlanner = new GCSViews.FlightPlanner();
                 //Configuration = new GCSViews.ConfigurationView.Setup();
@@ -704,6 +695,7 @@ namespace MissionPlanner
                 //Terminal = new GCSViews.Terminal();
 
                 FlightData.Width = MyView.Width;
+                HsdevFlightData.Width = MyView.Width;
                 FlightPlanner.Width = MyView.Width;
                 Simulation.Width = MyView.Width;
             }
@@ -726,12 +718,6 @@ namespace MissionPlanner
                 Application.Exit();
             }
 
-            //set first instance display configuration
-            if (DisplayConfiguration == null)
-            {
-                DisplayConfiguration = DisplayConfiguration.Basic();
-            }
-
             // load old config
             if (Settings.Instance["advancedview"] != null)
             {
@@ -741,7 +727,9 @@ namespace MissionPlanner
                 }
                 // remove old config
                 Settings.Instance.Remove("advancedview");
-            }            //// load this before the other screens get loaded
+            }
+
+            //// load this before the other screens get loaded
             if (Settings.Instance["displayview"] != null)
             {
                 try
@@ -752,13 +740,15 @@ namespace MissionPlanner
                 {
                     DisplayConfiguration = DisplayConfiguration.Basic();
                 }
+                DisplayConfiguration = new DisplayView().Advanced();
+                //DisplayConfiguration = Settings.Instance.GetDisplayView("displayview");
             }
 
             LayoutChanged += updateLayout;
             LayoutChanged(null, EventArgs.Empty);
 
             if (Settings.Instance["CHK_GDIPlus"] != null)
-                GCSViews.FlightData.myhud.opengl = !bool.Parse(Settings.Instance["CHK_GDIPlus"].ToString());
+                GCSViews.FlightData.myhud.UseOpenGL = !bool.Parse(Settings.Instance["CHK_GDIPlus"].ToString());
 
             if (Settings.Instance["CHK_hudshow"] != null)
                 GCSViews.FlightData.myhud.hudon = bool.Parse(Settings.Instance["CHK_hudshow"].ToString());
@@ -1141,6 +1131,11 @@ namespace MissionPlanner
             MyView.ShowScreen("FlightData");
         }
 
+        private void MenuHsFlightData_Click(object sender, EventArgs e)
+        {
+            MyView.ShowScreen("HsdevFlightData");
+        }
+
         private void MenuFlightPlanner_Click(object sender, EventArgs e)
         {
             MyView.ShowScreen("FlightPlanner");
@@ -1184,6 +1179,58 @@ namespace MissionPlanner
         private void MenuTerminal_Click(object sender, EventArgs e)
         {
             MyView.ShowScreen("Terminal");
+        }
+
+        private void toolStripMenuLogManger_Click(object sender, EventArgs e)
+        {
+
+            if (MainV2.comPort.MAV.cs.mode.ToString().ToUpper() == "STABILIZE" || MainV2.comPort.MAV.cs.mode == "Manual")
+            {
+                if (posdownlaoding == false)
+                {
+                    posdownlaoding = true;
+                    if(logdlmgr_form == null || logdlmgr_form.IsDisposed)
+                    {
+                        logdlmgr_form = new LogDownloadMavLink(showcontrol);
+                        logdlmgr_form.Show();
+                    }
+                    
+                }
+                else
+                {
+                    CustomMessageBox.Show("POS下载中.....", "错误");
+                }
+            }
+            else
+            {
+                CustomMessageBox.Show("请在待机状态下载POS", "错误");
+            }
+        }
+
+        private void MenuDownLoadPos_Click(object sender, EventArgs e)
+        {
+            if (MainV2.comPort.MAV.cs.mode.ToString().ToUpper() == "STABILIZE" || MainV2.comPort.MAV.cs.mode == "Manual")
+            {
+                if (posdownlaoding == false)
+                {
+                    posdownlaoding = true;
+                    var form = new PosDownLoadCurrent();
+
+                    form.Show();
+
+                    form.Pos_DownLoad_Thread();
+
+                    
+                }
+                else
+                {
+                    CustomMessageBox.Show("POS下载中.....", "错误");
+                }
+            }
+            else
+            {
+                CustomMessageBox.Show("请在待机状态下载POS", "错误");
+            }
         }
 
         public void doDisconnect(MAVLinkInterface comPort)
@@ -1400,6 +1447,7 @@ namespace MissionPlanner
                         _connectionControl.IsConnected(false);
                         UpdateConnectIcon();
                         comPort.Close();
+                        HsdevFlightData.showLogPlayBut(true);
                     }
                     catch
                     {
@@ -1559,6 +1607,7 @@ namespace MissionPlanner
 
                 // set connected icon
                 this.MenuConnect.Image = displayicons.disconnect;
+                HsdevFlightData.showLogPlayBut(false);
             }
             catch (Exception ex)
             {
@@ -1616,6 +1665,7 @@ namespace MissionPlanner
             if (comPort.BaseStream.IsOpen)
             {
                 doDisconnect(comPort);
+                HsdevFlightData.showLogPlayBut(true);
             }
             else
             {
@@ -1815,6 +1865,7 @@ namespace MissionPlanner
             try
             {
                 FlightData.Dispose();
+                HsdevFlightData.Dispose();
             }
             catch
             {
@@ -2387,7 +2438,7 @@ namespace MissionPlanner
                             MainV2.comPort.MAV.cs.linkqualitygcs = (ushort) (MainV2.comPort.MAV.cs.linkqualitygcs*0.8f);
                             linkqualitytime = DateTime.Now;
 
-                            // force redraw if there are no other packets are being read
+                            // force redraw is no other packets are being read
                             GCSViews.FlightData.myhud.Invalidate();
                         }
                     }
@@ -2660,7 +2711,8 @@ namespace MissionPlanner
             {
             }
 
-            MyView.AddScreen(new MainSwitcher.Screen("FlightData", FlightData, true));
+            MyView.AddScreen(new MainSwitcher.Screen("HsdevFlightData", HsdevFlightData, true));
+            MyView.AddScreen(new MainSwitcher.Screen("FlightData", FlightData, true));      
             MyView.AddScreen(new MainSwitcher.Screen("FlightPlanner", FlightPlanner, true));
             MyView.AddScreen(new MainSwitcher.Screen("HWConfig", typeof(GCSViews.InitialSetup), false));
             MyView.AddScreen(new MainSwitcher.Screen("SWConfig", typeof(GCSViews.SoftwareConfig), false));
@@ -2694,14 +2746,26 @@ namespace MissionPlanner
             else
             {
                 this.PerformLayout();
-                log.Info("show FlightData");
-                MenuFlightData_Click(this, e);
-                log.Info("show FlightData... Done");
-                MainMenu_ItemClicked(this, new ToolStripItemClickedEventArgs(MenuFlightData));
+
+                //log.Info("show FlightData");
+                //MenuFlightData_Click(this, e);
+                //log.Info("show FlightData... Done");
+                //MainMenu_ItemClicked(this, new ToolStripItemClickedEventArgs(MenuFlightData));
+
+                MenuHsFlightData_Click(this, e);
+                MainMenu_ItemClicked(this, new ToolStripItemClickedEventArgs(MenuHsFilghtData));
+
             }
 
             // for long running tasks using own threads.
             // for short use threadpool
+            MenuSimulation.Visible = false;
+            MenuFlightData.Visible = false;
+            FlightPlanner.setAdvancedFuction(false);
+            MenuInitConfig.Visible = false;
+            MenuConfigTune.Visible = false;
+            MenuTerminal.Visible = false;
+            MenuHelp.Visible = false;
 
             this.SuspendLayout();
 
@@ -2814,7 +2878,7 @@ namespace MissionPlanner
             log.Info("appload time");
             MissionPlanner.Utilities.Tracking.AddTiming("AppLoad", "Load Time",
                 (DateTime.Now - Program.starttime).TotalMilliseconds, "");
-
+/*
             bool winXp = Environment.OSVersion.Version.Major == 5;
             if (winXp)
             {
@@ -2830,6 +2894,8 @@ namespace MissionPlanner
                     "http://firmware.ardupilot.org/MissionPlanner/xp/checksums.txt";
                 System.Configuration.ConfigurationManager.AppSettings["BetaUpdateLocationVersion"] = "";
             }
+
+            //禁止自动更新
 
             try
             {
@@ -2849,7 +2915,7 @@ namespace MissionPlanner
             {
                 log.Error("Update check failed", ex);
             }
-
+*/
             // play a tlog that was passed to the program/ load a bin log passed
             if (Program.args.Length > 0)
             {
@@ -2926,6 +2992,8 @@ namespace MissionPlanner
             }
 
             // show wizard on first use
+            // 取消向导
+            /*
             if (Settings.Instance["newuser"] == null)
             {
                 if (CustomMessageBox.Show("This is your first run, Do you wish to use the setup wizard?\nRecomended for new users.", "Wizard", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
@@ -2939,6 +3007,13 @@ namespace MissionPlanner
 
                 Settings.Instance["newuser"] = DateTime.Now.ToShortDateString();
             }
+            */
+            CHK_hsmav.Location = new Point(this.MainMenu.Width - 400, this.MainMenu.Height - 20 );
+        }
+
+        private void resize(object sender, EventArgs e)
+        {
+            CHK_hsmav.Location = new Point(this.MainMenu.Width - 400, this.MainMenu.Height - 20);
         }
 
         private Dictionary<string, string> ProcessCommandLine(string[] args)
@@ -3055,8 +3130,6 @@ namespace MissionPlanner
             try
             {
                 MissionPlanner.Log.LogSort.SortLogs(Directory.GetFiles(Settings.Instance.LogDir, "*.tlog"));
-
-                MissionPlanner.Log.LogSort.SortLogs(Directory.GetFiles(Settings.Instance.LogDir, "*.rlog"));
             }
             catch (Exception ex)
             {
@@ -3099,9 +3172,6 @@ namespace MissionPlanner
 
         private void checkupdate(object stuff)
         {
-            if (Program.WindowsStoreApp)
-                return;
-
             try
             {
                 MissionPlanner.Utilities.Update.CheckForUpdate();
@@ -3126,7 +3196,10 @@ namespace MissionPlanner
             MyView.ShowScreen("Help");
         }
 
-
+        int pwstep = 0;
+        int keyhack = 0;
+        bool showcontrol = false;
+        bool fladv = false;
         /// <summary>
         /// keyboard shortcuts override
         /// </summary>
@@ -3135,6 +3208,101 @@ namespace MissionPlanner
         /// <returns></returns>
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
+
+            switch (pwstep)
+            {
+                case 0:
+                    if (keyData == Keys.H)
+                    {
+                        keyhack++;
+                    }
+                    else
+                    {
+                        pwstep = 0;
+                        keyhack = 0;
+                    }
+                    if (keyhack == 2)
+                    {
+                        pwstep = 1;
+                        keyhack = 0;
+                    }
+                    break;
+                case 1:
+                    if (keyData == Keys.U)
+                    {
+                        keyhack++;
+                    }
+                    else
+                    {
+                        pwstep = 0;
+                        keyhack = 0;
+                    }
+                    if (keyhack == 2)
+                    {
+                        pwstep = 2;
+                        keyhack = 0;
+                    }
+                    break;
+                case 2:
+                    if (keyData == Keys.I)
+                    {
+                        keyhack++;
+                    }
+                    else
+                    {
+                        pwstep = 0;
+                        keyhack = 0;
+                    }
+                    if (keyhack == 2)
+                    {
+                        pwstep = 3;
+                        keyhack = 0;
+                    }
+                    break;
+
+            }
+            if (pwstep == 3)
+            {
+                pwstep = 0;
+                //MenuConnect_Click(null, null);
+                showcontrol = !showcontrol;
+                if (showcontrol)
+                {
+                    int win = NativeMethods.FindWindow("ConsoleWindowClass", null);
+                    NativeMethods.ShowWindow(win, NativeMethods.SW_SHOWNORMAL); // hide window
+                }
+                else
+                {
+                    int win = NativeMethods.FindWindow("ConsoleWindowClass", null);
+                    NativeMethods.ShowWindow(win, NativeMethods.SW_HIDE); // hide window
+                    if(logdlmgr_form != null)
+                    {
+                        logdlmgr_form.Close(); //将已打开的日志管理对话框关闭
+                    }                    
+                }
+                MenuSimulation.Visible = !MenuSimulation.Visible;
+                MenuFlightData.Visible = !MenuFlightData.Visible;
+                MenuInitConfig.Visible = !MenuInitConfig.Visible;
+                MenuConfigTune.Visible = !MenuConfigTune.Visible;
+                MenuTerminal.Visible = !MenuTerminal.Visible;
+                MenuHelp.Visible = !MenuHelp.Visible;
+                fladv = !fladv;
+                FlightPlanner.setAdvancedFuction(fladv);
+                CHK_hsmav.Visible = !CHK_hsmav.Visible; // 控制协议复选框隐藏
+                //MyFlightData.zg1show();
+                //  public System.Windows.Forms.ToolStripButton MenuFlightData;
+                // public System.Windows.Forms.ToolStripButton MenuFlightPlanner;
+                // public System.Windows.Forms.ToolStripButton MenuInitConfig;
+                // public System.Windows.Forms.ToolStripButton MenuSimulation;
+                // public System.Windows.Forms.ToolStripButton MenuConfigTune;
+                // public System.Windows.Forms.ToolStripButton MenuTerminal;
+                // public System.Windows.Forms.ToolStripButton MenuConnect;
+
+                //private System.Windows.Forms.ToolStripButton MenuHelp;
+                return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
             if (keyData == Keys.F12)
             {
                 MenuConnect_Click(null, null);
@@ -3672,6 +3840,15 @@ namespace MissionPlanner
         private void connectionOptionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new ConnectionOptions().Show(this);
+        }
+
+        private void toolStripMenuCalCompass_Click(object sender, EventArgs e)
+        {
+            if (MainV2.comPort.MAV.cs.armed)
+            {
+                MessageBox.Show("解锁后不能校准罗盘！");
+            }else
+                new CalibrationCompassFrom().Show(this);
         }
     }
 }

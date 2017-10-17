@@ -128,6 +128,10 @@
             this.tabSimple = new System.Windows.Forms.TabPage();
             this.label38 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.CHK_hssideshot = new System.Windows.Forms.CheckBox();
+            this.CHK_sideshot = new System.Windows.Forms.CheckBox();
+            this.NUM_windDir = new System.Windows.Forms.NumericUpDown();
+            this.label43 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
             this.NUM_split = new System.Windows.Forms.NumericUpDown();
             this.CHK_usespeed = new System.Windows.Forms.CheckBox();
@@ -143,8 +147,10 @@
             this.NUM_altitude = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.NUM_refaltitude = new System.Windows.Forms.NumericUpDown();
             this.CHK_advanced = new System.Windows.Forms.CheckBox();
             this.CHK_footprints = new System.Windows.Forms.CheckBox();
+            this.label45 = new System.Windows.Forms.Label();
             this.CHK_internals = new System.Windows.Forms.CheckBox();
             this.CHK_grid = new System.Windows.Forms.CheckBox();
             this.CHK_markers = new System.Windows.Forms.CheckBox();
@@ -153,8 +159,6 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.TRK_zoom = new MissionPlanner.Controls.MyTrackBar();
             this.map = new MissionPlanner.Controls.myGMAP();
-            this.lbl_minshutter = new System.Windows.Forms.Label();
-            this.label44 = new System.Windows.Forms.Label();
             this.groupBox5.SuspendLayout();
             this.tabCamera.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -181,19 +185,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.NUM_spacing)).BeginInit();
             this.tabSimple.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NUM_windDir)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUM_split)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUM_UpDownFlySpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUM_angle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUM_altitude)).BeginInit();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NUM_refaltitude)).BeginInit();
             this.tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TRK_zoom)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.lbl_minshutter);
-            this.groupBox5.Controls.Add(this.label44);
             this.groupBox5.Controls.Add(this.lbl_gndelev);
             this.groupBox5.Controls.Add(this.label40);
             this.groupBox5.Controls.Add(this.lbl_turnrad);
@@ -575,6 +579,7 @@
             // 
             resources.ApplyResources(this.BUT_samplephoto, "BUT_samplephoto");
             this.BUT_samplephoto.Name = "BUT_samplephoto";
+            this.BUT_samplephoto.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.BUT_samplephoto.UseVisualStyleBackColor = true;
             this.BUT_samplephoto.Click += new System.EventHandler(this.BUT_samplephoto_Click);
             // 
@@ -693,6 +698,7 @@
             // 
             resources.ApplyResources(this.BUT_save, "BUT_save");
             this.BUT_save.Name = "BUT_save";
+            this.BUT_save.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.BUT_save.UseVisualStyleBackColor = true;
             this.BUT_save.Click += new System.EventHandler(this.BUT_save_Click);
             // 
@@ -993,6 +999,10 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.CHK_hssideshot);
+            this.groupBox6.Controls.Add(this.CHK_sideshot);
+            this.groupBox6.Controls.Add(this.NUM_windDir);
+            this.groupBox6.Controls.Add(this.label43);
             this.groupBox6.Controls.Add(this.label37);
             this.groupBox6.Controls.Add(this.NUM_split);
             this.groupBox6.Controls.Add(this.CHK_usespeed);
@@ -1010,6 +1020,35 @@
             resources.ApplyResources(this.groupBox6, "groupBox6");
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.TabStop = false;
+            // 
+            // CHK_hssideshot
+            // 
+            resources.ApplyResources(this.CHK_hssideshot, "CHK_hssideshot");
+            this.CHK_hssideshot.Name = "CHK_hssideshot";
+            this.CHK_hssideshot.UseVisualStyleBackColor = true;
+            this.CHK_hssideshot.CheckedChanged += new System.EventHandler(this.domainUpDown1_ValueChanged);
+            // 
+            // CHK_sideshot
+            // 
+            resources.ApplyResources(this.CHK_sideshot, "CHK_sideshot");
+            this.CHK_sideshot.Name = "CHK_sideshot";
+            this.CHK_sideshot.UseVisualStyleBackColor = true;
+            this.CHK_sideshot.CheckedChanged += new System.EventHandler(this.domainUpDown1_ValueChanged);
+            // 
+            // NUM_windDir
+            // 
+            resources.ApplyResources(this.NUM_windDir, "NUM_windDir");
+            this.NUM_windDir.Maximum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            0});
+            this.NUM_windDir.Name = "NUM_windDir";
+            // 
+            // label43
+            // 
+            resources.ApplyResources(this.label43, "label43");
+            this.label43.Name = "label43";
             // 
             // label37
             // 
@@ -1046,8 +1085,6 @@
             // CHK_toandland_RTL
             // 
             resources.ApplyResources(this.CHK_toandland_RTL, "CHK_toandland_RTL");
-            this.CHK_toandland_RTL.Checked = true;
-            this.CHK_toandland_RTL.CheckState = System.Windows.Forms.CheckState.Checked;
             this.CHK_toandland_RTL.Name = "CHK_toandland_RTL";
             this.CHK_toandland_RTL.UseVisualStyleBackColor = true;
             // 
@@ -1150,8 +1187,10 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.NUM_refaltitude);
             this.groupBox4.Controls.Add(this.CHK_advanced);
             this.groupBox4.Controls.Add(this.CHK_footprints);
+            this.groupBox4.Controls.Add(this.label45);
             this.groupBox4.Controls.Add(this.CHK_internals);
             this.groupBox4.Controls.Add(this.CHK_grid);
             this.groupBox4.Controls.Add(this.CHK_markers);
@@ -1159,6 +1198,23 @@
             resources.ApplyResources(this.groupBox4, "groupBox4");
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.TabStop = false;
+            // 
+            // NUM_refaltitude
+            // 
+            this.NUM_refaltitude.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            resources.ApplyResources(this.NUM_refaltitude, "NUM_refaltitude");
+            this.NUM_refaltitude.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.NUM_refaltitude.Name = "NUM_refaltitude";
+            this.NUM_refaltitude.ValueChanged += new System.EventHandler(this.domainUpDown1_ValueChanged);
+            this.NUM_refaltitude.KeyUp += new System.Windows.Forms.KeyEventHandler(this.domainUpDown1_ValueChanged);
             // 
             // CHK_advanced
             // 
@@ -1173,6 +1229,11 @@
             this.CHK_footprints.Name = "CHK_footprints";
             this.CHK_footprints.UseVisualStyleBackColor = true;
             this.CHK_footprints.CheckedChanged += new System.EventHandler(this.domainUpDown1_ValueChanged);
+            // 
+            // label45
+            // 
+            resources.ApplyResources(this.label45, "label45");
+            this.label45.Name = "label45";
             // 
             // CHK_internals
             // 
@@ -1212,6 +1273,7 @@
             // 
             resources.ApplyResources(this.BUT_Accept, "BUT_Accept");
             this.BUT_Accept.Name = "BUT_Accept";
+            this.BUT_Accept.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.BUT_Accept.UseVisualStyleBackColor = true;
             this.BUT_Accept.Click += new System.EventHandler(this.BUT_Accept_Click);
             // 
@@ -1263,16 +1325,6 @@
             this.map.MouseDown += new System.Windows.Forms.MouseEventHandler(this.map_MouseDown);
             this.map.MouseMove += new System.Windows.Forms.MouseEventHandler(this.map_MouseMove);
             // 
-            // lbl_minshutter
-            // 
-            resources.ApplyResources(this.lbl_minshutter, "lbl_minshutter");
-            this.lbl_minshutter.Name = "lbl_minshutter";
-            // 
-            // label44
-            // 
-            resources.ApplyResources(this.label44, "label44");
-            this.label44.Name = "label44";
-            // 
             // GridUI
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1319,12 +1371,14 @@
             this.tabSimple.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NUM_windDir)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUM_split)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUM_UpDownFlySpeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUM_angle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUM_altitude)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NUM_refaltitude)).EndInit();
             this.tabControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.TRK_zoom)).EndInit();
             this.ResumeLayout(false);
@@ -1421,13 +1475,6 @@
         private System.Windows.Forms.CheckBox CHK_camdirection;
         private System.Windows.Forms.NumericUpDown NUM_altitude;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.CheckBox CHK_advanced;
-        private System.Windows.Forms.CheckBox CHK_footprints;
-        private System.Windows.Forms.CheckBox CHK_internals;
-        private System.Windows.Forms.CheckBox CHK_grid;
-        private System.Windows.Forms.CheckBox CHK_markers;
-        private System.Windows.Forms.CheckBox CHK_boundary;
         private Controls.MyButton BUT_Accept;
         private System.Windows.Forms.TabControl tabControl1;
         private Controls.MyTrackBar TRK_zoom;
@@ -1458,7 +1505,18 @@
         private System.Windows.Forms.NumericUpDown num_setservohigh;
         private System.Windows.Forms.Label label42;
         private System.Windows.Forms.NumericUpDown num_setservono;
-        private System.Windows.Forms.Label lbl_minshutter;
-        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.NumericUpDown NUM_windDir;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.CheckBox CHK_sideshot;
+        private System.Windows.Forms.CheckBox CHK_hssideshot;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.NumericUpDown NUM_refaltitude;
+        private System.Windows.Forms.CheckBox CHK_advanced;
+        private System.Windows.Forms.CheckBox CHK_footprints;
+        private System.Windows.Forms.CheckBox CHK_internals;
+        private System.Windows.Forms.CheckBox CHK_grid;
+        private System.Windows.Forms.CheckBox CHK_markers;
+        private System.Windows.Forms.CheckBox CHK_boundary;
+        private System.Windows.Forms.Label label45;
     }
 }

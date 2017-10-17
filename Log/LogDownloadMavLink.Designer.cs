@@ -36,7 +36,6 @@
             this.BUT_clearlogs = new MissionPlanner.Controls.MyButton();
             this.CHK_logs = new System.Windows.Forms.CheckedListBox();
             this.BUT_redokml = new MissionPlanner.Controls.MyButton();
-            this.BUT_firstperson = new MissionPlanner.Controls.MyButton();
             this.BUT_bintolog = new MissionPlanner.Controls.MyButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
@@ -46,6 +45,8 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.labelBytes = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.BUT_DLthesePos = new MissionPlanner.Controls.MyButton();
+            this.BUT_firstperson = new MissionPlanner.Controls.MyButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -62,6 +63,7 @@
             // 
             resources.ApplyResources(this.BUT_DLall, "BUT_DLall");
             this.BUT_DLall.Name = "BUT_DLall";
+            this.BUT_DLall.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.BUT_DLall.UseVisualStyleBackColor = true;
             this.BUT_DLall.Click += new System.EventHandler(this.BUT_DLall_Click);
             // 
@@ -69,6 +71,7 @@
             // 
             resources.ApplyResources(this.BUT_DLthese, "BUT_DLthese");
             this.BUT_DLthese.Name = "BUT_DLthese";
+            this.BUT_DLthese.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.toolTip1.SetToolTip(this.BUT_DLthese, resources.GetString("BUT_DLthese.ToolTip"));
             this.BUT_DLthese.UseVisualStyleBackColor = true;
             this.BUT_DLthese.Click += new System.EventHandler(this.BUT_DLthese_Click);
@@ -77,6 +80,7 @@
             // 
             resources.ApplyResources(this.BUT_clearlogs, "BUT_clearlogs");
             this.BUT_clearlogs.Name = "BUT_clearlogs";
+            this.BUT_clearlogs.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.toolTip1.SetToolTip(this.BUT_clearlogs, resources.GetString("BUT_clearlogs.ToolTip"));
             this.BUT_clearlogs.UseVisualStyleBackColor = true;
             this.BUT_clearlogs.Click += new System.EventHandler(this.BUT_clearlogs_Click);
@@ -92,22 +96,16 @@
             // 
             resources.ApplyResources(this.BUT_redokml, "BUT_redokml");
             this.BUT_redokml.Name = "BUT_redokml";
+            this.BUT_redokml.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.toolTip1.SetToolTip(this.BUT_redokml, resources.GetString("BUT_redokml.ToolTip"));
             this.BUT_redokml.UseVisualStyleBackColor = true;
             this.BUT_redokml.Click += new System.EventHandler(this.BUT_redokml_Click);
-            // 
-            // BUT_firstperson
-            // 
-            resources.ApplyResources(this.BUT_firstperson, "BUT_firstperson");
-            this.BUT_firstperson.Name = "BUT_firstperson";
-            this.toolTip1.SetToolTip(this.BUT_firstperson, resources.GetString("BUT_firstperson.ToolTip"));
-            this.BUT_firstperson.UseVisualStyleBackColor = true;
-            this.BUT_firstperson.Click += new System.EventHandler(this.BUT_firstperson_Click);
             // 
             // BUT_bintolog
             // 
             resources.ApplyResources(this.BUT_bintolog, "BUT_bintolog");
             this.BUT_bintolog.Name = "BUT_bintolog";
+            this.BUT_bintolog.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.toolTip1.SetToolTip(this.BUT_bintolog, resources.GetString("BUT_bintolog.ToolTip"));
             this.BUT_bintolog.UseVisualStyleBackColor = true;
             this.BUT_bintolog.Click += new System.EventHandler(this.BUT_bintolog_Click);
@@ -160,13 +158,31 @@
             // tableLayoutPanel3
             // 
             resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
-            this.tableLayoutPanel3.Controls.Add(this.BUT_DLall, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.BUT_clearlogs, 0, 2);
-            this.tableLayoutPanel3.Controls.Add(this.BUT_firstperson, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.BUT_DLthese, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.BUT_bintolog, 1, 2);
-            this.tableLayoutPanel3.Controls.Add(this.BUT_redokml, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.BUT_redokml, 0, 4);
+            this.tableLayoutPanel3.Controls.Add(this.BUT_clearlogs, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.BUT_bintolog, 0, 3);
+            this.tableLayoutPanel3.Controls.Add(this.BUT_DLthese, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.BUT_DLthesePos, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.BUT_firstperson, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.BUT_DLall, 1, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            // 
+            // BUT_DLthesePos
+            // 
+            resources.ApplyResources(this.BUT_DLthesePos, "BUT_DLthesePos");
+            this.BUT_DLthesePos.Name = "BUT_DLthesePos";
+            this.BUT_DLthesePos.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.BUT_DLthesePos.UseVisualStyleBackColor = true;
+            this.BUT_DLthesePos.Click += new System.EventHandler(this.BUT_DLthesePos_Click);
+            // 
+            // BUT_firstperson
+            // 
+            resources.ApplyResources(this.BUT_firstperson, "BUT_firstperson");
+            this.BUT_firstperson.Name = "BUT_firstperson";
+            this.BUT_firstperson.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.toolTip1.SetToolTip(this.BUT_firstperson, resources.GetString("BUT_firstperson.ToolTip"));
+            this.BUT_firstperson.UseVisualStyleBackColor = true;
+            this.BUT_firstperson.Click += new System.EventHandler(this.BUT_firstperson_Click);
             // 
             // toolTip1
             // 
@@ -199,7 +215,6 @@
         private System.Windows.Forms.CheckedListBox CHK_logs;
         private Controls.MyButton BUT_redokml;
         private System.Windows.Forms.TextBox TXT_seriallog;
-        private Controls.MyButton BUT_firstperson;
         private Controls.MyButton BUT_bintolog;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label1;
@@ -210,5 +225,7 @@
         private System.Windows.Forms.Label labelBytes;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.ToolTip toolTip1;
+        private Controls.MyButton BUT_firstperson;
+        private Controls.MyButton BUT_DLthesePos;
     }
 }

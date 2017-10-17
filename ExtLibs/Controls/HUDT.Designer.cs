@@ -125,7 +125,7 @@ namespace MissionPlanner.Controls {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Arial.
+        ///   Looks up a localized string similar to Tahoma.
         /// </summary>
         internal static string Font {
             get {
@@ -179,20 +179,11 @@ namespace MissionPlanner.Controls {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to GPS: rtk Float.
+        ///   Looks up a localized string similar to GPS: 3D rtk.
         /// </summary>
         internal static string GPS5 {
             get {
                 return ResourceManager.GetString("GPS5", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to GPS: rtk Fixed.
-        /// </summary>
-        internal static string GPS6 {
-            get {
-                return ResourceManager.GetString("GPS6", resourceCulture);
             }
         }
         

@@ -121,6 +121,127 @@ namespace MissionPlanner
             rtcm3.ObsMessage += Rtcm3_ObsMessage;
 
             MissionPlanner.Utilities.Tracking.AddPage(this.GetType().ToString(), this.Text);
+
+            dg_basepos.ForeColor = Color.Black;
+        }
+
+        private void Rtcm3_ObsMessage(object sender, EventArgs e)
+        {
+            if (MainV2.instance.IsDisposed)
+                threadrun = false;
+
+            MainV2.instance.BeginInvoke((MethodInvoker) delegate
+            {
+                List<rtcm3.ob> obs = sender as List<rtcm3.ob>;
+
+                // get system controls
+                Func<char,List<VerticalProgressBar2>> ctls = delegate (char sys)
+                {
+                    return panel1.Controls.OfType<VerticalProgressBar2>()
+                        .Where(ctl => { return ctl.Label.StartsWith(sys + ""); }).ToList();
+                };
+
+                // we need more ctls for this system
+                while (ctls.Invoke(obs[0].sys).Count() < obs.Count)
+                    panel1.Controls.Add(new VerticalProgressBar2()
+                    {
+                        Height = panel1.Height - 30,
+                        Label = obs[0].sys + ""
+                    });
+
+                // we need to remove ctls for this system
+                while (ctls.Invoke(obs[0].sys).Count() > obs.Count)
+                {
+                    panel1.Controls.Remove(ctls.Invoke(obs[0].sys).First());
+                }
+
+                int width = panel1.Width/panel1.Controls.OfType<VerticalProgressBar2>().Count();
+
+                var tmp = ctls('G');
+                var tmp2 = ctls('R');
+                var tmp3 = ctls('C');
+
+                var start = 0;
+
+                if (obs[0].sys == 'G')
+                    start = 0;
+                if (obs[0].sys == 'R')
+                    start = tmp.Count;
+                if (obs[0].sys == 'C')
+                    start = tmp.Count + tmp2.Count;
+
+                // if G 0, if R = G.count (2 system support)
+                var a = start;
+
+                var sysctls = ctls.Invoke(obs[0].sys);
+                var cnt = 0;
+                foreach (var ob in obs)
+                {
+                    var vpb = sysctls[cnt];
+                    vpb.Value = (int) ob.snr;
+                    //vpb.Text = ob.snr.ToString();
+                    vpb.Label = ob.sys + ob.prn.ToString();
+                    vpb.Location = new Point(width*(a + cnt), 0);
+                    vpb.DrawLabel = true;
+                    vpb.Width = width;
+                    vpb.Height = panel1.Height-30;
+                    vpb.Minimum = 25;
+                    vpb.Maximum = 55;
+                    vpb.minline = 30;
+                    vpb.maxline = 99;
+                    cnt++;
+                }
+
+                ThemeManager.ApplyThemeTo(panel1);
+            }
+            );
+        }
+
+        ~SerialInjectGPS()
+        {
+            log.Info("destroy");
+        }
+
+        void loadBasePosList()
+        {
+            if (File.Exists(basepostlistfile))
+            {
+                //load config
+                System.Xml.Serialization.XmlSerializer reader =
+                    new System.Xml.Serialization.XmlSerializer(typeof (List<PointLatLngAlt>), new Type[] { typeof(Color) });
+
+                using (StreamReader sr = new StreamReader(basepostlistfile))
+                {
+                    try
+                    {
+                        baseposList = (List<PointLatLngAlt>) reader.Deserialize(sr);
+                    }
+                    catch (Exception ex)
+                    {
+                        log.Error(ex);
+                        CustomMessageBox.Show("Failed to load Base Position List\n" + ex.ToString(), Strings.ERROR);
+                    }
+                }
+            }
+
+            updateBasePosDG();
+        }
+
+        void saveBasePosList()
+        {
+            // save config
+            System.Xml.Serialization.XmlSerializer writer =
+                new System.Xml.Serialization.XmlSerializer(typeof(List<PointLatLngAlt>), new Type[] { typeof(Color) });
+
+            using (StreamWriter sw = new StreamWriter(basepostlistfile))
+            {
+                writer.Serialize(sw, baseposList);
+            }
+        }
+
+        public new void Show()
+        {
+            this.ShowUserControl();
         }
 
         private void Rtcm3_ObsMessage(object sender, EventArgs e)
@@ -549,6 +670,7 @@ namespace MissionPlanner
                                 rtcm3.resetParser();
                                 sbp.resetParser();
                                 ubx_m8p.resetParser();
+
                                 string msgname = "NMEA";
                                 if (!msgseen.ContainsKey(msgname))
                                     msgseen[msgname] = 0;
@@ -644,11 +766,16 @@ namespace MissionPlanner
 
                     Utilities.rtcm3.ecef2pos(pos, ref baseposllh);
 
+
                     if(svin.valid == 1)
                     {
                         //MainV2.comPort.MAV.cs.MovingBase = new Utilities.PointLatLngAlt(baseposllh[0]*Utilities.rtcm3.R2D,
                         //baseposllh[1]*Utilities.rtcm3.R2D, baseposllh[2]);
                     }
+
+                    //MainV2.comPort.MAV.cs.MovingBase = new Utilities.PointLatLngAlt(baseposllh[0]*Utilities.rtcm3.R2D,
+                    //baseposllh[1]*Utilities.rtcm3.R2D, baseposllh[2]);
+
 
                     //if (svin.valid == 1)
                     //ubx_m8p.turnon_off(comPort, 0x1, 0x3b, 0);
@@ -713,8 +840,14 @@ namespace MissionPlanner
                     ubx_m8p.poll_msg(comPort, 0x06, 0x71);
                     pollTMODE = DateTime.Now.AddSeconds(60);
 
-                    ubx_m8p.poll_msg(comPort, 0x0a, 0x4);
+                    ubx_m8p.poll_msg(comPort, 0x0a, 0x4);??
+                    log.InfoFormat("ubx TMODE3 {0} {1}", (ubx_m8p.ubx_cfg_tmode3.modeflags)tmode.flags, "");
                 }
+                else
+                {
+                    ubx_m8p.turnon_off(comPort, ubx_m8p.@class, ubx_m8p.subclass, 0);
+                }
+
             }
             catch (Exception ex)
             {
@@ -955,7 +1088,216 @@ namespace MissionPlanner
                 baseposList.Add(new PointLatLngAlt(basepos) {Tag = location});
 
                 updateBasePosDG();
+
             }
+        }
+
+        private void chk_m8pautoconfig_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Instance["SerialInjectGPS_m8pautoconfig"] = chk_m8pautoconfig.Checked.ToString();
+
+            if (chk_m8pautoconfig.Checked)
+                splitContainer1.Panel1Collapsed = false;
+            else
+                splitContainer1.Panel1Collapsed = true;
+        }
+
+        void updateBasePosDG()
+        {
+            if (baseposList.Count == 0)
+                return;
+
+            //dont trigger on clear
+            dg_basepos.RowsRemoved -= dg_basepos_RowsRemoved;
+            dg_basepos.Rows.Clear();
+            dg_basepos.RowsRemoved += dg_basepos_RowsRemoved;
+
+            foreach (var pointLatLngAlt in baseposList)
+            {
+                dg_basepos.Rows.Add(pointLatLngAlt.Lat.ToInvariantString(), pointLatLngAlt.Lng.ToInvariantString(), pointLatLngAlt.Alt.ToInvariantString(), pointLatLngAlt.Tag);
+            }
+
+            saveBasePosList();
+        }
+
+        private void dg_basepos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == Use.Index)
+            {
+                Settings.Instance["base_pos"] = String.Format("{0},{1},{2},{3}",
+                    dg_basepos[Lat.Index, e.RowIndex].Value.ToInvariantString(),
+                    dg_basepos[Long.Index, e.RowIndex].Value.ToInvariantString(),
+                    dg_basepos[Alt.Index, e.RowIndex].Value.ToInvariantString(),
+                    dg_basepos[BaseName1.Index, e.RowIndex].Value);
+
+                loadBasePOS();
+
+                if (comPort.IsOpen)
+                {
+                    ubx_m8p.SetupBasePos(comPort, basepos, int.Parse(txt_surveyinDur.Text, CultureInfo.InvariantCulture),
+                        double.Parse(txt_surveyinAcc.Text, CultureInfo.InvariantCulture));
+
+                    ubx_m8p.poll_msg(comPort, 0x06, 0x71);
+                }
+            }
+            if (e.ColumnIndex == Delete.Index)
+            {
+                dg_basepos.Rows.RemoveAt(e.RowIndex);
+            }
+        }
+
+        private void dg_basepos_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            while (baseposList.Count <= e.RowIndex)
+                baseposList.Add(new PointLatLngAlt());
+
+            if (e.ColumnIndex == Lat.Index)
+            {
+                double lat = 0.0f;
+                string[] items = dg_basepos[e.ColumnIndex, e.RowIndex].Value.ToString()
+                                    .Split(new char[] { (char)':' }, StringSplitOptions.RemoveEmptyEntries);
+                if (items.Count() == 1)
+                {
+                    if(double.TryParse(items[0], out lat))
+                        baseposList[e.RowIndex].Lat = lat;
+                    else
+                    {
+                        MessageBox.Show("输入错误！");
+                        return;
+                    }
+                }
+                else if(items.Count() == 3)
+                {
+                    int dd = 0;
+                    double min = 0.0f;
+                    double frac_mm = 0.0f;
+                    bool d = int.TryParse(items[0], out dd);
+                    bool m = double.TryParse(items[1], out min);
+                    bool mm = double.TryParse(items[2], out frac_mm);
+                    if(!d || !m || !mm)
+                    {
+                        MessageBox.Show("输入错误！");
+                        return;
+                    }
+                    lat = dd + min / 60.0f + frac_mm / 3600.0f;
+                    baseposList[e.RowIndex].Lat = lat;
+                    dg_basepos[e.ColumnIndex, e.RowIndex].Value = lat.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("输入错误！");
+                    return;
+                }
+            }
+            if (e.ColumnIndex == Long.Index)
+            {
+                //baseposList[e.RowIndex].Lng = double.Parse(dg_basepos[e.ColumnIndex, e.RowIndex].Value.ToString());
+
+                double lng = 0.0f;
+                string[] items = dg_basepos[e.ColumnIndex, e.RowIndex].Value.ToString()
+                                    .Split(new char[] { (char)':' }, StringSplitOptions.RemoveEmptyEntries);
+                if (items.Count() == 1)
+                {
+                    if (double.TryParse(items[0], out lng))
+                        baseposList[e.RowIndex].Lng = lng;
+                    else
+                    {
+                        MessageBox.Show("输入错误！");
+                        return;
+                    }
+                }
+                else if (items.Count() == 3)
+                {
+                    int dd = 0;
+                    double min = 0.0f;
+                    double frac_mm = 0.0f;
+                    bool d = int.TryParse(items[0], out dd);
+                    bool m = double.TryParse(items[1], out min);
+                    bool mm = double.TryParse(items[2], out frac_mm);
+                    if (!d || !m || !mm)
+                    {
+                        MessageBox.Show("输入错误！");
+                        return;
+                    }
+                    lng = dd + min / 60.0f + frac_mm / 3600.0f;
+                    baseposList[e.RowIndex].Lng = lng;
+                    dg_basepos[e.ColumnIndex, e.RowIndex].Value = lng.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("输入错误！");
+                    return;
+                }
+            }
+            if (e.ColumnIndex == Alt.Index)
+            {
+                //baseposList[e.RowIndex].Alt = double.Parse(dg_basepos[e.ColumnIndex, e.RowIndex].Value.ToString());
+                double alt = 0.0f;
+
+                if (double.TryParse(dg_basepos[e.ColumnIndex, e.RowIndex].Value.ToString(), out alt))
+                    baseposList[e.RowIndex].Alt = alt;
+                    else
+                    {
+                        MessageBox.Show("输入错误！");
+                        return;
+                    }
+              
+            }
+            if (e.ColumnIndex == BaseName1.Index)
+            {
+                baseposList[e.RowIndex].Tag = dg_basepos[e.ColumnIndex, e.RowIndex].Value.ToString();
+            }
+
+            saveBasePosList();
+        }
+
+        private void dg_basepos_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            baseposList.RemoveAt(e.RowIndex);
+
+            saveBasePosList();
+        }
+
+        private void chk_m8p_130p_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Instance["SerialInjectGPS_m8p_130p"] = chk_m8p_130p.Checked.ToString();
+        }
+
+        private void txt_surveyinAcc_TextChanged(object sender, EventArgs e)
+        {
+            Settings.Instance["SerialInjectGPS_SIAcc"] = txt_surveyinAcc.Text.ToString();
+        }
+
+        private void txt_surveyinDur_TextChanged(object sender, EventArgs e)
+        {
+            Settings.Instance["SerialInjectGPS_SITime"] = txt_surveyinDur.Text.ToString();
+        }
+
+        private void but_restartsvin_Click(object sender, EventArgs e)
+        {
+            basepos = PointLatLngAlt.Zero;
+            invalidateRTCMStatus();
+
+            msgseen.Clear();
+
+            if (comPort.IsOpen)
+            {
+                ubx_m8p.SetupBasePos(comPort, basepos, 0, 0, true);
+
+                ubx_m8p.SetupBasePos(comPort, basepos, int.Parse(txt_surveyinDur.Text, CultureInfo.InvariantCulture),
+                    double.Parse(txt_surveyinAcc.Text, CultureInfo.InvariantCulture));
+            }
+        }
+
+        private void dg_basepos_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
+        {
+            e.Row.Cells[Use.Index].Value = "Use";
+            e.Row.Cells[Delete.Index].Value = "Delete";
+        }
+
+        private void labelmsgseen_Click(object sender, EventArgs e)
+        {
+            msgseen.Clear();
         }
 
         private void chk_m8pautoconfig_CheckedChanged(object sender, EventArgs e)

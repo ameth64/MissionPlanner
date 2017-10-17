@@ -163,6 +163,12 @@ namespace MissionPlanner.Plugin
             get { return MainV2.instance.FlightPlanner.contextMenuStrip1; }
         }
 
+        //增加用户菜单
+        public ContextMenuStrip FPMenuMap2
+        {
+            get { return MainV2.instance.FlightPlanner.contextMenuStrip2; }
+        }
+
         /// <summary>
         /// The point where the menu was drawn
         /// </summary>

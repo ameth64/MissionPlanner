@@ -665,7 +665,7 @@ union px4_custom_mode {
             GPoint loc = new GPoint((int) (LocalPosition.X - (m2pixelwidth*wprad*2)), LocalPosition.Y);
                 // MainMap.FromLatLngToLocal(wpradposition);
 
-            if (m2pixelheight > 0.5 && !double.IsInfinity(m2pixelheight))
+            if (m2pixelheight > 0.5)
                 g.DrawArc(Pen,
                     new System.Drawing.Rectangle(
                         LocalPosition.X - Offset.X - (int) (Math.Abs(loc.X - LocalPosition.X)/2),
@@ -740,8 +740,8 @@ union px4_custom_mode {
         static Dictionary<string, Bitmap> fontBitmaps = new Dictionary<string, Bitmap>();
         static Font font;
 
-        public GMapMarkerWP(PointLatLng p, string wpno)
-            : base(p, GMarkerGoogleType.green)
+        public GMapMarkerWP(PointLatLng p, string wpno, GMarkerGoogleType c = GMarkerGoogleType.green)
+            : base(p, c)
         {
             this.wpno = wpno;
             if (font == null)

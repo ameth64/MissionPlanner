@@ -135,11 +135,12 @@
   <data name="FAILSAFE" xml:space="preserve">
     <value>FAILSAFE</value>
   </data>
-  <data name="FailsafeH" type="System.Int32" xml:space="preserve">
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="FailsafeH" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="Font" xml:space="preserve">
-    <value>Arial</value>
+    <value>Tahoma</value>
   </data>
   <data name="GPS0" xml:space="preserve">
     <value>GPS: No GPS</value>
@@ -157,10 +158,7 @@
     <value>GPS: 3D dgps</value>
   </data>
   <data name="GPS5" xml:space="preserve">
-    <value>GPS: rtk Float</value>
-  </data>
-    <data name="GPS6" xml:space="preserve">
-    <value>GPS: rtk Fixed</value>
+    <value>GPS: 3D rtk</value>
   </data>
   <data name="GS" xml:space="preserve">
     <value>GS </value>

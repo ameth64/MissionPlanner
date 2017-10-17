@@ -82,7 +82,7 @@ namespace GMap.NET.MapProviders
         }
         #endregion
 
-        public bool TryCorrectVersion = true;
+        public bool TryCorrectVersion = false;
         static bool init = false;
 
         public override void OnInitialized()
