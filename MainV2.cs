@@ -614,6 +614,8 @@ namespace MissionPlanner
             {
                 if (Settings.Instance["showconsole"] != null && Settings.Instance["showconsole"].ToString() == "True")
                 {
+                    int win = NativeMethods.FindWindow("ConsoleWindowClass", null);
+                    NativeMethods.ShowWindow(win, NativeMethods.SW_HIDE); // hide window
                 }
                 else
                 {

@@ -2352,19 +2352,9 @@ namespace MissionPlanner.GCSViews
                     if (items.Length <= 9)
                         continue;
 
-                    ushort cmd =
-                        (ushort)
-                                Enum.Parse(typeof(MAVLink.MAV_CMD),
-                                    Commands.Rows[a].Cells[Command.Index].Value.ToString(), false);
+                    if (int.Parse(items[0]) == 0)
+                         continue;
 
-                    if (cmd < (ushort)MAVLink.MAV_CMD.LAST &&
-                        double.Parse(Commands[Alt.Index, a].Value.ToString()) < double.Parse(TXT_altwarn.Text))
-                    {
-                        if (cmd != (ushort)MAVLink.MAV_CMD.TAKEOFF &&
-                            cmd != (ushort)MAVLink.MAV_CMD.LAND &&
-                            cmd != (ushort)MAVLink.MAV_CMD.RETURN_TO_LAUNCH)
-                            if (int.Parse(items[0]) == 0)
-                                continue;
                         HsTag t = new HsTag();
                         t.wp_type = HsWPType.NormalWP;
                         t.wp_color = GMarkerGoogleType.green;
@@ -2408,14 +2398,12 @@ namespace MissionPlanner.GCSViews
                             CustomMessageBox.Show("读出航点与本地缓存不一致");
                             break;
                         }
-                    }
-
+                }
                     sr.Close();
                     sr.Dispose();
                     writeKML();
 
                     MainMap.ZoomAndCenterMarkers("objects");
-                }
             }
         }
 
@@ -2609,18 +2597,17 @@ namespace MissionPlanner.GCSViews
                     if (Commands.Rows[a].Cells[Command.Index].Value.ToString().Contains("UNKNOWN"))
                         continue;
 
-                    byte cmd =
-                        (byte)
-                            (int)
-                                Enum.Parse(typeof (MAVLink.MAV_CMD),
+                    ushort cmd =
+                        (ushort)
+                                Enum.Parse(typeof(MAVLink.MAV_CMD),
                                     Commands.Rows[a].Cells[Command.Index].Value.ToString(), false);
 
-                    if (cmd < (byte) MAVLink.MAV_CMD.LAST &&
+                    if (cmd < (ushort)MAVLink.MAV_CMD.LAST &&
                         double.Parse(Commands[Alt.Index, a].Value.ToString()) < double.Parse(TXT_altwarn.Text))
                     {
-                        if (cmd != (byte) MAVLink.MAV_CMD.TAKEOFF &&
-                            cmd != (byte) MAVLink.MAV_CMD.LAND &&
-                            cmd != (byte) MAVLink.MAV_CMD.RETURN_TO_LAUNCH)
+                        if (cmd != (ushort)MAVLink.MAV_CMD.TAKEOFF &&
+                            cmd != (ushort)MAVLink.MAV_CMD.LAND &&
+                            cmd != (ushort)MAVLink.MAV_CMD.RETURN_TO_LAUNCH)
                         {
                             CustomMessageBox.Show("Low alt on WP#" + (a + 1) +
                                                   "\nPlease reduce the alt warning, or increase the altitude");
@@ -2660,9 +2647,8 @@ namespace MissionPlanner.GCSViews
                 else
                 {
                     temp.id =
-                        (ushort) 
-                            (int)
-                                Enum.Parse(typeof (MAVLink.MAV_CMD),
+                        (ushort)
+                                Enum.Parse(typeof(MAVLink.MAV_CMD),
                                     Commands.Rows[a].Cells[Command.Index].Value.ToString(),
                                     false);
                 }
@@ -8354,6 +8340,12 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
         }
 
         private void surveyGridToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GridPlugin grid = new GridPlugin();
+            grid.Host = new PluginHost();
+            grid.but_Click(sender, e);
+        }
+        private void GridToolStripMenuItem_Click(object sender, EventArgs e)
         {
             GridPlugin grid = new GridPlugin();
             grid.Host = new PluginHost();

@@ -179,6 +179,7 @@ namespace MissionPlanner.GCSViews
             this.areaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.textToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createCircleSurveyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.surveyGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mapToolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ContextMeasure = new System.Windows.Forms.ToolStripMenuItem();
             this.rotateMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -208,7 +209,6 @@ namespace MissionPlanner.GCSViews
             this.panelBASE = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.surveyGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.deleteWPToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.addWPToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -220,6 +220,7 @@ namespace MissionPlanner.GCSViews
             this.clearGridToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.autoWPMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.aeraToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.myGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allPlanMove = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.Commands)).BeginInit();
             this.panel5.SuspendLayout();
@@ -1210,6 +1211,12 @@ namespace MissionPlanner.GCSViews
             resources.ApplyResources(this.createCircleSurveyToolStripMenuItem, "createCircleSurveyToolStripMenuItem");
             this.createCircleSurveyToolStripMenuItem.Click += new System.EventHandler(this.createCircleSurveyToolStripMenuItem_Click);
             // 
+            // surveyGridToolStripMenuItem
+            // 
+            this.surveyGridToolStripMenuItem.Name = "surveyGridToolStripMenuItem";
+            resources.ApplyResources(this.surveyGridToolStripMenuItem, "surveyGridToolStripMenuItem");
+            this.surveyGridToolStripMenuItem.Click += new System.EventHandler(this.surveyGridToolStripMenuItem_Click);
+            // 
             // mapToolToolStripMenuItem
             // 
             this.mapToolToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1404,11 +1411,6 @@ namespace MissionPlanner.GCSViews
             this.timer1.Interval = 1200;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // surveyGridToolStripMenuItem
-            // 
-            this.surveyGridToolStripMenuItem.Name = "surveyGridToolStripMenuItem";
-            resources.ApplyResources(this.surveyGridToolStripMenuItem, "surveyGridToolStripMenuItem");
-            this.surveyGridToolStripMenuItem.Click += new System.EventHandler(this.surveyGridToolStripMenuItem_Click);
             // contextMenuStrip2
             // 
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1476,7 +1478,8 @@ namespace MissionPlanner.GCSViews
             // autoWPMenu
             // 
             this.autoWPMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aeraToolStripMenuItem2});
+            this.aeraToolStripMenuItem2,
+            this.myGridToolStripMenuItem});
             this.autoWPMenu.Name = "autoWPMenu";
             resources.ApplyResources(this.autoWPMenu, "autoWPMenu");
             // 
@@ -1485,6 +1488,12 @@ namespace MissionPlanner.GCSViews
             this.aeraToolStripMenuItem2.Name = "aeraToolStripMenuItem2";
             resources.ApplyResources(this.aeraToolStripMenuItem2, "aeraToolStripMenuItem2");
             this.aeraToolStripMenuItem2.Click += new System.EventHandler(this.aeraToolStripMenuItem2_Click);
+            // 
+            // myGridToolStripMenuItem
+            // 
+            this.myGridToolStripMenuItem.Name = "myGridToolStripMenuItem";
+            resources.ApplyResources(this.myGridToolStripMenuItem, "myGridToolStripMenuItem");
+            this.myGridToolStripMenuItem.Click += new System.EventHandler(this.GridToolStripMenuItem_Click);
             // 
             // allPlanMove
             // 
@@ -1688,5 +1697,6 @@ namespace MissionPlanner.GCSViews
         private System.Windows.Forms.ToolStripMenuItem saveGridToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadGridToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem allPlanMove;
+        private System.Windows.Forms.ToolStripMenuItem myGridToolStripMenuItem;
     }
 }
