@@ -53,7 +53,7 @@ namespace MissionPlanner.Log
         public LogDownloadMavLink(bool show_delete = false)
         {
             InitializeComponent();
-            BUT_clearlogs.Visible = show_delete;
+            //BUT_clearlogs.Visible = show_delete;
             labelBytes.Text = "";
 
             ThemeManager.ApplyThemeTo(this);

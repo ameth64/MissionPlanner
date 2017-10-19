@@ -2035,6 +2035,9 @@ namespace MissionPlanner.GCSViews
 
         private void but_qrtl_Click(object sender, EventArgs e)
         {
+            if (CustomMessageBox.Show("确定用多轴返航?", "多轴返航?", MessageBoxButtons.YesNo) !=
+                DialogResult.Yes)
+                return;
             try
             {
                 ((Button)sender).Enabled = false;
@@ -2046,6 +2049,9 @@ namespace MissionPlanner.GCSViews
 
         private void but_qland_Click(object sender, EventArgs e)
         {
+            if (CustomMessageBox.Show("确定紧急着陆?", "着陆?", MessageBoxButtons.YesNo) !=
+                 DialogResult.Yes)
+                return;
             try
             {
                 ((Button)sender).Enabled = false;
