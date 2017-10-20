@@ -1190,13 +1190,13 @@ Please check the following
                 // 4 seconds between valid packets
                 if (!(start.AddMilliseconds(4000) > DateTime.Now) && !logreadmode)
                 {
-                    if (retry < 6)
-                    {
-                        retry++;
-                        generatePacket((byte) MAVLINK_MSG_ID.PARAM_REQUEST_LIST, req);
-                        start = DateTime.Now;
-                        continue;
-                    }
+                    //if (retry < 6)
+                    //{
+                    //    retry++;
+                   //     generatePacket((byte) MAVLINK_MSG_ID.PARAM_REQUEST_LIST, req);
+                   //     start = DateTime.Now;
+                   //     continue;
+                   // }
 
                     onebyone = true;
 
