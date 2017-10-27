@@ -4320,6 +4320,9 @@
     </Content>
     <Content Include="Resources\compass_cal.png" />
     <Content Include="Resources\mpdesktop.ico" />
+    <Content Include="shot.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="texture.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -155,9 +155,18 @@ namespace MissionPlanner.GCSViews
 
             mymap = gMapControl1;
             myhud = hud2;
-            Type t = this.GetType();
-            System.Reflection.Assembly a = t.Assembly;
-            stream = a.GetManifestResourceStream(t.Namespace + ".shotphoto.wav ");
+
+            if (!File.Exists("shot.wav"))
+            {
+                //Type t = this.GetType();
+                System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
+                //System.Reflection.Assembly a = t.Assembly;
+                stream = asm.GetManifestResourceStream(asm.GetName().Name.ToString() + ".shot.wav");
+            }
+            else
+            {
+                stream = new FileStream("shot.wav", FileMode.Open);
+            }
             sp = new SoundPlayer(stream);
 
             start = DateTime.Now;
