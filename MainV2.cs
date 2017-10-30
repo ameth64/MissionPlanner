@@ -505,7 +505,7 @@ namespace MissionPlanner
 
             InitializeComponent();
             //Utilities.ThemeManager.ApplyThemeTo(this);
-            CHK_hsmav.Checked = false; //临时禁用协议复选框
+            //CHK_hsmav.Checked = false; //临时禁用协议复选框
             MyView = new MainSwitcher(this);
 
             View = MyView;
