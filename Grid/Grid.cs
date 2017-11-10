@@ -298,7 +298,7 @@ namespace MissionPlanner
             {
                 default:
                 case StartPosition.Home:
-                    startposutm = new utmpos(Host2.cs.HomeLocation);
+                    startposutm = new utmpos(MainV2.comPort.MAV.cs.HomeLocation);
                     break;
                 case StartPosition.BottomLeft:
                     startposutm = new utmpos(area.Left, area.Bottom, utmzone);
