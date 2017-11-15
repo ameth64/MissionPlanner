@@ -2290,6 +2290,70 @@ namespace MissionPlanner.GCSViews
             getcurrentwaypoints();
         }
 
+        public void backgroundgetWPs()
+        {
+            List<Locationwp> cmds = new List<Locationwp>();
+
+            try
+            {
+                MAVLinkInterface port = MainV2.comPort;
+
+                if (!port.BaseStream.IsOpen)
+                {
+                    throw new Exception("Please Connect First!");
+                }
+
+                MainV2.comPort.giveComport = true;
+
+                log.Info("Getting Home");
+
+                //((ProgressReporterDialogue)sender).UpdateProgressAndStatus(0, "Getting WP count");
+
+                if (port.MAV.apname == MAVLink.MAV_AUTOPILOT.PX4)
+                {
+                    try
+                    {
+                        cmds.Add(port.getHomePosition());
+                    }
+                    catch (TimeoutException)
+                    {
+                        // blank home
+                        cmds.Add(new Locationwp() { id = (ushort)MAVLink.MAV_CMD.WAYPOINT });
+                    }
+                }
+
+                log.Info("Getting WP #");
+
+                int cmdcount = port.getWPCount();
+
+                for (ushort a = 0; a < cmdcount; a++)
+                {
+                    //if (((ProgressReporterDialogue)sender).doWorkArgs.CancelRequested)
+                    //{
+                    //    ((ProgressReporterDialogue)sender).doWorkArgs.CancelAcknowledged = true;
+                    //    throw new Exception("Cancel Requested");
+                    //}
+
+                    log.Info("Getting WP" + a);
+                    //((ProgressReporterDialogue)sender).UpdateProgressAndStatus(a * 100 / cmdcount, "Getting WP " + a);
+                    cmds.Add(port.getWP(a));
+                }
+
+                port.setWPACK();
+
+                //((ProgressReporterDialogue)sender).UpdateProgressAndStatus(100, "Done");
+
+                log.Info("Done");
+            }
+            catch
+            {
+                throw;
+            }
+
+           // WPtoScreen(cmds);
+            //getcurrentwaypoints();
+        }
+
         public void WPtoScreen(List<Locationwp> cmds, bool withrally = true)
         {
             try
@@ -4690,6 +4754,7 @@ badresult:
                 MainMap.MapProvider = (GMapProvider) comboBoxMapType.SelectedItem;
                 FlightData.mymap.MapProvider = (GMapProvider) comboBoxMapType.SelectedItem;
                 HsdevFlightData.mymap.MapProvider = (GMapProvider)comboBoxMapType.SelectedItem;
+                HsdevInterface.mymap.MapProvider = (GMapProvider)comboBoxMapType.SelectedItem;
                 Settings.Instance["MapType"] = comboBoxMapType.Text;
             }
             catch (Exception ex)

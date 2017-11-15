@@ -104,6 +104,7 @@
             this.BUT_speed1_2 = new MissionPlanner.Controls.MyButton();
             this.BUT_speed1_4 = new MissionPlanner.Controls.MyButton();
             this.BUT_speed1_10 = new MissionPlanner.Controls.MyButton();
+            this.chk_rec_quadplane = new System.Windows.Forms.CheckBox();
             this.tablogbrowse = new System.Windows.Forms.TabPage();
             this.BUT_loganalysis = new MissionPlanner.Controls.MyButton();
             this.BUT_DFMavlink = new MissionPlanner.Controls.MyButton();
@@ -165,7 +166,6 @@
             this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.Messagetabtimer = new System.Windows.Forms.Timer(this.components);
             this.bindingSourceStatusTab = new System.Windows.Forms.BindingSource(this.components);
-            this.chk_rec_quadplane = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.MainH)).BeginInit();
             this.MainH.Panel1.SuspendLayout();
             this.MainH.Panel2.SuspendLayout();
@@ -305,7 +305,7 @@
             this.hud1.groundcourse = 0F;
             this.hud1.groundspeed = 0F;
             this.hud1.heading = 0F;
-            this.hud1.hudcolor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(241)))), ((int)(((byte)(30)))));
+            this.hud1.hudcolor = System.Drawing.Color.LightGray;
             this.hud1.linkqualitygcs = 0F;
             this.hud1.lowairspeed = false;
             this.hud1.lowgroundspeed = false;
@@ -316,7 +316,6 @@
             this.hud1.Name = "hud1";
             this.hud1.navpitch = 0F;
             this.hud1.navroll = 0F;
-            this.hud1.opengl = false;
             this.hud1.pitch = 0F;
             this.hud1.roll = 0F;
             this.hud1.Russian = false;
@@ -1647,6 +1646,12 @@
             this.BUT_speed1_10.UseVisualStyleBackColor = true;
             this.BUT_speed1_10.Click += new System.EventHandler(this.BUT_speed1_Click);
             // 
+            // chk_rec_quadplane
+            // 
+            resources.ApplyResources(this.chk_rec_quadplane, "chk_rec_quadplane");
+            this.chk_rec_quadplane.Name = "chk_rec_quadplane";
+            this.chk_rec_quadplane.UseVisualStyleBackColor = true;
+            // 
             // tablogbrowse
             // 
             this.tablogbrowse.Controls.Add(this.BUT_loganalysis);
@@ -1987,7 +1992,7 @@
             this.windDir1.BackColor = System.Drawing.Color.Transparent;
             this.windDir1.DataBindings.Add(new System.Windows.Forms.Binding("Direction", this.bindingSource1, "wind_dir", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.windDir1.DataBindings.Add(new System.Windows.Forms.Binding("Speed", this.bindingSource1, "wind_vel", true, System.Windows.Forms.DataSourceUpdateMode.Never));
-            this.windDir1.Direction = 180D;
+            this.windDir1.Direction = 360D;
             resources.ApplyResources(this.windDir1, "windDir1");
             this.windDir1.Name = "windDir1";
             this.windDir1.Speed = 0D;
@@ -2203,12 +2208,6 @@
             // bindingSourceStatusTab
             // 
             this.bindingSourceStatusTab.DataSource = typeof(MissionPlanner.CurrentState);
-            // 
-            // chk_rec_quadplane
-            // 
-            resources.ApplyResources(this.chk_rec_quadplane, "chk_rec_quadplane");
-            this.chk_rec_quadplane.Name = "chk_rec_quadplane";
-            this.chk_rec_quadplane.UseVisualStyleBackColor = true;
             // 
             // FlightData
             // 

@@ -1156,6 +1156,7 @@ namespace MissionPlanner.GCSViews
 
         private void goHereToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            /* //apm old code
             if (!MainV2.comPort.BaseStream.IsOpen)
             {
                 CustomMessageBox.Show("没有连接", "Error");
@@ -1188,6 +1189,45 @@ namespace MissionPlanner.GCSViews
                 MainV2.comPort.setGuidedModeWP(gotohere);
             }
             catch (Exception ex) { MainV2.comPort.giveComport = false; CustomMessageBox.Show("Error sending command : " + ex.Message, "Error"); }
+            */
+
+            string alt = "100";
+
+            if (MainV2.comPort.MAV.cs.firmware == MainV2.Firmwares.ArduCopter2)
+            {
+                alt = (10 * CurrentState.multiplierdist).ToString("0");
+            }
+            else
+            {
+                alt = (100 * CurrentState.multiplierdist).ToString("0");
+            }
+
+            if (Settings.Instance.ContainsKey("guided_alt"))
+                alt = Settings.Instance["guided_alt"];
+
+            if (DialogResult.Cancel == InputBox.Show("Enter Alt", "Enter Guided Mode Alt", ref alt))
+                return;
+
+            Settings.Instance["guided_alt"] = alt;
+
+            int intalt = (int)(100 * CurrentState.multiplierdist);
+            if (!int.TryParse(alt, out intalt))
+            {
+                CustomMessageBox.Show("Bad Alt");
+                return;
+            }
+
+            MainV2.comPort.MAV.GuidedMode.z = intalt / CurrentState.multiplierdist;
+
+            if (MainV2.comPort.MAV.cs.mode == "Guided")
+            {
+                MainV2.comPort.setGuidedModeWP(new Locationwp
+                {
+                    alt = MainV2.comPort.MAV.GuidedMode.z,
+                    lat = MainV2.comPort.MAV.GuidedMode.x,
+                    lng = MainV2.comPort.MAV.GuidedMode.y
+                });
+            }
 
         }
 

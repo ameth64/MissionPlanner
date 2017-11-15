@@ -159,6 +159,9 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.TRK_zoom = new MissionPlanner.Controls.MyTrackBar();
             this.map = new MissionPlanner.Controls.myGMAP();
+            this.shotangle_value = new System.Windows.Forms.NumericUpDown();
+            this.shotangel_txt = new System.Windows.Forms.Label();
+            this.CHK_hugedrop = new System.Windows.Forms.CheckBox();
             this.groupBox5.SuspendLayout();
             this.tabCamera.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -194,6 +197,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.NUM_refaltitude)).BeginInit();
             this.tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TRK_zoom)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.shotangle_value)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox5
@@ -999,7 +1003,6 @@
             // 
             // groupBox6
             // 
-            this.groupBox6.Controls.Add(this.CHK_hssideshot);
             this.groupBox6.Controls.Add(this.CHK_sideshot);
             this.groupBox6.Controls.Add(this.NUM_windDir);
             this.groupBox6.Controls.Add(this.label43);
@@ -1187,6 +1190,10 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.CHK_hugedrop);
+            this.groupBox4.Controls.Add(this.shotangle_value);
+            this.groupBox4.Controls.Add(this.shotangel_txt);
+            this.groupBox4.Controls.Add(this.CHK_hssideshot);
             this.groupBox4.Controls.Add(this.NUM_refaltitude);
             this.groupBox4.Controls.Add(this.CHK_advanced);
             this.groupBox4.Controls.Add(this.CHK_footprints);
@@ -1325,6 +1332,39 @@
             this.map.MouseDown += new System.Windows.Forms.MouseEventHandler(this.map_MouseDown);
             this.map.MouseMove += new System.Windows.Forms.MouseEventHandler(this.map_MouseMove);
             // 
+            // shotangle_value
+            // 
+            this.shotangle_value.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            resources.ApplyResources(this.shotangle_value, "shotangle_value");
+            this.shotangle_value.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.shotangle_value.Name = "shotangle_value";
+            this.shotangle_value.Value = new decimal(new int[] {
+            45,
+            0,
+            0,
+            0});
+            this.shotangle_value.ValueChanged += new System.EventHandler(this.domainUpDown1_ValueChanged);
+            // 
+            // shotangel_txt
+            // 
+            resources.ApplyResources(this.shotangel_txt, "shotangel_txt");
+            this.shotangel_txt.Name = "shotangel_txt";
+            // 
+            // CHK_hugedrop
+            // 
+            resources.ApplyResources(this.CHK_hugedrop, "CHK_hugedrop");
+            this.CHK_hugedrop.Name = "CHK_hugedrop";
+            this.CHK_hugedrop.UseVisualStyleBackColor = true;
+            this.CHK_hugedrop.CheckedChanged += new System.EventHandler(this.domainUpDown1_ValueChanged);
+            // 
             // GridUI
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1381,6 +1421,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.NUM_refaltitude)).EndInit();
             this.tabControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.TRK_zoom)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.shotangle_value)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1518,5 +1559,8 @@
         private System.Windows.Forms.CheckBox CHK_markers;
         private System.Windows.Forms.CheckBox CHK_boundary;
         private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.CheckBox CHK_hugedrop;
+        private System.Windows.Forms.NumericUpDown shotangle_value;
+        private System.Windows.Forms.Label shotangel_txt;
     }
 }

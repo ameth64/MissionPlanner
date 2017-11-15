@@ -498,6 +498,24 @@
     <Compile Include="GCSViews\ConfigurationView\ConfigGPSInject.Designer.cs">
       <DependentUpon>ConfigGPSInject.cs</DependentUpon>
     </Compile>
+    <Compile Include="GCSViews\ConfigurationView\HSConfigure.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GCSViews\ConfigurationView\HSConfigure.Designer.cs">
+      <DependentUpon>HSConfigure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GCSViews\ConfigurationView\PrearmCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GCSViews\ConfigurationView\PrearmCheck.Designer.cs">
+      <DependentUpon>PrearmCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GCSViews\HsdevInterface.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GCSViews\HsdevInterface.Designer.cs">
+      <DependentUpon>HsdevInterface.cs</DependentUpon>
+    </Compile>
     <Compile Include="Grid\Grid.cs" />
     <Compile Include="Grid\GridPlugin.cs" />
     <Compile Include="Grid\GridUI.cs">
@@ -1132,6 +1150,7 @@
     <Compile Include="Utilities\GitHubContent.cs" />
     <Compile Include="Utilities\GMapMarkerAirport.cs" />
     <Compile Include="Utilities\GMapMarkerRallyPt.cs" />
+    <Compile Include="Utilities\HSSetting.cs" />
     <Compile Include="Utilities\ICorrections.cs" />
     <Compile Include="Utilities\ImageProjection.cs" />
     <Compile Include="Utilities\LangUtility.cs" />
@@ -2530,6 +2549,12 @@
     <EmbeddedResource Include="GCSViews\ConfigurationView\ConfigWizard.resx">
       <DependentUpon>ConfigWizard.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GCSViews\ConfigurationView\HSConfigure.resx">
+      <DependentUpon>HSConfigure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GCSViews\ConfigurationView\PrearmCheck.resx">
+      <DependentUpon>PrearmCheck.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GCSViews\FlightData.de-DE.resx">
       <DependentUpon>FlightData.cs</DependentUpon>
     </EmbeddedResource>
@@ -2667,6 +2692,10 @@
       <DependentUpon>HsdevFlightData.cs</DependentUpon>
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>HsdevFlightData1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GCSViews\HsdevInterface.resx">
+      <DependentUpon>HsdevInterface.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="GCSViews\InitialSetup.de-DE.resx">

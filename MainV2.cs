@@ -387,6 +387,7 @@ namespace MissionPlanner
         /// </summary>
         public GCSViews.FlightData FlightData;
         public GCSViews.HsdevFlightData HsdevFlightData;
+        public GCSViews.HsdevInterface HsdevInterface;
         public GCSViews.FlightPlanner FlightPlanner;
         Controls.SITL Simulation;
 
@@ -689,6 +690,7 @@ namespace MissionPlanner
                 log.Info("Create FD");
                 FlightData = new GCSViews.FlightData();
                 HsdevFlightData = new GCSViews.HsdevFlightData();
+                HsdevInterface = new GCSViews.HsdevInterface();
                 log.Info("Create FP");
                 FlightPlanner = new GCSViews.FlightPlanner();
                 //Configuration = new GCSViews.ConfigurationView.Setup();
@@ -699,6 +701,7 @@ namespace MissionPlanner
 
                 FlightData.Width = MyView.Width;
                 HsdevFlightData.Width = MyView.Width;
+                HsdevInterface.Width = MyView.Width;
                 FlightPlanner.Width = MyView.Width;
                 Simulation.Width = MyView.Width;
             }
@@ -1137,6 +1140,26 @@ namespace MissionPlanner
         private void MenuHsFlightData_Click(object sender, EventArgs e)
         {
             MyView.ShowScreen("HsdevFlightData");
+        }
+
+        public void MenuHsdevInterface_Click(object sender, EventArgs e)
+        {
+            MyView.ShowScreen("HsdevInterface");
+            for (int i = 0; i < HsdevInterface.middlebuttons.Count; i++)
+            {
+                Type t = HsdevInterface.middlebuttons[i].GetType();
+                if (t.Name == "Button")
+                {
+                    Button b = (Button)HsdevInterface.middlebuttons[i];
+                    b.BackColor = Color.White;
+                }
+                if (t.Name == "ComboBox")
+                {
+                    ComboBox b = (ComboBox)HsdevInterface.middlebuttons[i];
+                    b.BackColor = Color.White;
+                }
+            }
+
         }
 
         private void MenuFlightPlanner_Click(object sender, EventArgs e)
@@ -1630,6 +1653,54 @@ namespace MissionPlanner
             }
         }
 
+        public void HSConnect_thread(string comname, string band)
+        {
+            comPort.giveComport = false;
+
+            log.Info("MenuConnect Start");
+
+            // sanity check
+            if (comPort.BaseStream.IsOpen && MainV2.comPort.MAV.cs.groundspeed > 4)
+            {
+                if (DialogResult.No ==
+                    CustomMessageBox.Show(Strings.Stillmoving, Strings.Disconnect, MessageBoxButtons.YesNo))
+                {
+                    return;
+                }
+            }
+
+            try
+            {
+                log.Info("Cleanup last logfiles");
+                // cleanup from any previous sessions
+                if (comPort.logfile != null)
+                    comPort.logfile.Close();
+
+                if (comPort.rawlogfile != null)
+                    comPort.rawlogfile.Close();
+            }
+            catch (Exception ex)
+            {
+                CustomMessageBox.Show(Strings.ErrorClosingLogFile + ex.Message, Strings.ERROR);
+            }
+
+            comPort.logfile = null;
+            comPort.rawlogfile = null;
+
+            // decide if this is a connect or disconnect
+            if (comPort.BaseStream.IsOpen)
+            {
+                doDisconnect(comPort);
+                HsdevFlightData.showLogPlayBut(true);
+            }
+            else
+            {
+                doConnect(comPort, comname, band);
+            }
+
+            MainV2._connectionControl.UpdateSysIDS();
+        }
+
         private void MenuConnect_Click(object sender, EventArgs e)
         {
             comPort.giveComport = false;
@@ -1869,6 +1940,7 @@ namespace MissionPlanner
             {
                 FlightData.Dispose();
                 HsdevFlightData.Dispose();
+                HsdevInterface.Dispose();
             }
             catch
             {
@@ -2426,7 +2498,28 @@ namespace MissionPlanner
                         {
                         }
                     }
+                    // speech hsdata warning - message high warning
+                    if (speechEnable && speechEngine != null &&
+                        (MainV2.comPort.logreadmode || comPort.BaseStream.IsOpen))
+                    {
 
+                        if (HsdevInterface.voicealarm.Count > 0)
+                        {
+                            if (MainV2.speechEngine.IsReady)
+                                lock (HsdevInterface.voicealarm)
+                                {
+                                    MainV2.speechEngine.SpeakAsync(
+                                        Common.speechConversion(HsdevInterface.voicealarm.Count.ToString() + HsdevInterface.voicealarm[0]));
+                                    HsdevInterface.DrawWarningMessage(HsdevInterface.voicealarm[0]);
+                                    lock (HsdevInterface.voicealarm)
+                                    {
+                                        HsdevInterface.voicealarm.RemoveAt(0);
+                                    }
+                                }
+                        }
+
+
+                    }
                     // not doing anything
                     if (!MainV2.comPort.logreadmode && !comPort.BaseStream.IsOpen)
                     {
@@ -2714,11 +2807,13 @@ namespace MissionPlanner
             {
             }
 
+            MyView.AddScreen(new MainSwitcher.Screen("HsdevInterface", HsdevInterface, true));
             MyView.AddScreen(new MainSwitcher.Screen("HsdevFlightData", HsdevFlightData, true));
             MyView.AddScreen(new MainSwitcher.Screen("FlightData", FlightData, true));      
             MyView.AddScreen(new MainSwitcher.Screen("FlightPlanner", FlightPlanner, true));
             MyView.AddScreen(new MainSwitcher.Screen("HWConfig", typeof(GCSViews.InitialSetup), false));
             MyView.AddScreen(new MainSwitcher.Screen("SWConfig", typeof(GCSViews.SoftwareConfig), false));
+            MyView.AddScreen(new MainSwitcher.Screen("HSConfig", typeof(GCSViews.ConfigurationView.HSConfigure), false));
             MyView.AddScreen(new MainSwitcher.Screen("Simulation", Simulation, true));
             MyView.AddScreen(new MainSwitcher.Screen("Terminal", typeof(GCSViews.Terminal), false));
             MyView.AddScreen(new MainSwitcher.Screen("Help", typeof(GCSViews.Help), false));
@@ -2755,8 +2850,11 @@ namespace MissionPlanner
                 //log.Info("show FlightData... Done");
                 //MainMenu_ItemClicked(this, new ToolStripItemClickedEventArgs(MenuFlightData));
 
-                MenuHsFlightData_Click(this, e);
-                MainMenu_ItemClicked(this, new ToolStripItemClickedEventArgs(MenuHsFilghtData));
+                //MenuHsFlightData_Click(this, e);
+                //MainMenu_ItemClicked(this, new ToolStripItemClickedEventArgs(MenuHsFilghtData));
+
+                MenuHsdevInterface_Click(this, e);
+                MainMenu_ItemClicked(this, new ToolStripItemClickedEventArgs(MenuHsdevInterface));
 
             }
 
@@ -3852,6 +3950,11 @@ namespace MissionPlanner
                 MessageBox.Show("解锁后不能校准罗盘！");
             }else
                 new CalibrationCompassFrom().Show(this);
+        }
+
+        private void toolStripMenuHSconfigure_Click(object sender, EventArgs e)
+        {
+            MyView.ShowScreen("HSConfig");
         }
     }
 }

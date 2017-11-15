@@ -85,7 +85,7 @@ namespace MissionPlanner
             form.Show();
         }
 
-        public static List<PointLatLngAlt> CreateGrid(List<PointLatLngAlt> polygon, double altitude, double distance, double spacing, double angle, double overshoot1,double overshoot2, StartPosition startpos, bool shutter, float minLaneSeparation, float leadin = 0, bool sideshot = false,bool hssideshot = false,double refalt = 0.0f)
+        public static List<PointLatLngAlt> CreateGrid(List<PointLatLngAlt> polygon, double altitude, double distance, double spacing, double angle, double overshoot1,double overshoot2, StartPosition startpos, bool shutter, float minLaneSeparation, float leadin = 0, bool sideshot = false,bool hssideshot = false,double hsshotangle = 45.0,double refalt = 0.0f)
         {
             //DoDebug();
 
@@ -347,7 +347,7 @@ namespace MissionPlanner
                 if (closest.p1.GetDistance(lastpnt) < closest.p2.GetDistance(lastpnt))
                 {
                     
-                    ds = hssideshot ? ( altitude) : ( 0.0f);
+                    ds = hssideshot ? ( altitude*Math.Tan((Math.PI / 180) * hsshotangle)) : ( 0.0f);
                     utmpos newstart = newpos(closest.p1, angle, -leadin - ds);
                     newstart.Tag = "S";
 
@@ -432,7 +432,7 @@ namespace MissionPlanner
                 }
                 else
                 {
-                    ds = hssideshot ? (altitude) : (0.0f);
+                    ds = hssideshot ? (altitude * Math.Tan((Math.PI / 180) * hsshotangle)) : (0.0f);
                     utmpos newstart = newpos(closest.p2, angle, leadin+ds);
                     newstart.Tag = "S";
                     addtomap(newstart, "S");
