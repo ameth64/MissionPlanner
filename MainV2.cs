@@ -3383,6 +3383,7 @@ namespace MissionPlanner
                 }
                 MenuSimulation.Visible = !MenuSimulation.Visible;
                 MenuFlightData.Visible = !MenuFlightData.Visible;
+                MenuHsFilghtData.Visible = !MenuHsFilghtData.Visible;
                 MenuInitConfig.Visible = !MenuInitConfig.Visible;
                 MenuConfigTune.Visible = !MenuConfigTune.Visible;
                 MenuTerminal.Visible = !MenuTerminal.Visible;
@@ -3390,6 +3391,10 @@ namespace MissionPlanner
                 fladv = !fladv;
                 FlightPlanner.setAdvancedFuction(fladv);
                 CHK_hsmav.Visible = !CHK_hsmav.Visible; // 控制协议复选框隐藏
+                MenuConnect.Visible = !MenuConnect.Visible;
+                toolStripConnectionControl.Visible = !toolStripConnectionControl.Visible;
+                comPort.hdieParamDialogue = !comPort.hdieParamDialogue;
+
                 //MyFlightData.zg1show();
                 //  public System.Windows.Forms.ToolStripButton MenuFlightData;
                 // public System.Windows.Forms.ToolStripButton MenuFlightPlanner;

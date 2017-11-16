@@ -1116,24 +1116,31 @@ Please check the following
 
         }
         */
+        public bool hdieParamDialogue = false;
 
         public void getParamList()
         {
             log.InfoFormat("getParamList {0} {1}", sysidcurrent, compidcurrent);
-
-            frmProgressReporter = new ProgressReporterDialogue
+            if (!hdieParamDialogue)
             {
-                StartPosition = FormStartPosition.CenterScreen,
-                Text = Strings.GettingParams + " " + sysidcurrent
-            };
+                frmProgressReporter = new ProgressReporterDialogue
+                {
+                    StartPosition = FormStartPosition.CenterScreen,
+                    Text = Strings.GettingParams + " " + sysidcurrent
+                };
 
-            frmProgressReporter.DoWork += FrmProgressReporterGetParams;
-            frmProgressReporter.UpdateProgressAndStatus(-1, Strings.GettingParamsD);
-            ThemeManager.ApplyThemeTo(frmProgressReporter);
+                frmProgressReporter.DoWork += FrmProgressReporterGetParams;
+                frmProgressReporter.UpdateProgressAndStatus(-1, Strings.GettingParamsD);
+                ThemeManager.ApplyThemeTo(frmProgressReporter);
 
-            frmProgressReporter.RunBackgroundOperationAsync();
+                frmProgressReporter.RunBackgroundOperationAsync();
 
-            frmProgressReporter.Dispose();
+                frmProgressReporter.Dispose();
+            }
+            else
+            {
+                getParamListBG();
+            }
 
             if (ParamListChanged != null)
             {

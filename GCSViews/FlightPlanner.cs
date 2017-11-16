@@ -8120,8 +8120,14 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
                 string file = fd.FileName;
                 if (file != "")
                 {
-                    kmlpolygonsoverlay.Polygons.Clear();
-                    kmlpolygonsoverlay.Routes.Clear();
+                   if (
+                       CustomMessageBox.Show("清除之前加载的KML吗?", "Confirm",
+                           MessageBoxButtons.OKCancel) == DialogResult.OK)
+                     {
+                        kmlpolygonsoverlay.Polygons.Clear();
+                        kmlpolygonsoverlay.Routes.Clear();
+                    }
+
 
                     FlightData.kmlpolygons.Routes.Clear();
                     FlightData.kmlpolygons.Polygons.Clear();
