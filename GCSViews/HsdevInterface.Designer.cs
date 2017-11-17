@@ -51,9 +51,6 @@
             this.bindingSourceQuickTab = new System.Windows.Forms.BindingSource(this.components);
             this.GraphTimer = new System.Windows.Forms.Timer(this.components);
             this.gMapControl1 = new MissionPlanner.Controls.myGMAP();
-            this.HUDpanel = new System.Windows.Forms.Panel();
-            this.hud1 = new MissionPlanner.Controls.HSHUD();
-            this.DataPanel = new System.Windows.Forms.Panel();
             this.rightsplitContainer = new System.Windows.Forms.SplitContainer();
             this.leftsplitContainer = new System.Windows.Forms.SplitContainer();
             this.leftdatapanel = new MissionPlanner.GCSViews.HsdevInterface.mypanel();
@@ -70,13 +67,15 @@
             this.targetalt = new System.Windows.Forms.Label();
             this.altasl = new System.Windows.Forms.Label();
             this.alt = new System.Windows.Forms.Label();
-            this.middlesplitContainer = new System.Windows.Forms.SplitContainer();
-            this.btn_setwp = new System.Windows.Forms.Button();
+            this.middlesplitContainer = new System.Windows.Forms.Panel();
             this.btn_stabilize = new System.Windows.Forms.Button();
+            this.btn_manual = new System.Windows.Forms.Button();
+            this.HUDpanel = new System.Windows.Forms.Panel();
+            this.hud1 = new MissionPlanner.Controls.HSHUD();
+            this.btn_setwp = new System.Windows.Forms.Button();
             this.btn_qhover = new System.Windows.Forms.Button();
             this.CMB_setwp = new System.Windows.Forms.ComboBox();
             this.btn_qlandemergent = new System.Windows.Forms.Button();
-            this.btn_manual = new System.Windows.Forms.Button();
             this.btn_parachute = new System.Windows.Forms.Button();
             this.btn_normalland = new System.Windows.Forms.Button();
             this.btn_qrtlemergent = new System.Windows.Forms.Button();
@@ -95,12 +94,11 @@
             this.DistToHome = new System.Windows.Forms.Label();
             this.wp_dist = new System.Windows.Forms.Label();
             this.wpno = new System.Windows.Forms.Label();
+            this.DataPanel = new System.Windows.Forms.Panel();
             this.contextMenuStripMap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceHud)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceQuickTab)).BeginInit();
-            this.HUDpanel.SuspendLayout();
-            this.DataPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rightsplitContainer)).BeginInit();
             this.rightsplitContainer.Panel1.SuspendLayout();
             this.rightsplitContainer.Panel2.SuspendLayout();
@@ -110,10 +108,10 @@
             this.leftsplitContainer.Panel2.SuspendLayout();
             this.leftsplitContainer.SuspendLayout();
             this.leftdatapanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.middlesplitContainer)).BeginInit();
-            this.middlesplitContainer.Panel2.SuspendLayout();
             this.middlesplitContainer.SuspendLayout();
+            this.HUDpanel.SuspendLayout();
             this.rightdatapanel.SuspendLayout();
+            this.DataPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // contextMenuStripMap
@@ -280,123 +278,14 @@
             this.gMapControl1.SelectedArea = ((GMap.NET.RectLatLng)(resources.GetObject("gMapControl1.SelectedArea")));
             this.gMapControl1.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.gMapControl1.ShowTileGridLines = false;
-            this.gMapControl1.Size = new System.Drawing.Size(1379, 692);
+            this.gMapControl1.Size = new System.Drawing.Size(1559, 692);
             this.gMapControl1.TabIndex = 5;
             this.gMapControl1.Zoom = 3D;
-            // 
-            // HUDpanel
-            // 
-            this.HUDpanel.BackColor = System.Drawing.Color.DimGray;
-            this.HUDpanel.Controls.Add(this.hud1);
-            this.HUDpanel.Location = new System.Drawing.Point(489, 305);
-            this.HUDpanel.Name = "HUDpanel";
-            this.HUDpanel.Size = new System.Drawing.Size(345, 209);
-            this.HUDpanel.TabIndex = 7;
-            // 
-            // hud1
-            // 
-            this.hud1.airspeed = 0F;
-            this.hud1.alt = 0F;
-            this.hud1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.hud1.BackColor = System.Drawing.Color.Black;
-            this.hud1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.hud1.batterylevel = 0F;
-            this.hud1.batteryremaining = 0F;
-            this.hud1.bgimage = null;
-            this.hud1.connected = false;
-            this.hud1.current = 0F;
-            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("airspeed", this.bindingSourceHud, "airspeed", true));
-            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("alt", this.bindingSourceHud, "alt", true));
-            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("batterylevel", this.bindingSourceHud, "battery_voltage", true));
-            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("batteryremaining", this.bindingSourceHud, "battery_remaining", true));
-            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("connected", this.bindingSourceHud, "connected", true));
-            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("current", this.bindingSourceHud, "current", true));
-            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("datetime", this.bindingSourceHud, "datetime", true));
-            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("disttowp", this.bindingSourceHud, "wp_dist", true));
-            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("failsafe", this.bindingSourceHud, "failsafe", true));
-            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("gpsfix", this.bindingSourceHud, "gpsstatus", true));
-            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("gpshdop", this.bindingSourceHud, "gpshdop", true));
-            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("groundalt", this.bindingSourceHud, "HomeAlt", true));
-            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("groundcourse", this.bindingSourceHud, "groundcourse", true));
-            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("groundspeed", this.bindingSourceHud, "groundspeed", true));
-            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("heading", this.bindingSourceHud, "yaw", true));
-            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("linkqualitygcs", this.bindingSourceHud, "linkqualitygcs", true));
-            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("message", this.bindingSourceHud, "messageHigh", true));
-            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("messagetime", this.bindingSourceHud, "messageHighTime", true));
-            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("mode", this.bindingSourceHud, "mode", true));
-            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("navpitch", this.bindingSourceHud, "nav_pitch", true));
-            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("navroll", this.bindingSourceHud, "nav_roll", true));
-            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("pitch", this.bindingSourceHud, "pitch", true));
-            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("roll", this.bindingSourceHud, "roll", true));
-            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("status", this.bindingSourceHud, "armed", true));
-            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("targetalt", this.bindingSourceHud, "targetalt", true));
-            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("targetheading", this.bindingSourceHud, "nav_bearing", true));
-            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("targetspeed", this.bindingSourceHud, "targetairspeed", true));
-            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("turnrate", this.bindingSourceHud, "turnrate", true));
-            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("verticalspeed", this.bindingSourceHud, "verticalspeed", true));
-            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("wpno", this.bindingSourceHud, "wpno", true));
-            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("xtrack_error", this.bindingSourceHud, "xtrack_error", true));
-            this.hud1.datetime = new System.DateTime(((long)(0)));
-            this.hud1.displayekf = false;
-            this.hud1.displayvibe = false;
-            this.hud1.disttowp = 0F;
-            this.hud1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.hud1.ekfstatus = 0F;
-            this.hud1.failsafe = false;
-            this.hud1.gpsfix = 0F;
-            this.hud1.gpsfix2 = 0F;
-            this.hud1.gpshdop = 0F;
-            this.hud1.gpshdop2 = 0F;
-            this.hud1.groundalt = 0F;
-            this.hud1.groundcourse = 0F;
-            this.hud1.groundspeed = 0F;
-            this.hud1.heading = 0F;
-            this.hud1.hudcolor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(241)))), ((int)(((byte)(30)))));
-            this.hud1.linkqualitygcs = 0F;
-            this.hud1.Location = new System.Drawing.Point(0, 0);
-            this.hud1.lowairspeed = false;
-            this.hud1.lowgroundspeed = false;
-            this.hud1.lowvoltagealert = false;
-            this.hud1.Margin = new System.Windows.Forms.Padding(4);
-            this.hud1.message = "";
-            this.hud1.messagetime = new System.DateTime(((long)(0)));
-            this.hud1.mode = "未知";
-            this.hud1.Name = "hud1";
-            this.hud1.navpitch = 0F;
-            this.hud1.navroll = 0F;
-            this.hud1.opengl = false;
-            this.hud1.pitch = 0F;
-            this.hud1.roll = 0F;
-            this.hud1.Russian = false;
-            this.hud1.Size = new System.Drawing.Size(345, 209);
-            this.hud1.status = false;
-            this.hud1.streamjpg = null;
-            this.hud1.TabIndex = 5;
-            this.hud1.targetalt = 0F;
-            this.hud1.targetheading = 0F;
-            this.hud1.targetspeed = 0F;
-            this.hud1.turnrate = 0F;
-            this.hud1.UseOpenGL = false;
-            this.hud1.verticalspeed = 0F;
-            this.hud1.vibex = 0F;
-            this.hud1.vibey = 0F;
-            this.hud1.vibez = 0F;
-            this.hud1.wpno = 0;
-            this.hud1.xtrack_error = 0F;
-            // 
-            // DataPanel
-            // 
-            this.DataPanel.Controls.Add(this.rightsplitContainer);
-            this.DataPanel.Location = new System.Drawing.Point(184, 520);
-            this.DataPanel.Name = "DataPanel";
-            this.DataPanel.Size = new System.Drawing.Size(970, 167);
-            this.DataPanel.TabIndex = 6;
             // 
             // rightsplitContainer
             // 
             this.rightsplitContainer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.rightsplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rightsplitContainer.IsSplitterFixed = true;
             this.rightsplitContainer.Location = new System.Drawing.Point(0, 0);
             this.rightsplitContainer.Name = "rightsplitContainer";
             // 
@@ -409,16 +298,15 @@
             this.rightsplitContainer.Panel2.BackColor = System.Drawing.Color.DimGray;
             this.rightsplitContainer.Panel2.Controls.Add(this.rightdatapanel);
             this.rightsplitContainer.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.rightpanel_Paint);
-            this.rightsplitContainer.Size = new System.Drawing.Size(970, 167);
-            this.rightsplitContainer.SplitterDistance = 650;
-            this.rightsplitContainer.TabIndex = 0;
+            this.rightsplitContainer.Size = new System.Drawing.Size(1163, 220);
+            this.rightsplitContainer.SplitterDistance = 862;
+            this.rightsplitContainer.TabIndex = 1;
             // 
             // leftsplitContainer
             // 
             this.leftsplitContainer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.leftsplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.leftsplitContainer.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.leftsplitContainer.IsSplitterFixed = true;
             this.leftsplitContainer.Location = new System.Drawing.Point(0, 0);
             this.leftsplitContainer.Name = "leftsplitContainer";
             // 
@@ -432,9 +320,10 @@
             // leftsplitContainer.Panel2
             // 
             this.leftsplitContainer.Panel2.Controls.Add(this.middlesplitContainer);
-            this.leftsplitContainer.Size = new System.Drawing.Size(650, 167);
-            this.leftsplitContainer.SplitterDistance = 301;
-            this.leftsplitContainer.TabIndex = 0;
+            this.leftsplitContainer.Panel2.Resize += new System.EventHandler(this.middlepanel_Resize);
+            this.leftsplitContainer.Size = new System.Drawing.Size(862, 220);
+            this.leftsplitContainer.SplitterDistance = 293;
+            this.leftsplitContainer.TabIndex = 1;
             // 
             // leftdatapanel
             // 
@@ -457,7 +346,7 @@
             this.leftdatapanel.Location = new System.Drawing.Point(0, 0);
             this.leftdatapanel.MinimumSize = new System.Drawing.Size(27, 27);
             this.leftdatapanel.Name = "leftdatapanel";
-            this.leftdatapanel.Size = new System.Drawing.Size(297, 163);
+            this.leftdatapanel.Size = new System.Drawing.Size(289, 216);
             this.leftdatapanel.TabIndex = 13;
             // 
             // gpshdop
@@ -618,67 +507,168 @@
             // 
             // middlesplitContainer
             // 
-            this.middlesplitContainer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.middlesplitContainer.BackColor = System.Drawing.Color.DimGray;
+            this.middlesplitContainer.Controls.Add(this.btn_stabilize);
+            this.middlesplitContainer.Controls.Add(this.btn_manual);
+            this.middlesplitContainer.Controls.Add(this.HUDpanel);
+            this.middlesplitContainer.Controls.Add(this.btn_setwp);
+            this.middlesplitContainer.Controls.Add(this.btn_qhover);
+            this.middlesplitContainer.Controls.Add(this.CMB_setwp);
+            this.middlesplitContainer.Controls.Add(this.btn_qlandemergent);
+            this.middlesplitContainer.Controls.Add(this.btn_parachute);
+            this.middlesplitContainer.Controls.Add(this.btn_normalland);
+            this.middlesplitContainer.Controls.Add(this.btn_qrtlemergent);
+            this.middlesplitContainer.Controls.Add(this.btn_arm);
+            this.middlesplitContainer.Controls.Add(this.btn_auto);
+            this.middlesplitContainer.Controls.Add(this.btn_prearm);
+            this.middlesplitContainer.Controls.Add(this.btn_rtl);
             this.middlesplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.middlesplitContainer.Location = new System.Drawing.Point(0, 0);
             this.middlesplitContainer.Name = "middlesplitContainer";
-            this.middlesplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // middlesplitContainer.Panel1
-            // 
-            this.middlesplitContainer.Panel1.BackColor = System.Drawing.Color.DimGray;
-            // 
-            // middlesplitContainer.Panel2
-            // 
-            this.middlesplitContainer.Panel2.BackColor = System.Drawing.Color.DimGray;
-            this.middlesplitContainer.Panel2.Controls.Add(this.btn_setwp);
-            this.middlesplitContainer.Panel2.Controls.Add(this.btn_stabilize);
-            this.middlesplitContainer.Panel2.Controls.Add(this.btn_qhover);
-            this.middlesplitContainer.Panel2.Controls.Add(this.CMB_setwp);
-            this.middlesplitContainer.Panel2.Controls.Add(this.btn_qlandemergent);
-            this.middlesplitContainer.Panel2.Controls.Add(this.btn_manual);
-            this.middlesplitContainer.Panel2.Controls.Add(this.btn_parachute);
-            this.middlesplitContainer.Panel2.Controls.Add(this.btn_normalland);
-            this.middlesplitContainer.Panel2.Controls.Add(this.btn_qrtlemergent);
-            this.middlesplitContainer.Panel2.Controls.Add(this.btn_arm);
-            this.middlesplitContainer.Panel2.Controls.Add(this.btn_auto);
-            this.middlesplitContainer.Panel2.Controls.Add(this.btn_prearm);
-            this.middlesplitContainer.Panel2.Controls.Add(this.btn_rtl);
-            this.middlesplitContainer.Panel2.SizeChanged += new System.EventHandler(this.middlepanel2_Resize);
-            this.middlesplitContainer.Size = new System.Drawing.Size(345, 167);
-            this.middlesplitContainer.SplitterDistance = 33;
-            this.middlesplitContainer.TabIndex = 0;
-            // 
-            // btn_setwp
-            // 
-            this.btn_setwp.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btn_setwp.BackColor = System.Drawing.Color.White;
-            this.btn_setwp.Location = new System.Drawing.Point(120, 96);
-            this.btn_setwp.Name = "btn_setwp";
-            this.btn_setwp.Size = new System.Drawing.Size(88, 23);
-            this.btn_setwp.TabIndex = 90;
-            this.btn_setwp.Text = "设置航点";
-            this.btn_setwp.UseVisualStyleBackColor = false;
+            this.middlesplitContainer.Size = new System.Drawing.Size(561, 216);
+            this.middlesplitContainer.TabIndex = 9;
             // 
             // btn_stabilize
             // 
             this.btn_stabilize.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_stabilize.BackColor = System.Drawing.Color.White;
-            this.btn_stabilize.Location = new System.Drawing.Point(164, 67);
+            this.btn_stabilize.Location = new System.Drawing.Point(4, 118);
             this.btn_stabilize.Name = "btn_stabilize";
-            this.btn_stabilize.Size = new System.Drawing.Size(44, 23);
-            this.btn_stabilize.TabIndex = 89;
+            this.btn_stabilize.Size = new System.Drawing.Size(94, 23);
+            this.btn_stabilize.TabIndex = 106;
             this.btn_stabilize.Text = "增稳";
             this.btn_stabilize.UseVisualStyleBackColor = false;
+            // 
+            // btn_manual
+            // 
+            this.btn_manual.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btn_manual.BackColor = System.Drawing.Color.White;
+            this.btn_manual.Location = new System.Drawing.Point(3, 83);
+            this.btn_manual.Name = "btn_manual";
+            this.btn_manual.Size = new System.Drawing.Size(94, 23);
+            this.btn_manual.TabIndex = 105;
+            this.btn_manual.Text = "手动";
+            this.btn_manual.UseVisualStyleBackColor = false;
+            // 
+            // HUDpanel
+            // 
+            this.HUDpanel.BackColor = System.Drawing.Color.DimGray;
+            this.HUDpanel.Controls.Add(this.hud1);
+            this.HUDpanel.Location = new System.Drawing.Point(109, 6);
+            this.HUDpanel.Name = "HUDpanel";
+            this.HUDpanel.Size = new System.Drawing.Size(343, 182);
+            this.HUDpanel.TabIndex = 104;
+            // 
+            // hud1
+            // 
+            this.hud1.airspeed = 0F;
+            this.hud1.alt = 0F;
+            this.hud1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.hud1.BackColor = System.Drawing.Color.Black;
+            this.hud1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.hud1.batterylevel = 0F;
+            this.hud1.batteryremaining = 0F;
+            this.hud1.bgimage = null;
+            this.hud1.connected = false;
+            this.hud1.current = 0F;
+            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("airspeed", this.bindingSourceHud, "airspeed", true));
+            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("alt", this.bindingSourceHud, "alt", true));
+            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("batterylevel", this.bindingSourceHud, "battery_voltage", true));
+            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("batteryremaining", this.bindingSourceHud, "battery_remaining", true));
+            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("connected", this.bindingSourceHud, "connected", true));
+            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("current", this.bindingSourceHud, "current", true));
+            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("datetime", this.bindingSourceHud, "datetime", true));
+            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("disttowp", this.bindingSourceHud, "wp_dist", true));
+            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("failsafe", this.bindingSourceHud, "failsafe", true));
+            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("gpsfix", this.bindingSourceHud, "gpsstatus", true));
+            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("gpshdop", this.bindingSourceHud, "gpshdop", true));
+            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("groundalt", this.bindingSourceHud, "HomeAlt", true));
+            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("groundcourse", this.bindingSourceHud, "groundcourse", true));
+            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("groundspeed", this.bindingSourceHud, "groundspeed", true));
+            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("heading", this.bindingSourceHud, "yaw", true));
+            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("linkqualitygcs", this.bindingSourceHud, "linkqualitygcs", true));
+            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("message", this.bindingSourceHud, "messageHigh", true));
+            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("messagetime", this.bindingSourceHud, "messageHighTime", true));
+            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("mode", this.bindingSourceHud, "mode", true));
+            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("navpitch", this.bindingSourceHud, "nav_pitch", true));
+            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("navroll", this.bindingSourceHud, "nav_roll", true));
+            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("pitch", this.bindingSourceHud, "pitch", true));
+            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("roll", this.bindingSourceHud, "roll", true));
+            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("status", this.bindingSourceHud, "armed", true));
+            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("targetalt", this.bindingSourceHud, "targetalt", true));
+            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("targetheading", this.bindingSourceHud, "nav_bearing", true));
+            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("targetspeed", this.bindingSourceHud, "targetairspeed", true));
+            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("turnrate", this.bindingSourceHud, "turnrate", true));
+            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("verticalspeed", this.bindingSourceHud, "verticalspeed", true));
+            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("wpno", this.bindingSourceHud, "wpno", true));
+            this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("xtrack_error", this.bindingSourceHud, "xtrack_error", true));
+            this.hud1.datetime = new System.DateTime(((long)(0)));
+            this.hud1.displayekf = false;
+            this.hud1.displayvibe = false;
+            this.hud1.disttowp = 0F;
+            this.hud1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.hud1.ekfstatus = 0F;
+            this.hud1.failsafe = false;
+            this.hud1.gpsfix = 0F;
+            this.hud1.gpsfix2 = 0F;
+            this.hud1.gpshdop = 0F;
+            this.hud1.gpshdop2 = 0F;
+            this.hud1.groundalt = 0F;
+            this.hud1.groundcourse = 0F;
+            this.hud1.groundspeed = 0F;
+            this.hud1.heading = 0F;
+            this.hud1.hudcolor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(241)))), ((int)(((byte)(30)))));
+            this.hud1.linkqualitygcs = 0F;
+            this.hud1.Location = new System.Drawing.Point(0, 0);
+            this.hud1.lowairspeed = false;
+            this.hud1.lowgroundspeed = false;
+            this.hud1.lowvoltagealert = false;
+            this.hud1.Margin = new System.Windows.Forms.Padding(4);
+            this.hud1.message = "";
+            this.hud1.messagetime = new System.DateTime(((long)(0)));
+            this.hud1.mode = "未知";
+            this.hud1.Name = "hud1";
+            this.hud1.navpitch = 0F;
+            this.hud1.navroll = 0F;
+            this.hud1.opengl = false;
+            this.hud1.pitch = 0F;
+            this.hud1.roll = 0F;
+            this.hud1.Russian = false;
+            this.hud1.Size = new System.Drawing.Size(343, 182);
+            this.hud1.status = false;
+            this.hud1.streamjpg = null;
+            this.hud1.TabIndex = 5;
+            this.hud1.targetalt = 0F;
+            this.hud1.targetheading = 0F;
+            this.hud1.targetspeed = 0F;
+            this.hud1.turnrate = 0F;
+            this.hud1.UseOpenGL = false;
+            this.hud1.verticalspeed = 0F;
+            this.hud1.vibex = 0F;
+            this.hud1.vibey = 0F;
+            this.hud1.vibez = 0F;
+            this.hud1.wpno = 0;
+            this.hud1.xtrack_error = 0F;
+            // 
+            // btn_setwp
+            // 
+            this.btn_setwp.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btn_setwp.BackColor = System.Drawing.Color.White;
+            this.btn_setwp.Location = new System.Drawing.Point(61, 191);
+            this.btn_setwp.Name = "btn_setwp";
+            this.btn_setwp.Size = new System.Drawing.Size(37, 23);
+            this.btn_setwp.TabIndex = 103;
+            this.btn_setwp.Text = "设置航点";
+            this.btn_setwp.UseVisualStyleBackColor = false;
             // 
             // btn_qhover
             // 
             this.btn_qhover.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_qhover.BackColor = System.Drawing.Color.White;
-            this.btn_qhover.Location = new System.Drawing.Point(236, 96);
+            this.btn_qhover.Location = new System.Drawing.Point(466, 46);
             this.btn_qhover.Name = "btn_qhover";
-            this.btn_qhover.Size = new System.Drawing.Size(90, 23);
-            this.btn_qhover.TabIndex = 88;
+            this.btn_qhover.Size = new System.Drawing.Size(90, 26);
+            this.btn_qhover.TabIndex = 101;
             this.btn_qhover.Text = "多轴悬停";
             this.btn_qhover.UseVisualStyleBackColor = false;
             // 
@@ -690,41 +680,30 @@
             this.CMB_setwp.FormattingEnabled = true;
             this.CMB_setwp.Items.AddRange(new object[] {
             "0 (Home)"});
-            this.CMB_setwp.Location = new System.Drawing.Point(16, 96);
+            this.CMB_setwp.Location = new System.Drawing.Point(4, 193);
             this.CMB_setwp.Name = "CMB_setwp";
-            this.CMB_setwp.Size = new System.Drawing.Size(76, 20);
-            this.CMB_setwp.TabIndex = 86;
+            this.CMB_setwp.Size = new System.Drawing.Size(54, 20);
+            this.CMB_setwp.TabIndex = 100;
             // 
             // btn_qlandemergent
             // 
             this.btn_qlandemergent.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_qlandemergent.BackColor = System.Drawing.Color.White;
-            this.btn_qlandemergent.Location = new System.Drawing.Point(236, 67);
+            this.btn_qlandemergent.Location = new System.Drawing.Point(466, 8);
             this.btn_qlandemergent.Name = "btn_qlandemergent";
-            this.btn_qlandemergent.Size = new System.Drawing.Size(90, 23);
-            this.btn_qlandemergent.TabIndex = 85;
+            this.btn_qlandemergent.Size = new System.Drawing.Size(90, 25);
+            this.btn_qlandemergent.TabIndex = 99;
             this.btn_qlandemergent.Text = "多轴应急着陆";
             this.btn_qlandemergent.UseVisualStyleBackColor = false;
-            // 
-            // btn_manual
-            // 
-            this.btn_manual.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btn_manual.BackColor = System.Drawing.Color.White;
-            this.btn_manual.Location = new System.Drawing.Point(120, 67);
-            this.btn_manual.Name = "btn_manual";
-            this.btn_manual.Size = new System.Drawing.Size(45, 23);
-            this.btn_manual.TabIndex = 84;
-            this.btn_manual.Text = "手动";
-            this.btn_manual.UseVisualStyleBackColor = false;
             // 
             // btn_parachute
             // 
             this.btn_parachute.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_parachute.BackColor = System.Drawing.Color.White;
-            this.btn_parachute.Location = new System.Drawing.Point(16, 67);
+            this.btn_parachute.Location = new System.Drawing.Point(466, 159);
             this.btn_parachute.Name = "btn_parachute";
-            this.btn_parachute.Size = new System.Drawing.Size(77, 23);
-            this.btn_parachute.TabIndex = 83;
+            this.btn_parachute.Size = new System.Drawing.Size(88, 23);
+            this.btn_parachute.TabIndex = 97;
             this.btn_parachute.Text = "应急开伞";
             this.btn_parachute.UseVisualStyleBackColor = false;
             // 
@@ -732,10 +711,10 @@
             // 
             this.btn_normalland.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_normalland.BackColor = System.Drawing.Color.White;
-            this.btn_normalland.Location = new System.Drawing.Point(236, 6);
+            this.btn_normalland.Location = new System.Drawing.Point(466, 83);
             this.btn_normalland.Name = "btn_normalland";
-            this.btn_normalland.Size = new System.Drawing.Size(88, 23);
-            this.btn_normalland.TabIndex = 82;
+            this.btn_normalland.Size = new System.Drawing.Size(88, 25);
+            this.btn_normalland.TabIndex = 96;
             this.btn_normalland.Text = "常规着陆";
             this.btn_normalland.UseVisualStyleBackColor = false;
             // 
@@ -743,10 +722,10 @@
             // 
             this.btn_qrtlemergent.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_qrtlemergent.BackColor = System.Drawing.Color.White;
-            this.btn_qrtlemergent.Location = new System.Drawing.Point(236, 35);
+            this.btn_qrtlemergent.Location = new System.Drawing.Point(466, 120);
             this.btn_qrtlemergent.Name = "btn_qrtlemergent";
-            this.btn_qrtlemergent.Size = new System.Drawing.Size(88, 23);
-            this.btn_qrtlemergent.TabIndex = 81;
+            this.btn_qrtlemergent.Size = new System.Drawing.Size(88, 25);
+            this.btn_qrtlemergent.TabIndex = 95;
             this.btn_qrtlemergent.Text = "多轴应急返航";
             this.btn_qrtlemergent.UseVisualStyleBackColor = false;
             // 
@@ -754,10 +733,10 @@
             // 
             this.btn_arm.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_arm.BackColor = System.Drawing.Color.White;
-            this.btn_arm.Location = new System.Drawing.Point(120, 7);
+            this.btn_arm.Location = new System.Drawing.Point(4, 45);
             this.btn_arm.Name = "btn_arm";
-            this.btn_arm.Size = new System.Drawing.Size(86, 23);
-            this.btn_arm.TabIndex = 80;
+            this.btn_arm.Size = new System.Drawing.Size(94, 23);
+            this.btn_arm.TabIndex = 94;
             this.btn_arm.Text = "解锁/加锁";
             this.btn_arm.UseVisualStyleBackColor = false;
             // 
@@ -765,10 +744,10 @@
             // 
             this.btn_auto.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_auto.BackColor = System.Drawing.Color.White;
-            this.btn_auto.Location = new System.Drawing.Point(120, 36);
+            this.btn_auto.Location = new System.Drawing.Point(3, 157);
             this.btn_auto.Name = "btn_auto";
-            this.btn_auto.Size = new System.Drawing.Size(88, 23);
-            this.btn_auto.TabIndex = 79;
+            this.btn_auto.Size = new System.Drawing.Size(94, 23);
+            this.btn_auto.TabIndex = 93;
             this.btn_auto.Text = "自动导航";
             this.btn_auto.UseVisualStyleBackColor = false;
             // 
@@ -776,10 +755,10 @@
             // 
             this.btn_prearm.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_prearm.BackColor = System.Drawing.Color.White;
-            this.btn_prearm.Location = new System.Drawing.Point(16, 6);
+            this.btn_prearm.Location = new System.Drawing.Point(4, 8);
             this.btn_prearm.Name = "btn_prearm";
-            this.btn_prearm.Size = new System.Drawing.Size(78, 23);
-            this.btn_prearm.TabIndex = 78;
+            this.btn_prearm.Size = new System.Drawing.Size(94, 23);
+            this.btn_prearm.TabIndex = 92;
             this.btn_prearm.Text = "起飞前检查";
             this.btn_prearm.UseVisualStyleBackColor = false;
             // 
@@ -787,10 +766,10 @@
             // 
             this.btn_rtl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_rtl.BackColor = System.Drawing.Color.White;
-            this.btn_rtl.Location = new System.Drawing.Point(16, 35);
+            this.btn_rtl.Location = new System.Drawing.Point(464, 190);
             this.btn_rtl.Name = "btn_rtl";
-            this.btn_rtl.Size = new System.Drawing.Size(78, 23);
-            this.btn_rtl.TabIndex = 77;
+            this.btn_rtl.Size = new System.Drawing.Size(90, 23);
+            this.btn_rtl.TabIndex = 91;
             this.btn_rtl.Text = "返航";
             this.btn_rtl.UseVisualStyleBackColor = false;
             // 
@@ -810,7 +789,7 @@
             this.rightdatapanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rightdatapanel.Location = new System.Drawing.Point(0, 0);
             this.rightdatapanel.Name = "rightdatapanel";
-            this.rightdatapanel.Size = new System.Drawing.Size(312, 163);
+            this.rightdatapanel.Size = new System.Drawing.Size(293, 216);
             this.rightdatapanel.TabIndex = 0;
             // 
             // battery2_usedmah
@@ -933,15 +912,23 @@
             this.wpno.Text = "目标航点:";
             this.wpno.Visible = false;
             // 
+            // DataPanel
+            // 
+            this.DataPanel.Controls.Add(this.rightsplitContainer);
+            this.DataPanel.Location = new System.Drawing.Point(220, 455);
+            this.DataPanel.Name = "DataPanel";
+            this.DataPanel.Size = new System.Drawing.Size(1163, 220);
+            this.DataPanel.TabIndex = 6;
+            this.DataPanel.Layout += new System.Windows.Forms.LayoutEventHandler(this.DataPanel_Layout);
+            // 
             // HsdevInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.HUDpanel);
             this.Controls.Add(this.DataPanel);
             this.Controls.Add(this.gMapControl1);
             this.Name = "HsdevInterface";
-            this.Size = new System.Drawing.Size(1379, 692);
+            this.Size = new System.Drawing.Size(1559, 692);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HsdevInterface_FormClosing);
             this.Load += new System.EventHandler(this.HsdevInterface_Load);
             this.Resize += new System.EventHandler(this.HsdevInterface_Resize);
@@ -950,8 +937,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceHud)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceQuickTab)).EndInit();
-            this.HUDpanel.ResumeLayout(false);
-            this.DataPanel.ResumeLayout(false);
             this.rightsplitContainer.Panel1.ResumeLayout(false);
             this.rightsplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.rightsplitContainer)).EndInit();
@@ -962,11 +947,11 @@
             this.leftsplitContainer.ResumeLayout(false);
             this.leftdatapanel.ResumeLayout(false);
             this.leftdatapanel.PerformLayout();
-            this.middlesplitContainer.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.middlesplitContainer)).EndInit();
             this.middlesplitContainer.ResumeLayout(false);
+            this.HUDpanel.ResumeLayout(false);
             this.rightdatapanel.ResumeLayout(false);
             this.rightdatapanel.PerformLayout();
+            this.DataPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -993,9 +978,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuQLAND;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuAutoDrog;
         public Controls.myGMAP gMapControl1;
-        private System.Windows.Forms.Panel HUDpanel;
-        private Controls.HSHUD hud1;
-        private System.Windows.Forms.Panel DataPanel;
         private System.Windows.Forms.SplitContainer rightsplitContainer;
         private System.Windows.Forms.SplitContainer leftsplitContainer;
         private mypanel leftdatapanel;
@@ -1012,13 +994,15 @@
         private System.Windows.Forms.Label targetalt;
         private System.Windows.Forms.Label altasl;
         private System.Windows.Forms.Label alt;
-        private System.Windows.Forms.SplitContainer middlesplitContainer;
-        private System.Windows.Forms.Button btn_setwp;
+        private System.Windows.Forms.Panel middlesplitContainer;
         private System.Windows.Forms.Button btn_stabilize;
+        private System.Windows.Forms.Button btn_manual;
+        private System.Windows.Forms.Panel HUDpanel;
+        private Controls.HSHUD hud1;
+        private System.Windows.Forms.Button btn_setwp;
         private System.Windows.Forms.Button btn_qhover;
         private System.Windows.Forms.ComboBox CMB_setwp;
         private System.Windows.Forms.Button btn_qlandemergent;
-        private System.Windows.Forms.Button btn_manual;
         private System.Windows.Forms.Button btn_parachute;
         private System.Windows.Forms.Button btn_normalland;
         private System.Windows.Forms.Button btn_qrtlemergent;
@@ -1037,5 +1021,6 @@
         private System.Windows.Forms.Label DistToHome;
         private System.Windows.Forms.Label wp_dist;
         private System.Windows.Forms.Label wpno;
+        private System.Windows.Forms.Panel DataPanel;
     }
 }

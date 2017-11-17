@@ -258,16 +258,6 @@ namespace MissionPlanner.GCSViews
 
             rightlabels.Add(new LabelInfo(battery2_usedmah, "0", "mah")); 
 
-
-
-            originalmiddlesize = middlesplitContainer.Panel2.Size;
-
-            originalleftsize = leftsplitContainer.Panel1.Size;
-
-            originalrightsize = rightsplitContainer.Panel2.Size;
-
-
-
             instance = this;
             //    _serializer = new DockStateSerializer(dockContainer1);
             //    _serializer.SavePath = Application.StartupPath + Path.DirectorySeparatorChar + "FDscreen.xml";
@@ -334,10 +324,10 @@ namespace MissionPlanner.GCSViews
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (middlesplitContainer.Panel1!=null)
+            if (middlesplitContainer!=null)
             {
-                Graphics g = middlesplitContainer.Panel1.CreateGraphics();
-                g.Clear(middlesplitContainer.Panel1.BackColor);
+                Graphics g = middlesplitContainer.CreateGraphics();
+                g.Clear(middlesplitContainer.BackColor);
             }
         }
 
@@ -434,10 +424,10 @@ namespace MissionPlanner.GCSViews
         int ignore = 0;
         private void HsdevInterface_Resize(object sender, EventArgs e)
         {
-
+            
             System.Drawing.Size size = new System.Drawing.Size();
-            size.Width = this.Width / 2;
-            size.Height = this.Height / 6;
+            size.Width = this.Width - this.Width / 3;
+            size.Height = this.Height / 5;
             size.Width = Math.Min(Math.Max(size.Width, 800), 1920);
             size.Height = Math.Min(Math.Max(size.Height, 180), 1080);
 
@@ -466,10 +456,11 @@ namespace MissionPlanner.GCSViews
             size.Width = middlesplitContainer.Width;
             size.Height = middlesplitContainer.Height;
             //hud1.Site = size;
-            HUDpanel.Size = size;
-            p.X = DataPanel.Location.X + leftsplitContainer.Panel1.Width + 4;
-            p.Y = DataPanel.Location.Y - HUDpanel.Height - 2;
-            HUDpanel.Location = p;
+
+            //HUDpanel.Size = size;
+            //p.X = DataPanel.Location.X + leftsplitContainer.Panel1.Width + 4;
+            //p.Y = DataPanel.Location.Y - HUDpanel.Height - 2;
+            //HUDpanel.Location = p;
 
             leftsplitContainer.BackColor = Color.White;
             rightsplitContainer.BackColor = Color.White;
@@ -478,11 +469,11 @@ namespace MissionPlanner.GCSViews
         }
         public void DrawWarningMessage(string txt)
         {
-            Graphics g = middlesplitContainer.Panel1.CreateGraphics();
-            g.Clear(middlesplitContainer.Panel1.BackColor);
+            Graphics g = middlesplitContainer.CreateGraphics();
+            g.Clear(middlesplitContainer.BackColor);
             Font font = new Font("SimSun", 16);
             float f = 16;
-            Panel temp = middlesplitContainer.Panel1;
+            Panel temp = middlesplitContainer;
             SizeF s = GetTextBounds(font, txt);
             while (true)
             {
@@ -514,7 +505,7 @@ namespace MissionPlanner.GCSViews
             }
         }
 
-        private void middlepanel2_Resize(object sender, EventArgs e)
+        private void middlepanel_Resize(object sender, EventArgs e)
         {
 
             if (middlebuttons.Count == 0)
@@ -525,8 +516,8 @@ namespace MissionPlanner.GCSViews
 
 
 
-            float wscale = (float)middlesplitContainer.Panel2.Width / (float)originalmiddlesize.Width;
-            float hscale = (float)middlesplitContainer.Panel2.Height / (float)originalmiddlesize.Height;
+            float wscale = (float)middlesplitContainer.Width / (float)originalmiddlesize.Width;
+            float hscale = (float)middlesplitContainer.Height / (float)originalmiddlesize.Height;
 
             minfont = 10000;
             float f = 10000;
@@ -2092,6 +2083,19 @@ namespace MissionPlanner.GCSViews
             }
             catch { CustomMessageBox.Show("指令执行失败", "错误"); }
             ((Button)sender).Enabled = true;
+        }
+
+        private void DataPanel_Layout(object sender, LayoutEventArgs e)
+        {
+        }
+
+        private void DataPanel_Layout()
+        {
+            originalmiddlesize = middlesplitContainer.Size;
+
+            originalleftsize = leftsplitContainer.Panel1.Size;
+
+            originalrightsize = rightsplitContainer.Panel2.Size;
         }
     }
 }
