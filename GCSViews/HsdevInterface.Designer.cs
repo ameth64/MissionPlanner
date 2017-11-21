@@ -68,6 +68,7 @@
             this.altasl = new System.Windows.Forms.Label();
             this.alt = new System.Windows.Forms.Label();
             this.middlesplitContainer = new System.Windows.Forms.Panel();
+            this.panel12 = new System.Windows.Forms.Panel();
             this.btn_stabilize = new System.Windows.Forms.Button();
             this.btn_manual = new System.Windows.Forms.Button();
             this.HUDpanel = new System.Windows.Forms.Panel();
@@ -95,6 +96,7 @@
             this.wp_dist = new System.Windows.Forms.Label();
             this.wpno = new System.Windows.Forms.Label();
             this.DataPanel = new System.Windows.Forms.Panel();
+            this.messagetext = new System.Windows.Forms.TextBox();
             this.contextMenuStripMap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceHud)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -109,6 +111,7 @@
             this.leftsplitContainer.SuspendLayout();
             this.leftdatapanel.SuspendLayout();
             this.middlesplitContainer.SuspendLayout();
+            this.panel12.SuspendLayout();
             this.HUDpanel.SuspendLayout();
             this.rightdatapanel.SuspendLayout();
             this.DataPanel.SuspendLayout();
@@ -508,34 +511,45 @@
             // middlesplitContainer
             // 
             this.middlesplitContainer.BackColor = System.Drawing.Color.DimGray;
-            this.middlesplitContainer.Controls.Add(this.btn_stabilize);
-            this.middlesplitContainer.Controls.Add(this.btn_manual);
-            this.middlesplitContainer.Controls.Add(this.HUDpanel);
-            this.middlesplitContainer.Controls.Add(this.btn_setwp);
-            this.middlesplitContainer.Controls.Add(this.btn_qhover);
-            this.middlesplitContainer.Controls.Add(this.CMB_setwp);
-            this.middlesplitContainer.Controls.Add(this.btn_qlandemergent);
-            this.middlesplitContainer.Controls.Add(this.btn_parachute);
-            this.middlesplitContainer.Controls.Add(this.btn_normalland);
-            this.middlesplitContainer.Controls.Add(this.btn_qrtlemergent);
-            this.middlesplitContainer.Controls.Add(this.btn_arm);
-            this.middlesplitContainer.Controls.Add(this.btn_auto);
-            this.middlesplitContainer.Controls.Add(this.btn_prearm);
-            this.middlesplitContainer.Controls.Add(this.btn_rtl);
+            this.middlesplitContainer.Controls.Add(this.panel12);
             this.middlesplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.middlesplitContainer.Location = new System.Drawing.Point(0, 0);
             this.middlesplitContainer.Name = "middlesplitContainer";
             this.middlesplitContainer.Size = new System.Drawing.Size(561, 216);
             this.middlesplitContainer.TabIndex = 9;
             // 
+            // panel12
+            // 
+            this.panel12.Controls.Add(this.messagetext);
+            this.panel12.Controls.Add(this.btn_stabilize);
+            this.panel12.Controls.Add(this.btn_manual);
+            this.panel12.Controls.Add(this.HUDpanel);
+            this.panel12.Controls.Add(this.btn_setwp);
+            this.panel12.Controls.Add(this.btn_qhover);
+            this.panel12.Controls.Add(this.CMB_setwp);
+            this.panel12.Controls.Add(this.btn_qlandemergent);
+            this.panel12.Controls.Add(this.btn_parachute);
+            this.panel12.Controls.Add(this.btn_normalland);
+            this.panel12.Controls.Add(this.btn_qrtlemergent);
+            this.panel12.Controls.Add(this.btn_arm);
+            this.panel12.Controls.Add(this.btn_auto);
+            this.panel12.Controls.Add(this.btn_prearm);
+            this.panel12.Controls.Add(this.btn_rtl);
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel12.Location = new System.Drawing.Point(0, 0);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(561, 216);
+            this.panel12.TabIndex = 8;
+            this.panel12.Resize += new System.EventHandler(this.middlepanel_Resize);
+            // 
             // btn_stabilize
             // 
             this.btn_stabilize.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_stabilize.BackColor = System.Drawing.Color.White;
-            this.btn_stabilize.Location = new System.Drawing.Point(4, 118);
+            this.btn_stabilize.Location = new System.Drawing.Point(5, 110);
             this.btn_stabilize.Name = "btn_stabilize";
-            this.btn_stabilize.Size = new System.Drawing.Size(94, 23);
-            this.btn_stabilize.TabIndex = 106;
+            this.btn_stabilize.Size = new System.Drawing.Size(94, 29);
+            this.btn_stabilize.TabIndex = 120;
             this.btn_stabilize.Text = "增稳";
             this.btn_stabilize.UseVisualStyleBackColor = false;
             // 
@@ -543,10 +557,10 @@
             // 
             this.btn_manual.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_manual.BackColor = System.Drawing.Color.White;
-            this.btn_manual.Location = new System.Drawing.Point(3, 83);
+            this.btn_manual.Location = new System.Drawing.Point(4, 75);
             this.btn_manual.Name = "btn_manual";
-            this.btn_manual.Size = new System.Drawing.Size(94, 23);
-            this.btn_manual.TabIndex = 105;
+            this.btn_manual.Size = new System.Drawing.Size(94, 29);
+            this.btn_manual.TabIndex = 119;
             this.btn_manual.Text = "手动";
             this.btn_manual.UseVisualStyleBackColor = false;
             // 
@@ -554,10 +568,10 @@
             // 
             this.HUDpanel.BackColor = System.Drawing.Color.DimGray;
             this.HUDpanel.Controls.Add(this.hud1);
-            this.HUDpanel.Location = new System.Drawing.Point(109, 6);
+            this.HUDpanel.Location = new System.Drawing.Point(104, 5);
             this.HUDpanel.Name = "HUDpanel";
-            this.HUDpanel.Size = new System.Drawing.Size(343, 182);
-            this.HUDpanel.TabIndex = 104;
+            this.HUDpanel.Size = new System.Drawing.Size(357, 182);
+            this.HUDpanel.TabIndex = 118;
             // 
             // hud1
             // 
@@ -634,7 +648,7 @@
             this.hud1.pitch = 0F;
             this.hud1.roll = 0F;
             this.hud1.Russian = false;
-            this.hud1.Size = new System.Drawing.Size(343, 182);
+            this.hud1.Size = new System.Drawing.Size(357, 182);
             this.hud1.status = false;
             this.hud1.streamjpg = null;
             this.hud1.TabIndex = 5;
@@ -654,21 +668,21 @@
             // 
             this.btn_setwp.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_setwp.BackColor = System.Drawing.Color.White;
-            this.btn_setwp.Location = new System.Drawing.Point(61, 191);
+            this.btn_setwp.Location = new System.Drawing.Point(58, 184);
             this.btn_setwp.Name = "btn_setwp";
-            this.btn_setwp.Size = new System.Drawing.Size(37, 23);
-            this.btn_setwp.TabIndex = 103;
-            this.btn_setwp.Text = "设置航点";
+            this.btn_setwp.Size = new System.Drawing.Size(41, 28);
+            this.btn_setwp.TabIndex = 117;
+            this.btn_setwp.Text = "设置";
             this.btn_setwp.UseVisualStyleBackColor = false;
             // 
             // btn_qhover
             // 
             this.btn_qhover.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_qhover.BackColor = System.Drawing.Color.White;
-            this.btn_qhover.Location = new System.Drawing.Point(466, 46);
+            this.btn_qhover.Location = new System.Drawing.Point(467, 43);
             this.btn_qhover.Name = "btn_qhover";
-            this.btn_qhover.Size = new System.Drawing.Size(90, 26);
-            this.btn_qhover.TabIndex = 101;
+            this.btn_qhover.Size = new System.Drawing.Size(90, 31);
+            this.btn_qhover.TabIndex = 116;
             this.btn_qhover.Text = "多轴悬停";
             this.btn_qhover.UseVisualStyleBackColor = false;
             // 
@@ -680,19 +694,19 @@
             this.CMB_setwp.FormattingEnabled = true;
             this.CMB_setwp.Items.AddRange(new object[] {
             "0 (Home)"});
-            this.CMB_setwp.Location = new System.Drawing.Point(4, 193);
+            this.CMB_setwp.Location = new System.Drawing.Point(5, 191);
             this.CMB_setwp.Name = "CMB_setwp";
             this.CMB_setwp.Size = new System.Drawing.Size(54, 20);
-            this.CMB_setwp.TabIndex = 100;
+            this.CMB_setwp.TabIndex = 115;
             // 
             // btn_qlandemergent
             // 
             this.btn_qlandemergent.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_qlandemergent.BackColor = System.Drawing.Color.White;
-            this.btn_qlandemergent.Location = new System.Drawing.Point(466, 8);
+            this.btn_qlandemergent.Location = new System.Drawing.Point(467, 6);
             this.btn_qlandemergent.Name = "btn_qlandemergent";
-            this.btn_qlandemergent.Size = new System.Drawing.Size(90, 25);
-            this.btn_qlandemergent.TabIndex = 99;
+            this.btn_qlandemergent.Size = new System.Drawing.Size(90, 32);
+            this.btn_qlandemergent.TabIndex = 114;
             this.btn_qlandemergent.Text = "多轴应急着陆";
             this.btn_qlandemergent.UseVisualStyleBackColor = false;
             // 
@@ -700,10 +714,10 @@
             // 
             this.btn_parachute.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_parachute.BackColor = System.Drawing.Color.White;
-            this.btn_parachute.Location = new System.Drawing.Point(466, 159);
+            this.btn_parachute.Location = new System.Drawing.Point(469, 150);
             this.btn_parachute.Name = "btn_parachute";
-            this.btn_parachute.Size = new System.Drawing.Size(88, 23);
-            this.btn_parachute.TabIndex = 97;
+            this.btn_parachute.Size = new System.Drawing.Size(88, 28);
+            this.btn_parachute.TabIndex = 113;
             this.btn_parachute.Text = "应急开伞";
             this.btn_parachute.UseVisualStyleBackColor = false;
             // 
@@ -711,10 +725,10 @@
             // 
             this.btn_normalland.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_normalland.BackColor = System.Drawing.Color.White;
-            this.btn_normalland.Location = new System.Drawing.Point(466, 83);
+            this.btn_normalland.Location = new System.Drawing.Point(468, 78);
             this.btn_normalland.Name = "btn_normalland";
-            this.btn_normalland.Size = new System.Drawing.Size(88, 25);
-            this.btn_normalland.TabIndex = 96;
+            this.btn_normalland.Size = new System.Drawing.Size(88, 30);
+            this.btn_normalland.TabIndex = 112;
             this.btn_normalland.Text = "常规着陆";
             this.btn_normalland.UseVisualStyleBackColor = false;
             // 
@@ -722,10 +736,10 @@
             // 
             this.btn_qrtlemergent.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_qrtlemergent.BackColor = System.Drawing.Color.White;
-            this.btn_qrtlemergent.Location = new System.Drawing.Point(466, 120);
+            this.btn_qrtlemergent.Location = new System.Drawing.Point(469, 111);
             this.btn_qrtlemergent.Name = "btn_qrtlemergent";
-            this.btn_qrtlemergent.Size = new System.Drawing.Size(88, 25);
-            this.btn_qrtlemergent.TabIndex = 95;
+            this.btn_qrtlemergent.Size = new System.Drawing.Size(88, 34);
+            this.btn_qrtlemergent.TabIndex = 111;
             this.btn_qrtlemergent.Text = "多轴应急返航";
             this.btn_qrtlemergent.UseVisualStyleBackColor = false;
             // 
@@ -733,10 +747,10 @@
             // 
             this.btn_arm.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_arm.BackColor = System.Drawing.Color.White;
-            this.btn_arm.Location = new System.Drawing.Point(4, 45);
+            this.btn_arm.Location = new System.Drawing.Point(5, 43);
             this.btn_arm.Name = "btn_arm";
-            this.btn_arm.Size = new System.Drawing.Size(94, 23);
-            this.btn_arm.TabIndex = 94;
+            this.btn_arm.Size = new System.Drawing.Size(94, 27);
+            this.btn_arm.TabIndex = 110;
             this.btn_arm.Text = "解锁/加锁";
             this.btn_arm.UseVisualStyleBackColor = false;
             // 
@@ -744,10 +758,10 @@
             // 
             this.btn_auto.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_auto.BackColor = System.Drawing.Color.White;
-            this.btn_auto.Location = new System.Drawing.Point(3, 157);
+            this.btn_auto.Location = new System.Drawing.Point(4, 145);
             this.btn_auto.Name = "btn_auto";
-            this.btn_auto.Size = new System.Drawing.Size(94, 23);
-            this.btn_auto.TabIndex = 93;
+            this.btn_auto.Size = new System.Drawing.Size(94, 33);
+            this.btn_auto.TabIndex = 109;
             this.btn_auto.Text = "自动导航";
             this.btn_auto.UseVisualStyleBackColor = false;
             // 
@@ -755,10 +769,10 @@
             // 
             this.btn_prearm.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_prearm.BackColor = System.Drawing.Color.White;
-            this.btn_prearm.Location = new System.Drawing.Point(4, 8);
+            this.btn_prearm.Location = new System.Drawing.Point(5, 6);
             this.btn_prearm.Name = "btn_prearm";
-            this.btn_prearm.Size = new System.Drawing.Size(94, 23);
-            this.btn_prearm.TabIndex = 92;
+            this.btn_prearm.Size = new System.Drawing.Size(93, 31);
+            this.btn_prearm.TabIndex = 108;
             this.btn_prearm.Text = "起飞前检查";
             this.btn_prearm.UseVisualStyleBackColor = false;
             // 
@@ -766,10 +780,10 @@
             // 
             this.btn_rtl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_rtl.BackColor = System.Drawing.Color.White;
-            this.btn_rtl.Location = new System.Drawing.Point(464, 190);
+            this.btn_rtl.Location = new System.Drawing.Point(468, 183);
             this.btn_rtl.Name = "btn_rtl";
-            this.btn_rtl.Size = new System.Drawing.Size(90, 23);
-            this.btn_rtl.TabIndex = 91;
+            this.btn_rtl.Size = new System.Drawing.Size(90, 27);
+            this.btn_rtl.TabIndex = 107;
             this.btn_rtl.Text = "返航";
             this.btn_rtl.UseVisualStyleBackColor = false;
             // 
@@ -921,6 +935,14 @@
             this.DataPanel.TabIndex = 6;
             this.DataPanel.Layout += new System.Windows.Forms.LayoutEventHandler(this.DataPanel_Layout);
             // 
+            // messagetext
+            // 
+            this.messagetext.Location = new System.Drawing.Point(104, 192);
+            this.messagetext.Name = "messagetext";
+            this.messagetext.ReadOnly = true;
+            this.messagetext.Size = new System.Drawing.Size(357, 21);
+            this.messagetext.TabIndex = 121;
+            // 
             // HsdevInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -948,6 +970,8 @@
             this.leftdatapanel.ResumeLayout(false);
             this.leftdatapanel.PerformLayout();
             this.middlesplitContainer.ResumeLayout(false);
+            this.panel12.ResumeLayout(false);
+            this.panel12.PerformLayout();
             this.HUDpanel.ResumeLayout(false);
             this.rightdatapanel.ResumeLayout(false);
             this.rightdatapanel.PerformLayout();
@@ -995,6 +1019,19 @@
         private System.Windows.Forms.Label altasl;
         private System.Windows.Forms.Label alt;
         private System.Windows.Forms.Panel middlesplitContainer;
+        private mypanel rightdatapanel;
+        private System.Windows.Forms.Label battery2_usedmah;
+        private System.Windows.Forms.Label current2;
+        private System.Windows.Forms.Label battery_voltage2;
+        private System.Windows.Forms.Label battery_remaining;
+        private System.Windows.Forms.Label current;
+        private System.Windows.Forms.Label battery_voltage;
+        private System.Windows.Forms.Label xtrack_error;
+        private System.Windows.Forms.Label DistToHome;
+        private System.Windows.Forms.Label wp_dist;
+        private System.Windows.Forms.Label wpno;
+        private System.Windows.Forms.Panel DataPanel;
+        private System.Windows.Forms.Panel panel12;
         private System.Windows.Forms.Button btn_stabilize;
         private System.Windows.Forms.Button btn_manual;
         private System.Windows.Forms.Panel HUDpanel;
@@ -1010,17 +1047,6 @@
         private System.Windows.Forms.Button btn_auto;
         private System.Windows.Forms.Button btn_prearm;
         private System.Windows.Forms.Button btn_rtl;
-        private mypanel rightdatapanel;
-        private System.Windows.Forms.Label battery2_usedmah;
-        private System.Windows.Forms.Label current2;
-        private System.Windows.Forms.Label battery_voltage2;
-        private System.Windows.Forms.Label battery_remaining;
-        private System.Windows.Forms.Label current;
-        private System.Windows.Forms.Label battery_voltage;
-        private System.Windows.Forms.Label xtrack_error;
-        private System.Windows.Forms.Label DistToHome;
-        private System.Windows.Forms.Label wp_dist;
-        private System.Windows.Forms.Label wpno;
-        private System.Windows.Forms.Panel DataPanel;
+        private System.Windows.Forms.TextBox messagetext;
     }
 }

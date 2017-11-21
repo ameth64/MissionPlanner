@@ -135,6 +135,7 @@ namespace MissionPlanner.GCSViews
         System.Drawing.Size originalmiddlesize = new System.Drawing.Size();
         System.Drawing.Size originalleftsize = new System.Drawing.Size();
         System.Drawing.Size originalrightsize = new System.Drawing.Size();
+        System.Drawing.Size originalhudpanelsize = new System.Drawing.Size();
         float minfont = 10000;
 
         //public Bitmap bmpleftpanel;
@@ -426,8 +427,8 @@ namespace MissionPlanner.GCSViews
         {
             
             System.Drawing.Size size = new System.Drawing.Size();
-            size.Width = this.Width - this.Width / 3;
-            size.Height = this.Height / 5;
+            size.Width = (int)((float)this.Width - (float)this.Width / 2.5);
+            size.Height = (int)((float)this.Height / 4.5);
             size.Width = Math.Min(Math.Max(size.Width, 800), 1920);
             size.Height = Math.Min(Math.Max(size.Height, 180), 1080);
 
@@ -442,9 +443,6 @@ namespace MissionPlanner.GCSViews
             {
                 DataPanel.Size = size;
             }
-
-
-
 
             System.Drawing.Point p = new System.Drawing.Point();
             p.X = this.Width / 2 - DataPanel.Width / 2;
@@ -509,10 +507,36 @@ namespace MissionPlanner.GCSViews
         {
 
             if (middlebuttons.Count == 0)
+            {
+                originalmiddlesize = middlesplitContainer.Size;
+
+                originalleftsize = leftsplitContainer.Panel1.Size;
+
+                originalrightsize = rightsplitContainer.Panel2.Size;
+
+                originalhudpanelsize = HUDpanel.Size;
+
                 return;
+            }
 
             System.Drawing.Size size = new System.Drawing.Size();
+            size = new System.Drawing.Size();
+            size.Width = (int)((float)panel12.Width * (float)((float)originalhudpanelsize.Width / (float)originalmiddlesize.Width));
+            size.Height = (int)((float)panel12.Height * (float)((float)originalhudpanelsize.Height / (float)originalmiddlesize.Height)) - 25;
+            HUDpanel.Size = size;
+
             System.Drawing.Point p = new System.Drawing.Point();
+            p.X = panel12.Width / 2 - HUDpanel.Width / 2;
+            p.Y = 5;
+            HUDpanel.Location = p;
+
+            p.Y += HUDpanel.Height + 3;
+
+            messagetext.Location = p;
+
+            size.Height = 25;
+
+            messagetext.Size = size;
 
 
 
@@ -530,9 +554,10 @@ namespace MissionPlanner.GCSViews
 
                     Button temp = (Button)middlebuttons[i];
 
-                    if (temp.Location.X < 0 || temp.Location.Y < 0)
-                        continue;
-                    if(wscale>1.0)
+                    //if (temp.Location.X < 0 || temp.Location.Y < 0)
+                    //    temp.Location = p;
+
+                    if (wscale>1.0)
                          p.X = (int)Math.Floor((float)btnbounds[i].X * wscale);
                     else
                          p.X = (int)Math.Ceiling((float)btnbounds[i].X * wscale);
@@ -2089,13 +2114,5 @@ namespace MissionPlanner.GCSViews
         {
         }
 
-        private void DataPanel_Layout()
-        {
-            originalmiddlesize = middlesplitContainer.Size;
-
-            originalleftsize = leftsplitContainer.Panel1.Size;
-
-            originalrightsize = rightsplitContainer.Panel2.Size;
-        }
     }
 }
