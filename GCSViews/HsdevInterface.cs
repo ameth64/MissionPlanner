@@ -428,7 +428,7 @@ namespace MissionPlanner.GCSViews
         {
             
             System.Drawing.Size size = new System.Drawing.Size();
-            size.Width = (int)((float)this.Width - (float)this.Width / 2.5);
+            size.Width = (int)((float)this.Width - (float)this.Width / 5);
             size.Height = (int)((float)this.Height / 4.5);
             size.Width = Math.Min(Math.Max(size.Width, 800), 1920);
             size.Height = Math.Min(Math.Max(size.Height, 180), 1080);
