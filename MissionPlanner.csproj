@@ -531,6 +531,9 @@
       <DependentUpon>LogDownloadscp.cs</DependentUpon>
     </Compile>
     <Compile Include="Log\test\MotorFailure.cs" />
+    <Compile Include="OpenGLtest.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Strings.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -2843,6 +2846,9 @@
     <EmbeddedResource Include="MovingBase.pt.resx">
       <DependentUpon>MovingBase.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OpenGLtest.resx">
+      <DependentUpon>OpenGLtest.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Radio\Sikradio.ar.resx">
       <DependentUpon>Sikradio.cs</DependentUpon>
     </EmbeddedResource>
@@ -3048,9 +3054,6 @@
       <DependentUpon>1Intro.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizard\1Intro.resx">
-      <DependentUpon>1Intro.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizard\1Intro.zh-Hans.resx">
       <DependentUpon>1Intro.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizard\1Intro.zh-Hant.resx">
@@ -3871,9 +3874,6 @@
     <Compile Include="HIL\Hil.cs" />
     <Compile Include="HIL\Wind.cs" />
     <Compile Include="HIL\XPlane.cs" />
-    <Compile Include="OpenGLtest.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="OSDVideo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -4064,9 +4064,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Log\MavlinkLog.zh-Hans.resx">
       <DependentUpon>MavlinkLog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OpenGLtest.resx">
-      <DependentUpon>OpenGLtest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OSDVideo.resx">
       <DependentUpon>OSDVideo.cs</DependentUpon>

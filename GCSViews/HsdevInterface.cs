@@ -142,6 +142,7 @@ namespace MissionPlanner.GCSViews
 
         public HsdevInterface()
         {
+
             middlebuttons = new List<object>();
             leftlabels = new List<LabelInfo>();
             rightlabels = new List<LabelInfo>();
@@ -522,7 +523,7 @@ namespace MissionPlanner.GCSViews
             System.Drawing.Size size = new System.Drawing.Size();
             size = new System.Drawing.Size();
             size.Width = (int)((float)panel12.Width * (float)((float)originalhudpanelsize.Width / (float)originalmiddlesize.Width));
-            size.Height = (int)((float)panel12.Height * (float)((float)originalhudpanelsize.Height / (float)originalmiddlesize.Height)) - 25;
+            size.Height = (int)((float)panel12.Height * (float)((float)originalhudpanelsize.Height / (float)originalmiddlesize.Height));
             HUDpanel.Size = size;
 
             System.Drawing.Point p = new System.Drawing.Point();
@@ -543,9 +544,10 @@ namespace MissionPlanner.GCSViews
             float wscale = (float)middlesplitContainer.Width / (float)originalmiddlesize.Width;
             float hscale = (float)middlesplitContainer.Height / (float)originalmiddlesize.Height;
 
-            minfont = 10000;
-            float f = 10000;
-            for (int i = 0; i < middlebuttons.Count; i++)
+            minfont = 0;
+            float f = 0;
+            int i = 0;
+            for ( i = 0; i < middlebuttons.Count; i++)
             {
 
                 Type t = middlebuttons[i].GetType();
@@ -619,16 +621,16 @@ namespace MissionPlanner.GCSViews
 
                 }
 
-                if (f < minfont)
-                    minfont = f;
+               // if (f < minfont)
+                    minfont += f;
 
                 if (t.Name == "ComboBox")
                 {
 
                     ComboBox temp = (ComboBox)middlebuttons[i];
 
-                    if (temp.Location.X < 0 || temp.Location.Y < 0)
-                        continue;
+                    //if (temp.Location.X < 0 || temp.Location.Y < 0)
+                   //     continue;
                     if (wscale > 1.0)
                         p.X = (int)Math.Floor((float)btnbounds[i].X * wscale);
                     else
@@ -656,12 +658,15 @@ namespace MissionPlanner.GCSViews
 
             }
 
-            for (int i = 0; i < middlebuttons.Count; i++)
+            minfont /= i;
+            for ( i = 0; i < middlebuttons.Count; i++)
             {
                 Type t = middlebuttons[i].GetType();
                 if (t.Name == "Button")
                 {
                     Button temp = (Button)middlebuttons[i];
+                    if (temp.Text == "设置")
+                        continue;
                     temp.Font = new Font("SimSun", minfont);
                     temp.BackColor = Color.White;
                 }
@@ -1283,6 +1288,11 @@ namespace MissionPlanner.GCSViews
                     // Console.WriteLine(DateTime.Now.Millisecond + " done ");
                     updateleftpanel();
                     updaterightpanel();
+
+                    if (MainV2.comPort.MAV.cs.messageHigh != "" && MainV2.comPort.MAV.cs.messageHighTime.AddSeconds(10) > DateTime.Now)
+                    {
+                        messagetext.Text = MainV2.comPort.MAV.cs.messageHigh;
+                    }
 
                     // battery warning.
                     float warnvolt = Settings.Instance.GetFloat("speechbatteryvolt");

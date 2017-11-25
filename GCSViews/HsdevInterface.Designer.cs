@@ -69,6 +69,7 @@
             this.alt = new System.Windows.Forms.Label();
             this.middlesplitContainer = new System.Windows.Forms.Panel();
             this.panel12 = new System.Windows.Forms.Panel();
+            this.messagetext = new System.Windows.Forms.TextBox();
             this.btn_stabilize = new System.Windows.Forms.Button();
             this.btn_manual = new System.Windows.Forms.Button();
             this.HUDpanel = new System.Windows.Forms.Panel();
@@ -96,7 +97,6 @@
             this.wp_dist = new System.Windows.Forms.Label();
             this.wpno = new System.Windows.Forms.Label();
             this.DataPanel = new System.Windows.Forms.Panel();
-            this.messagetext = new System.Windows.Forms.TextBox();
             this.contextMenuStripMap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceHud)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -357,7 +357,7 @@
             this.gpshdop.AutoSize = true;
             this.gpshdop.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.gpshdop.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.gpshdop.Location = new System.Drawing.Point(9, 143);
+            this.gpshdop.Location = new System.Drawing.Point(9, 196);
             this.gpshdop.Name = "gpshdop";
             this.gpshdop.Size = new System.Drawing.Size(42, 14);
             this.gpshdop.TabIndex = 25;
@@ -369,7 +369,7 @@
             this.lat.AutoSize = true;
             this.lat.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lat.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lat.Location = new System.Drawing.Point(141, 119);
+            this.lat.Location = new System.Drawing.Point(141, 170);
             this.lat.Name = "lat";
             this.lat.Size = new System.Drawing.Size(42, 14);
             this.lat.TabIndex = 24;
@@ -381,7 +381,7 @@
             this.lng.AutoSize = true;
             this.lng.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lng.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lng.Location = new System.Drawing.Point(8, 119);
+            this.lng.Location = new System.Drawing.Point(8, 170);
             this.lng.Name = "lng";
             this.lng.Size = new System.Drawing.Size(42, 14);
             this.lng.TabIndex = 23;
@@ -393,7 +393,7 @@
             this.gpsstatus.AutoSize = true;
             this.gpsstatus.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.gpsstatus.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.gpsstatus.Location = new System.Drawing.Point(141, 97);
+            this.gpsstatus.Location = new System.Drawing.Point(141, 140);
             this.gpsstatus.Name = "gpsstatus";
             this.gpsstatus.Size = new System.Drawing.Size(63, 14);
             this.gpsstatus.TabIndex = 22;
@@ -405,7 +405,7 @@
             this.satcount.AutoSize = true;
             this.satcount.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.satcount.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.satcount.Location = new System.Drawing.Point(8, 97);
+            this.satcount.Location = new System.Drawing.Point(8, 140);
             this.satcount.Name = "satcount";
             this.satcount.Size = new System.Drawing.Size(63, 14);
             this.satcount.TabIndex = 21;
@@ -417,7 +417,7 @@
             this.aspd_error.AutoSize = true;
             this.aspd_error.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.aspd_error.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.aspd_error.Location = new System.Drawing.Point(142, 74);
+            this.aspd_error.Location = new System.Drawing.Point(142, 111);
             this.aspd_error.Name = "aspd_error";
             this.aspd_error.Size = new System.Drawing.Size(56, 14);
             this.aspd_error.TabIndex = 20;
@@ -429,7 +429,7 @@
             this.targetairspeed.AutoSize = true;
             this.targetairspeed.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.targetairspeed.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.targetairspeed.Location = new System.Drawing.Point(8, 74);
+            this.targetairspeed.Location = new System.Drawing.Point(8, 111);
             this.targetairspeed.Name = "targetairspeed";
             this.targetairspeed.Size = new System.Drawing.Size(70, 14);
             this.targetairspeed.TabIndex = 19;
@@ -441,7 +441,7 @@
             this.groundspeed.AutoSize = true;
             this.groundspeed.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groundspeed.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.groundspeed.Location = new System.Drawing.Point(142, 51);
+            this.groundspeed.Location = new System.Drawing.Point(142, 80);
             this.groundspeed.Name = "groundspeed";
             this.groundspeed.Size = new System.Drawing.Size(42, 14);
             this.groundspeed.TabIndex = 18;
@@ -453,7 +453,7 @@
             this.airspeed.AutoSize = true;
             this.airspeed.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.airspeed.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.airspeed.Location = new System.Drawing.Point(8, 51);
+            this.airspeed.Location = new System.Drawing.Point(8, 80);
             this.airspeed.Name = "airspeed";
             this.airspeed.Size = new System.Drawing.Size(42, 14);
             this.airspeed.TabIndex = 17;
@@ -465,7 +465,7 @@
             this.alt_error.AutoSize = true;
             this.alt_error.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.alt_error.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.alt_error.Location = new System.Drawing.Point(142, 29);
+            this.alt_error.Location = new System.Drawing.Point(142, 47);
             this.alt_error.Name = "alt_error";
             this.alt_error.Size = new System.Drawing.Size(56, 14);
             this.alt_error.TabIndex = 16;
@@ -477,7 +477,7 @@
             this.targetalt.AutoSize = true;
             this.targetalt.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.targetalt.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.targetalt.Location = new System.Drawing.Point(8, 29);
+            this.targetalt.Location = new System.Drawing.Point(8, 47);
             this.targetalt.Name = "targetalt";
             this.targetalt.Size = new System.Drawing.Size(70, 14);
             this.targetalt.TabIndex = 15;
@@ -489,7 +489,7 @@
             this.altasl.AutoSize = true;
             this.altasl.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.altasl.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.altasl.Location = new System.Drawing.Point(142, 6);
+            this.altasl.Location = new System.Drawing.Point(142, 13);
             this.altasl.Name = "altasl";
             this.altasl.Size = new System.Drawing.Size(70, 14);
             this.altasl.TabIndex = 14;
@@ -501,7 +501,7 @@
             this.alt.AutoSize = true;
             this.alt.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.alt.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.alt.Location = new System.Drawing.Point(8, 6);
+            this.alt.Location = new System.Drawing.Point(8, 13);
             this.alt.Name = "alt";
             this.alt.Size = new System.Drawing.Size(70, 14);
             this.alt.TabIndex = 13;
@@ -542,13 +542,21 @@
             this.panel12.TabIndex = 8;
             this.panel12.Resize += new System.EventHandler(this.middlepanel_Resize);
             // 
+            // messagetext
+            // 
+            this.messagetext.Location = new System.Drawing.Point(104, 192);
+            this.messagetext.Name = "messagetext";
+            this.messagetext.ReadOnly = true;
+            this.messagetext.Size = new System.Drawing.Size(357, 21);
+            this.messagetext.TabIndex = 121;
+            // 
             // btn_stabilize
             // 
             this.btn_stabilize.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_stabilize.BackColor = System.Drawing.Color.White;
             this.btn_stabilize.Location = new System.Drawing.Point(5, 110);
             this.btn_stabilize.Name = "btn_stabilize";
-            this.btn_stabilize.Size = new System.Drawing.Size(94, 29);
+            this.btn_stabilize.Size = new System.Drawing.Size(92, 27);
             this.btn_stabilize.TabIndex = 120;
             this.btn_stabilize.Text = "增稳";
             this.btn_stabilize.UseVisualStyleBackColor = false;
@@ -559,7 +567,7 @@
             this.btn_manual.BackColor = System.Drawing.Color.White;
             this.btn_manual.Location = new System.Drawing.Point(4, 75);
             this.btn_manual.Name = "btn_manual";
-            this.btn_manual.Size = new System.Drawing.Size(94, 29);
+            this.btn_manual.Size = new System.Drawing.Size(93, 27);
             this.btn_manual.TabIndex = 119;
             this.btn_manual.Text = "手动";
             this.btn_manual.UseVisualStyleBackColor = false;
@@ -670,7 +678,7 @@
             this.btn_setwp.BackColor = System.Drawing.Color.White;
             this.btn_setwp.Location = new System.Drawing.Point(58, 184);
             this.btn_setwp.Name = "btn_setwp";
-            this.btn_setwp.Size = new System.Drawing.Size(41, 28);
+            this.btn_setwp.Size = new System.Drawing.Size(41, 27);
             this.btn_setwp.TabIndex = 117;
             this.btn_setwp.Text = "设置";
             this.btn_setwp.UseVisualStyleBackColor = false;
@@ -679,9 +687,9 @@
             // 
             this.btn_qhover.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_qhover.BackColor = System.Drawing.Color.White;
-            this.btn_qhover.Location = new System.Drawing.Point(467, 43);
+            this.btn_qhover.Location = new System.Drawing.Point(469, 43);
             this.btn_qhover.Name = "btn_qhover";
-            this.btn_qhover.Size = new System.Drawing.Size(90, 31);
+            this.btn_qhover.Size = new System.Drawing.Size(87, 27);
             this.btn_qhover.TabIndex = 116;
             this.btn_qhover.Text = "多轴悬停";
             this.btn_qhover.UseVisualStyleBackColor = false;
@@ -694,7 +702,7 @@
             this.CMB_setwp.FormattingEnabled = true;
             this.CMB_setwp.Items.AddRange(new object[] {
             "0 (Home)"});
-            this.CMB_setwp.Location = new System.Drawing.Point(5, 191);
+            this.CMB_setwp.Location = new System.Drawing.Point(5, 186);
             this.CMB_setwp.Name = "CMB_setwp";
             this.CMB_setwp.Size = new System.Drawing.Size(54, 20);
             this.CMB_setwp.TabIndex = 115;
@@ -705,18 +713,18 @@
             this.btn_qlandemergent.BackColor = System.Drawing.Color.White;
             this.btn_qlandemergent.Location = new System.Drawing.Point(467, 6);
             this.btn_qlandemergent.Name = "btn_qlandemergent";
-            this.btn_qlandemergent.Size = new System.Drawing.Size(90, 32);
+            this.btn_qlandemergent.Size = new System.Drawing.Size(89, 27);
             this.btn_qlandemergent.TabIndex = 114;
-            this.btn_qlandemergent.Text = "多轴应急着陆";
+            this.btn_qlandemergent.Text = "多轴着陆";
             this.btn_qlandemergent.UseVisualStyleBackColor = false;
             // 
             // btn_parachute
             // 
             this.btn_parachute.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_parachute.BackColor = System.Drawing.Color.White;
-            this.btn_parachute.Location = new System.Drawing.Point(469, 150);
+            this.btn_parachute.Location = new System.Drawing.Point(469, 145);
             this.btn_parachute.Name = "btn_parachute";
-            this.btn_parachute.Size = new System.Drawing.Size(88, 28);
+            this.btn_parachute.Size = new System.Drawing.Size(87, 27);
             this.btn_parachute.TabIndex = 113;
             this.btn_parachute.Text = "应急开伞";
             this.btn_parachute.UseVisualStyleBackColor = false;
@@ -727,7 +735,7 @@
             this.btn_normalland.BackColor = System.Drawing.Color.White;
             this.btn_normalland.Location = new System.Drawing.Point(468, 78);
             this.btn_normalland.Name = "btn_normalland";
-            this.btn_normalland.Size = new System.Drawing.Size(88, 30);
+            this.btn_normalland.Size = new System.Drawing.Size(88, 27);
             this.btn_normalland.TabIndex = 112;
             this.btn_normalland.Text = "常规着陆";
             this.btn_normalland.UseVisualStyleBackColor = false;
@@ -738,9 +746,9 @@
             this.btn_qrtlemergent.BackColor = System.Drawing.Color.White;
             this.btn_qrtlemergent.Location = new System.Drawing.Point(469, 111);
             this.btn_qrtlemergent.Name = "btn_qrtlemergent";
-            this.btn_qrtlemergent.Size = new System.Drawing.Size(88, 34);
+            this.btn_qrtlemergent.Size = new System.Drawing.Size(87, 27);
             this.btn_qrtlemergent.TabIndex = 111;
-            this.btn_qrtlemergent.Text = "多轴应急返航";
+            this.btn_qrtlemergent.Text = "多轴返航";
             this.btn_qrtlemergent.UseVisualStyleBackColor = false;
             // 
             // btn_arm
@@ -749,7 +757,7 @@
             this.btn_arm.BackColor = System.Drawing.Color.White;
             this.btn_arm.Location = new System.Drawing.Point(5, 43);
             this.btn_arm.Name = "btn_arm";
-            this.btn_arm.Size = new System.Drawing.Size(94, 27);
+            this.btn_arm.Size = new System.Drawing.Size(92, 27);
             this.btn_arm.TabIndex = 110;
             this.btn_arm.Text = "解锁/加锁";
             this.btn_arm.UseVisualStyleBackColor = false;
@@ -760,7 +768,7 @@
             this.btn_auto.BackColor = System.Drawing.Color.White;
             this.btn_auto.Location = new System.Drawing.Point(4, 145);
             this.btn_auto.Name = "btn_auto";
-            this.btn_auto.Size = new System.Drawing.Size(94, 33);
+            this.btn_auto.Size = new System.Drawing.Size(93, 27);
             this.btn_auto.TabIndex = 109;
             this.btn_auto.Text = "自动导航";
             this.btn_auto.UseVisualStyleBackColor = false;
@@ -771,7 +779,7 @@
             this.btn_prearm.BackColor = System.Drawing.Color.White;
             this.btn_prearm.Location = new System.Drawing.Point(5, 6);
             this.btn_prearm.Name = "btn_prearm";
-            this.btn_prearm.Size = new System.Drawing.Size(93, 31);
+            this.btn_prearm.Size = new System.Drawing.Size(93, 27);
             this.btn_prearm.TabIndex = 108;
             this.btn_prearm.Text = "起飞前检查";
             this.btn_prearm.UseVisualStyleBackColor = false;
@@ -780,9 +788,9 @@
             // 
             this.btn_rtl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_rtl.BackColor = System.Drawing.Color.White;
-            this.btn_rtl.Location = new System.Drawing.Point(468, 183);
+            this.btn_rtl.Location = new System.Drawing.Point(468, 180);
             this.btn_rtl.Name = "btn_rtl";
-            this.btn_rtl.Size = new System.Drawing.Size(90, 27);
+            this.btn_rtl.Size = new System.Drawing.Size(88, 27);
             this.btn_rtl.TabIndex = 107;
             this.btn_rtl.Text = "返航";
             this.btn_rtl.UseVisualStyleBackColor = false;
@@ -811,7 +819,7 @@
             this.battery2_usedmah.AutoSize = true;
             this.battery2_usedmah.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.battery2_usedmah.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.battery2_usedmah.Location = new System.Drawing.Point(7, 124);
+            this.battery2_usedmah.Location = new System.Drawing.Point(7, 194);
             this.battery2_usedmah.Name = "battery2_usedmah";
             this.battery2_usedmah.Size = new System.Drawing.Size(98, 14);
             this.battery2_usedmah.TabIndex = 33;
@@ -823,7 +831,7 @@
             this.current2.AutoSize = true;
             this.current2.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.current2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.current2.Location = new System.Drawing.Point(163, 98);
+            this.current2.Location = new System.Drawing.Point(163, 162);
             this.current2.Name = "current2";
             this.current2.Size = new System.Drawing.Size(70, 14);
             this.current2.TabIndex = 32;
@@ -835,7 +843,7 @@
             this.battery_voltage2.AutoSize = true;
             this.battery_voltage2.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.battery_voltage2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.battery_voltage2.Location = new System.Drawing.Point(7, 98);
+            this.battery_voltage2.Location = new System.Drawing.Point(7, 162);
             this.battery_voltage2.Name = "battery_voltage2";
             this.battery_voltage2.Size = new System.Drawing.Size(70, 14);
             this.battery_voltage2.TabIndex = 31;
@@ -847,7 +855,7 @@
             this.battery_remaining.AutoSize = true;
             this.battery_remaining.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.battery_remaining.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.battery_remaining.Location = new System.Drawing.Point(7, 75);
+            this.battery_remaining.Location = new System.Drawing.Point(7, 129);
             this.battery_remaining.Name = "battery_remaining";
             this.battery_remaining.Size = new System.Drawing.Size(112, 14);
             this.battery_remaining.TabIndex = 30;
@@ -859,7 +867,7 @@
             this.current.AutoSize = true;
             this.current.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.current.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.current.Location = new System.Drawing.Point(162, 53);
+            this.current.Location = new System.Drawing.Point(162, 93);
             this.current.Name = "current";
             this.current.Size = new System.Drawing.Size(84, 14);
             this.current.TabIndex = 29;
@@ -871,7 +879,7 @@
             this.battery_voltage.AutoSize = true;
             this.battery_voltage.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.battery_voltage.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.battery_voltage.Location = new System.Drawing.Point(7, 53);
+            this.battery_voltage.Location = new System.Drawing.Point(7, 93);
             this.battery_voltage.Name = "battery_voltage";
             this.battery_voltage.Size = new System.Drawing.Size(84, 14);
             this.battery_voltage.TabIndex = 28;
@@ -883,7 +891,7 @@
             this.xtrack_error.AutoSize = true;
             this.xtrack_error.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.xtrack_error.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.xtrack_error.Location = new System.Drawing.Point(162, 30);
+            this.xtrack_error.Location = new System.Drawing.Point(162, 53);
             this.xtrack_error.Name = "xtrack_error";
             this.xtrack_error.Size = new System.Drawing.Size(56, 14);
             this.xtrack_error.TabIndex = 27;
@@ -895,7 +903,7 @@
             this.DistToHome.AutoSize = true;
             this.DistToHome.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.DistToHome.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.DistToHome.Location = new System.Drawing.Point(7, 30);
+            this.DistToHome.Location = new System.Drawing.Point(7, 53);
             this.DistToHome.Name = "DistToHome";
             this.DistToHome.Size = new System.Drawing.Size(84, 14);
             this.DistToHome.TabIndex = 26;
@@ -907,7 +915,7 @@
             this.wp_dist.AutoSize = true;
             this.wp_dist.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.wp_dist.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.wp_dist.Location = new System.Drawing.Point(162, 8);
+            this.wp_dist.Location = new System.Drawing.Point(162, 16);
             this.wp_dist.Name = "wp_dist";
             this.wp_dist.Size = new System.Drawing.Size(84, 14);
             this.wp_dist.TabIndex = 25;
@@ -919,7 +927,7 @@
             this.wpno.AutoSize = true;
             this.wpno.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.wpno.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.wpno.Location = new System.Drawing.Point(7, 8);
+            this.wpno.Location = new System.Drawing.Point(7, 16);
             this.wpno.Name = "wpno";
             this.wpno.Size = new System.Drawing.Size(70, 14);
             this.wpno.TabIndex = 24;
@@ -934,14 +942,6 @@
             this.DataPanel.Size = new System.Drawing.Size(1163, 220);
             this.DataPanel.TabIndex = 6;
             this.DataPanel.Layout += new System.Windows.Forms.LayoutEventHandler(this.DataPanel_Layout);
-            // 
-            // messagetext
-            // 
-            this.messagetext.Location = new System.Drawing.Point(104, 192);
-            this.messagetext.Name = "messagetext";
-            this.messagetext.ReadOnly = true;
-            this.messagetext.Size = new System.Drawing.Size(357, 21);
-            this.messagetext.TabIndex = 121;
             // 
             // HsdevInterface
             // 
