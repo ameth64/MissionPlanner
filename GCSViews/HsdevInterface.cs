@@ -335,19 +335,74 @@ namespace MissionPlanner.GCSViews
 
         internal PointLatLng MouseDownStart;
 
+        GMapMarker center = new GMarkerGoogle(new PointLatLng(0.0, 0.0), GMarkerGoogleType.none);
+
+        private void gMapControl1_OnPositionChanged(PointLatLng point)
+        {
+            center.Position = point;
+
+            UpdateOverlayVisibility();
+        }
+
         private void gMapControl1_MouseDown(object sender, MouseEventArgs e)
         {
+            MouseDownStart = gMapControl1.FromLocalToLatLng(e.X, e.Y);
 
+            //if (ModifierKeys == Keys.Control)
+           // {
+            //    goHereToolStripMenuItem_Click(null, null);
+            //}
+
+            if (gMapControl1.IsMouseOverMarker)
+            {
+                if (CurrentGMapMarker is GMapMarkerADSBPlane)
+                {
+                    var marker = CurrentGMapMarker as GMapMarkerADSBPlane;
+                    if (marker.Tag is adsb.PointLatLngAltHdg)
+                    {
+                        var plla = marker.Tag as adsb.PointLatLngAltHdg;
+                        plla.DisplayICAO = !plla.DisplayICAO;
+                    }
+                }
+            }
         }
 
         private void gMapControl1_MouseMove(object sender, MouseEventArgs e)
         {
+            if (e.Button == MouseButtons.Left)
+            {
+                PointLatLng point = gMapControl1.FromLocalToLatLng(e.X, e.Y);
 
-        }
+                double latdif = MouseDownStart.Lat - point.Lat;
+                double lngdif = MouseDownStart.Lng - point.Lng;
 
-        private void gMapControl1_OnPositionChanged(PointLatLng point)
-        {
-            UpdateOverlayVisibility();
+                gMapControl1.Position = new PointLatLng(center.Position.Lat + latdif,
+                    center.Position.Lng + lngdif);
+            }
+            else
+            {
+                // setup a ballon with home distance
+                if (marker != null)
+                {
+                    if (routes.Markers.Contains(marker))
+                        routes.Markers.Remove(marker);
+                }
+
+                if (Settings.Instance.GetBoolean("CHK_disttohomeflightdata") != false)
+                {
+                    PointLatLng point = gMapControl1.FromLocalToLatLng(e.X, e.Y);
+
+                    marker = new GMapMarkerRect(point);
+                    marker.ToolTip = new GMapToolTip(marker);
+                    marker.ToolTipMode = MarkerTooltipMode.Always;
+                    marker.ToolTipText = "Dist to Home: " +
+                                         ((gMapControl1.MapProvider.Projection.GetDistance(point,
+                                             MainV2.comPort.MAV.cs.HomeLocation.Point()) * 1000) *
+                                          CurrentState.multiplierdist).ToString("0");
+
+                    routes.Markers.Add(marker);
+                }
+            }
         }
 
         void UpdateOverlayVisibility()
@@ -370,7 +425,17 @@ namespace MissionPlanner.GCSViews
 
         private void gMapControl1_MouseLeave(object sender, EventArgs e)
         {
-
+            if (marker != null)
+            {
+                try
+                {
+                    if (routes.Markers.Contains(marker))
+                        routes.Markers.Remove(marker);
+                }
+                catch
+                {
+                }
+            }
         }
 
         void gMapControl1_OnMarkerLeave(GMapMarker item)
@@ -2018,6 +2083,10 @@ namespace MissionPlanner.GCSViews
 
         private void btn_setwp_Click(object sender, EventArgs e)
         {
+            if (CustomMessageBox.Show("要将航点更改为 "+ CMB_setwp.SelectedIndex.ToString()+" 点吗？", "改变航点?", MessageBoxButtons.YesNo) !=
+                    DialogResult.Yes)
+                return;
+
             if (CMB_setwp.SelectedIndex == -1)
                 return;
             try
@@ -2124,5 +2193,46 @@ namespace MissionPlanner.GCSViews
         {
         }
 
+
+        private void 飞行到这里ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string alt = "100";
+
+            if (MainV2.comPort.MAV.cs.firmware == MainV2.Firmwares.ArduCopter2)
+            {
+                alt = (10 * CurrentState.multiplierdist).ToString("0");
+            }
+            else
+            {
+                alt = (100 * CurrentState.multiplierdist).ToString("0");
+            }
+
+            if (Settings.Instance.ContainsKey("guided_alt"))
+                alt = Settings.Instance["guided_alt"];
+
+            if (DialogResult.Cancel == InputBox.Show("Enter Alt", "Enter Guided Mode Alt", ref alt))
+                return;
+
+            Settings.Instance["guided_alt"] = alt;
+
+            int intalt = (int)(100 * CurrentState.multiplierdist);
+            if (!int.TryParse(alt, out intalt))
+            {
+                CustomMessageBox.Show("Bad Alt");
+                return;
+            }
+
+            MainV2.comPort.MAV.GuidedMode.z = intalt / CurrentState.multiplierdist;
+
+            if (MainV2.comPort.MAV.cs.mode == "Guided")
+            {
+                MainV2.comPort.setGuidedModeWP(new Locationwp
+                {
+                    alt = MainV2.comPort.MAV.GuidedMode.z,
+                    lat = MainV2.comPort.MAV.GuidedMode.x,
+                    lng = MainV2.comPort.MAV.GuidedMode.y
+                });
+            }
+        }
     }
 }

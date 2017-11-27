@@ -35,6 +35,7 @@
             this.toolStripMenuRTL = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuQLAND = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuAutoDrog = new System.Windows.Forms.ToolStripMenuItem();
+            this.飞行到这里ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bindingSourceHud = new System.Windows.Forms.BindingSource(this.components);
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
@@ -124,9 +125,10 @@
             this.toolStripMenuQRTL,
             this.toolStripMenuRTL,
             this.toolStripMenuQLAND,
-            this.toolStripMenuAutoDrog});
+            this.toolStripMenuAutoDrog,
+            this.飞行到这里ToolStripMenuItem});
             this.contextMenuStripMap.Name = "contextMenuStrip1";
-            this.contextMenuStripMap.Size = new System.Drawing.Size(149, 92);
+            this.contextMenuStripMap.Size = new System.Drawing.Size(149, 114);
             // 
             // toolStripMenuQRTL
             // 
@@ -155,6 +157,13 @@
             this.toolStripMenuAutoDrog.Size = new System.Drawing.Size(148, 22);
             this.toolStripMenuAutoDrog.Text = "自动拖放地图";
             this.toolStripMenuAutoDrog.Click += new System.EventHandler(this.toolStripMenuAutoDrog_Click);
+            // 
+            // 飞行到这里ToolStripMenuItem
+            // 
+            this.飞行到这里ToolStripMenuItem.Name = "飞行到这里ToolStripMenuItem";
+            this.飞行到这里ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.飞行到这里ToolStripMenuItem.Text = "飞行到这里";
+            this.飞行到这里ToolStripMenuItem.Click += new System.EventHandler(this.飞行到这里ToolStripMenuItem_Click);
             // 
             // bindingSourceHud
             // 
@@ -284,6 +293,10 @@
             this.gMapControl1.Size = new System.Drawing.Size(1559, 692);
             this.gMapControl1.TabIndex = 5;
             this.gMapControl1.Zoom = 3D;
+            this.gMapControl1.OnPositionChanged += new GMap.NET.PositionChanged(this.gMapControl1_OnPositionChanged);
+            this.gMapControl1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gMapControl1_MouseDown);
+            this.gMapControl1.MouseLeave += new System.EventHandler(this.gMapControl1_MouseLeave);
+            this.gMapControl1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gMapControl1_MouseMove);
             // 
             // rightsplitContainer
             // 
@@ -560,6 +573,7 @@
             this.btn_stabilize.TabIndex = 120;
             this.btn_stabilize.Text = "增稳";
             this.btn_stabilize.UseVisualStyleBackColor = false;
+            this.btn_stabilize.Click += new System.EventHandler(this.btn_stabilize_Click);
             // 
             // btn_manual
             // 
@@ -571,6 +585,7 @@
             this.btn_manual.TabIndex = 119;
             this.btn_manual.Text = "手动";
             this.btn_manual.UseVisualStyleBackColor = false;
+            this.btn_manual.Click += new System.EventHandler(this.btn_manual_Click);
             // 
             // HUDpanel
             // 
@@ -682,6 +697,7 @@
             this.btn_setwp.TabIndex = 117;
             this.btn_setwp.Text = "设置";
             this.btn_setwp.UseVisualStyleBackColor = false;
+            this.btn_setwp.Click += new System.EventHandler(this.btn_setwp_Click);
             // 
             // btn_qhover
             // 
@@ -693,6 +709,7 @@
             this.btn_qhover.TabIndex = 116;
             this.btn_qhover.Text = "多轴悬停";
             this.btn_qhover.UseVisualStyleBackColor = false;
+            this.btn_qhover.Click += new System.EventHandler(this.btn_qhover_Click);
             // 
             // CMB_setwp
             // 
@@ -706,6 +723,7 @@
             this.CMB_setwp.Name = "CMB_setwp";
             this.CMB_setwp.Size = new System.Drawing.Size(54, 20);
             this.CMB_setwp.TabIndex = 115;
+            this.CMB_setwp.Click += new System.EventHandler(this.CMB_setwp_Click);
             // 
             // btn_qlandemergent
             // 
@@ -717,6 +735,7 @@
             this.btn_qlandemergent.TabIndex = 114;
             this.btn_qlandemergent.Text = "多轴着陆";
             this.btn_qlandemergent.UseVisualStyleBackColor = false;
+            this.btn_qlandemergent.Click += new System.EventHandler(this.btn_qlandemergent_Click);
             // 
             // btn_parachute
             // 
@@ -728,6 +747,7 @@
             this.btn_parachute.TabIndex = 113;
             this.btn_parachute.Text = "应急开伞";
             this.btn_parachute.UseVisualStyleBackColor = false;
+            this.btn_parachute.Click += new System.EventHandler(this.btn_parachute_Click);
             // 
             // btn_normalland
             // 
@@ -739,6 +759,7 @@
             this.btn_normalland.TabIndex = 112;
             this.btn_normalland.Text = "常规着陆";
             this.btn_normalland.UseVisualStyleBackColor = false;
+            this.btn_normalland.Click += new System.EventHandler(this.btn_normalland_Click);
             // 
             // btn_qrtlemergent
             // 
@@ -750,6 +771,7 @@
             this.btn_qrtlemergent.TabIndex = 111;
             this.btn_qrtlemergent.Text = "多轴返航";
             this.btn_qrtlemergent.UseVisualStyleBackColor = false;
+            this.btn_qrtlemergent.Click += new System.EventHandler(this.btn_qrtlemergent_Click);
             // 
             // btn_arm
             // 
@@ -761,6 +783,7 @@
             this.btn_arm.TabIndex = 110;
             this.btn_arm.Text = "解锁/加锁";
             this.btn_arm.UseVisualStyleBackColor = false;
+            this.btn_arm.Click += new System.EventHandler(this.btn_arm_Click);
             // 
             // btn_auto
             // 
@@ -772,6 +795,7 @@
             this.btn_auto.TabIndex = 109;
             this.btn_auto.Text = "自动导航";
             this.btn_auto.UseVisualStyleBackColor = false;
+            this.btn_auto.Click += new System.EventHandler(this.btn_auto_Click);
             // 
             // btn_prearm
             // 
@@ -783,6 +807,7 @@
             this.btn_prearm.TabIndex = 108;
             this.btn_prearm.Text = "起飞前检查";
             this.btn_prearm.UseVisualStyleBackColor = false;
+            this.btn_prearm.Click += new System.EventHandler(this.btn_prearm_Click);
             // 
             // btn_rtl
             // 
@@ -794,6 +819,7 @@
             this.btn_rtl.TabIndex = 107;
             this.btn_rtl.Text = "返航";
             this.btn_rtl.UseVisualStyleBackColor = false;
+            this.btn_rtl.Click += new System.EventHandler(this.btn_rtl_Click);
             // 
             // rightdatapanel
             // 
@@ -1048,5 +1074,6 @@
         private System.Windows.Forms.Button btn_prearm;
         private System.Windows.Forms.Button btn_rtl;
         private System.Windows.Forms.TextBox messagetext;
+        private System.Windows.Forms.ToolStripMenuItem 飞行到这里ToolStripMenuItem;
     }
 }
