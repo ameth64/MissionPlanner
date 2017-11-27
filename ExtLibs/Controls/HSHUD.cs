@@ -1989,7 +1989,8 @@ namespace MissionPlanner.Controls
 
                 if (!opengl)
                 {
-                    e.Graphics.DrawImageUnscaled(objBitmap, 0, 0);
+                    //e.Graphics.DrawImageUnscaled(objBitmap, 0, 0);
+                    e.Graphics.DrawImage(objBitmap, e.ClipRectangle);
                 }
 
                 if (DesignMode)

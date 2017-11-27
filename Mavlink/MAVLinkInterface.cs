@@ -327,7 +327,8 @@ namespace MissionPlanner
             frmProgressReporter = new ProgressReporterDialogue
             {
                 StartPosition = FormStartPosition.CenterScreen,
-                Text = Strings.ConnectingMavlink
+                //Text = Strings.ConnectingMavlink
+                Text = "尝试连接中....."
             };
 
             if (getparams)
@@ -338,7 +339,7 @@ namespace MissionPlanner
             {
                 frmProgressReporter.DoWork += FrmProgressReporterDoWorkNOParams;
             }
-            frmProgressReporter.UpdateProgressAndStatus(-1, Strings.MavlinkConnecting);
+            frmProgressReporter.UpdateProgressAndStatus(-1, "正在连接飞控"/*Strings.MavlinkConnecting*/);
             ThemeManager.ApplyThemeTo(frmProgressReporter);
 
             frmProgressReporter.RunBackgroundOperationAsync();
@@ -363,7 +364,7 @@ namespace MissionPlanner
 
         private void OpenBg(object PRsender, bool getparams, ProgressWorkerEventArgs progressWorkerEventArgs)
         {
-            frmProgressReporter.UpdateProgressAndStatus(-1, Strings.MavlinkConnecting);
+            frmProgressReporter.UpdateProgressAndStatus(-1, "尝试连接飞控"/*Strings.MavlinkConnecting*/);
 
             giveComport = true;
 
@@ -1116,7 +1117,7 @@ Please check the following
 
         }
         */
-        public bool hdieParamDialogue = false;
+        public bool hdieParamDialogue = true;
 
         public void getParamList()
         {

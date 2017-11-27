@@ -1521,7 +1521,7 @@ namespace MissionPlanner
                     _connectionControl.TOOL_APMFirmware.SelectedIndex =
                         _connectionControl.TOOL_APMFirmware.Items.IndexOf(Firmwares.ArduPlane);
                 }
-
+/*  禁止固件检测
                 // check for newer firmware
                 var softwares = Firmware.LoadSoftwares();
 
@@ -1558,7 +1558,7 @@ namespace MissionPlanner
                         log.Error(ex);
                     }
                 }
-
+*/
                 FlightData.CheckBatteryShow();
 
                 MissionPlanner.Utilities.Tracking.AddEvent("Connect", "Connect", comPort.MAV.cs.firmware.ToString(),
