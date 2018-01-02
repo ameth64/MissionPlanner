@@ -1628,6 +1628,12 @@ namespace MissionPlanner
                             wpno = plugin.Host.AddWPtoList(MAVLink.MAV_CMD.LOITER_TO_ALT, 1, 120, 0, 0, to_plla.Lng, to_plla.Lat,
                                 (int)(to_plla.Alt * CurrentState.multiplierdist), hstag);
                             wpsplitstart.Add(wpno);
+                            //添加用于任务中断的do_jump航点
+                            to_bearing = grid[1].GetBearing(grid[0]);
+                            PointLatLngAlt dojump_plla = grid[0].newpos(to_bearing, 250);
+                            hstag.wp_type = FlightPlanner.HsWPType.Takeoff_Adjust;
+                            wpno = plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_JUMP, 4, 0, 0, 0, 0, 0, 0, hstag);
+                            wpsplitstart.Add(wpno);
                             //添加起飞结束到作业航线的切入点
                             to_bearing = grid[1].GetBearing(grid[0]);
                             PointLatLngAlt switch_plla = grid[0].newpos(to_bearing, 150);

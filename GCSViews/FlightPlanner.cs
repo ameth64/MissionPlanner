@@ -2093,8 +2093,8 @@ namespace MissionPlanner.GCSViews
                     */
                     for (a = 0; a < Commands.Rows.Count - 0; a++)
                     {
-                        if (Commands.Rows[a].Cells[Command.Index].Value.ToString().Contains("DO_"))
-                            continue;
+                        //if (Commands.Rows[a].Cells[Command.Index].Value.ToString().Contains("DO_") && !Commands.Rows[a].Cells[Command.Index].Value.ToString().Equals("DO_JUMP"))
+                        //    continue;
                         if (Commands.Rows[a].Cells[Command.Index].Value.ToString().Contains("VTOL_TAKEOFF"))
                         {
                             coords.Add(new Vector(double.Parse(TXT_homelat.Text), double.Parse(TXT_homelng.Text), float.Parse(Commands.Rows[a].Cells[Alt.Index].Value.ToString()) + homealt));
@@ -2463,11 +2463,11 @@ namespace MissionPlanner.GCSViews
                             break;
                         }
                 }
-                    sr.Close();
-                    sr.Dispose();
-                    writeKML();
+                sr.Close();
+                sr.Dispose();
+                writeKML();
 
-                    MainMap.ZoomAndCenterMarkers("objects");
+                MainMap.ZoomAndCenterMarkers("objects");
             }
         }
 

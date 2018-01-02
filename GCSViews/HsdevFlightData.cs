@@ -863,8 +863,8 @@ namespace MissionPlanner.GCSViews
                                         tag = !showWpDetail ? "" : (a + 1).ToString() + "点" + Command.Rows[a].Cells[MainV2.instance.FlightPlanner.Alt.Index].Value.ToString() + "米高";
                                         double lng = double.Parse(Command.Rows[a].Cells[MainV2.instance.FlightPlanner.Lon.Index].Value.ToString());
                                         double lat = double.Parse(Command.Rows[a].Cells[MainV2.instance.FlightPlanner.Lat.Index].Value.ToString());
-                                        int alt = int.Parse(Command.Rows[a].Cells[MainV2.instance.FlightPlanner.Alt.Index].Value.ToString());
-                                        addpolygonmarker(tag, lng, lat, alt, Color.White, polygons);
+                                        double alt = double.Parse(Command.Rows[a].Cells[MainV2.instance.FlightPlanner.Alt.Index].Value.ToString());
+                                        addpolygonmarker(tag, lng, lat, (int)alt, Color.White, polygons);
                                     }
                                 }
                                 catch
@@ -872,8 +872,8 @@ namespace MissionPlanner.GCSViews
                                         tag = !showWpDetail ? "" : (a + 1).ToString() + "点" + Command.Rows[a].Cells[MainV2.instance.FlightPlanner.Alt.Index].Value.ToString() + "米高";
                                         double lng = double.Parse(Command.Rows[a].Cells[MainV2.instance.FlightPlanner.Lon.Index].Value.ToString());
                                         double lat = double.Parse(Command.Rows[a].Cells[MainV2.instance.FlightPlanner.Lat.Index].Value.ToString());
-                                        int alt = int.Parse(Command.Rows[a].Cells[MainV2.instance.FlightPlanner.Alt.Index].Value.ToString());
-                                        addpolygonmarker(tag, lng, lat, alt, Color.White, polygons);
+                                        double alt = double.Parse(Command.Rows[a].Cells[MainV2.instance.FlightPlanner.Alt.Index].Value.ToString());
+                                        addpolygonmarker(tag, lng, lat, (int)alt, Color.White, polygons);
                                 }
 
                             }
